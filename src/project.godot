@@ -11,8 +11,15 @@ config_version=5
 [application]
 
 config/name="Nime's Travel"
-config/features=PackedStringArray("4.2", "GL Compatibility")
+config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=600
+window/stretch/mode="viewport"
+window/stretch/aspect="ignore"
 
 [dotnet]
 
