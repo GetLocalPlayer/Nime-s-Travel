@@ -10,6 +10,7 @@ centered = false
 script = ExtResource("1_8kjky")
 
 [node name="Clickable" type="Area2D" parent="."]
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Clickable"]
 shape = SubResource("RectangleShape2D_dboli")

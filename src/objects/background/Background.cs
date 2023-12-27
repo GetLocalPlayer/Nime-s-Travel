@@ -7,16 +7,12 @@ public partial class Background : Sprite2D
 	public override void _Ready()
 	{
 		var clickable = GetNode<Area2D>("Clickable");
+		
 		clickable.InputEvent += (Nodeviewport, @event, shapeIdx) =>
 		{
 			if (@event is InputEventMouseButton btn)
 				if (btn.IsPressed() && btn.ButtonIndex == MouseButton.Left)
 					GetTree().CallGroup("Player", "SetNewWalkTarget", GetGlobalMousePosition());
 		};
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 }

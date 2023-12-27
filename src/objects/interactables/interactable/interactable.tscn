@@ -16,16 +16,16 @@ script = ExtResource("1_wvcga")
 texture = ExtResource("1_fj3kd")
 
 [node name="Clickable" type="Area2D" parent="." groups=["interactables"]]
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Clickable"]
 shape = SubResource("RectangleShape2D_tlovn")
 
 [node name="Collider" type="Area2D" parent="."]
 input_pickable = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
 position = Vector2(142, 67)
 shape = SubResource("RectangleShape2D_s7t5f")
 debug_color = Color(1, 0.52549, 0, 0.419608)
-
-[connection signal="input_event" from="Clickable" to="." method="OnClickableInputEvent"]

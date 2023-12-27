@@ -18,7 +18,6 @@ public partial class NimeFSM : FiniteStateMachine
 		var agent = GetParent().GetNode<NavigationAgent2D>("NavigationAgent2D");
 		agent.PathChanged += () =>
 		{
-			
 			SetState(States["walk"]);
 		};
 

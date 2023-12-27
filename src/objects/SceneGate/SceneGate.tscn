@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjvfm7im765jm"]
+
+[ext_resource type="Script" path="res://objects/SceneGate/SceneGate.cs" id="1_qx145"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vw145"]
+size = Vector2(106, 108)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ylk5q"]
+size = Vector2(108, 250)
+
+[node name="SceneGate" type="Node2D" groups=["SceneGates"]]
+script = ExtResource("1_qx145")
+IsActive = false
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(-122, 114)
+gizmo_extents = 24.4
+
+[node name="WalkInPoint" type="Marker2D" parent="."]
+position = Vector2(19, 62)
+
+[node name="WalkOutPoint" type="Marker2D" parent="."]
+position = Vector2(-19, -73)
+gizmo_extents = 55.5
+
+[node name="Collider" type="Area2D" parent="."]
+position = Vector2(190, 53)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
+shape = SubResource("RectangleShape2D_vw145")
+debug_color = Color(0.976471, 0, 0.407843, 0.419608)
+
+[node name="Clickable" type="Area2D" parent="."]
+position = Vector2(-126, 17)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Clickable"]
+shape = SubResource("RectangleShape2D_ylk5q")
+debug_color = Color(0, 0.647059, 0.266667, 0.419608)

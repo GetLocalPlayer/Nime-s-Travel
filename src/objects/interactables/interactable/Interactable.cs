@@ -18,17 +18,21 @@ using System.Dynamic;
 
 public partial class Interactable : Node2D
 {
-	public bool IsActive = false;
-
-
-	private void MakeInactive()
-	{
-		IsActive = false;
+	private bool isActive = true;
+	[Export] public bool IsActive {
+		get => isActive;
+		set {
+			isActive = value;
+			if (IsNodeReady())
+				GetNode<Area2D>("Collider").Monitoring = value;
+		}
 	}
 
 
-    private void OnClickableInputEvent(Node viewport, InputEvent @event, int shapeIdx)
-	{
-		IsActive = true;
-	}
+	private void Disable() => IsActive = false;
+	private void Enable() => IsActive = true;
+
+    public override void _Ready()
+    {
+    }
 }
