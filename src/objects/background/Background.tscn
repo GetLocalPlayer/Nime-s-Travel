@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsin28x3d0431"]
+
+[ext_resource type="Script" path="res://objects/background/Background.cs" id="1_8kjky"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dboli"]
+size = Vector2(953, 510)
+
+[node name="Background" type="Sprite2D"]
+centered = false
+script = ExtResource("1_8kjky")
+
+[node name="Clickable" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Clickable"]
+shape = SubResource("RectangleShape2D_dboli")

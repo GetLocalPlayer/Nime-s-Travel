@@ -1,3 +1,30 @@
-[gd_scene format=3 uid="uid://expad3u7bjp3"]
+[gd_scene load_steps=5 format=3 uid="uid://expad3u7bjp3"]
+
+[ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_lisb4"]
+[ext_resource type="Texture2D" uid="uid://c44srvewhefkb" path="res://scenes/home/background.png" id="1_v0acl"]
+[ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="3_dlque"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_sf02g"]
+vertices = PackedVector2Array(498, 437, 497, 437, 578, 436, 330, 441, 263, 432, 264, 432, 49, 411, -87, 413, -85, 410, 196, 410, 196, 411, 197, 415, 267, 428, 268, 428, 324, 436, 375, 442, 374, 447, 451, 447, 376, 442, 441, 443, 442, 443, 522, 439, 582, 441, 644, 437, 644, 439)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8), PackedInt32Array(6, 8, 9, 10), PackedInt32Array(11, 6, 10), PackedInt32Array(11, 10, 12, 5), PackedInt32Array(3, 5, 12, 13, 14), PackedInt32Array(3, 14, 15, 16), PackedInt32Array(17, 16, 15, 18, 19), PackedInt32Array(17, 19, 20), PackedInt32Array(17, 20, 0, 21), PackedInt32Array(22, 21, 0, 2, 23, 24)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-91, 401, 78, 400, 198, 401, 269, 418, 325, 426, 376, 432, 441, 433, 497, 427, 578, 426, 653, 428, 656, 449, 582, 451, 522, 449, 452, 457, 373, 458, 328, 451, 262, 442, 196, 425, 49, 421, -108, 424)])
+parsed_geometry_type = 0
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="Home" type="Node"]
+
+[node name="Background" parent="." instance=ExtResource("1_lisb4")]
+texture = ExtResource("1_v0acl")
+
+[node name="CollisionShape2D" parent="Background/Clickable" index="0"]
+position = Vector2(432, 246)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Background"]
+navigation_polygon = SubResource("NavigationPolygon_sf02g")
+
+[node name="Nime" parent="." instance=ExtResource("3_dlque")]
+position = Vector2(610, 439)
+scale = Vector2(-0.6, 0.6)
+MoveSpeed = 100.0
+
+[editable path="Background"]
