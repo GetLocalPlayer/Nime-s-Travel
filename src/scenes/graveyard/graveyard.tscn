@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://bdnwor80y7kvj"]
+
+[ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_7732i"]
+[ext_resource type="Texture2D" uid="uid://drv4wl1d4y7vv" path="res://scenes/graveyard/back.png" id="2_kjyhk"]
+[ext_resource type="Texture2D" uid="uid://iaa21bgoia06" path="res://scenes/graveyard/grave1.png" id="3_50utd"]
+[ext_resource type="Texture2D" uid="uid://6lhr7omh6osp" path="res://scenes/graveyard/grave3.png" id="4_k7nu5"]
+[ext_resource type="Texture2D" uid="uid://c73xqnvjnssja" path="res://scenes/graveyard/grave_clover.png" id="5_tubix"]
+[ext_resource type="Texture2D" uid="uid://cwecqo7mfree2" path="res://scenes/graveyard/clover_profile.png" id="6_n0aij"]
+[ext_resource type="Texture2D" uid="uid://dpycerqlev1wm" path="res://scenes/graveyard/tree.png" id="7_g7nm7"]
+[ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="8_xde2y"]
+[ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="9_m46h3"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_luotr"]
+vertices = PackedVector2Array(-276, -137, -214, -135, -215, -135, 147, -148, 146, -148, 194, -152, 190, -149, 43, -113, 54, -115, 55, -115, -4, -92, -5, -93, 283, -138, 372, -105, 372, -102, 279, -133, 278, -134, 237, -146, 233, -143, 232, -143, 147, -146, 81, -132, 87, -130, -276, -133, -339, -133, -339, -134, -221, -134, -177, -122, -166, -120, -133, -97, -127, -100, -77, -88, -77, -91, -12, -96)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15, 16), PackedInt32Array(17, 12, 16, 18, 5), PackedInt32Array(5, 18, 19, 6), PackedInt32Array(3, 6, 20), PackedInt32Array(21, 3, 20, 22), PackedInt32Array(21, 22, 8, 7), PackedInt32Array(23, 24, 25, 0, 2, 26), PackedInt32Array(27, 26, 2, 28), PackedInt32Array(29, 27, 28, 30), PackedInt32Array(31, 29, 30, 32), PackedInt32Array(11, 31, 32, 33), PackedInt32Array(11, 33, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(39, -122, 78, -142, 145, -158, 195, -163, 239, -156, 285, -148, 382, -112, 382, -89, 276, -124, 231, -133, 190, -139, 149, -136, 90, -121, 58, -106, -4, -83, -79, -78, -137, -88, -181, -113, -222, -124, -276, -123, -347, -123, -352, -144, -277, -148, -212, -145, -163, -130, -124, -110, -76, -101, -14, -106)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2mtb"]
+size = Vector2(60.5, 53)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ttna3"]
+size = Vector2(71, 86)
+
+[node name="Graveyard" type="Node2D"]
+z_as_relative = false
+y_sort_enabled = true
+
+[node name="Background" parent="." instance=ExtResource("1_7732i")]
+texture = ExtResource("2_kjyhk")
+
+[node name="CollisionShape2D" parent="Background/Clickable" index="0"]
+position = Vector2(399, 244)
+
+[node name="Grave1" type="Sprite2D" parent="."]
+position = Vector2(178, 285)
+texture = ExtResource("3_50utd")
+
+[node name="Grave3" type="Sprite2D" parent="."]
+position = Vector2(352, 278)
+texture = ExtResource("4_k7nu5")
+
+[node name="GraveClover" type="Sprite2D" parent="."]
+position = Vector2(275, 295)
+texture = ExtResource("5_tubix")
+
+[node name="CloverProfile" type="Sprite2D" parent="GraveClover"]
+position = Vector2(1, -10)
+texture = ExtResource("6_n0aij")
+metadata/_edit_lock_ = true
+
+[node name="Tree" type="Sprite2D" parent="."]
+position = Vector2(498, 503)
+texture = ExtResource("7_g7nm7")
+centered = false
+offset = Vector2(-100, -255)
+
+[node name="Nime" parent="." instance=ExtResource("9_m46h3")]
+position = Vector2(707, 349)
+scale = Vector2(0.265, 0.265)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(498, 503)
+navigation_polygon = SubResource("NavigationPolygon_luotr")
+
+[node name="StreetGraveyardGate" parent="." instance=ExtResource("8_xde2y")]
+position = Vector2(930, 385)
+ToScenePath = "res://scenes/street/street.tscn"
+
+[node name="SpawnPoint" parent="StreetGraveyardGate" index="0"]
+position = Vector2(-119, -6)
+
+[node name="SpawnWayPoint" parent="StreetGraveyardGate" index="1"]
+position = Vector2(-224, -32)
+
+[node name="ExitWayPoint" parent="StreetGraveyardGate" index="2"]
+position = Vector2(-65, 14)
+
+[node name="CollisionShape2D" parent="StreetGraveyardGate/Collider" index="0"]
+position = Vector2(-50, -16)
+shape = SubResource("RectangleShape2D_c2mtb")
+
+[node name="CollisionShape2D" parent="StreetGraveyardGate/Clickable" index="0"]
+position = Vector2(-164.5, -28)
+shape = SubResource("RectangleShape2D_ttna3")
+
+[editable path="Background"]
+[editable path="StreetGraveyardGate"]

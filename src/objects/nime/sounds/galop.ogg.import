@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/galop.ogg-345798e12e624a894220ee28805f5fa8.og
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

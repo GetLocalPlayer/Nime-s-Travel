@@ -10,13 +10,13 @@ public abstract partial class FiniteStateMachine : Node
         currentState?.Update(GetContext(), delta);
     }
 
-	virtual protected Node GetContext() => GetParent();
+	protected virtual Node GetContext() => GetParent();
 	
     public void SetState(State newState)
 	{
 		if (newState == currentState) return;
 		currentState?.Exit(GetContext());
-		newState?.Enter(GetContext());
 		currentState = newState;
+		newState?.Enter(GetContext());
 	}
 }

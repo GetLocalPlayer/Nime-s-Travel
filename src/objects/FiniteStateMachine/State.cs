@@ -7,9 +7,9 @@ public abstract partial class State
 {
 	public event EventHandler<Node> StateFinished;
 	
-	abstract public void Enter(Node context);
-	abstract public void Exit(Node context);
-	abstract public void Update(Node context, double delta);
+	public abstract void Enter(Node context);
+	public abstract void Exit(Node context);
+	public abstract void Update(Node context, double delta);
 
 	protected void RaiseStateFinished(Node context)
 	{

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://naqvhvou0w4y"]
+[gd_scene load_steps=20 format=3 uid="uid://naqvhvou0w4y"]
 
 [ext_resource type="Script" path="res://objects/nime/Nime.cs" id="1_aldx7"]
 [ext_resource type="Script" path="res://objects/nime/scripts/States/NimeFSM.cs" id="1_c1jqf"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://1w866bfuvlqr" path="res://objects/nime/textures/10.png" id="10_uyxwh"]
 [ext_resource type="Texture2D" uid="uid://cbdjey1cthyit" path="res://objects/nime/textures/11.png" id="11_iasri"]
 [ext_resource type="Texture2D" uid="uid://ccdvqsgluohvk" path="res://objects/nime/textures/12.png" id="12_ib616"]
-[ext_resource type="Script" path="res://objects/nime/Animations.cs" id="16_vma7u"]
 [ext_resource type="AudioStream" uid="uid://ls1rarhhwcoe" path="res://objects/nime/sounds/galop.ogg" id="18_uc1nq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dkceb"]
@@ -83,6 +82,7 @@ animations = [{
 size = Vector2(170.693, 195.5)
 
 [node name="Nime" type="Node2D" groups=["Player"]]
+y_sort_enabled = true
 script = ExtResource("1_aldx7")
 
 [node name="FSM" type="Node" parent="."]
@@ -93,9 +93,8 @@ script = ExtResource("1_c1jqf")
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 position = Vector2(-18.195, -148.92)
 sprite_frames = SubResource("SpriteFrames_dkceb")
-animation = &"Cast"
-frame_progress = 0.222556
-script = ExtResource("16_vma7u")
+animation = &"Idle"
+autoplay = "Idle"
 
 [node name="GalopSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_uc1nq")

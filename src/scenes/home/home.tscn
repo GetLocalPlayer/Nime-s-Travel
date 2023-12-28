@@ -1,9 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://expad3u7bjp3"]
+[gd_scene load_steps=9 format=3 uid="uid://expad3u7bjp3"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_lisb4"]
 [ext_resource type="Texture2D" uid="uid://c44srvewhefkb" path="res://scenes/home/background.png" id="1_v0acl"]
+[ext_resource type="Texture2D" uid="uid://geh8o1qm8n6w" path="res://scenes/home/door_cover.png" id="3_8mep1"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="3_dlque"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="3_iqu22"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fygc"]
+size = Vector2(58, 71)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gn8y"]
+size = Vector2(117, 233)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sf02g"]
 vertices = PackedVector2Array(498, 437, 497, 437, 578, 436, 330, 441, 263, 432, 264, 432, 49, 411, -87, 413, -85, 410, 196, 410, 196, 411, 197, 415, 267, 428, 268, 428, 324, 436, 375, 442, 374, 447, 451, 447, 376, 442, 441, 443, 442, 443, 522, 439, 582, 441, 644, 437, 644, 439)
@@ -12,10 +19,38 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-91, 401, 78, 400, 198,
 parsed_geometry_type = 0
 source_geometry_group_name = &"navigation_polygon_source_group"
 
-[node name="Home" type="Node"]
+[node name="Home" type="Node2D"]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_sf02g")
+[node name="Nime" parent="." instance=ExtResource("3_dlque")]
+position = Vector2(610, 439)
+scale = Vector2(-0.5, 0.5)
+MoveSpeed = 150.0
+
+[node name="HomeStreetGate" parent="." instance=ExtResource("3_iqu22")]
+position = Vector2(-167, 247)
+ToScenePath = "res://scenes/street/street.tscn"
+
+[node name="SpawnPoint" parent="HomeStreetGate" index="0"]
+position = Vector2(138, 163)
+
+[node name="SpawnWayPoint" parent="HomeStreetGate" index="1"]
+position = Vector2(361, 166)
+
+[node name="ExitWayPoint" parent="HomeStreetGate" index="2"]
+position = Vector2(82, 165)
+
+[node name="CollisionShape2D" parent="HomeStreetGate/Collider" index="0"]
+position = Vector2(39, 142)
+shape = SubResource("RectangleShape2D_4fygc")
+
+[node name="Clickable" parent="HomeStreetGate" index="4"]
+priority = 1
+
+[node name="CollisionShape2D" parent="HomeStreetGate/Clickable" index="0"]
+position = Vector2(199.5, 41.5)
+shape = SubResource("RectangleShape2D_4gn8y")
 
 [node name="Background" parent="." instance=ExtResource("1_lisb4")]
 texture = ExtResource("1_v0acl")
@@ -23,34 +58,17 @@ texture = ExtResource("1_v0acl")
 [node name="CollisionShape2D" parent="Background/Clickable" index="0"]
 position = Vector2(432, 246)
 
-[node name="SceneGateStreet" parent="." instance=ExtResource("3_iqu22")]
-position = Vector2(-167, 247)
-ToScene = ExtResource("3_dlque")
-IsActive = true
+[node name="DoorCover" type="Sprite2D" parent="Background"]
+position = Vector2(0, 496.105)
+texture = ExtResource("3_8mep1")
+centered = false
+offset = Vector2(0, -400)
+metadata/_edit_lock_ = true
 
-[node name="SpawnPoint" parent="SceneGateStreet" index="0"]
-position = Vector2(128, 163)
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+z_as_relative = false
+y_sort_enabled = true
+navigation_polygon = SubResource("NavigationPolygon_sf02g")
 
-[node name="WalkInPoint" parent="SceneGateStreet" index="1"]
-position = Vector2(310, 161)
-
-[node name="WalkOutPoint" parent="SceneGateStreet" index="2"]
-position = Vector2(82, 165)
-
-[node name="Collider" parent="SceneGateStreet" index="3"]
-position = Vector2(59, 161)
-
-[node name="Clickable" parent="SceneGateStreet" index="4"]
-position = Vector2(222, 103)
-priority = 1
-
-[node name="CollisionShape2D" parent="SceneGateStreet/Clickable" index="0"]
-position = Vector2(-15, -56)
-
-[node name="Nime" parent="." instance=ExtResource("3_dlque")]
-position = Vector2(610, 439)
-scale = Vector2(-0.5, 0.5)
-MoveSpeed = 150.0
-
+[editable path="HomeStreetGate"]
 [editable path="Background"]
-[editable path="SceneGateStreet"]

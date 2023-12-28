@@ -7,9 +7,9 @@ using System;
 
  	SceneGate			// Просто корневая нода для группировки
  	--SpawnPoint		// Координаты этой ноды передаются Нимэ сразу после загрузки сцены
-	--WalkInPoint		// Точка координат для NavigationAgent2D, к которой будет проложен
-						// путь сразу после загрузки сцены (из SpawnPoint в WalkInPoint)
- 	--WalkOutPoint		// Точка координат для NavigationAgent2D, к которой будет проложен
+	--SpawnWayPoint		// Точка координат для NavigationAgent2D, к которой будет проложен
+						// путь сразу после загрузки сцены (из SpawnPoint в SpawnWayPoint)
+ 	--ExitWayPoint		// Точка координат для NavigationAgent2D, к которой будет проложен
 						// путь для выхода из сцены при клике на Clickable
 	--Collider			// С этой нодой должна столкнуться Нимэ чтобы начался процесс
 						// загрузки уровня, соответствующему данному переоду
@@ -19,7 +19,8 @@ using System;
 */
 public partial class SceneGate : Node2D
 {
-	[Export] public PackedScene ToScene;
+	[Export] public string ToScenePath;
+	private PackedScene ToScene;
 	private bool isActive = true;
 	[Export] public bool IsActive {
 		get => isActive;
@@ -37,8 +38,8 @@ public partial class SceneGate : Node2D
 		}
 	}
 	public Vector2 SpawnPoint { get => GetNode<Marker2D>("SpawnPoint").GlobalPosition; }
-	public Vector2 WalkInPoint { get => GetNode<Marker2D>("WalkInPoint").GlobalPosition; }
-	public Vector2 WalkOutPoint { get => GetNode<Marker2D>("WalkOutPoint").GlobalPosition; }
+	public Vector2 SpawnWayPoint { get => GetNode<Marker2D>("SpawnWayPoint").GlobalPosition; }
+	public Vector2 ExitWayPoint { get => GetNode<Marker2D>("ExitWayPoint").GlobalPosition; }
 
 	// Для активации/деактивации посредстом вызова группы
 	// GetTree().CallGroup("SceneGates", "Disable"/"Enable")
@@ -47,9 +48,19 @@ public partial class SceneGate : Node2D
 
     public override void _Ready()
     {
+		ToScene = ResourceLoader.Load<PackedScene>(ToScenePath);
+
 		GetNode<Area2D>("Clickable").Monitoring = IsActive;
 		GetNode<Area2D>("Clickable").InputPickable = IsActive;
 		GetNode<Area2D>("Collider").Monitoring = IsActive;
+
+		var globals = GetTree().Root.GetNode<GlobalVariables>("GlobalVariables");
+		if (Name == globals.SceneGateName)
+		{
+			GetTree().CallGroup("Player", "EnterScene",
+				GetNode<Marker2D>("SpawnPoint").GlobalPosition,
+				GetNode<Marker2D>("SpawnWayPoint").GlobalPosition);
+		}
 
         var clickable = GetNode<Area2D>("Clickable");
 		clickable.InputEvent += (viewport, @event, shapeIdx) =>
@@ -57,7 +68,7 @@ public partial class SceneGate : Node2D
 			if (@event is InputEventMouseButton btn)
 				if (btn.IsPressed() && btn.ButtonIndex == MouseButton.Left)
 				{
-					GetTree().CallGroup("Player", "SetNewWalkTarget", GetNode<Marker2D>("WalkOutPoint").GlobalPosition);
+					GetTree().CallGroup("Player", "SetNewWalkTarget", GetNode<Marker2D>("ExitWayPoint").GlobalPosition);
 					((Viewport)viewport).SetInputAsHandled();
 				}
 		};
@@ -66,16 +77,26 @@ public partial class SceneGate : Node2D
 		collider.AreaEntered += (area) =>
 		{
 			if (area.IsInGroup("PlayerCollider"))
-				// Судя по всему, смена сцены, как и другие 
-				// действия связанные с удалением нодов,
-				// вызывает проблемы, если заниматься этим
-				// в момент обработки ряда сигналов.
-				// CallDeferred вызывает функцию с указаным
-				// именем после выполнения всех обработок
-				// движком в текущем кадре.
+				/* Выгружать текущую сцену в момент
+				выполнения кода сигнала - не лучшая идея,
+				поскольку движок продолжет выполнение
+				внутренних процессов связанных с нодой
+				текущего сигнала, что приведет к
+				исключению нулевого указателя.
+				Выгружать сцену следует в конце текущего 
+				кадра, когда все внутренние процессы завершены.
+				Для этого существует функция CallDeferred,
+				вызывающая функцию с указанным в строке
+				именем после завершения всех внутренних 
+				процессов движка. */
 				CallDeferred("ChangeScene");
 		};
     }
 
-	private void ChangeScene() => GetTree().ChangeSceneToPacked(ToScene);
+	private void ChangeScene()
+	{
+		var globals = GetTree().Root.GetNode<GlobalVariables>("GlobalVariables");
+		globals.SceneGateName = Name;
+		GetTree().ChangeSceneToPacked(ToScene);
+	}
 }

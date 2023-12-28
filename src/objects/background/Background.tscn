@@ -6,6 +6,7 @@
 size = Vector2(953, 510)
 
 [node name="Background" type="Sprite2D"]
+y_sort_enabled = true
 centered = false
 script = ExtResource("1_8kjky")
 

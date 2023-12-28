@@ -9,6 +9,10 @@ public partial class Walk : State
         nime.GetNode<AnimatedSprite2D>("Animations").Play("Walk");
         nime.GetNode<AudioStreamPlayer2D>("GalopSound").Play();
         nime.GetNode<AnimatedSprite2D>("Animations").Play("Walk");
+        var agent = nime.GetNode<NavigationAgent2D>("NavigationAgent2D");
+        var pos = nime.GlobalPosition;
+        var nextPos = agent.GetNextPathPosition();
+        nime.Scale = nime.Scale with { X = Math.Abs(nime.Scale.X) * (pos.X > nextPos.X ? -1f : 1) };
     }
 
     public override void Exit(Node context)

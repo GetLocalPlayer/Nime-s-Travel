@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://b15mn1d0al221"]
+
+[ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_0qp4l"]
+[ext_resource type="Texture2D" uid="uid://b18inoo254ek0" path="res://scenes/bakerhouse/back.png" id="2_n7gu8"]
+[ext_resource type="Texture2D" uid="uid://cwl5jeumh4hg1" path="res://scenes/bakerhouse/back_z0.png" id="3_u7o2y"]
+[ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="4_jxp4p"]
+[ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="5_uupps"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brmn3"]
+size = Vector2(953, 510)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_v5l6m"]
+vertices = PackedVector2Array(-570, 240, -446, 262, -447, 262, -869, 232, -569, 239, -575, 250, -870, 242, -446, 276, -445, 276, -181, 298, -180, 298, 90, 303, 90, 310, -181, 310, -353, 300, -348, 288)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 0), PackedInt32Array(5, 6, 3, 0), PackedInt32Array(7, 5, 0, 2, 8), PackedInt32Array(9, 10, 11, 12, 13, 14), PackedInt32Array(15, 9, 14), PackedInt32Array(2, 15, 14, 8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-878, 222, -568, 230, -444, 252, -346, 278, -180, 288, 100, 294, 100, 320, -182, 320, -356, 310, -448, 286, -576, 260, -882, 252)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7oyxo"]
+size = Vector2(87.25, 125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bvxqt"]
+size = Vector2(196, 518)
+
+[node name="AlchemistHouse" type="Node2D"]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Background" parent="." instance=ExtResource("1_0qp4l")]
+texture = ExtResource("2_n7gu8")
+
+[node name="CollisionShape2D" parent="Background/Clickable" index="0"]
+position = Vector2(376, 244)
+shape = SubResource("RectangleShape2D_brmn3")
+
+[node name="BackZ0" type="Sprite2D" parent="."]
+position = Vector2(0, 454)
+texture = ExtResource("3_u7o2y")
+centered = false
+offset = Vector2(0, -339)
+
+[node name="Nime" parent="." instance=ExtResource("4_jxp4p")]
+position = Vector2(379, 274)
+scale = Vector2(0.5, 0.5)
+MoveSpeed = 150.0
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(380, 295)
+scale = Vector2(0.5, 0.5)
+navigation_polygon = SubResource("NavigationPolygon_v5l6m")
+
+[node name="NeighborhoodBakerHouseGate" parent="." instance=ExtResource("5_uupps")]
+position = Vector2(-51, 358)
+scale = Vector2(0.5, 0.5)
+ToScenePath = "res://scenes/neighborhood/neighborhood.tscn"
+
+[node name="SpawnPoint" parent="NeighborhoodBakerHouseGate" index="0"]
+position = Vector2(174, 114)
+
+[node name="SpawnWayPoint" parent="NeighborhoodBakerHouseGate" index="1"]
+position = Vector2(418, 144)
+
+[node name="ExitWayPoint" parent="NeighborhoodBakerHouseGate" index="2"]
+position = Vector2(-44, 116)
+
+[node name="CollisionShape2D" parent="NeighborhoodBakerHouseGate/Collider" index="0"]
+position = Vector2(-8, 32)
+shape = SubResource("RectangleShape2D_7oyxo")
+
+[node name="CollisionShape2D" parent="NeighborhoodBakerHouseGate/Clickable" index="0"]
+position = Vector2(192, -93)
+shape = SubResource("RectangleShape2D_bvxqt")
+
+[editable path="Background"]
+[editable path="NeighborhoodBakerHouseGate"]

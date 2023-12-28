@@ -12,15 +12,17 @@ public partial class NimeFSM : FiniteStateMachine
 
     public override void _Ready()
 	{
-		States["walk"].StateFinished += (state, context) => 
-			SetState(States["idle"]);
-		
-		var agent = GetParent().GetNode<NavigationAgent2D>("NavigationAgent2D");
-		agent.PathChanged += () =>
-		{
-			SetState(States["walk"]);
-		};
-
 		SetState(States["idle"]);
+
+		SetupTransitions();
+	}
+
+	private void SetupTransitions()
+	{
+		var agent = GetParent().GetNode<NavigationAgent2D>("NavigationAgent2D");
+
+		agent.PathChanged += () => SetState(States["walk"]);
+
+		States["walk"].StateFinished += (state, context) => SetState(States["idle"]);
 	}
 }
