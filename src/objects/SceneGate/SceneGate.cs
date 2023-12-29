@@ -48,19 +48,19 @@ public partial class SceneGate : Node2D
 
     public override void _Ready()
     {
+		/* CallDeferred вызывает функцию с указанным
+		в строке именем в конце текущего кадра. Это
+		хорошее место чтобы отложить вызов функций
+		для которых требуется чтобы все ноды сцены были
+		инициализированны, готовы к работе и все
+		внутренние процессы движка звершены. */
+		CallDeferred("ReadyDeferred");
+
 		ToScene = ResourceLoader.Load<PackedScene>(ToScenePath);
 
 		GetNode<Area2D>("Clickable").Monitoring = IsActive;
 		GetNode<Area2D>("Clickable").InputPickable = IsActive;
-		GetNode<Area2D>("Collider").Monitoring = IsActive;
-
-		var globals = GetTree().Root.GetNode<GlobalVariables>("GlobalVariables");
-		if (Name == globals.SceneGateName)
-		{
-			GetTree().CallGroup("Player", "EnterScene",
-				GetNode<Marker2D>("SpawnPoint").GlobalPosition,
-				GetNode<Marker2D>("SpawnWayPoint").GlobalPosition);
-		}
+		GetNode<Area2D>("Collider").Monitoring = IsActive;	
 
         var clickable = GetNode<Area2D>("Clickable");
 		clickable.InputEvent += (viewport, @event, shapeIdx) =>
@@ -84,14 +84,18 @@ public partial class SceneGate : Node2D
 				текущего сигнала, что приведет к
 				исключению нулевого указателя.
 				Выгружать сцену следует в конце текущего 
-				кадра, когда все внутренние процессы завершены.
-				Для этого существует функция CallDeferred,
-				вызывающая функцию с указанным в строке
-				именем после завершения всех внутренних 
-				процессов движка. */
+				кадра, когда все внутренние процессы завершены. */
 				CallDeferred("ChangeScene");
 		};
     }
+
+	private void ReadyDeferred()
+	{
+		var globals = GetTree().Root.GetNode<GlobalVariables>("GlobalVariables");
+
+		if (Name == globals.SceneGateName)
+			GetTree().CallGroup("Player", "EnterScene", GetNode<Marker2D>("SpawnPoint").GlobalPosition, GetNode<Marker2D>("SpawnWayPoint").GlobalPosition);
+	}
 
 	private void ChangeScene()
 	{
