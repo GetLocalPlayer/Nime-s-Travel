@@ -91,10 +91,11 @@ script = ExtResource("1_c1jqf")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
-position = Vector2(-18.195, -148.92)
 sprite_frames = SubResource("SpriteFrames_dkceb")
 animation = &"Idle"
 autoplay = "Idle"
+centered = false
+offset = Vector2(-238, -307)
 
 [node name="GalopSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_uc1nq")
