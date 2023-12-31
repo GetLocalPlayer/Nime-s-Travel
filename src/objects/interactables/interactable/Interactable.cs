@@ -18,13 +18,17 @@ using System.Dynamic;
 
 public partial class Interactable : Node2D
 {
-	private bool isActive = true;
+	private bool _isActive = true;
 	[Export] public bool IsActive {
-		get => isActive;
+		get => _isActive;
 		set {
-			isActive = value;
+			_isActive = value;
 			if (IsNodeReady())
-				GetNode<Area2D>("Collider").Monitoring = value;
+			{
+				var collider = GetNode<Area2D>("Collider");
+				collider.Monitoring = value;
+				collider.Visible = value;
+			}
 		}
 	}
 
@@ -32,7 +36,16 @@ public partial class Interactable : Node2D
 	private void Disable() => IsActive = false;
 	private void Enable() => IsActive = true;
 
+	private int counter = 0;
+
     public override void _Ready()
     {
+		var collider = GetNode<Area2D>("Collider");
+		collider.AreaEntered += (area) =>
+		{
+			if (!area.IsInGroup("PlayerCollider")) return;
+			counter++;
+			GD.Print($"Collided {counter}");
+		};
     }
 }

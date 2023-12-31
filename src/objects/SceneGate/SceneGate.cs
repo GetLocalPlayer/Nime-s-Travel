@@ -21,11 +21,11 @@ public partial class SceneGate : Node2D
 {
 	[Export] public string ToScenePath;
 	private PackedScene ToScene;
-	private bool isActive = true;
+	private bool _isActive = true;
 	[Export] public bool IsActive {
-		get => isActive;
+		get => _isActive;
 		set {
-			isActive = value;
+			_isActive = value;
 			// На момент первого вызова этого сеттера,
 			// нод и его потомки еще не готовы и попытка
 			// обращения вызовает исключение null указателя.
