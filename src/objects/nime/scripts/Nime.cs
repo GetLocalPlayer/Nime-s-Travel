@@ -8,7 +8,7 @@ public partial class Nime : Node2D
 	[Signal] public delegate void SceneEnteredEventHandler();
 
 	[Export] public float MoveSpeed = 80;	
-	public Interactable Focus;
+	public Interactable FocusedInteractable;
 
     public void SetNewWalkTarget(Vector2 newTarget)
 	{
@@ -20,8 +20,8 @@ public partial class Nime : Node2D
 	{
 		if (i != null)
 		{
-			Focus = i;
-			GetNode<NavigationAgent2D>("NavigationAgent2D").TargetPosition = Focus.WayPoint;
+			FocusedInteractable = i;
+			GetNode<NavigationAgent2D>("NavigationAgent2D").TargetPosition = FocusedInteractable.WayPoint;
 			EmitSignal("FocusSet");
 		}
 	}

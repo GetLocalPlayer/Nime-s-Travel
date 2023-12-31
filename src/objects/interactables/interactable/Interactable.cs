@@ -29,15 +29,9 @@ public partial class Interactable : Node2D
     {
 		var clickable = GetNode<Area2D>("Clickable");
 		clickable.MouseEntered += () =>
-		{
-
-			GetTree().CallGroup("UI", "SetInteractable", this);
-		};
+			GetTree().CallGroup("UI", "SetInteractableHint", this);
 		clickable.MouseExited += () =>
-		{
-
-			GetTree().CallGroup("UI", "RemoveInteractable", this);
-		};
+			GetTree().CallGroup("UI", "RemoveInteractableHint");
 		clickable.InputEvent += (viewport, @event, shapeIdx) =>
 		{
 			if (@event is InputEventMouseButton btn)

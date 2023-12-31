@@ -4,7 +4,6 @@ using System.Diagnostics.Metrics;
 
 public partial class UI : Control
 {
-	private Interactable currentInterractable;
 	private CenterContainer hornContainer;
 	private TextureRect horn;
 	private Button btnRed;
@@ -13,6 +12,8 @@ public partial class UI : Control
 	private TextureRect interactableIcon;
 	private Label interactableLabel;
 	private RichTextLabel interactionText;
+
+	private Interactable focusedInteractable;
 
 	private int counter = 0;
 	public override void _Ready()
@@ -45,19 +46,34 @@ public partial class UI : Control
 		interactionText.Text = null;
 	}
 
-	private void SetInteractable(Interactable i)
+	private void SetInteractableHint(Interactable i)
 	{
-		currentInterractable = i;
-		interactableIcon.Texture = i.Icon;
-		interactableLabel.Text = i.UIName;
+		if (focusedInteractable == null || focusedInteractable == i)
+		{
+			interactableIcon.Texture = i.Icon;
+			interactableLabel.Text = i.UIName;
+		}
 	}
 
-	private void RemoveInteractable(Interactable i)
+	private void RemoveInteractableHint()
 	{
-		if (currentInterractable == null || currentInterractable != i) return;
-		currentInterractable = null;
+		if (focusedInteractable != null) return;
 		interactableIcon.Texture = null;
-		interactableLabel.Text = "";
+		interactableLabel.Text = null;
+	}
+
+	private void SetInteractableFocused(Interactable i)
+	{
+		focusedInteractable = i;
+		SetInteractableHint(i);
+		hornContainer.Visible = true;
+	}
+
+	private void RemoveInteractableFocused()
+	{
+		focusedInteractable = null;
+		RemoveInteractableHint();
+		hornContainer.Visible = false;
 	}
 
 	private void EnableHorn() => hornContainer.Visible = true;

@@ -23,7 +23,11 @@ public partial class NimeFSM : FiniteStateMachine
 	private void SetupTransitions()
 	{
 		nime.WalkTargetSet += () =>
+		{
 			SetState(states["walk"]);
+			nime.FocusedInteractable = null;
+			GetTree().CallGroup("UI", "RemoveInteractableFocused");
+		};
 
 		states["walk"].StateFinished += (state, context) =>
 			SetState(states["idle"]);
@@ -32,11 +36,13 @@ public partial class NimeFSM : FiniteStateMachine
 			SetState(states["walk"]);
 
 		nime.FocusSet += () =>
-		{
 			SetState(states["walkToFocus"]);
-		};
 
 		states["walkToFocus"].StateFinished += (state, context) =>
+		{
 			SetState(states["idle"]);
+			GetTree().CallGroup("UI", "SetInteractableFocused", nime.FocusedInteractable);
+		};
+
 	}
 }
