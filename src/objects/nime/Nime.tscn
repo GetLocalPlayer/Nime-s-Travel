@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://naqvhvou0w4y"]
 
-[ext_resource type="Script" path="res://objects/nime/Nime.cs" id="1_aldx7"]
+[ext_resource type="Script" path="res://objects/nime/scripts/Nime.cs" id="1_3tqnx"]
 [ext_resource type="Script" path="res://objects/nime/scripts/States/NimeFSM.cs" id="1_c1jqf"]
 [ext_resource type="Texture2D" uid="uid://dtgspvtpxdc63" path="res://objects/nime/textures/01.png" id="1_gimor"]
 [ext_resource type="Texture2D" uid="uid://dbm0pbaub6k5" path="res://objects/nime/textures/cast.png" id="1_w3mea"]
@@ -83,7 +83,7 @@ size = Vector2(170.693, 195.5)
 
 [node name="Nime" type="Node2D" groups=["Player"]]
 y_sort_enabled = true
-script = ExtResource("1_aldx7")
+script = ExtResource("1_3tqnx")
 
 [node name="FSM" type="Node" parent="."]
 script = ExtResource("1_c1jqf")

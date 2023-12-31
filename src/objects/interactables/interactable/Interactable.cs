@@ -18,56 +18,34 @@ using System.Dynamic;
 
 public partial class Interactable : Node2D
 {
-	private bool _isActive;
-	public bool IsActive {
-		get => _isActive;
-		set {
-			_isActive = value;
-			if (IsNodeReady())
-			{
-				var collider = GetNode<Area2D>("Collider");
-				collider.Monitoring = value;
-				collider.Visible = value;
-			}
-		}
-	}
 	[Export] public CompressedTexture2D Icon;
 	[Export] public string UIName;
 	[Export] public string[] UIInteraction;
-	private bool isHovered = false;
-
-	public void Disable() => IsActive = false;
-	public void Enable() => IsActive = true;
-
+	
+	public Vector2 WayPoint { get => GetNode<Marker2D>("WayPoint").GlobalPosition ;}
+	public Vector2 LookAtPoint { get => GetNode<Marker2D>("LookAtPoint").GlobalPosition ;}
 
     public override void _Ready()
     {
-		Disable();
-
-		var collider = GetNode<Area2D>("Collider");
-		collider.AreaEntered += (area) =>
-		{
-			if (!area.IsInGroup("PlayerCollider")) return;
-			SetDeferred("IsActive", false);
-		};
-
 		var clickable = GetNode<Area2D>("Clickable");
 		clickable.MouseEntered += () =>
 		{
-			isHovered = true;
+
 			GetTree().CallGroup("UI", "SetInteractable", this);
 		};
 		clickable.MouseExited += () =>
 		{
-			isHovered = false;
+
 			GetTree().CallGroup("UI", "RemoveInteractable", this);
 		};
-    }
-
-    public override void _Input(InputEvent @event)
-    {
-        if (@event is InputEventMouseButton btn)
-			if (btn.IsPressed() && btn.ButtonIndex == MouseButton.Left)
-				IsActive = isHovered;
+		clickable.InputEvent += (viewport, @event, shapeIdx) =>
+		{
+			if (@event is InputEventMouseButton btn)
+				if (btn.IsPressed() && btn.ButtonIndex == MouseButton.Left)
+				{
+					((Viewport)viewport).SetInputAsHandled();
+					GetTree().CallGroup("Player", "SetFocus", this);
+				}
+		};
     }
 }

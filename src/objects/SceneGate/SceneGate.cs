@@ -94,7 +94,7 @@ public partial class SceneGate : Node2D
 		var globals = GetTree().Root.GetNode<GlobalVariables>("GlobalVariables");
 
 		if (Name == globals.SceneGateName)
-			GetTree().CallGroup("Player", "EnterScene", GetNode<Marker2D>("SpawnPoint").GlobalPosition, GetNode<Marker2D>("SpawnWayPoint").GlobalPosition);
+			GetTree().CallGroup("Player", "EnterScene", this);
 	}
 
 	private void ChangeScene()

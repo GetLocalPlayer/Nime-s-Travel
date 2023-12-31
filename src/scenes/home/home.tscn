@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://expad3u7bjp3"]
+[gd_scene load_steps=13 format=3 uid="uid://expad3u7bjp3"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_lisb4"]
 [ext_resource type="Texture2D" uid="uid://c44srvewhefkb" path="res://scenes/home/background.png" id="1_v0acl"]
@@ -22,11 +22,8 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-91, 401, 78, 400, 198,
 parsed_geometry_type = 0
 source_geometry_group_name = &"navigation_polygon_source_group"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0d7f"]
-size = Vector2(46, 47)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_utdbj"]
-size = Vector2(54, 128)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ygfj"]
+size = Vector2(43, 44)
 
 [node name="Home" type="Node2D"]
 y_sort_enabled = true
@@ -88,13 +85,15 @@ UIInteraction = PackedStringArray("dasdasdasdasd")
 [node name="Sprite2D" parent="InteractableBooks" index="0"]
 texture = ExtResource("7_7bebi")
 
-[node name="CollisionShape2D" parent="InteractableBooks/Clickable" index="0"]
-position = Vector2(-3, -0.5)
-shape = SubResource("RectangleShape2D_b0d7f")
+[node name="LookAtPoint" parent="InteractableBooks" index="1"]
+position = Vector2(-7, 121)
 
-[node name="CollisionShape2D" parent="InteractableBooks/Collider" index="0"]
-position = Vector2(-1, 107)
-shape = SubResource("RectangleShape2D_utdbj")
+[node name="WayPoint" parent="InteractableBooks" index="2"]
+position = Vector2(65, 188)
+
+[node name="CollisionShape2D" parent="InteractableBooks/Clickable" index="0"]
+position = Vector2(-3.5, 0)
+shape = SubResource("RectangleShape2D_8ygfj")
 
 [editable path="HomeStreetGate"]
 [editable path="Background"]

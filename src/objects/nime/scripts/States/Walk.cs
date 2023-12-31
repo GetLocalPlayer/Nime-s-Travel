@@ -13,6 +13,8 @@ public partial class Walk : State
         var pos = nime.GlobalPosition;
         var nextPos = agent.GetNextPathPosition();
         nime.Scale = nime.Scale with { X = Math.Abs(nime.Scale.X) * (pos.X > nextPos.X ? -1f : 1) };
+        if (agent.IsNavigationFinished())
+            OnFinish(nime);
     }
 
     public override void Exit(Node context)
@@ -31,6 +33,11 @@ public partial class Walk : State
         nime.GlobalPosition += offset;
         nime.Scale = nime.Scale with { X = Math.Abs(nime.Scale.X) * (offset.X < 0f ? -1f : 1) };
         if (agent.IsNavigationFinished())
-            RaiseStateFinished(nime);
+            OnFinish(nime);
+    }
+
+    protected virtual void OnFinish(Node context)
+    {
+        EmitStateFinished(context);
     }
 }

@@ -11,7 +11,7 @@ public abstract partial class State
 	public abstract void Exit(Node context);
 	public abstract void Update(Node context, double delta);
 
-	protected void RaiseStateFinished(Node context)
+	protected void EmitStateFinished(Node context)
 	{
 		StateFinished?.Invoke(this, context);
 	}

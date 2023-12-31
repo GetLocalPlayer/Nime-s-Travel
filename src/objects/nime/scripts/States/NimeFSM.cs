@@ -5,24 +5,38 @@ using System.Dynamic;
 
 public partial class NimeFSM : FiniteStateMachine
 {	
-	private readonly Dictionary<string, State> States = new Dictionary<string, State> {
+	 Nime nime;
+
+	private readonly Dictionary<string, State> states = new Dictionary<string, State> {
 		{"idle", new Idle()},
 		{"walk", new Walk()},
+		{"walkToFocus", new WalkToFocus()},
 	};
 
     public override void _Ready()
 	{
-		SetState(States["idle"]);
-
+		nime = (Nime)GetContext();
+		SetState(states["idle"]);
 		SetupTransitions();
 	}
 
 	private void SetupTransitions()
 	{
-		var agent = GetParent().GetNode<NavigationAgent2D>("NavigationAgent2D");
+		nime.WalkTargetSet += () =>
+			SetState(states["walk"]);
 
-		agent.PathChanged += () => SetState(States["walk"]);
+		states["walk"].StateFinished += (state, context) =>
+			SetState(states["idle"]);
 
-		States["walk"].StateFinished += (state, context) => SetState(States["idle"]);
+		nime.SceneEntered += () =>	
+			SetState(states["walk"]);
+
+		nime.FocusSet += () =>
+		{
+			SetState(states["walkToFocus"]);
+		};
+
+		states["walkToFocus"].StateFinished += (state, context) =>
+			SetState(states["idle"]);
 	}
 }

@@ -9,20 +9,16 @@ script = ExtResource("1_wvcga")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_fj3kd")
 
+[node name="LookAtPoint" type="Marker2D" parent="."]
+gizmo_extents = 94.0
+
+[node name="WayPoint" type="Marker2D" parent="."]
+gizmo_extents = 39.9
+
 [node name="Clickable" type="Area2D" parent="." groups=["InteractableClickables"]]
 monitorable = false
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Clickable"]
 debug_color = Color(1, 1, 1, 0.419608)
-metadata/_edit_lock_ = true
-
-[node name="Collider" type="Area2D" parent="." groups=["InteractableColliders"]]
-input_pickable = false
-monitorable = false
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
-position = Vector2(142, 67)
-debug_color = Color(1, 0.52549, 0, 0.419608)
 metadata/_edit_lock_ = true

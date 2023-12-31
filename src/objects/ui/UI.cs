@@ -5,6 +5,7 @@ using System.Diagnostics.Metrics;
 public partial class UI : Control
 {
 	private Interactable currentInterractable;
+	private CenterContainer hornContainer;
 	private TextureRect horn;
 	private Button btnRed;
 	private Button btnGreen;
@@ -18,15 +19,12 @@ public partial class UI : Control
 	{
 		var mainContainer = GetNode<BoxContainer>("MainContainer");
 
-		var hornCointainer = mainContainer.GetNode<CenterContainer>("HornContainer");
-		horn = hornCointainer.GetNode<TextureRect>("Horn");
-		horn.Visible = false;
-		btnRed = hornCointainer.GetNode<Button>("ButtonRed");
-		btnRed.Visible = false;
-		btnGreen = hornCointainer.GetNode<Button>("ButtonGreen");
-		btnGreen.Visible = false;
-		btnBlue = hornCointainer.GetNode<Button>("ButtonBlue");
-		btnBlue.Visible = false;
+		hornContainer = mainContainer.GetNode<CenterContainer>("HornContainer");
+		hornContainer.Visible = false;
+		horn = hornContainer.GetNode<TextureRect>("Horn");
+		btnRed = hornContainer.GetNode<Button>("ButtonRed");
+		btnGreen = hornContainer.GetNode<Button>("ButtonGreen");
+		btnBlue = hornContainer.GetNode<Button>("ButtonBlue");
 
 		var interactableContainer = mainContainer.GetNode<BoxContainer>("InteractableContainer");
 		interactableIcon = interactableContainer.GetNode<TextureRect>("Icon");
@@ -61,4 +59,7 @@ public partial class UI : Control
 		interactableIcon.Texture = null;
 		interactableLabel.Text = "";
 	}
+
+	private void EnableHorn() => hornContainer.Visible = true;
+	private void DisableHorn() => hornContainer.Visible = false;
 }

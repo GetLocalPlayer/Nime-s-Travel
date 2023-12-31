@@ -39,10 +39,10 @@ texture = ExtResource("2_1k7nj")
 position = Vector2(420, 242)
 
 [node name="HouseZ" type="Sprite2D" parent="."]
-position = Vector2(629, 410)
+position = Vector2(629, 470)
 texture = ExtResource("3_m0vqg")
 centered = false
-offset = Vector2(0, -147)
+offset = Vector2(0, -206.77)
 
 [node name="Nime" parent="." instance=ExtResource("4_3nipx")]
 position = Vector2(268, 453)

@@ -12,7 +12,7 @@ public abstract partial class FiniteStateMachine : Node
 
 	protected virtual Node GetContext() => GetParent();
 	
-    public void SetState(State newState)
+    public virtual void SetState(State newState)
 	{
 		if (newState == currentState) return;
 		currentState?.Exit(GetContext());
