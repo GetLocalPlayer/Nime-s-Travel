@@ -1,13 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://djk0tfvrgbpsp"]
+[gd_scene load_steps=3 format=3 uid="uid://djk0tfvrgbpsp"]
 
 [ext_resource type="Texture2D" uid="uid://b652rv7d4j3m2" path="res://icon.svg" id="1_fj3kd"]
 [ext_resource type="Script" path="res://objects/interactables/interactable/Interactable.cs" id="1_wvcga"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlovn"]
-size = Vector2(124, 123)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7t5f"]
-size = Vector2(128, 121)
 
 [node name="Interactable" type="Node2D"]
 script = ExtResource("1_wvcga")
@@ -15,17 +9,20 @@ script = ExtResource("1_wvcga")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_fj3kd")
 
-[node name="Clickable" type="Area2D" parent="." groups=["interactables"]]
+[node name="Clickable" type="Area2D" parent="." groups=["InteractableClickables"]]
 monitorable = false
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Clickable"]
-shape = SubResource("RectangleShape2D_tlovn")
+debug_color = Color(1, 1, 1, 0.419608)
+metadata/_edit_lock_ = true
 
-[node name="Collider" type="Area2D" parent="."]
+[node name="Collider" type="Area2D" parent="." groups=["InteractableColliders"]]
 input_pickable = false
 monitorable = false
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
 position = Vector2(142, 67)
-shape = SubResource("RectangleShape2D_s7t5f")
 debug_color = Color(1, 0.52549, 0, 0.419608)
+metadata/_edit_lock_ = true

@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://expad3u7bjp3"]
+[gd_scene load_steps=14 format=3 uid="uid://expad3u7bjp3"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_lisb4"]
 [ext_resource type="Texture2D" uid="uid://c44srvewhefkb" path="res://scenes/home/background.png" id="1_v0acl"]
 [ext_resource type="Texture2D" uid="uid://geh8o1qm8n6w" path="res://scenes/home/door_cover.png" id="3_8mep1"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="3_dlque"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="3_iqu22"]
+[ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactables/interactable/interactable.tscn" id="6_4jxc5"]
+[ext_resource type="Texture2D" uid="uid://ep5tridp670e" path="res://scenes/home/book_ico.png" id="7_3kghw"]
+[ext_resource type="Texture2D" uid="uid://blrfplqio7ehx" path="res://scenes/home/books.png" id="7_7bebi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4fygc"]
 size = Vector2(58, 71)
@@ -18,6 +21,12 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(
 outlines = Array[PackedVector2Array]([PackedVector2Array(-91, 401, 78, 400, 198, 401, 269, 418, 325, 426, 376, 432, 441, 433, 497, 427, 578, 426, 653, 428, 656, 449, 582, 451, 522, 449, 452, 457, 373, 458, 328, 451, 262, 442, 196, 425, 49, 421, -108, 424)])
 parsed_geometry_type = 0
 source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0d7f"]
+size = Vector2(46, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utdbj"]
+size = Vector2(54, 128)
 
 [node name="Home" type="Node2D"]
 y_sort_enabled = true
@@ -70,5 +79,23 @@ z_as_relative = false
 y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_sf02g")
 
+[node name="InteractableBooks" parent="." instance=ExtResource("6_4jxc5")]
+position = Vector2(147, 228)
+Icon = ExtResource("7_3kghw")
+UIName = "Книги"
+UIInteraction = PackedStringArray("dasdasdasdasd")
+
+[node name="Sprite2D" parent="InteractableBooks" index="0"]
+texture = ExtResource("7_7bebi")
+
+[node name="CollisionShape2D" parent="InteractableBooks/Clickable" index="0"]
+position = Vector2(-3, -0.5)
+shape = SubResource("RectangleShape2D_b0d7f")
+
+[node name="CollisionShape2D" parent="InteractableBooks/Collider" index="0"]
+position = Vector2(-1, 107)
+shape = SubResource("RectangleShape2D_utdbj")
+
 [editable path="HomeStreetGate"]
 [editable path="Background"]
+[editable path="InteractableBooks"]

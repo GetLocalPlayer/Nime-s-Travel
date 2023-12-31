@@ -1,16 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkcn5ylv2er2p"]
+[gd_scene load_steps=6 format=3 uid="uid://bkcn5ylv2er2p"]
 
 [ext_resource type="Texture2D" uid="uid://x1qjlmton88t" path="res://objects/ui/horn.png" id="1_btmpg"]
+[ext_resource type="Script" path="res://objects/ui/UI.cs" id="1_uvga7"]
 [ext_resource type="Texture2D" uid="uid://b652rv7d4j3m2" path="res://icon.svg" id="2_kyxf1"]
 [ext_resource type="FontFile" uid="uid://cbxbbyqhktfve" path="res://fonts/arial.ttf" id="2_ukrsc"]
 
-[node name="UI" type="Control"]
+[sub_resource type="LabelSettings" id="LabelSettings_8vrek"]
+line_spacing = -7.0
+font = ExtResource("2_ukrsc")
+font_size = 22
+
+[node name="UI" type="Control" groups=["UI"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_uvga7")
 metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -25,7 +33,7 @@ grow_vertical = 0
 pivot_offset = Vector2(0, 100)
 color = Color(0, 0, 0, 1)
 
-[node name="BoxContainer" type="BoxContainer" parent="."]
+[node name="MainContainer" type="BoxContainer" parent="."]
 layout_direction = 1
 layout_mode = 1
 anchors_preset = 12
@@ -36,28 +44,30 @@ offset_top = -100.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="CenterContainer" type="CenterContainer" parent="BoxContainer"]
+[node name="HornContainer" type="CenterContainer" parent="MainContainer"]
 layout_mode = 2
 
-[node name="ButtonBlue" type="Button" parent="BoxContainer/CenterContainer"]
+[node name="ButtonRed" type="Button" parent="MainContainer/HornContainer"]
 layout_mode = 2
 
-[node name="ButtonGreen" type="Button" parent="BoxContainer/CenterContainer"]
+[node name="ButtonGreen" type="Button" parent="MainContainer/HornContainer"]
 layout_mode = 2
 
-[node name="ButtonRed" type="Button" parent="BoxContainer/CenterContainer"]
+[node name="ButtonBlue" type="Button" parent="MainContainer/HornContainer"]
 layout_mode = 2
 
-[node name="Horn" type="TextureRect" parent="BoxContainer/CenterContainer"]
+[node name="Horn" type="TextureRect" parent="MainContainer/HornContainer"]
 layout_mode = 2
 texture = ExtResource("1_btmpg")
 stretch_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="BoxContainer"]
-custom_minimum_size = Vector2(15.79, 0)
+[node name="VSeparator" type="VSeparator" parent="MainContainer"]
+light_mask = 0
+visibility_layer = 0
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="Text" type="RichTextLabel" parent="BoxContainer"]
+[node name="InteractionText" type="RichTextLabel" parent="MainContainer"]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
@@ -66,16 +76,43 @@ theme_override_fonts/normal_font = ExtResource("2_ukrsc")
 theme_override_font_sizes/normal_font_size = 25
 scroll_active = false
 
-[node name="VSeparator2" type="VSeparator" parent="BoxContainer"]
-custom_minimum_size = Vector2(16.225, 0)
+[node name="VSeparator2" type="VSeparator" parent="MainContainer"]
+light_mask = 0
+visibility_layer = 0
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="BoxContainer"]
+[node name="InteractableContainer" type="BoxContainer" parent="MainContainer"]
 layout_mode = 2
+vertical = true
+
+[node name="HSeparator" type="HSeparator" parent="MainContainer/InteractableContainer"]
+light_mask = 0
+visibility_layer = 0
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="MainContainer/InteractableContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 texture = ExtResource("2_kyxf1")
-expand_mode = 3
+expand_mode = 1
 stretch_mode = 5
 
-[node name="VSeparator3" type="VSeparator" parent="BoxContainer"]
-custom_minimum_size = Vector2(16.225, 0)
+[node name="Label" type="Label" parent="MainContainer/InteractableContainer"]
+layout_mode = 2
+text = "Test Text
+"
+label_settings = SubResource("LabelSettings_8vrek")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MainContainer/InteractableContainer"]
+light_mask = 0
+visibility_layer = 0
+layout_mode = 2
+
+[node name="VSeparator3" type="VSeparator" parent="MainContainer"]
+light_mask = 0
+visibility_layer = 0
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2

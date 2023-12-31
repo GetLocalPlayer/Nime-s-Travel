@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalVariables="*res://autoload/GlobalVariables.cs"
+Ui="*res://objects/ui/ui.tscn"
 
 [display]
 

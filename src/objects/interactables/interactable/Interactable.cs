@@ -18,8 +18,8 @@ using System.Dynamic;
 
 public partial class Interactable : Node2D
 {
-	private bool _isActive = true;
-	[Export] public bool IsActive {
+	private bool _isActive;
+	public bool IsActive {
 		get => _isActive;
 		set {
 			_isActive = value;
@@ -31,21 +31,43 @@ public partial class Interactable : Node2D
 			}
 		}
 	}
+	[Export] public CompressedTexture2D Icon;
+	[Export] public string UIName;
+	[Export] public string[] UIInteraction;
+	private bool isHovered = false;
 
+	public void Disable() => IsActive = false;
+	public void Enable() => IsActive = true;
 
-	private void Disable() => IsActive = false;
-	private void Enable() => IsActive = true;
-
-	private int counter = 0;
 
     public override void _Ready()
     {
+		Disable();
+
 		var collider = GetNode<Area2D>("Collider");
 		collider.AreaEntered += (area) =>
 		{
 			if (!area.IsInGroup("PlayerCollider")) return;
-			counter++;
-			GD.Print($"Collided {counter}");
+			SetDeferred("IsActive", false);
 		};
+
+		var clickable = GetNode<Area2D>("Clickable");
+		clickable.MouseEntered += () =>
+		{
+			isHovered = true;
+			GetTree().CallGroup("UI", "SetInteractable", this);
+		};
+		clickable.MouseExited += () =>
+		{
+			isHovered = false;
+			GetTree().CallGroup("UI", "RemoveInteractable", this);
+		};
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton btn)
+			if (btn.IsPressed() && btn.ButtonIndex == MouseButton.Left)
+				IsActive = isHovered;
     }
 }
