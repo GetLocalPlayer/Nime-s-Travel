@@ -6,9 +6,6 @@ public partial class UI : Control
 {
 	private CenterContainer hornContainer;
 	private TextureRect horn;
-	private Button btnRed;
-	private Button btnGreen;
-	private Button btnBlue;
 	private TextureRect interactableIcon;
 	private Label interactableLabel;
 	private RichTextLabel interactionText;
@@ -16,16 +13,37 @@ public partial class UI : Control
 	private Interactable focusedInteractable;
 
 	private int counter = 0;
+
+	private delegate void PressedEventHandler();
+
 	public override void _Ready()
 	{
 		var mainContainer = GetNode<BoxContainer>("MainContainer");
 
 		hornContainer = mainContainer.GetNode<CenterContainer>("HornContainer");
 		hornContainer.Visible = false;
-		horn = hornContainer.GetNode<TextureRect>("Horn");
-		btnRed = hornContainer.GetNode<Button>("ButtonRed");
-		btnGreen = hornContainer.GetNode<Button>("ButtonGreen");
-		btnBlue = hornContainer.GetNode<Button>("ButtonBlue");
+
+		var buttonsRoot = hornContainer.GetNode<Control>("Buttons");
+		var animPlayer = buttonsRoot.GetNode<AnimationPlayer>("AnimationPlayer");
+
+		var pressedHandler = Callable.From((Button emitter) => 
+		{
+			animPlayer.Queue(emitter.Name);
+		});
+
+		/* Сигнал кнопок "pressed" не предусметривает передачи
+		в качестве параметра кнопки, которая была pressed. В
+		GDScript мы можем использовать метод Callable.bind(...)
+		чтобы привязать произвольные параметры к Callable который
+		вызывается в момент излучения сигнала, но, похожу, этот
+		метод все еще (версия движка 4.2.1) не реализован в С#
+		версии API. Придется костылявить замыканиями. */
+		var btnRed = buttonsRoot.GetNode<Button>("Red");
+		btnRed.Pressed += () => pressedHandler.Call(btnRed);
+		var btnGreen = buttonsRoot.GetNode<Button>("Green");
+		btnGreen.Pressed += () => pressedHandler.Call(btnGreen);
+		var btnBlue = buttonsRoot.GetNode<Button>("Blue");
+		btnBlue.Pressed += () => pressedHandler.Call(btnBlue);
 
 		var interactableContainer = mainContainer.GetNode<BoxContainer>("InteractableContainer");
 		interactableIcon = interactableContainer.GetNode<TextureRect>("Icon");
@@ -43,7 +61,7 @@ public partial class UI : Control
 		interactableLabel.Text = null;
 
 		interactionText = mainContainer.GetNode<RichTextLabel>("InteractionText");
-		interactionText.Text = null;
+		//interactionText.Text = null;
 	}
 
 	private void SetInteractableHint(Interactable i)

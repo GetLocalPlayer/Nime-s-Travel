@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byh0sneucqw43"
-path="res://.godot/imported/cursor_quest.png-1e659c0c918d7567f4ffd2d0f835ae06.ctex"
+uid="uid://x1qjlmton88t"
+path="res://.godot/imported/horn.png-2dddb8479ad43f905069a1e63ae25b2d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/ui/cursor_quest.png"
-dest_files=["res://.godot/imported/cursor_quest.png-1e659c0c918d7567f4ffd2d0f835ae06.ctex"]
+source_file="res://autoload/ui/horn.png"
+dest_files=["res://.godot/imported/horn.png-2dddb8479ad43f905069a1e63ae25b2d.ctex"]
 
 [params]
 

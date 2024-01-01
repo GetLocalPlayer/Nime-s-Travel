@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm60gyaprrsw3"
-path="res://.godot/imported/cursor_walk.png-d689bf535d65a88dbdccd7958dc415f9.ctex"
+uid="uid://cqsrgvngeegvg"
+path="res://.godot/imported/hornbuttonanim.png-b9394953e26b7fca0dfd55374afaa496.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/ui/cursor_walk.png"
-dest_files=["res://.godot/imported/cursor_walk.png-d689bf535d65a88dbdccd7958dc415f9.ctex"]
+source_file="res://autoload/ui/hornbuttonanim.png"
+dest_files=["res://.godot/imported/hornbuttonanim.png-b9394953e26b7fca0dfd55374afaa496.ctex"]
 
 [params]
 

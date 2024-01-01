@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d10t3f66yhqks"
-path="res://.godot/imported/button.png-2e9b93beea2f88ae985cac30221c10f4.ctex"
+uid="uid://bvi5g26ivi4ty"
+path="res://.godot/imported/hornbutton.png-927326c1aee84a86aec363b6257bd23c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/ui/button.png"
-dest_files=["res://.godot/imported/button.png-2e9b93beea2f88ae985cac30221c10f4.ctex"]
+source_file="res://autoload/ui/hornbutton.png"
+dest_files=["res://.godot/imported/hornbutton.png-927326c1aee84a86aec363b6257bd23c.ctex"]
 
 [params]
 
