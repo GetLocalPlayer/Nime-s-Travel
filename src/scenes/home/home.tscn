@@ -79,7 +79,8 @@ navigation_polygon = SubResource("NavigationPolygon_sf02g")
 [node name="InteractableBooks" parent="." instance=ExtResource("6_4jxc5")]
 position = Vector2(147, 228)
 UIIcon = ExtResource("7_3kghw")
-UILabel = "Книги"
+UILabel = "LABEL_BOOKS"
+Interaction = PackedStringArray("INT_BOOKS")
 
 [node name="Sprite2D" parent="InteractableBooks" index="0"]
 texture = ExtResource("7_7bebi")

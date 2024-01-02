@@ -30,6 +30,11 @@ window/stretch/aspect="ignore"
 
 project/assembly_name="Nime-s Travel"
 
+[internationalization]
+
+locale/translation_remaps={}
+locale/translations=PackedStringArray("res://localization/text/strings.en.translation", "res://localization/text/strings.ru.translation")
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -390,7 +390,7 @@ script = ExtResource("1_3tqnx")
 script = ExtResource("1_c1jqf")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 5.0
+path_desired_distance = 10.0
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dkceb")

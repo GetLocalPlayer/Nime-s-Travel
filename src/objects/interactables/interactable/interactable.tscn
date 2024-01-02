@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b652rv7d4j3m2" path="res://icon.svg" id="1_fj3kd"]
 [ext_resource type="Script" path="res://objects/interactables/interactable/Interactable.cs" id="1_wvcga"]
 
-[node name="Interactable" type="Node2D"]
+[node name="Interactable" type="Node2D" groups=["Interactables"]]
 script = ExtResource("1_wvcga")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

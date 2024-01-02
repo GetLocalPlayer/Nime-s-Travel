@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 
 public partial class UI : Control
@@ -7,14 +8,16 @@ public partial class UI : Control
 	private CenterContainer hornContainer;
 	private Button interactableHint;
 	private Button interactableButton;
-	private RichTextLabel interactionText;
+	private RichTextLabel interactionLabel;
+	private Control interactionModal;
 
 	private Interactable targetedInteractable;
-
-	private int counter = 0;
+	private int interactionIndex;
 
 	public override void _Ready()
 	{
+		GetNode<CheckBox>("LanguageSwitcher").Toggled += (toggledOn) =>
+			TranslationServer.SetLocale(toggledOn ? "ru" : "en");
 		var mainContainer = GetNode<BoxContainer>("MainContainer");
 
 		hornContainer = mainContainer.GetNode<CenterContainer>("HornContainer");
@@ -50,13 +53,25 @@ public partial class UI : Control
 		interactableButton = interactableContainer.GetNode<Button>("Button");
 		interactableButton.Visible = false;
 		interactableButton.Pressed += () =>
-		{
-			counter++;
-			GD.Print($"Interactable button {counter}");
-		};
+			InteractableClicked(targetedInteractable);
 
-		interactionText = mainContainer.GetNode<RichTextLabel>("InteractionText");
-		interactionText.Text = null;
+		interactionLabel = mainContainer.GetNode<RichTextLabel>("InteractionText");
+		interactionLabel.Text = null;
+
+		interactionModal = GetNode<Control>("InteractionModal");
+		interactionModal.Visible = false;
+		interactionModal.GuiInput += (@event) =>
+		{
+			if (@event is InputEventMouseButton btn)
+				if (btn.Pressed && btn.ButtonIndex == MouseButton.Left)
+				{
+					if (interactionIndex >= targetedInteractable.Interaction.Length)
+					{
+						interactionModal.Visible = false;
+						interactionLabel.Text = "";
+					}
+				}
+		};
 	}
 
 	public void InteractableHovered(Interactable i)
@@ -89,5 +104,19 @@ public partial class UI : Control
 		targetedInteractable = null;
 		interactableButton.Visible = false;
 		hornContainer.Visible = false;
+	}
+
+
+	public void InteractableClicked(Interactable i)
+	{
+		if (targetedInteractable == i && targetedInteractable.Interaction.Length > 0) RunInteraction();
+	}
+
+	private void RunInteraction()
+	{
+		interactionLabel.Visible = true;
+		interactionLabel.Text = targetedInteractable.Interaction[0];
+		interactionIndex = 1;
+		interactionModal.Visible = true;
 	}
 }

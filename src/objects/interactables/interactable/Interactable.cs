@@ -38,8 +38,8 @@ public partial class Interactable : Node2D
 				if (btn.IsPressed() && btn.ButtonIndex == MouseButton.Left)
 				{
 					((Viewport)viewport).SetInputAsHandled();
-					GetTree().CallGroup("UI", "InteractableClicked", this);
 					GetTree().CallGroup("Player", "InteractableClicked", this);
+					GetTree().CallGroup("UI", "InteractableClicked", this);
 				}
 		};
     }
