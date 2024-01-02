@@ -5,16 +5,13 @@ using System.Diagnostics.Metrics;
 public partial class UI : Control
 {
 	private CenterContainer hornContainer;
-	private TextureRect horn;
-	private TextureRect interactableIcon;
-	private Label interactableLabel;
+	private Button interactableHint;
+	private Button interactableButton;
 	private RichTextLabel interactionText;
 
-	private Interactable focusedInteractable;
+	private Interactable targetedInteractable;
 
 	private int counter = 0;
-
-	private delegate void PressedEventHandler();
 
 	public override void _Ready()
 	{
@@ -24,18 +21,19 @@ public partial class UI : Control
 		hornContainer.Visible = false;
 
 		var buttonsRoot = hornContainer.GetNode<Control>("Buttons");
-		var animPlayer = buttonsRoot.GetNode<AnimationPlayer>("AnimationPlayer");
+		var animPlayer = buttonsRoot.GetNode<AnimationPlayer>("MagicSpark/AnimationPlayer");
 
 		var pressedHandler = Callable.From((Button emitter) => 
 		{
 			animPlayer.Queue(emitter.Name);
+			GetTree().CallGroup("Player", "HornButtonClicked", emitter.Name);
 		});
 
 		/* Сигнал кнопок "pressed" не предусметривает передачи
-		в качестве параметра кнопки, которая была pressed. В
+		в качестве параметра кнопку, которая была pressed. В
 		GDScript мы можем использовать метод Callable.bind(...)
 		чтобы привязать произвольные параметры к Callable который
-		вызывается в момент излучения сигнала, но, похожу, этот
+		вызывается в момент излучения сигнала, но, похоже, этот
 		метод все еще (версия движка 4.2.1) не реализован в С#
 		версии API. Придется костылявить замыканиями. */
 		var btnRed = buttonsRoot.GetNode<Button>("Red");
@@ -46,54 +44,50 @@ public partial class UI : Control
 		btnBlue.Pressed += () => pressedHandler.Call(btnBlue);
 
 		var interactableContainer = mainContainer.GetNode<BoxContainer>("InteractableContainer");
-		interactableIcon = interactableContainer.GetNode<TextureRect>("Icon");
-		interactableIcon.Texture = null;
-		interactableIcon.GuiInput += (@event) =>
+		interactableHint = interactableContainer.GetNode<Button>("Hint");
+		interactableHint.Visible = false;
+		
+		interactableButton = interactableContainer.GetNode<Button>("Button");
+		interactableButton.Visible = false;
+		interactableButton.Pressed += () =>
 		{
-			if (@event is InputEventMouseButton btn)
-				if (btn.IsPressed() && btn.ButtonIndex == MouseButton.Left)
-				{
-					counter++;
-					GD.Print($"Click {counter}");
-				}
+			counter++;
+			GD.Print($"Interactable button {counter}");
 		};
-		interactableLabel = interactableContainer.GetNode<Label>("Label");
-		interactableLabel.Text = null;
 
 		interactionText = mainContainer.GetNode<RichTextLabel>("InteractionText");
-		//interactionText.Text = null;
+		interactionText.Text = null;
 	}
 
-	private void SetInteractableHint(Interactable i)
+	public void InteractableHovered(Interactable i)
 	{
-		if (focusedInteractable == null || focusedInteractable == i)
-		{
-			interactableIcon.Texture = i.Icon;
-			interactableLabel.Text = i.UIName;
-		}
+		interactableHint.Icon = i.UIIcon;
+		interactableHint.Text = i.UILabel;
+		interactableHint.Visible = !interactableButton.Visible;
 	}
 
-	private void RemoveInteractableHint()
+	public void InteractableUnhovered(Interactable i)
 	{
-		if (focusedInteractable != null) return;
-		interactableIcon.Texture = null;
-		interactableLabel.Text = null;
+		interactableHint.Icon = null;
+		interactableHint.Text = null;
+		interactableHint.Visible = false;
 	}
 
-	private void SetInteractableFocused(Interactable i)
+	public void InteractableReached(Interactable i)
 	{
-		focusedInteractable = i;
-		SetInteractableHint(i);
+		targetedInteractable = i;
+		interactableHint.Visible = false;
+		interactableButton.Icon = i.UIIcon;
+		interactableButton.Text = i.UILabel;
+		interactableButton.Visible = true;
 		hornContainer.Visible = true;
+		hornContainer.GetNode<AnimationPlayer>("Buttons/MagicSpark/AnimationPlayer").Play("RESET");
 	}
 
-	private void RemoveInteractableFocused()
+	public void InteractableLeft()
 	{
-		focusedInteractable = null;
-		RemoveInteractableHint();
+		targetedInteractable = null;
+		interactableButton.Visible = false;
 		hornContainer.Visible = false;
 	}
-
-	private void EnableHorn() => hornContainer.Visible = true;
-	private void DisableHorn() => hornContainer.Visible = false;
 }

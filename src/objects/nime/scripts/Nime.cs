@@ -3,26 +3,31 @@ using System;
 
 public partial class Nime : Node2D
 {
-	[Signal] public delegate void FocusSetEventHandler();
+	[Signal] public delegate void InteractableTargetedEventHandler();
 	[Signal] public delegate void WalkTargetSetEventHandler();
 	[Signal] public delegate void SceneEnteredEventHandler();
+	[Signal] public delegate void MagicCastEventHandler();
 
 	[Export] public float MoveSpeed = 80;	
-	public Interactable FocusedInteractable;
+	public Interactable TargetedInteractable;
+	public string Spell = "";
 
     public void SetNewWalkTarget(Vector2 newTarget)
 	{
 		GetNode<NavigationAgent2D>("NavigationAgent2D").TargetPosition = newTarget;
 		EmitSignal("WalkTargetSet");
+		if (TargetedInteractable != null) 
+			GetTree().CallGroup("UI", "InteractableLeft");
+		TargetedInteractable = null;
 	}
 
-	public void SetFocus(Interactable i)
+	public void InteractableClicked(Interactable i)
 	{
-		if (i != null)
+		if (TargetedInteractable != i)
 		{
-			FocusedInteractable = i;
-			GetNode<NavigationAgent2D>("NavigationAgent2D").TargetPosition = FocusedInteractable.WayPoint;
-			EmitSignal("FocusSet");
+			TargetedInteractable = i;
+			GetNode<NavigationAgent2D>("NavigationAgent2D").TargetPosition = TargetedInteractable.WayPoint;
+			EmitSignal("InteractableTargeted");
 		}
 	}
 
@@ -31,5 +36,11 @@ public partial class Nime : Node2D
 		Position = gate.SpawnPoint;
 		GetNode<NavigationAgent2D>("NavigationAgent2D").TargetPosition = gate.SpawnWayPoint;
 		EmitSignal("SceneEntered");
+	}
+
+	public void HornButtonClicked(string buttonName)
+	{
+		Spell += buttonName[0].ToString().ToLower();
+		EmitSignal("MagicCast");
 	}
 }

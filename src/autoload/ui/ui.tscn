@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bkcn5ylv2er2p"]
+[gd_scene load_steps=12 format=3 uid="uid://bkcn5ylv2er2p"]
 
 [ext_resource type="Texture2D" uid="uid://x1qjlmton88t" path="res://autoload/ui/horn.png" id="1_btmpg"]
 [ext_resource type="Script" path="res://autoload/ui/UI.cs" id="1_uvga7"]
@@ -7,53 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://bvi5g26ivi4ty" path="res://autoload/ui/hornbutton.png" id="3_2arbf"]
 [ext_resource type="Texture2D" uid="uid://cqsrgvngeegvg" path="res://autoload/ui/hornbuttonanim.png" id="4_n58fa"]
 
-[sub_resource type="Animation" id="Animation_a4jgu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/Spark:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationPlayer/Spark:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimationPlayer/Spark:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(38, 530)]
-}
-
-[sub_resource type="Animation" id="Animation_fxeu2"]
-resource_name = "Green"
+[sub_resource type="Animation" id="Animation_8ykup"]
+resource_name = "Blue"
 length = 0.8
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/Spark:frame")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -65,7 +26,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationPlayer/Spark:visible")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -77,7 +38,60 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AnimationPlayer/Spark:self_modulate")
+tracks/2/path = NodePath(".:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-74, -20)]
+}
+
+[sub_resource type="Animation" id="Animation_fxeu2"]
+resource_name = "Green"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -89,14 +103,53 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimationPlayer/Spark:position")
+tracks/3/path = NodePath(".:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(24, 566)]
+"values": [Vector2(-88, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_a4jgu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-26, -1)]
 }
 
 [sub_resource type="Animation" id="Animation_rqh4l"]
@@ -106,7 +159,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/Spark:frame")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -118,7 +171,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationPlayer/Spark:visible")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -130,7 +183,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AnimationPlayer/Spark:self_modulate")
+tracks/2/path = NodePath(".:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -142,67 +195,14 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimationPlayer/Spark:position")
+tracks/3/path = NodePath(".:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(55, 587)]
-}
-
-[sub_resource type="Animation" id="Animation_8ykup"]
-resource_name = "Blue"
-length = 0.8
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/Spark:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationPlayer/Spark:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimationPlayer/Spark:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AnimationPlayer/Spark:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(38, 530)]
+"values": [Vector2(-56, 37)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lg54o"]
@@ -212,11 +212,6 @@ _data = {
 "RESET": SubResource("Animation_a4jgu"),
 "Red": SubResource("Animation_rqh4l")
 }
-
-[sub_resource type="LabelSettings" id="LabelSettings_8vrek"]
-line_spacing = -7.0
-font = ExtResource("2_ukrsc")
-font_size = 22
 
 [node name="UI" type="Control" groups=["UI"]]
 layout_mode = 3
@@ -263,6 +258,20 @@ stretch_mode = 2
 [node name="Buttons" type="Control" parent="MainContainer/HornContainer"]
 layout_mode = 2
 
+[node name="MagicSpark" type="Sprite2D" parent="MainContainer/HornContainer/Buttons"]
+visible = false
+position = Vector2(-26, -1)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_n58fa")
+hframes = 4
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainContainer/HornContainer/Buttons/MagicSpark"]
+libraries = {
+"": SubResource("AnimationLibrary_lg54o")
+}
+autoplay = "RESET"
+
 [node name="Red" type="Button" parent="MainContainer/HornContainer/Buttons"]
 layout_mode = 2
 offset_left = -75.0
@@ -302,20 +311,6 @@ action_mode = 0
 icon = ExtResource("3_2arbf")
 flat = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MainContainer/HornContainer/Buttons"]
-libraries = {
-"": SubResource("AnimationLibrary_lg54o")
-}
-autoplay = "RESET"
-
-[node name="Spark" type="Sprite2D" parent="MainContainer/HornContainer/Buttons/AnimationPlayer"]
-visible = false
-position = Vector2(38, 530)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("4_n58fa")
-hframes = 4
-vframes = 4
-
 [node name="VSeparator" type="VSeparator" parent="MainContainer"]
 light_mask = 0
 visibility_layer = 0
@@ -330,7 +325,6 @@ size_flags_horizontal = 3
 theme_override_fonts/normal_font = ExtResource("2_ukrsc")
 theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
-text = "[color=#ffff00]Здесь мои книги и дневники.[br]Немного. Я мало что успела изучить."
 scroll_active = false
 
 [node name="VSeparator2" type="VSeparator" parent="MainContainer"]
@@ -339,29 +333,49 @@ visibility_layer = 0
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="InteractableContainer" type="BoxContainer" parent="MainContainer"]
+[node name="InteractableContainer" type="VBoxContainer" parent="MainContainer"]
 layout_mode = 2
-vertical = true
 
 [node name="HSeparator" type="HSeparator" parent="MainContainer/InteractableContainer"]
 light_mask = 0
 visibility_layer = 0
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="MainContainer/InteractableContainer"]
+[node name="Button" type="Button" parent="MainContainer/InteractableContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("2_kyxf1")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="MainContainer/InteractableContainer"]
-layout_mode = 2
-text = "Test Text
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ukrsc")
+theme_override_font_sizes/font_size = 21
+action_mode = 0
+text = "sdffgsdf
 "
-label_settings = SubResource("LabelSettings_8vrek")
-horizontal_alignment = 1
-vertical_alignment = 2
+icon = ExtResource("2_kyxf1")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Hint" type="Button" parent="MainContainer/InteractableContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ukrsc")
+theme_override_font_sizes/font_size = 21
+action_mode = 0
+text = "sdffgsdf
+"
+icon = ExtResource("2_kyxf1")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
 
 [node name="HSeparator2" type="HSeparator" parent="MainContainer/InteractableContainer"]
 light_mask = 0

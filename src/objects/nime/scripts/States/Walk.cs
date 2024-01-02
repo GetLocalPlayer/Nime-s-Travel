@@ -6,15 +6,14 @@ public partial class Walk : State
     public override void Enter(Node context)
     {
         var nime = (Nime)context;
-        nime.GetNode<AnimatedSprite2D>("Animations").Play("Walk");
+        nime.GetNode<AnimationPlayer>("AnimationPlayer").Play("Walk");
         nime.GetNode<AudioStreamPlayer2D>("GalopSound").Play();
-        nime.GetNode<AnimatedSprite2D>("Animations").Play("Walk");
         var agent = nime.GetNode<NavigationAgent2D>("NavigationAgent2D");
         var pos = nime.GlobalPosition;
         var nextPos = agent.GetNextPathPosition();
         nime.Scale = nime.Scale with { X = Math.Abs(nime.Scale.X) * (pos.X > nextPos.X ? -1f : 1) };
         if (agent.IsNavigationFinished())
-            OnFinish(nime);
+            Finalize(nime);
     }
 
     public override void Exit(Node context)
@@ -33,10 +32,10 @@ public partial class Walk : State
         nime.GlobalPosition += offset;
         nime.Scale = nime.Scale with { X = Math.Abs(nime.Scale.X) * (offset.X < 0f ? -1f : 1) };
         if (agent.IsNavigationFinished())
-            OnFinish(nime);
+            Finalize(nime);
     }
 
-    protected virtual void OnFinish(Node context)
+    protected virtual void Finalize(Node context)
     {
         EmitStateFinished(context);
     }

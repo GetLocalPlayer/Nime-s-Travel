@@ -10,7 +10,8 @@ public partial class NimeFSM : FiniteStateMachine
 	private readonly Dictionary<string, State> states = new Dictionary<string, State> {
 		{"idle", new Idle()},
 		{"walk", new Walk()},
-		{"walkToFocus", new WalkToFocus()},
+		{"walkToInteractable", new WalkToInteractable()},
+		{"castMagic", new CastMagic()},
 	};
 
     public override void _Ready()
@@ -25,8 +26,6 @@ public partial class NimeFSM : FiniteStateMachine
 		nime.WalkTargetSet += () =>
 		{
 			SetState(states["walk"]);
-			nime.FocusedInteractable = null;
-			GetTree().CallGroup("UI", "RemoveInteractableFocused");
 		};
 
 		states["walk"].StateFinished += (state, context) =>
@@ -35,14 +34,21 @@ public partial class NimeFSM : FiniteStateMachine
 		nime.SceneEntered += () =>	
 			SetState(states["walk"]);
 
-		nime.FocusSet += () =>
-			SetState(states["walkToFocus"]);
-
-		states["walkToFocus"].StateFinished += (state, context) =>
+		nime.InteractableTargeted += () =>
 		{
-			SetState(states["idle"]);
-			GetTree().CallGroup("UI", "SetInteractableFocused", nime.FocusedInteractable);
+			SetState(states["walkToInteractable"]);
 		};
 
+		states["walkToInteractable"].StateFinished += (state, context) =>
+		{
+			SetState(states["idle"]);
+			GetTree().CallGroup("UI", "InteractableReached", nime.TargetedInteractable);
+		};
+
+		nime.MagicCast += () =>
+			SetState(states["castMagic"]);
+
+		states["castMagic"].StateFinished += (state, context) =>
+			SetState(states["idle"]);
 	}
 }

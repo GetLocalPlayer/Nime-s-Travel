@@ -3,13 +3,13 @@ using System;
 using System.Runtime.CompilerServices;
 
 
-public class WalkToFocus : Walk
+public class WalkToInteractable : Walk
 {
-    protected  override void OnFinish(Node context)
+    protected  override void Finalize(Node context)
     {
         var nime = (Nime)context;
-        var lookAtPoint = nime.FocusedInteractable.LookAtPoint;
+        var lookAtPoint = nime.TargetedInteractable.LookAtPoint;
         nime.Scale = nime.Scale with { X = Math.Abs(nime.Scale.X) * (nime.Position.X > lookAtPoint.X ? -1f : 1) };
-        base.OnFinish(nime);
+        base.Finalize(nime);
     }
 }
