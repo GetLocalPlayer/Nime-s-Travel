@@ -76,25 +76,25 @@ z_as_relative = false
 y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_sf02g")
 
-[node name="InteractableBooks" parent="." instance=ExtResource("6_4jxc5")]
+[node name="Books" parent="." instance=ExtResource("6_4jxc5")]
 position = Vector2(147, 228)
 UIIcon = ExtResource("7_3kghw")
 UILabel = "LABEL_BOOKS"
-Interaction = PackedStringArray("INT_BOOKS")
+interactionLines = PackedStringArray("INT_BOOKS")
 
-[node name="Sprite2D" parent="InteractableBooks" index="0"]
+[node name="Sprite2D" parent="Books" index="0"]
 texture = ExtResource("7_7bebi")
 
-[node name="LookAtPoint" parent="InteractableBooks" index="1"]
+[node name="LookAtPoint" parent="Books" index="1"]
 position = Vector2(-7, 121)
 
-[node name="WayPoint" parent="InteractableBooks" index="2"]
+[node name="WayPoint" parent="Books" index="2"]
 position = Vector2(65, 188)
 
-[node name="CollisionShape2D" parent="InteractableBooks/Clickable" index="0"]
+[node name="CollisionShape2D" parent="Books/Clickable" index="0"]
 position = Vector2(-3.5, 0)
 shape = SubResource("RectangleShape2D_8ygfj")
 
 [editable path="HomeStreetGate"]
 [editable path="Background"]
-[editable path="InteractableBooks"]
+[editable path="Books"]

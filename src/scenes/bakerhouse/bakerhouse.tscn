@@ -1,13 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://b15mn1d0al221"]
+[gd_scene load_steps=14 format=3 uid="uid://b15mn1d0al221"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_0qp4l"]
 [ext_resource type="Texture2D" uid="uid://b18inoo254ek0" path="res://scenes/bakerhouse/back.png" id="2_n7gu8"]
 [ext_resource type="Texture2D" uid="uid://cwl5jeumh4hg1" path="res://scenes/bakerhouse/back_z0.png" id="3_u7o2y"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="4_jxp4p"]
+[ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactables/interactable/interactable.tscn" id="5_ggtyw"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="5_uupps"]
+[ext_resource type="Texture2D" uid="uid://c4ymlc2loys1x" path="res://scenes/bakerhouse/pony_ico.png" id="6_5jpup"]
+[ext_resource type="Texture2D" uid="uid://cg7oyotj61up3" path="res://scenes/bakerhouse/pony.png" id="7_fmt3k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brmn3"]
 size = Vector2(953, 510)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cowkc"]
+size = Vector2(94, 152)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_v5l6m"]
 vertices = PackedVector2Array(-570, 240, -446, 262, -447, 262, -869, 232, -569, 239, -575, 250, -870, 242, -446, 276, -445, 276, -181, 298, -180, 298, 90, 303, 90, 310, -181, 310, -353, 300, -348, 288)
@@ -43,6 +49,23 @@ position = Vector2(379, 274)
 scale = Vector2(0.5, 0.5)
 MoveSpeed = 150.0
 
+[node name="Baker" parent="." instance=ExtResource("5_ggtyw")]
+position = Vector2(570, 365)
+UIIcon = ExtResource("6_5jpup")
+UILabel = "LABEL_BAKER"
+interactionLines = PackedStringArray("INT_BAKER")
+
+[node name="Sprite2D" parent="Baker" index="0"]
+position = Vector2(-20, -39)
+texture = ExtResource("7_fmt3k")
+
+[node name="WayPoint" parent="Baker" index="2"]
+position = Vector2(-149, 83)
+
+[node name="CollisionShape2D" parent="Baker/Clickable" index="0"]
+position = Vector2(-18, -26)
+shape = SubResource("RectangleShape2D_cowkc")
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(380, 295)
 scale = Vector2(0.5, 0.5)
@@ -71,4 +94,5 @@ position = Vector2(192, -93)
 shape = SubResource("RectangleShape2D_bvxqt")
 
 [editable path="Background"]
+[editable path="Baker"]
 [editable path="NeighborhoodBakerHouseGate"]

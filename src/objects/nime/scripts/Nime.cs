@@ -14,11 +14,14 @@ public partial class Nime : Node2D
 
     public void SetNewWalkTarget(Vector2 newTarget)
 	{
-		GetNode<NavigationAgent2D>("NavigationAgent2D").TargetPosition = newTarget;
+		var agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+		agent.TargetPosition = newTarget;
 		EmitSignal("WalkTargetSet");
-		if (TargetedInteractable != null) 
+		if (TargetedInteractable != null)
+		{ 
 			GetTree().CallGroup("UI", "InteractableLeft");
-		TargetedInteractable = null;
+			TargetedInteractable = null;
+		}
 	}
 
 	public void InteractableClicked(Interactable i)

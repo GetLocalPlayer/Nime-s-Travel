@@ -1,14 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://bdnwor80y7kvj"]
+[gd_scene load_steps=17 format=3 uid="uid://bdnwor80y7kvj"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_7732i"]
 [ext_resource type="Texture2D" uid="uid://drv4wl1d4y7vv" path="res://scenes/graveyard/back.png" id="2_kjyhk"]
+[ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactables/interactable/interactable.tscn" id="3_7fqlc"]
 [ext_resource type="Texture2D" uid="uid://iaa21bgoia06" path="res://scenes/graveyard/grave1.png" id="3_50utd"]
+[ext_resource type="Texture2D" uid="uid://di2d3veko00no" path="res://scenes/graveyard/grave_ico.png" id="4_6cabc"]
 [ext_resource type="Texture2D" uid="uid://6lhr7omh6osp" path="res://scenes/graveyard/grave3.png" id="4_k7nu5"]
 [ext_resource type="Texture2D" uid="uid://c73xqnvjnssja" path="res://scenes/graveyard/grave_clover.png" id="5_tubix"]
 [ext_resource type="Texture2D" uid="uid://cwecqo7mfree2" path="res://scenes/graveyard/clover_profile.png" id="6_n0aij"]
 [ext_resource type="Texture2D" uid="uid://dpycerqlev1wm" path="res://scenes/graveyard/tree.png" id="7_g7nm7"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="8_xde2y"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="9_m46h3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pvokv"]
+size = Vector2(53, 58)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0mpq"]
+size = Vector2(52, 52)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_luotr"]
 vertices = PackedVector2Array(-276, -137, -214, -135, -215, -135, 147, -148, 146, -148, 194, -152, 190, -149, 43, -113, 54, -115, 55, -115, -4, -92, -5, -93, 283, -138, 372, -105, 372, -102, 279, -133, 278, -134, 237, -146, 233, -143, 232, -143, 147, -146, 81, -132, 87, -130, -276, -133, -339, -133, -339, -134, -221, -134, -177, -122, -166, -120, -133, -97, -127, -100, -77, -88, -77, -91, -12, -96)
@@ -25,6 +33,7 @@ size = Vector2(71, 86)
 [node name="Graveyard" type="Node2D"]
 z_as_relative = false
 y_sort_enabled = true
+metadata/_edit_vertical_guides_ = [59.0]
 
 [node name="Background" parent="." instance=ExtResource("1_7732i")]
 texture = ExtResource("2_kjyhk")
@@ -32,13 +41,37 @@ texture = ExtResource("2_kjyhk")
 [node name="CollisionShape2D" parent="Background/Clickable" index="0"]
 position = Vector2(399, 244)
 
-[node name="Grave1" type="Sprite2D" parent="."]
+[node name="Grave1" parent="." instance=ExtResource("3_7fqlc")]
 position = Vector2(178, 285)
+UIIcon = ExtResource("4_6cabc")
+UILabel = "LABEL_GRAVE"
+interactionLines = PackedStringArray("INT_GRAVE_1")
+
+[node name="Sprite2D" parent="Grave1" index="0"]
 texture = ExtResource("3_50utd")
 
-[node name="Grave3" type="Sprite2D" parent="."]
+[node name="WayPoint" parent="Grave1" index="2"]
+position = Vector2(55, 83)
+
+[node name="CollisionShape2D" parent="Grave1/Clickable" index="0"]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_pvokv")
+
+[node name="Grave2" parent="." instance=ExtResource("3_7fqlc")]
 position = Vector2(352, 278)
+UIIcon = ExtResource("4_6cabc")
+UILabel = "LABEL_GRAVE"
+interactionLines = PackedStringArray("INT_GRAVE_2")
+
+[node name="Sprite2D" parent="Grave2" index="0"]
 texture = ExtResource("4_k7nu5")
+
+[node name="WayPoint" parent="Grave2" index="2"]
+position = Vector2(-53, 96)
+
+[node name="CollisionShape2D" parent="Grave2/Clickable" index="0"]
+position = Vector2(2, 3)
+shape = SubResource("RectangleShape2D_x0mpq")
 
 [node name="GraveClover" type="Sprite2D" parent="."]
 position = Vector2(275, 295)
@@ -85,4 +118,6 @@ position = Vector2(-164.5, -28)
 shape = SubResource("RectangleShape2D_ttna3")
 
 [editable path="Background"]
+[editable path="Grave1"]
+[editable path="Grave2"]
 [editable path="StreetGraveyardGate"]

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Dynamic;
 
 
@@ -20,7 +21,12 @@ public partial class Interactable : Node2D
 {
 	[Export] public CompressedTexture2D UIIcon;
 	[Export] public string UILabel;
-	[Export] public string[] Interaction;
+	/* InitInteraction содержит текст при первом
+	взаимодействии, после чего поле обнуляется
+	и всегда возвращается Interaciton (см.
+	GetInteraction). */
+	[Export] private string[] initialInteracitonLines;
+	[Export] private string[] interactionLines;
 	
 	public Vector2 WayPoint { get => GetNode<Marker2D>("WayPoint").GlobalPosition ;}
 	public Vector2 LookAtPoint { get => GetNode<Marker2D>("LookAtPoint").GlobalPosition ;}
@@ -37,10 +43,21 @@ public partial class Interactable : Node2D
 			if (@event is InputEventMouseButton btn)
 				if (btn.IsPressed() && btn.ButtonIndex == MouseButton.Left)
 				{
-					((Viewport)viewport).SetInputAsHandled();
+					GetViewport().SetInputAsHandled();
 					GetTree().CallGroup("Player", "InteractableClicked", this);
 					GetTree().CallGroup("UI", "InteractableClicked", this);
 				}
 		};
     }
+
+	public string[] GetInteractionLines()
+	{
+		if (initialInteracitonLines != null)
+		{
+			var tmp = initialInteracitonLines;
+			initialInteracitonLines = null;
+			return tmp;
+		}
+		return interactionLines != null ? (string[])interactionLines.Clone() : null;
+	}
 }

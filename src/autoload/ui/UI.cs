@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
+using System.Linq;
 
 public partial class UI : Control
 {
@@ -12,7 +13,7 @@ public partial class UI : Control
 	private Control interactionModal;
 
 	private Interactable targetedInteractable;
-	private int interactionIndex;
+	private List<string> interactionLines;
 
 	public override void _Ready()
 	{
@@ -55,7 +56,7 @@ public partial class UI : Control
 		interactableButton.Pressed += () =>
 			InteractableClicked(targetedInteractable);
 
-		interactionLabel = mainContainer.GetNode<RichTextLabel>("InteractionText");
+		interactionLabel = mainContainer.GetNode<RichTextLabel>("InteractionContainer/RichLabel");
 		interactionLabel.Text = null;
 
 		interactionModal = GetNode<Control>("InteractionModal");
@@ -65,10 +66,16 @@ public partial class UI : Control
 			if (@event is InputEventMouseButton btn)
 				if (btn.Pressed && btn.ButtonIndex == MouseButton.Left)
 				{
-					if (interactionIndex >= targetedInteractable.Interaction.Length)
+					if (interactionLines.Any())
+					{
+						interactionLabel.Text = interactionLines[0];
+						interactionLines.RemoveAt(0);
+					}
+					else
 					{
 						interactionModal.Visible = false;
 						interactionLabel.Text = "";
+						interactionLines = null;
 					}
 				}
 		};
@@ -109,14 +116,23 @@ public partial class UI : Control
 
 	public void InteractableClicked(Interactable i)
 	{
-		if (targetedInteractable == i && targetedInteractable.Interaction.Length > 0) RunInteraction();
+		if (targetedInteractable == i)
+		{
+			var lines = targetedInteractable.GetInteractionLines();
+			if (lines != null)
+			{
+				interactionLines = new List<string>(lines);
+				if (interactionLines.Any())
+					RunInteraction();
+			}
+		}
 	}
 
 	private void RunInteraction()
 	{
 		interactionLabel.Visible = true;
-		interactionLabel.Text = targetedInteractable.Interaction[0];
-		interactionIndex = 1;
+		interactionLabel.Text = interactionLines[0];
+		interactionLines.RemoveAt(0);
 		interactionModal.Visible = true;
 	}
 }

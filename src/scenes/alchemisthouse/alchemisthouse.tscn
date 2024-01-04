@@ -1,18 +1,24 @@
-[gd_scene load_steps=10 format=3 uid="uid://ds7xjedviyivx"]
+[gd_scene load_steps=14 format=3 uid="uid://ds7xjedviyivx"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_yk12b"]
 [ext_resource type="Texture2D" uid="uid://b06fnnrptobf1" path="res://scenes/alchemisthouse/back.png" id="2_ox0rm"]
 [ext_resource type="Texture2D" uid="uid://c4psxmk5nsxs1" path="res://scenes/alchemisthouse/back_z0.png" id="3_olxm5"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="4_ptc2y"]
+[ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactables/interactable/interactable.tscn" id="5_fieot"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="5_xggcl"]
+[ext_resource type="Texture2D" uid="uid://bwujamettbkun" path="res://scenes/alchemisthouse/pony_ico.png" id="6_vktut"]
+[ext_resource type="Texture2D" uid="uid://c5btqb38q77nb" path="res://scenes/alchemisthouse/pony.png" id="7_o7twc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brmn3"]
 size = Vector2(953, 510)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_03eao"]
+size = Vector2(140, 199)
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_v5l6m"]
-vertices = PackedVector2Array(-172, 326, -366, 322, -364, 322, -176, 318, 95, 323, 96, 331, -358, 312, -359, 312, -463, 300, -462, 306, -573, 250, -571, 239, -869, 232, -870, 242)
+vertices = PackedVector2Array(-172, 326, -366, 322, -364, 322, -176, 318, 183, 318, 184, 324, -358, 312, -359, 312, -463, 300, -462, 306, -573, 250, -571, 239, -869, 232, -870, 242)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5, 0, 2), PackedInt32Array(6, 3, 2, 7), PackedInt32Array(8, 7, 2, 9), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 11, 10, 13)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-878, 222, -568, 230, -460, 290, -358, 302, -176, 308, 104, 314, 108, 342, -172, 336, -366, 332, -466, 316, -576, 260, -882, 252)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-878, 222, -568, 230, -460, 290, -358, 302, -176, 308, 192, 308, 196, 334, -172, 336, -366, 332, -466, 316, -576, 260, -882, 252)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7oyxo"]
@@ -39,9 +45,27 @@ centered = false
 offset = Vector2(0, -339)
 
 [node name="Nime" parent="." instance=ExtResource("4_ptc2y")]
-position = Vector2(379, 274)
+position = Vector2(241, 268)
 scale = Vector2(0.5, 0.5)
 MoveSpeed = 150.0
+
+[node name="Alchemist" parent="." instance=ExtResource("5_fieot")]
+position = Vector2(624, 331)
+UIIcon = ExtResource("6_vktut")
+UILabel = "LABEL_ALCHEMIST"
+initialInteracitonLines = PackedStringArray("INIT_INT_ALCHEMIST_1", "INIT_INT_ALCHEMIST_2", "INIT_INT_ALCHEMIST_3")
+interactionLines = PackedStringArray("INT_ALCHEMIST_1", "INT_ALCHEMIST_2")
+
+[node name="Sprite2D" parent="Alchemist" index="0"]
+position = Vector2(0, -6)
+texture = ExtResource("7_o7twc")
+
+[node name="WayPoint" parent="Alchemist" index="2"]
+position = Vector2(-156, 106)
+
+[node name="CollisionShape2D" parent="Alchemist/Clickable" index="0"]
+position = Vector2(-8, 5.5)
+shape = SubResource("RectangleShape2D_03eao")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(379, 274)
@@ -71,4 +95,5 @@ position = Vector2(192, -93)
 shape = SubResource("RectangleShape2D_bvxqt")
 
 [editable path="Background"]
+[editable path="Alchemist"]
 [editable path="NeighborhoodAlchemistHouseGate"]

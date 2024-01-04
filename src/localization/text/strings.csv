@@ -1,3 +1,28 @@
-keys,ru,en
-LABEL_BOOKS,Книги,Books
-INT_BOOKS,Здесь мои книги и дневники.\nНемного. Я мало что успела изучить.,Here are my books and diaries.\nA little. I didn't have much time to study.
+"keys","ru","en"
+"LABEL_BOOKS","Книги","Books"
+"INT_BOOKS","[color=#F8C8DC]Здесь мои книги и дневники.
+Немного. Я мало что успела изучить.","[color=#F8C8DC]Here are my books and diaries.
+A little. I didn't have much time to study."
+"LABEL_ALCHEMIST","Алхимик","Alchemist"
+"INIT_INT_ALCHEMIST_1","[color=#F8C8DC]Привет, как твои исследования? ","[color=#F8C8DC]Hi, how's your research going?"
+"INIT_INT_ALCHEMIST_2","[color=#71c837]Наконец-то смог добиться устойчивой
+Химической левитации.
+Если бы ты мне помогала почаще... ","[color=#71c837]Finally I was able to achieve stable
+Chemical levitation.
+If you would help me more often..."
+"INIT_INT_ALCHEMIST_3","[color=#F8C8DC]Сам знаешь - я только теорию
+изучала. Опыта не хватает
+Даже на простые заклинания. ","[color=#F8C8DC]You know yourself - I only studied theory.
+Experience is not enough
+even for simple spells."
+"INT_ALCHEMIST_1","[color=#F8C8DC]Ещё что интересного? ","[color=#F8C8DC]What else is interesting?"
+"INT_ALCHEMIST_2","[color=#71c837]Пока только левитационный раствор. ","[color=#71c837]So far, only levitation solution."
+"LABEL_BAKER","Пекарь","Baker"
+"INT_BAKER","[color=#F8C8DC]Пекарь очень занят.
+Лучше его не отвлекать. ","[color=#F8C8DC]The baker is very busy.
+It's better not to distract him."
+"LABEL_GRAVE","Памятник","Tombstone"
+"INT_GRAVE_1","[color=#F8C8DC]Это кладбище.
+Здесь кругом памятники.","[color=#F8C8DC]This is a cemetery.
+There are tombstone all around here."
+"INT_GRAVE_2","[color=#F8C8DC]Еще один памятник. ","[color=#F8C8DC]Another tombstone."

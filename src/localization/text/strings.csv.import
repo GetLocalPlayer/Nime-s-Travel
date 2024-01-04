@@ -13,5 +13,5 @@ dest_files=["res://localization/text/strings.ru.translation", "res://localizatio
 
 [params]
 
-compress=true
+compress=false
 delimiter=0
