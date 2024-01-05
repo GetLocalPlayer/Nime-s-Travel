@@ -425,6 +425,13 @@ visibility_layer = 0
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
+[node name="InspectionImage" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 500.0
+
 [node name="InteractionModal" type="Control" parent="."]
 visible = false
 layout_mode = 1

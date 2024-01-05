@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwecqo7mfree2"
-path="res://.godot/imported/clover_profile.png-92e0d0cde92945cdf0d7ead73304a763.ctex"
+path="res://.godot/imported/clover_engraving.png-a3d7194b8f11266b43e07ed1a2a1c32f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/graveyard/clover_profile.png"
-dest_files=["res://.godot/imported/clover_profile.png-92e0d0cde92945cdf0d7ead73304a763.ctex"]
+source_file="res://scenes/graveyard/clover_engraving.png"
+dest_files=["res://.godot/imported/clover_engraving.png-a3d7194b8f11266b43e07ed1a2a1c32f.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bdnwor80y7kvj"]
+[gd_scene load_steps=23 format=3 uid="uid://bdnwor80y7kvj"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_7732i"]
 [ext_resource type="Texture2D" uid="uid://drv4wl1d4y7vv" path="res://scenes/graveyard/back.png" id="2_kjyhk"]
@@ -7,10 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://di2d3veko00no" path="res://scenes/graveyard/grave_ico.png" id="4_6cabc"]
 [ext_resource type="Texture2D" uid="uid://6lhr7omh6osp" path="res://scenes/graveyard/grave3.png" id="4_k7nu5"]
 [ext_resource type="Texture2D" uid="uid://c73xqnvjnssja" path="res://scenes/graveyard/grave_clover.png" id="5_tubix"]
-[ext_resource type="Texture2D" uid="uid://cwecqo7mfree2" path="res://scenes/graveyard/clover_profile.png" id="6_n0aij"]
+[ext_resource type="Texture2D" uid="uid://cwecqo7mfree2" path="res://scenes/graveyard/clover_engraving.png" id="6_n0aij"]
+[ext_resource type="Script" path="res://scenes/graveyard/CloverGrave.cs" id="7_eko1s"]
 [ext_resource type="Texture2D" uid="uid://dpycerqlev1wm" path="res://scenes/graveyard/tree.png" id="7_g7nm7"]
+[ext_resource type="Texture2D" uid="uid://cied30evf786d" path="res://scenes/graveyard/grave_clover_ico.png" id="8_b55mr"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="8_xde2y"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="9_m46h3"]
+[ext_resource type="Texture2D" uid="uid://bav48rel7l3jf" path="res://scenes/graveyard/graveview.png" id="9_w80xd"]
+[ext_resource type="Texture2D" uid="uid://ib6etdyp1ltd" path="res://scenes/graveyard/clover.png" id="12_qpj7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvokv"]
 size = Vector2(53, 58)
@@ -18,10 +22,19 @@ size = Vector2(53, 58)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x0mpq"]
 size = Vector2(52, 52)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acrgy"]
+size = Vector2(54, 57)
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_luotr"]
-vertices = PackedVector2Array(-276, -137, -214, -135, -215, -135, 147, -148, 146, -148, 194, -152, 190, -149, 43, -113, 54, -115, 55, -115, -4, -92, -5, -93, 283, -138, 372, -105, 372, -102, 279, -133, 278, -134, 237, -146, 233, -143, 232, -143, 147, -146, 81, -132, 87, -130, -276, -133, -339, -133, -339, -134, -221, -134, -177, -122, -166, -120, -133, -97, -127, -100, -77, -88, -77, -91, -12, -96)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15, 16), PackedInt32Array(17, 12, 16, 18, 5), PackedInt32Array(5, 18, 19, 6), PackedInt32Array(3, 6, 20), PackedInt32Array(21, 3, 20, 22), PackedInt32Array(21, 22, 8, 7), PackedInt32Array(23, 24, 25, 0, 2, 26), PackedInt32Array(27, 26, 2, 28), PackedInt32Array(29, 27, 28, 30), PackedInt32Array(31, 29, 30, 32), PackedInt32Array(11, 31, 32, 33), PackedInt32Array(11, 33, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(39, -122, 78, -142, 145, -158, 195, -163, 239, -156, 285, -148, 382, -112, 382, -89, 276, -124, 231, -133, 190, -139, 149, -136, 90, -121, 58, -106, -4, -83, -79, -78, -137, -88, -181, -113, -222, -124, -276, -123, -347, -123, -352, -144, -277, -148, -212, -145, -163, -130, -124, -110, -76, -101, -14, -106)])
+vertices = PackedVector2Array(147, -148, 146, -148, 194, -152, 190, -149, 43, -113, 54, -115, 55, -115, -4, -92, -5, -93, 283, -138, 372, -105, 372, -102, 279, -133, 278, -134, 237, -146, 233, -143, 232, -143, 147, -146, 81, -132, 87, -130, -331, -116, -332, -120, -275, -135, -279, -128, -221, -134, -278, -128, -215, -135, -177, -122, -166, -120, -133, -97, -127, -100, -77, -88, -77, -91, -12, -96)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13), PackedInt32Array(14, 9, 13, 15, 2), PackedInt32Array(2, 15, 16, 3), PackedInt32Array(0, 3, 17), PackedInt32Array(18, 0, 17, 19), PackedInt32Array(18, 19, 5, 4), PackedInt32Array(20, 21, 22, 23), PackedInt32Array(24, 25, 23, 22, 26), PackedInt32Array(27, 24, 26, 28), PackedInt32Array(29, 27, 28, 30), PackedInt32Array(31, 29, 30, 32), PackedInt32Array(8, 31, 32, 33), PackedInt32Array(8, 33, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(39, -122, 78, -142, 145, -158, 195, -163, 239, -156, 285, -148, 382, -112, 382, -89, 276, -124, 231, -133, 190, -139, 149, -136, 90, -121, 58, -106, -4, -83, -79, -78, -137, -88, -181, -113, -222, -124, -277, -118, -339, -104, -346, -128, -277, -145, -212, -145, -163, -130, -124, -110, -76, -101, -14, -106)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ahsum"]
+vertices = PackedVector2Array(-344, -116, -345, -116, -332, -120, -445, -64, -444, -63, -493, -58, -478, -61, -330, -116, -344, -111, -375, -101, -375, -94, -412, -76, -375, -93, -405, -75, -560, -59, -560, -61, -443, -67, -442, -67, -404, -74)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(0, 2, 7, 8, 9), PackedInt32Array(9, 8, 10, 11), PackedInt32Array(11, 10, 12, 13), PackedInt32Array(14, 15, 6, 5), PackedInt32Array(3, 6, 16, 17), PackedInt32Array(12, 18, 13), PackedInt32Array(11, 13, 3, 17)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-479, -71, -445, -77, -416, -85, -381, -109, -348, -125, -327, -132, -315, -110, -340, -102, -370, -85, -402, -65, -442, -54, -493, -48, -570, -50, -570, -72)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2mtb"]
@@ -39,7 +52,7 @@ metadata/_edit_vertical_guides_ = [59.0]
 texture = ExtResource("2_kjyhk")
 
 [node name="CollisionShape2D" parent="Background/Clickable" index="0"]
-position = Vector2(399, 244)
+position = Vector2(399, 254)
 
 [node name="Grave1" parent="." instance=ExtResource("3_7fqlc")]
 position = Vector2(178, 285)
@@ -73,14 +86,34 @@ position = Vector2(-53, 96)
 position = Vector2(2, 3)
 shape = SubResource("RectangleShape2D_x0mpq")
 
-[node name="GraveClover" type="Sprite2D" parent="."]
+[node name="CloverGrave" parent="." instance=ExtResource("3_7fqlc")]
 position = Vector2(275, 295)
+script = ExtResource("7_eko1s")
+UIIcon = ExtResource("8_b55mr")
+UILabel = "LABEL_CLOVER_GRAVE"
+interactionLines = PackedStringArray("INT_CLOVER_GRAVE")
+inspectionTexture = ExtResource("9_w80xd")
+inspecitonLines = PackedStringArray("OBS_CLOVER_GRAVE")
+
+[node name="Sprite2D" parent="CloverGrave" index="0"]
 texture = ExtResource("5_tubix")
 
-[node name="CloverProfile" type="Sprite2D" parent="GraveClover"]
-position = Vector2(1, -10)
+[node name="WayPoint" parent="CloverGrave" index="2"]
+position = Vector2(-51, 76)
+
+[node name="CollisionShape2D" parent="CloverGrave/Clickable" index="0"]
+position = Vector2(1, -3.5)
+shape = SubResource("RectangleShape2D_acrgy")
+
+[node name="CloverEngraving" type="Sprite2D" parent="CloverGrave"]
+position = Vector2(0, -8)
 texture = ExtResource("6_n0aij")
-metadata/_edit_lock_ = true
+
+[node name="Clover" type="Sprite2D" parent="CloverGrave"]
+visible = false
+position = Vector2(0, -9)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("12_qpj7e")
 
 [node name="Tree" type="Sprite2D" parent="."]
 position = Vector2(498, 503)
@@ -92,9 +125,16 @@ offset = Vector2(-100, -255)
 position = Vector2(707, 349)
 scale = Vector2(0.265, 0.265)
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+[node name="NavigationRegions" type="Node" parent="."]
+
+[node name="Main" type="NavigationRegion2D" parent="NavigationRegions"]
 position = Vector2(498, 503)
 navigation_polygon = SubResource("NavigationPolygon_luotr")
+
+[node name="Escape" type="NavigationRegion2D" parent="NavigationRegions"]
+position = Vector2(498, 503)
+navigation_polygon = SubResource("NavigationPolygon_ahsum")
+enabled = false
 
 [node name="StreetGraveyardGate" parent="." instance=ExtResource("8_xde2y")]
 position = Vector2(930, 385)
@@ -120,4 +160,5 @@ shape = SubResource("RectangleShape2D_ttna3")
 [editable path="Background"]
 [editable path="Grave1"]
 [editable path="Grave2"]
+[editable path="CloverGrave"]
 [editable path="StreetGraveyardGate"]

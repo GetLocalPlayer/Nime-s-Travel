@@ -1,28 +1,33 @@
 "keys","ru","en"
 "LABEL_BOOKS","Книги","Books"
-"INT_BOOKS","[color=#F8C8DC]Здесь мои книги и дневники.
-Немного. Я мало что успела изучить.","[color=#F8C8DC]Here are my books and diaries.
+"INT_BOOKS","[color=#ffdef7]Здесь мои книги и дневники.
+Немного. Я мало что успела изучить.","[color=#ffdef7]Here are my books and diaries.
 A little. I didn't have much time to study."
 "LABEL_ALCHEMIST","Алхимик","Alchemist"
-"INIT_INT_ALCHEMIST_1","[color=#F8C8DC]Привет, как твои исследования? ","[color=#F8C8DC]Hi, how's your research going?"
+"INIT_INT_ALCHEMIST_1","[color=#ffdef7]Привет, как твои исследования? ","[color=#ffdef7]Hi, how's your research going?"
 "INIT_INT_ALCHEMIST_2","[color=#71c837]Наконец-то смог добиться устойчивой
 Химической левитации.
 Если бы ты мне помогала почаще... ","[color=#71c837]Finally I was able to achieve stable
 Chemical levitation.
 If you would help me more often..."
-"INIT_INT_ALCHEMIST_3","[color=#F8C8DC]Сам знаешь - я только теорию
+"INIT_INT_ALCHEMIST_3","[color=#ffdef7]Сам знаешь - я только теорию
 изучала. Опыта не хватает
-Даже на простые заклинания. ","[color=#F8C8DC]You know yourself - I only studied theory.
+Даже на простые заклинания. ","[color=#ffdef7]You know yourself - I only studied theory.
 Experience is not enough
 even for simple spells."
-"INT_ALCHEMIST_1","[color=#F8C8DC]Ещё что интересного? ","[color=#F8C8DC]What else is interesting?"
+"INT_ALCHEMIST_1","[color=#ffdef7]Ещё что интересного? ","[color=#ffdef7]What else is interesting?"
 "INT_ALCHEMIST_2","[color=#71c837]Пока только левитационный раствор. ","[color=#71c837]So far, only levitation solution."
 "LABEL_BAKER","Пекарь","Baker"
-"INT_BAKER","[color=#F8C8DC]Пекарь очень занят.
-Лучше его не отвлекать. ","[color=#F8C8DC]The baker is very busy.
+"INT_BAKER","[color=#ffdef7]Пекарь очень занят.
+Лучше его не отвлекать. ","[color=#ffdef7]The baker is very busy.
 It's better not to distract him."
 "LABEL_GRAVE","Памятник","Tombstone"
-"INT_GRAVE_1","[color=#F8C8DC]Это кладбище.
-Здесь кругом памятники.","[color=#F8C8DC]This is a cemetery.
+"INT_GRAVE_1","[color=#ffdef7]Это кладбище.
+Здесь кругом памятники.","[color=#ffdef7]This is a cemetery.
 There are tombstone all around here."
-"INT_GRAVE_2","[color=#F8C8DC]Еще один памятник. ","[color=#F8C8DC]Another tombstone."
+"INT_GRAVE_2","[color=#ffdef7]Еще один памятник. ","[color=#ffdef7]Another tombstone."
+"OBS_CLOVER_GRAVE","Кловер Премудрая, юникорн","Clover the Clever, Unicorn"
+"INT_CLOVER_GRAVE","[color=#ffdef7]Два года прошло.
+Уже давно пора бы искать нового наставника.","[color=#ffdef7]Two years have passed.
+It's high time to look for a new mentor."
+"LABEL_CLOVER_GRAVE","Памятник Кловер ","Clover's tombstone"

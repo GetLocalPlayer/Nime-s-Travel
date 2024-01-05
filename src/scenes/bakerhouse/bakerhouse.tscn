@@ -53,6 +53,7 @@ MoveSpeed = 150.0
 position = Vector2(570, 365)
 UIIcon = ExtResource("6_5jpup")
 UILabel = "LABEL_BAKER"
+initialInteracitonLines = null
 interactionLines = PackedStringArray("INT_BAKER")
 
 [node name="Sprite2D" parent="Baker" index="0"]

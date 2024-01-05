@@ -10,10 +10,12 @@ public partial class UI : Control
 	private Button interactableHint;
 	private Button interactableButton;
 	private RichTextLabel interactionLabel;
+	private TextureRect inspectionImage;
 	private Control interactionModal;
 
-	private Interactable targetedInteractable;
-	private List<string> interactionLines;
+	private Interactable reachedInteractable;
+	private List<string> inspectionLines = new List<string>();
+	private List<string> interactionLines = new List<string>();
 
 	public override void _Ready()
 	{
@@ -54,10 +56,13 @@ public partial class UI : Control
 		interactableButton = interactableContainer.GetNode<Button>("Button");
 		interactableButton.Visible = false;
 		interactableButton.Pressed += () =>
-			InteractableClicked(targetedInteractable);
+			InteractableClicked(reachedInteractable);
 
 		interactionLabel = mainContainer.GetNode<RichTextLabel>("InteractionContainer/RichLabel");
 		interactionLabel.Text = null;
+
+		inspectionImage = GetNode<TextureRect>("InspectionImage");
+		inspectionImage.Visible = false;
 
 		interactionModal = GetNode<Control>("InteractionModal");
 		interactionModal.Visible = false;
@@ -66,6 +71,17 @@ public partial class UI : Control
 			if (@event is InputEventMouseButton btn)
 				if (btn.Pressed && btn.ButtonIndex == MouseButton.Left)
 				{
+					if (inspectionLines.Any())
+					{
+						interactionLabel.Text = inspectionLines[0];
+						inspectionLines.RemoveAt(0);
+						return;
+					}
+					else if (inspectionImage.Visible)
+					{
+						inspectionImage.Visible = false;
+						inspectionImage.Texture = null;
+					}
 					if (interactionLines.Any())
 					{
 						interactionLabel.Text = interactionLines[0];
@@ -75,7 +91,6 @@ public partial class UI : Control
 					{
 						interactionModal.Visible = false;
 						interactionLabel.Text = "";
-						interactionLines = null;
 					}
 				}
 		};
@@ -97,7 +112,7 @@ public partial class UI : Control
 
 	public void InteractableReached(Interactable i)
 	{
-		targetedInteractable = i;
+		reachedInteractable = i;
 		interactableHint.Visible = false;
 		interactableButton.Icon = i.UIIcon;
 		interactableButton.Text = i.UILabel;
@@ -108,7 +123,7 @@ public partial class UI : Control
 
 	public void InteractableLeft()
 	{
-		targetedInteractable = null;
+		reachedInteractable = null;
 		interactableButton.Visible = false;
 		hornContainer.Visible = false;
 	}
@@ -116,23 +131,32 @@ public partial class UI : Control
 
 	public void InteractableClicked(Interactable i)
 	{
-		if (targetedInteractable == i)
+		if (reachedInteractable == i)
 		{
-			var lines = targetedInteractable.GetInteractionLines();
-			if (lines != null)
+			var (inspTexture,  inspLines) = reachedInteractable.GetInspectionData();
+			if (inspTexture != null)
 			{
-				interactionLines = new List<string>(lines);
-				if (interactionLines.Any())
-					RunInteraction();
+				inspectionImage.Texture = inspTexture;
+				inspectionImage.Visible = true;
+				inspectionLines.AddRange(inspLines);
 			}
-		}
-	}
 
-	private void RunInteraction()
-	{
-		interactionLabel.Visible = true;
-		interactionLabel.Text = interactionLines[0];
-		interactionLines.RemoveAt(0);
-		interactionModal.Visible = true;
+			var interLines = reachedInteractable.GetInteractionLines();
+			interactionLines.AddRange(interLines);
+
+			if (inspectionLines.Any())
+			{
+				interactionLabel.Text = inspectionLines[0];
+				inspectionLines.RemoveAt(0);
+			}
+			else
+			{
+				interactionLabel.Text = interactionLines[0];
+				interactionLines.RemoveAt(0);
+			}
+
+			interactionModal.Visible = true;
+			interactionLabel.Visible = true;
+		}
 	}
 }
