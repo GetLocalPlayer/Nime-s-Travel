@@ -65,15 +65,15 @@ InteractionLines = PackedStringArray("INT_ALCHEMIST_1", "INT_ALCHEMIST_2")
 position = Vector2(0, -6)
 texture = ExtResource("7_o7twc")
 
-[node name="LookAtPoint" parent="Interactables/Alchemist" index="1"]
-position = Vector2(-13, -11)
-
-[node name="WayPoint" parent="Interactables/Alchemist" index="2"]
-position = Vector2(-156, 106)
-
 [node name="CollisionShape2D" parent="Interactables/Alchemist/Clickable" index="0"]
 position = Vector2(-8, 5.5)
 shape = SubResource("RectangleShape2D_03eao")
+
+[node name="LookAtPoint" parent="Interactables/Alchemist" index="2"]
+position = Vector2(-13, -11)
+
+[node name="WayPoint" parent="Interactables/Alchemist" index="3"]
+position = Vector2(-156, 106)
 
 [node name="Flask" parent="Interactables" instance=ExtResource("5_fieot")]
 position = Vector2(407, 276)
@@ -82,10 +82,10 @@ UIIcon = ExtResource("8_8jldv")
 [node name="Sprite2D" parent="Interactables/Flask" index="0"]
 texture = ExtResource("9_8jwgp")
 
-[node name="LookAtPoint" parent="Interactables/Flask" index="1"]
+[node name="LookAtPoint" parent="Interactables/Flask" index="2"]
 position = Vector2(0, 10)
 
-[node name="WayPoint" parent="Interactables/Flask" index="2"]
+[node name="WayPoint" parent="Interactables/Flask" index="3"]
 position = Vector2(-83, 158)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]

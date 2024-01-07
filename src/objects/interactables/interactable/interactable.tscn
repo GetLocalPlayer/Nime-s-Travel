@@ -1,18 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://djk0tfvrgbpsp"]
+[gd_scene load_steps=6 format=3 uid="uid://djk0tfvrgbpsp"]
 
 [ext_resource type="Texture2D" uid="uid://b652rv7d4j3m2" path="res://icon.svg" id="1_fj3kd"]
 [ext_resource type="Script" path="res://objects/interactables/interactable/Interactable.cs" id="1_wvcga"]
+[ext_resource type="Script" path="res://objects/interactables/interactable/PointDrawer.cs" id="3_uj84h"]
+[ext_resource type="Texture2D" uid="uid://b6asdnoqvos7x" path="res://objects/interactables/interactable/LookAtPoint.png" id="4_p0b67"]
+[ext_resource type="Texture2D" uid="uid://bkog84x7t6k1" path="res://objects/interactables/interactable/WayPoint.png" id="5_1ggc6"]
 
 [node name="Interactable" type="Node2D" groups=["Interactables"]]
 script = ExtResource("1_wvcga")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_fj3kd")
-
-[node name="LookAtPoint" type="Marker2D" parent="."]
-
-[node name="WayPoint" type="Marker2D" parent="."]
-scale = Vector2(1.045, 1.045)
 
 [node name="Clickable" type="Area2D" parent="." groups=["InteractableClickables"]]
 monitorable = false
@@ -21,3 +19,15 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Clickable"]
 debug_color = Color(1, 1, 1, 0.419608)
 metadata/_edit_lock_ = true
+
+[node name="LookAtPoint" type="Marker2D" parent="."]
+script = ExtResource("3_uj84h")
+Texture = ExtResource("4_p0b67")
+Offset = Vector2(-16, -16)
+Size = Vector2(32, 32)
+
+[node name="WayPoint" type="Marker2D" parent="."]
+script = ExtResource("3_uj84h")
+Texture = ExtResource("5_1ggc6")
+Offset = Vector2(-18, -50)
+Size = Vector2(36, 50)

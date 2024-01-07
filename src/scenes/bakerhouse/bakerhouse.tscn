@@ -93,15 +93,15 @@ InteractionLines = PackedStringArray("INT_BAKER")
 position = Vector2(-20, -39)
 texture = ExtResource("7_fmt3k")
 
-[node name="LookAtPoint" parent="Baker" index="1"]
-position = Vector2(-13, 15)
-
-[node name="WayPoint" parent="Baker" index="2"]
-position = Vector2(-149, 83)
-
 [node name="CollisionShape2D" parent="Baker/Clickable" index="0"]
 position = Vector2(-18, -26)
 shape = SubResource("RectangleShape2D_cowkc")
+
+[node name="LookAtPoint" parent="Baker" index="2"]
+position = Vector2(-13, 15)
+
+[node name="WayPoint" parent="Baker" index="3"]
+position = Vector2(-149, 83)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(380, 295)

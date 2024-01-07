@@ -67,15 +67,15 @@ InteractionLines = PackedStringArray("INT_BOOKS")
 [node name="Sprite2D" parent="Books" index="0"]
 texture = ExtResource("7_7bebi")
 
-[node name="LookAtPoint" parent="Books" index="1"]
-position = Vector2(-5, -2)
-
-[node name="WayPoint" parent="Books" index="2"]
-position = Vector2(65, 188)
-
 [node name="CollisionShape2D" parent="Books/Clickable" index="0"]
 position = Vector2(-3.5, 0)
 shape = SubResource("RectangleShape2D_8ygfj")
+
+[node name="LookAtPoint" parent="Books" index="2"]
+position = Vector2(-5, -2)
+
+[node name="WayPoint" parent="Books" index="3"]
+position = Vector2(65, 188)
 
 [node name="Background" parent="." instance=ExtResource("1_lisb4")]
 texture = ExtResource("1_v0acl")
