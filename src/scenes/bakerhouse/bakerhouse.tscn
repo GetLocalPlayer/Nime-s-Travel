@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b15mn1d0al221"]
+[gd_scene load_steps=20 format=3 uid="uid://b15mn1d0al221"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_0qp4l"]
 [ext_resource type="Texture2D" uid="uid://b18inoo254ek0" path="res://scenes/bakerhouse/back.png" id="2_n7gu8"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="5_uupps"]
 [ext_resource type="Texture2D" uid="uid://c4ymlc2loys1x" path="res://scenes/bakerhouse/pony_ico.png" id="6_5jpup"]
 [ext_resource type="Texture2D" uid="uid://cg7oyotj61up3" path="res://scenes/bakerhouse/pony.png" id="7_fmt3k"]
+[ext_resource type="Shader" uid="uid://dkwxj81uqbq0k" path="res://scenes/bakerhouse/flameshader.tres" id="9_baq7i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brmn3"]
 size = Vector2(953, 510)
@@ -27,6 +28,39 @@ size = Vector2(87.25, 125)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bvxqt"]
 size = Vector2(196, 518)
 
+[sub_resource type="Gradient" id="Gradient_iyqvn"]
+offsets = PackedFloat32Array(0, 0.56051, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.579618, 0.579618, 0.579618, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nq383"]
+noise_type = 3
+seed = 6
+frequency = 0.006
+fractal_type = 2
+fractal_octaves = 3
+fractal_lacunarity = 1.4
+fractal_gain = 0.91
+domain_warp_type = 2
+domain_warp_amplitude = 18.285
+domain_warp_frequency = -3.155
+domain_warp_fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vdjem"]
+width = 256
+height = 256
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_iyqvn")
+noise = SubResource("FastNoiseLite_nq383")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvbah"]
+shader = ExtResource("9_baq7i")
+shader_parameter/Texture2DParameter = SubResource("NoiseTexture2D_vdjem")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ygbhv"]
+size = Vector2(64, 64)
+orientation = 2
+
 [node name="AlchemistHouse" type="Node2D"]
 y_sort_enabled = true
 metadata/_edit_lock_ = true
@@ -35,7 +69,7 @@ metadata/_edit_lock_ = true
 texture = ExtResource("2_n7gu8")
 
 [node name="CollisionShape2D" parent="Background/Clickable" index="0"]
-position = Vector2(376, 244)
+position = Vector2(383, 227)
 shape = SubResource("RectangleShape2D_brmn3")
 
 [node name="BackZ0" type="Sprite2D" parent="."]
@@ -53,12 +87,14 @@ MoveSpeed = 150.0
 position = Vector2(570, 365)
 UIIcon = ExtResource("6_5jpup")
 UILabel = "LABEL_BAKER"
-initialInteracitonLines = null
-interactionLines = PackedStringArray("INT_BAKER")
+InteractionLines = PackedStringArray("INT_BAKER")
 
 [node name="Sprite2D" parent="Baker" index="0"]
 position = Vector2(-20, -39)
 texture = ExtResource("7_fmt3k")
+
+[node name="LookAtPoint" parent="Baker" index="1"]
+position = Vector2(-13, 15)
 
 [node name="WayPoint" parent="Baker" index="2"]
 position = Vector2(-149, 83)
@@ -93,6 +129,13 @@ shape = SubResource("RectangleShape2D_7oyxo")
 [node name="CollisionShape2D" parent="NeighborhoodBakerHouseGate/Clickable" index="0"]
 position = Vector2(192, -93)
 shape = SubResource("RectangleShape2D_bvxqt")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+material = SubResource("ShaderMaterial_hvbah")
+position = Vector2(680, 298)
+rotation = 3.14159
+scale = Vector2(0.960545, 1.41023)
+mesh = SubResource("PlaneMesh_ygbhv")
 
 [editable path="Background"]
 [editable path="Baker"]

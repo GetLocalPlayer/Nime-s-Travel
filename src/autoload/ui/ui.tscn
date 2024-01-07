@@ -431,6 +431,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 offset_bottom = 500.0
+mouse_filter = 2
 
 [node name="InteractionModal" type="Control" parent="."]
 visible = false

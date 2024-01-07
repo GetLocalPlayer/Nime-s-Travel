@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 
 /*
@@ -8,5 +9,16 @@ https://docs.godotengine.org/en/stable/tutorials/scripting/singletons_autoload.h
 */
 public partial class GlobalVariables : Node
 {
+	public enum SpellType
+	{
+		LEVITATION,
+		IGNITION,
+	}
+
+	private Dictionary<SpellType, string> spellBook = new Dictionary<SpellType, string> {
+		{SpellType.LEVITATION, "ggb"},
+		{SpellType.IGNITION, "brb"},
+	};
+	
 	public string SceneGateName = null;
 }

@@ -3,7 +3,10 @@ using System;
 
 public partial class Background : Sprite2D
 {
-	// Called when the node enters the scene tree for the first time.
+	/* Задник отлавливает клик мышкой и передает
+	группе игроков глобальную позицию курсора
+	к которой строится маршрут по навигационной
+	сетке. */
 	public override void _Ready()
 	{
 		var clickable = GetNode<Area2D>("Clickable");
@@ -12,7 +15,7 @@ public partial class Background : Sprite2D
 		{
 			if (@event is InputEventMouseButton btn)
 				if (btn.IsPressed() && btn.ButtonIndex == MouseButton.Left)
-					GetTree().CallGroup("Player", "SetNewWalkTarget", GetGlobalMousePosition());
+					GetTree().CallGroup("Player", "BackgroundClicked", GetGlobalMousePosition());
 		};
 	}
 }

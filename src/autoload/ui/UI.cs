@@ -13,8 +13,8 @@ public partial class UI : Control
 	private TextureRect inspectionImage;
 	private Control interactionModal;
 
+	private Interactable currentInteractable;
 	private Interactable reachedInteractable;
-	private List<string> inspectionLines = new List<string>();
 	private List<string> interactionLines = new List<string>();
 
 	public override void _Ready()
@@ -56,7 +56,7 @@ public partial class UI : Control
 		interactableButton = interactableContainer.GetNode<Button>("Button");
 		interactableButton.Visible = false;
 		interactableButton.Pressed += () =>
-			InteractableClicked(reachedInteractable);
+			reachedInteractable.OnClick();
 
 		interactionLabel = mainContainer.GetNode<RichTextLabel>("InteractionContainer/RichLabel");
 		interactionLabel.Text = null;
@@ -70,31 +70,34 @@ public partial class UI : Control
 		{
 			if (@event is InputEventMouseButton btn)
 				if (btn.Pressed && btn.ButtonIndex == MouseButton.Left)
-				{
-					if (inspectionLines.Any())
-					{
-						interactionLabel.Text = inspectionLines[0];
-						inspectionLines.RemoveAt(0);
-						return;
-					}
-					else if (inspectionImage.Visible)
-					{
-						inspectionImage.Visible = false;
-						inspectionImage.Texture = null;
-					}
-					if (interactionLines.Any())
-					{
-						interactionLabel.Text = interactionLines[0];
-						interactionLines.RemoveAt(0);
-					}
-					else
-					{
-						interactionModal.Visible = false;
-						interactionLabel.Text = "";
-					}
-				}
+					OnInteractionModalClick();
 		};
 	}
+
+	private void OnInteractionModalClick()
+	{
+		if (interactionLines.Any())
+		{
+			interactionLabel.Text = interactionLines[0];
+			interactionLines.RemoveAt(0);
+			return;
+		}
+
+		interactionLabel.Hide();
+		interactionModal.Hide();
+		var i = currentInteractable;
+		currentInteractable = null;
+		if (inspectionImage.Visible)
+		{			
+			inspectionImage.Hide();
+			i.OnInspectionFinished();
+			GD.Print("Inspeciton finished");
+		}
+		else
+			i.OnInteractionFinished();
+		
+	}
+
 
 	public void InteractableHovered(Interactable i)
 	{
@@ -103,60 +106,66 @@ public partial class UI : Control
 		interactableHint.Visible = !interactableButton.Visible;
 	}
 
-	public void InteractableUnhovered(Interactable i)
+	public void InteractableUnhovered()
 	{
 		interactableHint.Icon = null;
 		interactableHint.Text = null;
-		interactableHint.Visible = false;
+		interactableHint.Hide();
 	}
 
 	public void InteractableReached(Interactable i)
 	{
 		reachedInteractable = i;
-		interactableHint.Visible = false;
+		interactableHint.Hide();
 		interactableButton.Icon = i.UIIcon;
 		interactableButton.Text = i.UILabel;
-		interactableButton.Visible = true;
-		hornContainer.Visible = true;
+		interactableButton.Show();
+		hornContainer.Show();
 		hornContainer.GetNode<AnimationPlayer>("Buttons/MagicSpark/AnimationPlayer").Play("RESET");
 	}
 
-	public void InteractableLeft()
+	public void InteractableLeft(Interactable i)
 	{
+		if (reachedInteractable != i) return;
 		reachedInteractable = null;
-		interactableButton.Visible = false;
-		hornContainer.Visible = false;
+		interactableButton.Hide();
+		hornContainer.Hide();
 	}
 
-
-	public void InteractableClicked(Interactable i)
+	public void InteractableInspected(Interactable i)
 	{
-		if (reachedInteractable == i)
+		currentInteractable = i;
+		inspectionImage.Texture = i.InspectionTexture;
+		inspectionImage.Show();
+		if (!i.InspectionLines.IsEmpty())
 		{
-			var (inspTexture,  inspLines) = reachedInteractable.GetInspectionData();
-			if (inspTexture != null)
-			{
-				inspectionImage.Texture = inspTexture;
-				inspectionImage.Visible = true;
-				inspectionLines.AddRange(inspLines);
-			}
-
-			var interLines = reachedInteractable.GetInteractionLines();
-			interactionLines.AddRange(interLines);
-
-			if (inspectionLines.Any())
-			{
-				interactionLabel.Text = inspectionLines[0];
-				inspectionLines.RemoveAt(0);
-			}
-			else
-			{
-				interactionLabel.Text = interactionLines[0];
-				interactionLines.RemoveAt(0);
-			}
-
-			interactionModal.Visible = true;
-			interactionLabel.Visible = true;
+			interactionLines.AddRange(i.InspectionLines);
+			interactionLines.RemoveAt(0);
+			interactionLabel.Text = i.InspectionLines[0];
+			interactionLabel.Show();
 		}
+		interactionModal.Show();
+	}
+
+	public void InteractableInitialInteraction(Interactable i)
+	{
+		currentInteractable = i;
+		interactionLines.AddRange(i.InitialInteracitonLines);
+		RunInteraction();
+	}
+
+	public void InteractableInteracted(Interactable i)
+	{
+		currentInteractable = i;
+		interactionLines.AddRange(i.InteractionLines);
+		RunInteraction();
+	}
+	private void RunInteraction()
+	{
+		interactionLabel.Text = interactionLines[0];
+		interactionLabel.Show();
+		interactionLines.RemoveAt(0);
+		interactionModal.Show();
+		GD.Print(interactionLines.Count);
 	}
 }

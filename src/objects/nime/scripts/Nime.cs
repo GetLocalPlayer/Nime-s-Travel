@@ -12,14 +12,15 @@ public partial class Nime : Node2D
 	public Interactable TargetedInteractable;
 	public string Spell = "";
 
-    public void SetNewWalkTarget(Vector2 newTarget)
+    public void BackgroundClicked(Vector2 newTarget)
 	{
 		var agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 		agent.TargetPosition = newTarget;
 		EmitSignal("WalkTargetSet");
 		if (TargetedInteractable != null)
 		{ 
-			GetTree().CallGroup("UI", "InteractableLeft");
+			GetTree().CallGroup("Interactables", "InteractableLeft", TargetedInteractable);
+			GetTree().CallGroup("UI", "InteractableLeft", TargetedInteractable);
 			TargetedInteractable = null;
 		}
 	}
@@ -28,6 +29,11 @@ public partial class Nime : Node2D
 	{
 		if (TargetedInteractable != i)
 		{
+			if (TargetedInteractable != null)
+			{
+				GetTree().CallGroup("Interactables", "InteractableLeft", TargetedInteractable);
+				GetTree().CallGroup("UI", "InteractableLeft", TargetedInteractable);
+			}
 			TargetedInteractable = i;
 			GetNode<NavigationAgent2D>("NavigationAgent2D").TargetPosition = TargetedInteractable.WayPoint;
 			EmitSignal("InteractableTargeted");

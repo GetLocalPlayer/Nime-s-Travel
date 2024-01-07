@@ -42,6 +42,7 @@ public partial class NimeFSM : FiniteStateMachine
 		states["walkToInteractable"].StateFinished += (state, context) =>
 		{
 			SetState(states["idle"]);
+			GetTree().CallGroup("Interactables", "InteractableReached", nime.TargetedInteractable);
 			GetTree().CallGroup("UI", "InteractableReached", nime.TargetedInteractable);
 		};
 

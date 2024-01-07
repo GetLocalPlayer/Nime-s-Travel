@@ -10,10 +10,9 @@ script = ExtResource("1_wvcga")
 texture = ExtResource("1_fj3kd")
 
 [node name="LookAtPoint" type="Marker2D" parent="."]
-gizmo_extents = 94.0
 
 [node name="WayPoint" type="Marker2D" parent="."]
-gizmo_extents = 39.9
+scale = Vector2(1.045, 1.045)
 
 [node name="Clickable" type="Area2D" parent="." groups=["InteractableClickables"]]
 monitorable = false

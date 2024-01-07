@@ -62,13 +62,13 @@ MoveSpeed = 150.0
 position = Vector2(147, 228)
 UIIcon = ExtResource("7_3kghw")
 UILabel = "LABEL_BOOKS"
-interactionLines = PackedStringArray("INT_BOOKS")
+InteractionLines = PackedStringArray("INT_BOOKS")
 
 [node name="Sprite2D" parent="Books" index="0"]
 texture = ExtResource("7_7bebi")
 
 [node name="LookAtPoint" parent="Books" index="1"]
-position = Vector2(-7, 121)
+position = Vector2(-5, -2)
 
 [node name="WayPoint" parent="Books" index="2"]
 position = Vector2(65, 188)

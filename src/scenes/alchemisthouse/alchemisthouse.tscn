@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ds7xjedviyivx"]
+[gd_scene load_steps=16 format=3 uid="uid://ds7xjedviyivx"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_yk12b"]
 [ext_resource type="Texture2D" uid="uid://b06fnnrptobf1" path="res://scenes/alchemisthouse/back.png" id="2_ox0rm"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="5_xggcl"]
 [ext_resource type="Texture2D" uid="uid://bwujamettbkun" path="res://scenes/alchemisthouse/pony_ico.png" id="6_vktut"]
 [ext_resource type="Texture2D" uid="uid://c5btqb38q77nb" path="res://scenes/alchemisthouse/pony.png" id="7_o7twc"]
+[ext_resource type="Texture2D" uid="uid://bs6hxbbsm865v" path="res://scenes/alchemisthouse/flasc_ico.png" id="8_8jldv"]
+[ext_resource type="Texture2D" uid="uid://dji63jltdmq4f" path="res://scenes/alchemisthouse/flask.png" id="9_8jwgp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brmn3"]
 size = Vector2(953, 510)
@@ -45,27 +47,46 @@ centered = false
 offset = Vector2(0, -339)
 
 [node name="Nime" parent="." instance=ExtResource("4_ptc2y")]
-position = Vector2(241, 268)
+position = Vector2(375, 356)
 scale = Vector2(0.5, 0.5)
 MoveSpeed = 150.0
 
-[node name="Alchemist" parent="." instance=ExtResource("5_fieot")]
+[node name="Interactables" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Alchemist" parent="Interactables" instance=ExtResource("5_fieot")]
 position = Vector2(624, 331)
 UIIcon = ExtResource("6_vktut")
 UILabel = "LABEL_ALCHEMIST"
-initialInteracitonLines = PackedStringArray("INIT_INT_ALCHEMIST_1", "INIT_INT_ALCHEMIST_2", "INIT_INT_ALCHEMIST_3")
-interactionLines = PackedStringArray("INT_ALCHEMIST_1", "INT_ALCHEMIST_2")
+InitialInteracitonLines = PackedStringArray("INIT_INT_ALCHEMIST_1", "INIT_INT_ALCHEMIST_2", "INIT_INT_ALCHEMIST_3")
+InteractionLines = PackedStringArray("INT_ALCHEMIST_1", "INT_ALCHEMIST_2")
 
-[node name="Sprite2D" parent="Alchemist" index="0"]
+[node name="Sprite2D" parent="Interactables/Alchemist" index="0"]
 position = Vector2(0, -6)
 texture = ExtResource("7_o7twc")
 
-[node name="WayPoint" parent="Alchemist" index="2"]
+[node name="LookAtPoint" parent="Interactables/Alchemist" index="1"]
+position = Vector2(-13, -11)
+
+[node name="WayPoint" parent="Interactables/Alchemist" index="2"]
 position = Vector2(-156, 106)
 
-[node name="CollisionShape2D" parent="Alchemist/Clickable" index="0"]
+[node name="CollisionShape2D" parent="Interactables/Alchemist/Clickable" index="0"]
 position = Vector2(-8, 5.5)
 shape = SubResource("RectangleShape2D_03eao")
+
+[node name="Flask" parent="Interactables" instance=ExtResource("5_fieot")]
+position = Vector2(407, 276)
+UIIcon = ExtResource("8_8jldv")
+
+[node name="Sprite2D" parent="Interactables/Flask" index="0"]
+texture = ExtResource("9_8jwgp")
+
+[node name="LookAtPoint" parent="Interactables/Flask" index="1"]
+position = Vector2(0, 10)
+
+[node name="WayPoint" parent="Interactables/Flask" index="2"]
+position = Vector2(-83, 158)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(379, 274)
@@ -95,5 +116,6 @@ position = Vector2(192, -93)
 shape = SubResource("RectangleShape2D_bvxqt")
 
 [editable path="Background"]
-[editable path="Alchemist"]
+[editable path="Interactables/Alchemist"]
+[editable path="Interactables/Flask"]
 [editable path="NeighborhoodAlchemistHouseGate"]

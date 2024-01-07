@@ -26,7 +26,7 @@ It's better not to distract him."
 Здесь кругом памятники.","[color=#ffdef7]This is a cemetery.
 There are tombstone all around here."
 "INT_GRAVE_2","[color=#ffdef7]Еще один памятник. ","[color=#ffdef7]Another tombstone."
-"OBS_CLOVER_GRAVE","Кловер Премудрая, юникорн","Clover the Clever, Unicorn"
+"INSP_CLOVER_GRAVE","Кловер Премудрая, юникорн","Clover the Clever, Unicorn"
 "INT_CLOVER_GRAVE","[color=#ffdef7]Два года прошло.
 Уже давно пора бы искать нового наставника.","[color=#ffdef7]Two years have passed.
 It's high time to look for a new mentor."
