@@ -47,7 +47,7 @@ centered = false
 offset = Vector2(0, -339)
 
 [node name="Nime" parent="." instance=ExtResource("4_ptc2y")]
-position = Vector2(375, 356)
+position = Vector2(236, 336)
 scale = Vector2(0.5, 0.5)
 MoveSpeed = 150.0
 
@@ -61,31 +61,45 @@ UILabel = "LABEL_ALCHEMIST"
 InitialInteracitonLines = PackedStringArray("INIT_INT_ALCHEMIST_1", "INIT_INT_ALCHEMIST_2", "INIT_INT_ALCHEMIST_3")
 InteractionLines = PackedStringArray("INT_ALCHEMIST_1", "INT_ALCHEMIST_2")
 
-[node name="Sprite2D" parent="Interactables/Alchemist" index="0"]
-position = Vector2(0, -6)
+[node name="Object" parent="Interactables/Alchemist" index="0"]
 texture = ExtResource("7_o7twc")
+
+[node name="MagicEffect" parent="Interactables/Alchemist" index="1"]
+position = Vector2(-12, -3)
+scale = Vector2(1.94, 2.34)
 
 [node name="CollisionShape2D" parent="Interactables/Alchemist/Clickable" index="0"]
 position = Vector2(-8, 5.5)
 shape = SubResource("RectangleShape2D_03eao")
 
-[node name="LookAtPoint" parent="Interactables/Alchemist" index="2"]
+[node name="LookAtPoint" parent="Interactables/Alchemist" index="3"]
 position = Vector2(-13, -11)
+Texture = ExtResource("9_8jwgp")
 
-[node name="WayPoint" parent="Interactables/Alchemist" index="3"]
+[node name="WayPoint" parent="Interactables/Alchemist" index="4"]
 position = Vector2(-156, 106)
 
 [node name="Flask" parent="Interactables" instance=ExtResource("5_fieot")]
-position = Vector2(407, 276)
+position = Vector2(429, 275)
 UIIcon = ExtResource("8_8jldv")
+Spell = "LEVITATION"
+Autocast = true
+FCastIntercationLines = PackedStringArray("FCAST_FLASK")
+BCastInteractionLines = PackedStringArray("BCAST_FLASK")
+ErrFCastInteractionLines = PackedStringArray("FCAST_ERR_FLASK")
+ErrBCastInteractionLines = PackedStringArray("BCAST_ERR_FLASK")
 
-[node name="Sprite2D" parent="Interactables/Flask" index="0"]
+[node name="Object" parent="Interactables/Flask" index="0"]
 texture = ExtResource("9_8jwgp")
 
-[node name="LookAtPoint" parent="Interactables/Flask" index="2"]
+[node name="MagicEffect" parent="Interactables/Flask" index="1"]
+position = Vector2(-1.99999, 2)
+scale = Vector2(0.6, 0.68)
+
+[node name="LookAtPoint" parent="Interactables/Flask" index="3"]
 position = Vector2(0, 10)
 
-[node name="WayPoint" parent="Interactables/Flask" index="3"]
+[node name="WayPoint" parent="Interactables/Flask" index="4"]
 position = Vector2(-83, 158)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]

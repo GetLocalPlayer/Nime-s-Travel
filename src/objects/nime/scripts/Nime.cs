@@ -51,5 +51,6 @@ public partial class Nime : Node2D
 	{
 		Spell += buttonName[0].ToString().ToLower();
 		EmitSignal("MagicCast");
+		GetTree().CallGroup("Interactables", "SpellOnInteractable", TargetedInteractable);
 	}
 }

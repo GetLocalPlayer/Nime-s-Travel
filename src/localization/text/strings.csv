@@ -31,3 +31,18 @@ There are tombstone all around here."
 Уже давно пора бы искать нового наставника.","[color=#ffdef7]Two years have passed.
 It's high time to look for a new mentor."
 "LABEL_CLOVER_GRAVE","Памятник Кловер ","Clover's tombstone"
+"LABEL_FLASK","Колба","Flaks"
+"FCAST_FLASK","[color=#ffdef7]Это левитация.
+Стоит запомнить, как работает.
+Я могу выполнить заклинание в обе стороны.
+Хотя бы такая малость мне доступна.","[color=#ffdef7]This is levitation.
+I can memorize how it works.
+I can perform the spell in both directions.
+At least this level  of magic is available to me."
+"BCAST_FLASK","[color=#ffdef7]Обратный эффект.
+Та же магия, но в обратном порядке.
+Могу попробовать сама.","[color=#ffdef7]The reverse effect.
+The same magic but in reverse order.
+I can try it myself."
+"FCAST_ERR_FLASK","[color=#ffdef7]Колба уже левитирует.","[color=#ffdef7]The flask is already levitating."
+"BCAST_ERR_FLASK","[color=#ffdef7]Эффект левитации уже снят.","[color=#ffdef7]The levitation effect has already been removed."

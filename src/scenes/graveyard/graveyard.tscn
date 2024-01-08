@@ -1,12 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://bdnwor80y7kvj"]
+[gd_scene load_steps=20 format=3 uid="uid://bdnwor80y7kvj"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_7732i"]
 [ext_resource type="Texture2D" uid="uid://drv4wl1d4y7vv" path="res://scenes/graveyard/back.png" id="2_kjyhk"]
 [ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactables/interactable/interactable.tscn" id="3_7fqlc"]
-[ext_resource type="Texture2D" uid="uid://iaa21bgoia06" path="res://scenes/graveyard/grave1.png" id="3_50utd"]
 [ext_resource type="Texture2D" uid="uid://di2d3veko00no" path="res://scenes/graveyard/grave_ico.png" id="4_6cabc"]
-[ext_resource type="Texture2D" uid="uid://6lhr7omh6osp" path="res://scenes/graveyard/grave3.png" id="4_k7nu5"]
-[ext_resource type="Texture2D" uid="uid://c73xqnvjnssja" path="res://scenes/graveyard/grave_clover.png" id="5_tubix"]
 [ext_resource type="Texture2D" uid="uid://cwecqo7mfree2" path="res://scenes/graveyard/clover_engraving.png" id="6_n0aij"]
 [ext_resource type="Script" path="res://scenes/graveyard/CloverGrave.cs" id="7_eko1s"]
 [ext_resource type="Texture2D" uid="uid://dpycerqlev1wm" path="res://scenes/graveyard/tree.png" id="7_g7nm7"]
@@ -60,17 +57,14 @@ UIIcon = ExtResource("4_6cabc")
 UILabel = "LABEL_GRAVE"
 InteractionLines = PackedStringArray("INT_GRAVE_1")
 
-[node name="Sprite2D" parent="Grave1" index="0"]
-texture = ExtResource("3_50utd")
-
 [node name="CollisionShape2D" parent="Grave1/Clickable" index="0"]
 position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_pvokv")
 
-[node name="LookAtPoint" parent="Grave1" index="2"]
+[node name="LookAtPoint" parent="Grave1" index="3"]
 position = Vector2(3, 3)
 
-[node name="WayPoint" parent="Grave1" index="3"]
+[node name="WayPoint" parent="Grave1" index="4"]
 position = Vector2(55, 83)
 
 [node name="Grave2" parent="." instance=ExtResource("3_7fqlc")]
@@ -79,17 +73,14 @@ UIIcon = ExtResource("4_6cabc")
 UILabel = "LABEL_GRAVE"
 InteractionLines = PackedStringArray("INT_GRAVE_2")
 
-[node name="Sprite2D" parent="Grave2" index="0"]
-texture = ExtResource("4_k7nu5")
-
 [node name="CollisionShape2D" parent="Grave2/Clickable" index="0"]
 position = Vector2(2, 3)
 shape = SubResource("RectangleShape2D_x0mpq")
 
-[node name="LookAtPoint" parent="Grave2" index="2"]
+[node name="LookAtPoint" parent="Grave2" index="3"]
 position = Vector2(2, 8)
 
-[node name="WayPoint" parent="Grave2" index="3"]
+[node name="WayPoint" parent="Grave2" index="4"]
 position = Vector2(-53, 96)
 
 [node name="CloverGrave" parent="." instance=ExtResource("3_7fqlc")]
@@ -101,6 +92,16 @@ InspectionTexture = ExtResource("9_w80xd")
 InspectionLines = PackedStringArray("INSP_CLOVER_GRAVE")
 InteractionLines = PackedStringArray("INT_CLOVER_GRAVE")
 
+[node name="CollisionShape2D" parent="CloverGrave/Clickable" index="0"]
+position = Vector2(1, -3.5)
+shape = SubResource("RectangleShape2D_acrgy")
+
+[node name="LookAtPoint" parent="CloverGrave" index="3"]
+position = Vector2(2, -6)
+
+[node name="WayPoint" parent="CloverGrave" index="4"]
+position = Vector2(-51, 76)
+
 [node name="CloverEngraving" type="Sprite2D" parent="CloverGrave"]
 position = Vector2(0, -8)
 texture = ExtResource("6_n0aij")
@@ -110,19 +111,6 @@ visible = false
 position = Vector2(0, -9)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("12_qpj7e")
-
-[node name="Sprite2D" parent="CloverGrave" index="2"]
-texture = ExtResource("5_tubix")
-
-[node name="CollisionShape2D" parent="CloverGrave/Clickable" index="0"]
-position = Vector2(1, -3.5)
-shape = SubResource("RectangleShape2D_acrgy")
-
-[node name="LookAtPoint" parent="CloverGrave" index="4"]
-position = Vector2(2, -6)
-
-[node name="WayPoint" parent="CloverGrave" index="5"]
-position = Vector2(-51, 76)
 
 [node name="Tree" type="Sprite2D" parent="."]
 position = Vector2(498, 503)

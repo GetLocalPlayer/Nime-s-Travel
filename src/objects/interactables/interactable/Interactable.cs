@@ -1,8 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
 
 
 /*
@@ -59,14 +56,24 @@ public partial class Interactable : Node2D
 	[ExportGroup("Interaction")]
 	[Export] public string[] InteractionLines;
 
-	[ExportGroup("Spell Application")]
-	/* ЗАклинание применяется автоматически,
+	[ExportGroup("Spell")]
+	/* Строковое название заклинания, в данном случае
+	LEVITATION или IGNITION. Регистр не имеет значения. */ 
+	[Export] public string Spell;
+	/* Заклинание применяется автоматически,
 	ака	при изучении нового заклинания. */
 	[Export] public bool Autocast = false;
-	/* Текст после применения заклинания. */
-	[Export] public string[] CastForwardIntercationLines;
-	/* Текст после применения заклинания взад. */
-	[Export] public string[] CastBackwardsInteractionLines;
+	/* Текст после прямого применения заклинания
+	(F stands for Forward). */
+	[Export] public string[] FCastIntercationLines;
+	/* Текст после обратного применения заклинания
+	(B stands for Взад (ну или Backward)). */
+	[Export] public string[] BCastInteractionLines;
+	/* Реакция на попытку применить уже примененного
+	заклинания в данном направлении (а-ля "Колба уже
+	левитирует"). */
+	[Export] public string[] ErrFCastInteractionLines;
+	[Export] public string[] ErrBCastInteractionLines;
 	
 	private bool isReached = false;
 	
@@ -75,16 +82,6 @@ public partial class Interactable : Node2D
 	}
 	public Vector2 LookAtPoint {
 		get => GetNode<Marker2D>("LookAtPoint").GlobalPosition;
-	}
-
-	protected virtual void InteractableReached(Interactable i)
-	{
-		if (this == i) i.isReached = true;
-	}
-
-	protected virtual void InteractableLeft(Interactable i)
-	{
-		if (this == i) i.isReached = false;
 	}
 
     public override void _Ready()
@@ -119,6 +116,22 @@ public partial class Interactable : Node2D
 			else if (!InteractionLines.IsEmpty())
 				tree.CallGroup("UI", "InteractableInteracted", this);
 		}
+	}
+
+	protected virtual void InteractableReached(Interactable i)
+	{
+		if (this == i) i.isReached = true;
+	}
+
+	protected virtual void InteractableLeft(Interactable i)
+	{
+		if (this == i) i.isReached = false;
+	}
+
+	protected virtual void SpellOnInteractable(Interactable i)
+	{
+		var sprite = GetNode<MagicEffect>("MagicEffect");
+		if (!sprite.Visible) sprite.Appear();
 	}
 
 	public virtual void OnInspectionFinished()

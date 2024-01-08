@@ -1,16 +1,188 @@
-[gd_scene load_steps=6 format=3 uid="uid://djk0tfvrgbpsp"]
+[gd_scene load_steps=22 format=3 uid="uid://djk0tfvrgbpsp"]
 
 [ext_resource type="Texture2D" uid="uid://b652rv7d4j3m2" path="res://icon.svg" id="1_fj3kd"]
 [ext_resource type="Script" path="res://objects/interactables/interactable/Interactable.cs" id="1_wvcga"]
+[ext_resource type="Texture2D" uid="uid://dusg2hfpjqqt0" path="res://objects/interactables/interactable/magic.png" id="3_2202n"]
 [ext_resource type="Script" path="res://objects/interactables/interactable/PointDrawer.cs" id="3_uj84h"]
+[ext_resource type="Script" path="res://objects/interactables/interactable/MagicEffect.cs" id="4_fhcdu"]
 [ext_resource type="Texture2D" uid="uid://b6asdnoqvos7x" path="res://objects/interactables/interactable/LookAtPoint.png" id="4_p0b67"]
 [ext_resource type="Texture2D" uid="uid://bkog84x7t6k1" path="res://objects/interactables/interactable/WayPoint.png" id="5_1ggc6"]
+
+[sub_resource type="Animation" id="Animation_gxsuq"]
+resource_name = "Idle"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gfhl0"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ndpt8"]
+resource_name = "Appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.001, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0hola"]
+_data = {
+"Appear": SubResource("Animation_ndpt8"),
+"Idle": SubResource("Animation_gxsuq"),
+"RESET": SubResource("Animation_gfhl0")
+}
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_itmdk"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s5he4"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5k02r"]
+animation = &"Appear"
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_q53jr"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_q41ub"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_qx3ha"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wlr1v"]
+animation = &"Appear"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_000gj"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_1syu2"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wc0p5"]
+graph_offset = Vector2(-124.928, -186.635)
+nodes/AddAppear/node = SubResource("AnimationNodeAdd2_itmdk")
+nodes/AddAppear/position = Vector2(440, -160)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_s5he4")
+nodes/Animation/position = Vector2(240, -320)
+nodes/Appear/node = SubResource("AnimationNodeAnimation_5k02r")
+nodes/Appear/position = Vector2(-180, -20)
+nodes/AppearTime/node = SubResource("AnimationNodeTimeSeek_q53jr")
+nodes/AppearTime/position = Vector2(220, -40)
+nodes/BlendAppearDisppear/node = SubResource("AnimationNodeBlend2_q41ub")
+nodes/BlendAppearDisppear/position = Vector2(0, -20)
+nodes/BlendResetPlay/node = SubResource("AnimationNodeBlend2_qx3ha")
+nodes/BlendResetPlay/position = Vector2(620, -280)
+nodes/Disapper/node = SubResource("AnimationNodeAnimation_wlr1v")
+nodes/Disapper/position = Vector2(-180, 120)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_000gj")
+nodes/Idle/position = Vector2(120, -180)
+nodes/ResetTime/node = SubResource("AnimationNodeTimeSeek_1syu2")
+nodes/ResetTime/position = Vector2(420, -300)
+nodes/output/position = Vector2(800, -160)
+node_connections = [&"AddAppear", 0, &"Idle", &"AddAppear", 1, &"AppearTime", &"AppearTime", 0, &"BlendAppearDisppear", &"BlendAppearDisppear", 0, &"Appear", &"BlendAppearDisppear", 1, &"Disapper", &"BlendResetPlay", 0, &"ResetTime", &"BlendResetPlay", 1, &"AddAppear", &"ResetTime", 0, &"Animation", &"output", 0, &"BlendResetPlay"]
 
 [node name="Interactable" type="Node2D" groups=["Interactables"]]
 script = ExtResource("1_wvcga")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Object" type="Sprite2D" parent="."]
 texture = ExtResource("1_fj3kd")
+
+[node name="MagicEffect" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_2202n")
+hframes = 18
+script = ExtResource("4_fhcdu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MagicEffect"]
+libraries = {
+"": SubResource("AnimationLibrary_0hola")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="MagicEffect"]
+libraries = {
+"": SubResource("AnimationLibrary_0hola")
+}
+tree_root = SubResource("AnimationNodeBlendTree_wc0p5")
+anim_player = NodePath("../AnimationPlayer")
+parameters/AddAppear/add_amount = 1.0
+parameters/AppearTime/seek_request = -1.0
+parameters/BlendAppearDisppear/blend_amount = 0.0
+parameters/BlendResetPlay/blend_amount = 1.0
+parameters/ResetTime/seek_request = -1.0
 
 [node name="Clickable" type="Area2D" parent="." groups=["InteractableClickables"]]
 monitorable = false
