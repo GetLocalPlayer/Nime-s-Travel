@@ -5,9 +5,9 @@ using System.Dynamic;
 
 public partial class NimeFSM : FiniteStateMachine
 {	
-	 Nime nime;
+	Nime nime;
 
-	private readonly Dictionary<string, State> states = new Dictionary<string, State> {
+	readonly Dictionary<string, State> states = new Dictionary<string, State> {
 		{"idle", new Idle()},
 		{"walk", new Walk()},
 		{"walkToInteractable", new WalkToInteractable()},
@@ -23,6 +23,8 @@ public partial class NimeFSM : FiniteStateMachine
 
 	private void SetupTransitions()
 	{
+		var tree = GetTree();
+
 		nime.WalkTargetSet += () =>
 		{
 			SetState(states["walk"]);
@@ -42,14 +44,27 @@ public partial class NimeFSM : FiniteStateMachine
 		states["walkToInteractable"].StateFinished += (state, context) =>
 		{
 			SetState(states["idle"]);
-			GetTree().CallGroup("Interactables", "InteractableReached", nime.TargetedInteractable);
-			GetTree().CallGroup("UI", "InteractableReached", nime.TargetedInteractable);
+			tree.CallGroup("Interactables", "InteractableReached", nime.TargetedInteractable);
+			tree.CallGroup("UI", "InteractableReached", nime.TargetedInteractable);
 		};
 
-		nime.MagicCast += () =>
-			SetState(states["castMagic"]);
+		nime.MagicCast += (spellCode) =>
+		{
+			if (currentState != states["castMagic"])
+				SetState(states["castMagic"]);
+			(currentState as CastMagic).AddSpell(nime, spellCode);
+			tree.CallGroup("Interactables", "StartCastOnInteractable", nime.TargetedInteractable);
+		};
+
+		(states["castMagic"] as CastMagic).SpellCast += (state, context, spellBeingCast) =>
+		{
+			tree.CallGroup("Interactables", "CastOnInteractable", nime.TargetedInteractable, spellBeingCast);
+		};
 
 		states["castMagic"].StateFinished += (state, context) =>
+		{
 			SetState(states["idle"]);
+			tree.CallGroup("Interactables", "StopCastOnInteractable", nime.TargetedInteractable);
+		};
 	}
 }

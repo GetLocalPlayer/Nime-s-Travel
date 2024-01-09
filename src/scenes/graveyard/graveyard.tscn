@@ -57,6 +57,11 @@ UIIcon = ExtResource("4_6cabc")
 UILabel = "LABEL_GRAVE"
 InteractionLines = PackedStringArray("INT_GRAVE_1")
 
+[node name="AnimationTree" parent="Grave1/MagicEffect" index="1"]
+parameters/AppearTimeScale/scale = 1.0
+parameters/AppearTimeSeek/seek_request = -1.0
+parameters/ResetTimeSeek/seek_request = -1.0
+
 [node name="CollisionShape2D" parent="Grave1/Clickable" index="0"]
 position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_pvokv")
@@ -72,6 +77,11 @@ position = Vector2(352, 278)
 UIIcon = ExtResource("4_6cabc")
 UILabel = "LABEL_GRAVE"
 InteractionLines = PackedStringArray("INT_GRAVE_2")
+
+[node name="AnimationTree" parent="Grave2/MagicEffect" index="1"]
+parameters/AppearTimeScale/scale = 1.0
+parameters/AppearTimeSeek/seek_request = -1.0
+parameters/ResetTimeSeek/seek_request = -1.0
 
 [node name="CollisionShape2D" parent="Grave2/Clickable" index="0"]
 position = Vector2(2, 3)
@@ -91,6 +101,11 @@ UILabel = "LABEL_CLOVER_GRAVE"
 InspectionTexture = ExtResource("9_w80xd")
 InspectionLines = PackedStringArray("INSP_CLOVER_GRAVE")
 InteractionLines = PackedStringArray("INT_CLOVER_GRAVE")
+
+[node name="AnimationTree" parent="CloverGrave/MagicEffect" index="1"]
+parameters/AppearTimeScale/scale = 1.0
+parameters/AppearTimeSeek/seek_request = -1.0
+parameters/ResetTimeSeek/seek_request = -1.0
 
 [node name="CollisionShape2D" parent="CloverGrave/Clickable" index="0"]
 position = Vector2(1, -3.5)

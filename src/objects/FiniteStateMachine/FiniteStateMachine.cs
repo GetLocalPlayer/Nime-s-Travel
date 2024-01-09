@@ -14,7 +14,6 @@ public abstract partial class FiniteStateMachine : Node
 	
     public virtual void SetState(State newState)
 	{
-		if (newState == currentState) return;
 		currentState?.Exit(GetContext());
 		currentState = newState;
 		newState?.Enter(GetContext());

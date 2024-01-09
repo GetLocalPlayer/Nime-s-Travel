@@ -57,9 +57,11 @@ public partial class Interactable : Node2D
 	[Export] public string[] InteractionLines;
 
 	[ExportGroup("Spell")]
-	/* Строковое название заклинания, в данном случае
-	LEVITATION или IGNITION. Регистр не имеет значения. */ 
-	[Export] public string Spell;
+	/* Строковое название заклинания, заменяется
+	соответствующим кодом из словаря в классе
+	GlobalVariables, если существует иначе
+	пустая строка. */ 
+	[Export] string spellName = "";
 	/* Заклинание применяется автоматически,
 	ака	при изучении нового заклинания. */
 	[Export] public bool Autocast = false;
@@ -115,24 +117,12 @@ public partial class Interactable : Node2D
 				tree.CallGroup("UI", "InteractableInitialInteraction", this);
 			else if (!InteractionLines.IsEmpty())
 				tree.CallGroup("UI", "InteractableInteracted", this);
+			else if (Autocast)
+				tree.CallGroup("UI", "InteractableSpellReveal", GlobalVariables.GetSpellCode(spellName));
 		}
 	}
 
-	protected virtual void InteractableReached(Interactable i)
-	{
-		if (this == i) i.isReached = true;
-	}
-
-	protected virtual void InteractableLeft(Interactable i)
-	{
-		if (this == i) i.isReached = false;
-	}
-
-	protected virtual void SpellOnInteractable(Interactable i)
-	{
-		var sprite = GetNode<MagicEffect>("MagicEffect");
-		if (!sprite.Visible) sprite.Appear();
-	}
+	/* =================== Вызываются напрямую из UI ===================  */
 
 	public virtual void OnInspectionFinished()
 	{
@@ -145,5 +135,37 @@ public partial class Interactable : Node2D
 	public virtual void OnInteractionFinished()
 	{
 		InitialInteracitonLines = Array.Empty<string>();
+	}
+
+
+	/* Вызываются через GetTree().CallGroup("Interactables", ...) */
+
+	protected virtual void InteractableReached(Interactable i)
+	{
+		if (this == i) isReached = true;
+	}
+
+	protected virtual void InteractableLeft(Interactable i)
+	{
+		if (this == i) isReached = false;
+	}
+
+	protected virtual void StartCastOnInteractable(Interactable i)
+	{
+		if (this != i) return;
+		GetNode<MagicEffect>("MagicEffect").Appear();
+	}
+
+	protected virtual void StopCastOnInteractable(Interactable i)
+	{
+		if (this != i) return;
+		GetNode<MagicEffect>("MagicEffect").Disappear();
+	}
+
+	protected virtual void CastOnInteractable(Interactable i, string spellCode)
+	{
+		if (this != i) return;
+		if (GlobalVariables.GetSpellCode(spellName) == spellCode)
+			GD.Print($"{spellName.ToUpper()} as {spellCode} is cast on {UILabel}");
 	}
 }

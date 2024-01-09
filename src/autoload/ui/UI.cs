@@ -91,27 +91,13 @@ public partial class UI : Control
 		{			
 			inspectionImage.Hide();
 			i.OnInspectionFinished();
-			GD.Print("Inspeciton finished");
 		}
 		else
 			i.OnInteractionFinished();
 		
 	}
 
-
-	public void InteractableHovered(Interactable i)
-	{
-		interactableHint.Icon = i.UIIcon;
-		interactableHint.Text = i.UILabel;
-		interactableHint.Visible = !interactableButton.Visible;
-	}
-
-	public void InteractableUnhovered()
-	{
-		interactableHint.Icon = null;
-		interactableHint.Text = null;
-		interactableHint.Hide();
-	}
+	/* Вызываются из класса Nime как GetTree().CallGroup("UI", ...) */
 
 	public void InteractableReached(Interactable i)
 	{
@@ -130,6 +116,28 @@ public partial class UI : Control
 		reachedInteractable = null;
 		interactableButton.Hide();
 		hornContainer.Hide();
+	}
+
+	/*
+	Вызываются из класса Interactable как GetTree().CallGroup("UI", ...).
+	CallGroup вызывает функцию с переданным именем у КАЖДОГО нода в группе 
+	"UI", что значит внутри функций должна быть проверка если текущий this 
+	это нужный мне UI. Но поскольку группа "UI" содержит один единственный
+	нод UI, я не заморачиваюсь.
+	*/
+
+	public void InteractableHovered(Interactable i)
+	{
+		interactableHint.Icon = i.UIIcon;
+		interactableHint.Text = i.UILabel;
+		interactableHint.Visible = !interactableButton.Visible;
+	}
+
+	public void InteractableUnhovered()
+	{
+		interactableHint.Icon = null;
+		interactableHint.Text = null;
+		interactableHint.Hide();
 	}
 
 	public void InteractableInspected(Interactable i)
@@ -166,6 +174,5 @@ public partial class UI : Control
 		interactionLabel.Show();
 		interactionLines.RemoveAt(0);
 		interactionModal.Show();
-		GD.Print(interactionLines.Count);
 	}
 }
