@@ -6,16 +6,38 @@ using System.Linq;
 
 public partial class UI : Control
 {
-	private CenterContainer hornContainer;
-	private Button interactableHint;
-	private Button interactableButton;
-	private RichTextLabel interactionLabel;
-	private TextureRect inspectionImage;
-	private Control interactionModal;
+	[Signal] public delegate void InteractionFinishedEventHandler();
+	[Signal] public delegate void SpellRevealedEventHandler();
+	[Signal] public delegate void InteractableButtonClickedEventHandler();
 
-	private Interactable currentInteractable;
-	private Interactable reachedInteractable;
-	private List<string> interactionLines = new List<string>();
+	CenterContainer hornContainer;
+	Button interactableHint;
+	Button interactableButton;
+	AnimationPlayer msAnimPlayer;
+
+	RichTextLabel interactionLabel;
+	TextureRect inspectionImage;
+
+	/* Кнтрол на весь экран перехватывающий
+	события мыши для перелистования текста. */
+	Control interactionModal;
+	/* То же самое что и кнтрол выше но
+	для катсцен (демонастрации заклинаний,
+	взлета колбы и прочего). */
+	Control cutsceneModal;
+	/* Хранит в себе Interactable к которому
+	подошла Ниме, нужен для отображения 
+	кнопки в нижнем-правом углу. */
+	Interactable reachedInteractable;
+	/* Пеоеменна для передачи между функциями
+	Interactable с которым происходит
+	взаимодействие. */
+	Interactable currentInteractable;
+	/* Строки текста взаимодействия, сменяющие
+	друг друга при по клику мышия. Нужен только
+	для передачи между вызовами
+	OnInteractionModalClick(). */
+	List<string> interactionLines = new List<string>();
 
 	public override void _Ready()
 	{
@@ -24,155 +46,166 @@ public partial class UI : Control
 		var mainContainer = GetNode<BoxContainer>("MainContainer");
 
 		hornContainer = mainContainer.GetNode<CenterContainer>("HornContainer");
-		hornContainer.Visible = false;
+		hornContainer.Hide();
 
 		var buttonsRoot = hornContainer.GetNode<Control>("Buttons");
-		var animPlayer = buttonsRoot.GetNode<AnimationPlayer>("MagicSpark/AnimationPlayer");
+		msAnimPlayer = buttonsRoot.GetNode<AnimationPlayer>("MagicSpark/AnimationPlayer");
 
-		var pressedHandler = Callable.From((Button emitter) => 
-		{
-			animPlayer.Queue(emitter.Name);
-			GetTree().CallGroup("Player", "HornButtonClicked", emitter.Name);
-		});
 
-		/* Сигнал кнопок "pressed" не предусметривает передачи
-		в качестве параметра кнопку, которая была pressed. В
-		GDScript мы можем использовать метод Callable.bind(...)
-		чтобы привязать произвольные параметры к Callable который
-		вызывается в момент излучения сигнала, но, похоже, этот
-		метод все еще (версия движка 4.2.1) не реализован в С#
-		версии API. Придется костылявить замыканиями. */
 		var btnRed = buttonsRoot.GetNode<Button>("Red");
-		btnRed.Pressed += () => pressedHandler.Call(btnRed);
 		var btnGreen = buttonsRoot.GetNode<Button>("Green");
-		btnGreen.Pressed += () => pressedHandler.Call(btnGreen);
 		var btnBlue = buttonsRoot.GetNode<Button>("Blue");
-		btnBlue.Pressed += () => pressedHandler.Call(btnBlue);
+
+		var btn2Code = new Dictionary<Button, char>{
+			{btnRed, 'r'},
+			{btnGreen, 'g'},
+			{btnBlue, 'b'},
+		};
+
+		void pressedHandler(Button emitter)
+		{
+			msAnimPlayer.Queue(emitter.Name);
+			GetTree().CallGroup("Player", "HornButtonClicked", btn2Code[emitter]);
+		}
+
+		btnRed.Pressed += () => pressedHandler(btnRed);
+		btnGreen.Pressed += () => pressedHandler(btnGreen);
+		btnBlue.Pressed += () => pressedHandler(btnBlue);
 
 		var interactableContainer = mainContainer.GetNode<BoxContainer>("InteractableContainer");
 		interactableHint = interactableContainer.GetNode<Button>("Hint");
-		interactableHint.Visible = false;
+		interactableHint.Hide();
 		
 		interactableButton = interactableContainer.GetNode<Button>("Button");
-		interactableButton.Visible = false;
+		interactableButton.Hide();
 		interactableButton.Pressed += () =>
-			reachedInteractable.OnClick();
+			EmitSignal("InteractableButtonClicked");
 
 		interactionLabel = mainContainer.GetNode<RichTextLabel>("InteractionContainer/RichLabel");
 		interactionLabel.Text = null;
 
 		inspectionImage = GetNode<TextureRect>("InspectionImage");
-		inspectionImage.Visible = false;
+		inspectionImage.Hide();
 
 		interactionModal = GetNode<Control>("InteractionModal");
-		interactionModal.Visible = false;
-		interactionModal.GuiInput += (@event) =>
-		{
-			if (@event is InputEventMouseButton btn)
-				if (btn.Pressed && btn.ButtonIndex == MouseButton.Left)
-					OnInteractionModalClick();
-		};
-	}
-
-	private void OnInteractionModalClick()
-	{
-		if (interactionLines.Any())
-		{
-			interactionLabel.Text = interactionLines[0];
-			interactionLines.RemoveAt(0);
-			return;
-		}
-
-		interactionLabel.Hide();
 		interactionModal.Hide();
-		var i = currentInteractable;
-		currentInteractable = null;
-		if (inspectionImage.Visible)
-		{			
-			inspectionImage.Hide();
-			i.OnInspectionFinished();
-		}
-		else
-			i.OnInteractionFinished();
-		
+
+		cutsceneModal = GetNode<Control>("CutsceneModal");
+		cutsceneModal.Hide();
 	}
 
-	/* Вызываются из класса Nime как GetTree().CallGroup("UI", ...) */
-
-	public void InteractableReached(Interactable i)
+	public void SetHint(CompressedTexture2D icon, string label)
 	{
-		reachedInteractable = i;
-		interactableHint.Hide();
-		interactableButton.Icon = i.UIIcon;
-		interactableButton.Text = i.UILabel;
-		interactableButton.Show();
-		hornContainer.Show();
-		hornContainer.GetNode<AnimationPlayer>("Buttons/MagicSpark/AnimationPlayer").Play("RESET");
-	}
-
-	public void InteractableLeft(Interactable i)
-	{
-		if (reachedInteractable != i) return;
-		reachedInteractable = null;
-		interactableButton.Hide();
-		hornContainer.Hide();
-	}
-
-	/*
-	Вызываются из класса Interactable как GetTree().CallGroup("UI", ...).
-	CallGroup вызывает функцию с переданным именем у КАЖДОГО нода в группе 
-	"UI", что значит внутри функций должна быть проверка если текущий this 
-	это нужный мне UI. Но поскольку группа "UI" содержит один единственный
-	нод UI, я не заморачиваюсь.
-	*/
-
-	public void InteractableHovered(Interactable i)
-	{
-		interactableHint.Icon = i.UIIcon;
-		interactableHint.Text = i.UILabel;
+		interactableHint.Icon = icon;
+		interactableHint.Text = label;
 		interactableHint.Visible = !interactableButton.Visible;
 	}
 
-	public void InteractableUnhovered()
+	public void ClearHint()
 	{
 		interactableHint.Icon = null;
-		interactableHint.Text = null;
+		interactableHint.Text = "";
 		interactableHint.Hide();
 	}
 
-	public void InteractableInspected(Interactable i)
+	public void SetHintButton(CompressedTexture2D icon, string label)
 	{
-		currentInteractable = i;
-		inspectionImage.Texture = i.InspectionTexture;
-		inspectionImage.Show();
-		if (!i.InspectionLines.IsEmpty())
+		interactableButton.Icon = icon;
+		interactableButton.Text = label;
+		interactableButton.Show();
+		interactableHint.Hide();
+	}
+
+	public void ClearHintButton()
+	{
+		interactableButton.Icon = null;
+		interactableButton.Text = "";
+		interactableButton.Hide();
+	}
+
+	public void ShowHorn()
+	{
+		hornContainer.Show();
+	}
+
+	public void HideHorn()
+	{
+		hornContainer.Hide();
+	}
+
+	async public void RevealSpell(string spellName)
+	{
+		var spells = GetTree().Root.GetNode<Spells>("Spells");
+
+		var spellCode = spells.GetSpellCode(spellName);
+		if (spellCode == null)
+			throw new Exception($"No spell code found for {spellName} during UI spell reveal.");
+
+		msAnimPlayer.Stop();
+		foreach (var c in spellCode)
 		{
-			interactionLines.AddRange(i.InspectionLines);
-			interactionLines.RemoveAt(0);
-			interactionLabel.Text = i.InspectionLines[0];
-			interactionLabel.Show();
+			var anim2Play = "";
+			switch (c)
+			{
+				case 'r':
+					anim2Play = "Red";
+					break;
+				case 'g':
+					anim2Play = "Green";
+					break;
+				case 'b':
+					anim2Play = "Blue";
+					break;
+			}
+			msAnimPlayer.Queue(anim2Play);
 		}
-		interactionModal.Show();
+		cutsceneModal.Show();
+		await ToSignal(msAnimPlayer, AnimationPlayer.SignalName.AnimationFinished);
+		cutsceneModal.Hide();
+		EmitSignal("SpellRevealed");
 	}
 
-	public void InteractableInitialInteraction(Interactable i)
+	public void RunInteraction(string[] lines)
 	{
-		currentInteractable = i;
-		interactionLines.AddRange(i.InitialInteracitonLines);
-		RunInteraction();
-	}
+		if (lines.IsEmpty()) return;
 
-	public void InteractableInteracted(Interactable i)
-	{
-		currentInteractable = i;
-		interactionLines.AddRange(i.InteractionLines);
-		RunInteraction();
-	}
-	private void RunInteraction()
-	{
-		interactionLabel.Text = interactionLines[0];
+		var list = new List<string>(lines);
+		interactionLabel.Text = list[0];
+		list.RemoveAt(0);
 		interactionLabel.Show();
-		interactionLines.RemoveAt(0);
 		interactionModal.Show();
+
+        void handler(InputEvent @event)
+        {
+            if (!(@event is InputEventMouseButton btn && btn.Pressed && btn.ButtonIndex == MouseButton.Left))
+                return;
+
+            if (list.Any())
+            {
+                interactionLabel.Text = list[0];
+                list.RemoveAt(0);
+                return;
+            }
+
+            if (inspectionImage.Visible)
+            {
+                inspectionImage.Texture = null;
+                inspectionImage.Hide();
+            }
+
+            interactionLabel.Hide();
+            interactionModal.Hide();
+            interactionModal.GuiInput -= handler;
+            EmitSignal("InteractionFinished");
+        }
+
+        interactionModal.GuiInput += handler;
+	}
+
+	public void RunPicturedInteraction(CompressedTexture2D texture, string[] lines)
+	{
+        inspectionImage.Texture = texture ?? throw new Exception("Must provide a texture to run inspeciton!");
+		inspectionImage.Show();
+		RunInteraction(lines.IsEmpty() ? new string[1]{""} : lines);
 	}
 }

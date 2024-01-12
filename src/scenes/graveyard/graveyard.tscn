@@ -1,9 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://bdnwor80y7kvj"]
+[gd_scene load_steps=23 format=3 uid="uid://bdnwor80y7kvj"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_7732i"]
 [ext_resource type="Texture2D" uid="uid://drv4wl1d4y7vv" path="res://scenes/graveyard/back.png" id="2_kjyhk"]
 [ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactables/interactable/interactable.tscn" id="3_7fqlc"]
 [ext_resource type="Texture2D" uid="uid://di2d3veko00no" path="res://scenes/graveyard/grave_ico.png" id="4_6cabc"]
+[ext_resource type="Texture2D" uid="uid://iaa21bgoia06" path="res://scenes/graveyard/grave1.png" id="5_003ir"]
+[ext_resource type="Texture2D" uid="uid://6lhr7omh6osp" path="res://scenes/graveyard/grave3.png" id="6_25ayc"]
 [ext_resource type="Texture2D" uid="uid://cwecqo7mfree2" path="res://scenes/graveyard/clover_engraving.png" id="6_n0aij"]
 [ext_resource type="Script" path="res://scenes/graveyard/CloverGrave.cs" id="7_eko1s"]
 [ext_resource type="Texture2D" uid="uid://dpycerqlev1wm" path="res://scenes/graveyard/tree.png" id="7_g7nm7"]
@@ -11,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="8_xde2y"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="9_m46h3"]
 [ext_resource type="Texture2D" uid="uid://bav48rel7l3jf" path="res://scenes/graveyard/graveview.png" id="9_w80xd"]
+[ext_resource type="Texture2D" uid="uid://c73xqnvjnssja" path="res://scenes/graveyard/grave_clover.png" id="10_fk2kn"]
 [ext_resource type="Texture2D" uid="uid://ib6etdyp1ltd" path="res://scenes/graveyard/clover.png" id="12_qpj7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvokv"]
@@ -57,10 +60,8 @@ UIIcon = ExtResource("4_6cabc")
 UILabel = "LABEL_GRAVE"
 InteractionLines = PackedStringArray("INT_GRAVE_1")
 
-[node name="AnimationTree" parent="Grave1/MagicEffect" index="1"]
-parameters/AppearTimeScale/scale = 1.0
-parameters/AppearTimeSeek/seek_request = -1.0
-parameters/ResetTimeSeek/seek_request = -1.0
+[node name="Object" parent="Grave1" index="0"]
+texture = ExtResource("5_003ir")
 
 [node name="CollisionShape2D" parent="Grave1/Clickable" index="0"]
 position = Vector2(-0.5, -1)
@@ -78,10 +79,8 @@ UIIcon = ExtResource("4_6cabc")
 UILabel = "LABEL_GRAVE"
 InteractionLines = PackedStringArray("INT_GRAVE_2")
 
-[node name="AnimationTree" parent="Grave2/MagicEffect" index="1"]
-parameters/AppearTimeScale/scale = 1.0
-parameters/AppearTimeSeek/seek_request = -1.0
-parameters/ResetTimeSeek/seek_request = -1.0
+[node name="Object" parent="Grave2" index="0"]
+texture = ExtResource("6_25ayc")
 
 [node name="CollisionShape2D" parent="Grave2/Clickable" index="0"]
 position = Vector2(2, 3)
@@ -102,10 +101,8 @@ InspectionTexture = ExtResource("9_w80xd")
 InspectionLines = PackedStringArray("INSP_CLOVER_GRAVE")
 InteractionLines = PackedStringArray("INT_CLOVER_GRAVE")
 
-[node name="AnimationTree" parent="CloverGrave/MagicEffect" index="1"]
-parameters/AppearTimeScale/scale = 1.0
-parameters/AppearTimeSeek/seek_request = -1.0
-parameters/ResetTimeSeek/seek_request = -1.0
+[node name="Object" parent="CloverGrave" index="0"]
+texture = ExtResource("10_fk2kn")
 
 [node name="CollisionShape2D" parent="CloverGrave/Clickable" index="0"]
 position = Vector2(1, -3.5)

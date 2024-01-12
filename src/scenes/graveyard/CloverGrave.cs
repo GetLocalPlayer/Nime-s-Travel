@@ -4,8 +4,8 @@ using System;
 public partial class CloverGrave : Interactable
 {
     // Called when the node enters the scene tree for the first time.
-    public override void OnClick()
+    public override void Clickable_OnClick()
     {
-        base.OnClick();
+        base.Clickable_OnClick();
     }
 }

@@ -4,13 +4,13 @@
 Немного. Я мало что успела изучить.","[color=#ffdef7]Here are my books and diaries.
 A little. I didn't have much time to study."
 "LABEL_ALCHEMIST","Алхимик","Alchemist"
-"INIT_INT_ALCHEMIST_1","[color=#ffdef7]Привет, как твои исследования? ","[color=#ffdef7]Hi, how's your research going?"
-"INIT_INT_ALCHEMIST_2","[color=#71c837]Наконец-то смог добиться устойчивой
+"F_INT_ALCHEMIST_1","[color=#ffdef7]Привет, как твои исследования? ","[color=#ffdef7]Hi, how's your research going?"
+"F_INT_ALCHEMIST_2","[color=#71c837]Наконец-то смог добиться устойчивой
 Химической левитации.
 Если бы ты мне помогала почаще... ","[color=#71c837]Finally I was able to achieve stable
 Chemical levitation.
 If you would help me more often..."
-"INIT_INT_ALCHEMIST_3","[color=#ffdef7]Сам знаешь - я только теорию
+"F_INT_ALCHEMIST_3","[color=#ffdef7]Сам знаешь - я только теорию
 изучала. Опыта не хватает
 Даже на простые заклинания. ","[color=#ffdef7]You know yourself - I only studied theory.
 Experience is not enough
@@ -32,17 +32,97 @@ There are tombstone all around here."
 It's high time to look for a new mentor."
 "LABEL_CLOVER_GRAVE","Памятник Кловер ","Clover's tombstone"
 "LABEL_FLASK","Колба","Flaks"
-"FCAST_FLASK","[color=#ffdef7]Это левитация.
+"SPELL_INT_DEFAULT","[color=#ffdef7]Заклинание работает, но ничего
+не происходит.","[color=#ffdef7]The spell works, but nothing
+is happening."
+"SPELL_AFFECTED_INT_DEFAULT","[color=#ffdef7]Уже под действием заклинания.","[color=#ffdef7]It's already under the spell's effect."
+"WRONG_SPELL_INT_DEFAULT","[color=#ffdef7]Это так не работает. ","[color=#ffdef7]It doesn't work that way."
+"WRONG_SPELL_INT_PONY_DEFAULT","[color=#ffdef7]Очевидно, плохая идея. ","[color=#ffdef7]Obviously a bad idea."
+"FSPELL_FLASK","[color=#ffdef7]Это левитация.
 Стоит запомнить, как работает.
 Я могу выполнить заклинание в обе стороны.
 Хотя бы такая малость мне доступна.","[color=#ffdef7]This is levitation.
 I can memorize how it works.
 I can perform the spell in both directions.
 At least this level  of magic is available to me."
-"BCAST_FLASK","[color=#ffdef7]Обратный эффект.
+"BSPELL_FLASK","[color=#ffdef7]Обратный эффект.
 Та же магия, но в обратном порядке.
 Могу попробовать сама.","[color=#ffdef7]The reverse effect.
 The same magic but in reverse order.
 I can try it myself."
-"FCAST_ERR_FLASK","[color=#ffdef7]Колба уже левитирует.","[color=#ffdef7]The flask is already levitating."
-"BCAST_ERR_FLASK","[color=#ffdef7]Эффект левитации уже снят.","[color=#ffdef7]The levitation effect has already been removed."
+"FSPELL_AFFECTED_FLASK","[color=#ffdef7]Колба уже левитирует.","[color=#ffdef7]The flask is already levitating."
+"BSPELL_AFFECTED_FLASK","[color=#ffdef7]Эффект левитации уже снят.","[color=#ffdef7]The levitation effect has already been removed."
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""
+"","",""

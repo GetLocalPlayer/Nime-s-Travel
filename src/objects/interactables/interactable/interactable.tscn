@@ -139,6 +139,8 @@ node_connections = [&"AddAppear", 0, &"Idle", &"AddAppear", 1, &"AppearTimeSeek"
 
 [node name="Interactable" type="Node2D" groups=["Interactables"]]
 script = ExtResource("1_wvcga")
+SpellInteractionLines = PackedStringArray("SPELL_INT_DEFAULT")
+WrongSpellInteractionLines = PackedStringArray("WRONG_SPELL_INT_DEFAULT")
 
 [node name="Object" type="Sprite2D" parent="."]
 texture = ExtResource("1_fj3kd")

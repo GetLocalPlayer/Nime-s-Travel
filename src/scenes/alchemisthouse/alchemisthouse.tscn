@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ds7xjedviyivx"]
+[gd_scene load_steps=17 format=3 uid="uid://ds7xjedviyivx"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_yk12b"]
 [ext_resource type="Texture2D" uid="uid://b06fnnrptobf1" path="res://scenes/alchemisthouse/back.png" id="2_ox0rm"]
@@ -16,6 +16,10 @@ size = Vector2(953, 510)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_03eao"]
 size = Vector2(140, 199)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s4vvu"]
+radius = 13.0
+height = 46.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_v5l6m"]
 vertices = PackedVector2Array(-172, 326, -366, 322, -364, 322, -176, 318, 183, 318, 184, 324, -358, 312, -359, 312, -463, 300, -462, 306, -573, 250, -571, 239, -869, 232, -870, 242)
@@ -58,7 +62,7 @@ metadata/_edit_lock_ = true
 position = Vector2(624, 331)
 UIIcon = ExtResource("6_vktut")
 UILabel = "LABEL_ALCHEMIST"
-InitialInteracitonLines = PackedStringArray("INIT_INT_ALCHEMIST_1", "INIT_INT_ALCHEMIST_2", "INIT_INT_ALCHEMIST_3")
+FirstInteracitonLines = PackedStringArray("F_INT_ALCHEMIST_1", "F_INT_ALCHEMIST_2", "F_INT_ALCHEMIST_3")
 InteractionLines = PackedStringArray("INT_ALCHEMIST_1", "INT_ALCHEMIST_2")
 
 [node name="Object" parent="Interactables/Alchemist" index="0"]
@@ -67,11 +71,6 @@ texture = ExtResource("7_o7twc")
 [node name="MagicEffect" parent="Interactables/Alchemist" index="1"]
 position = Vector2(-12, -3)
 scale = Vector2(1.94, 2.34)
-
-[node name="AnimationTree" parent="Interactables/Alchemist/MagicEffect" index="1"]
-parameters/AppearTimeScale/scale = 1.0
-parameters/AppearTimeSeek/seek_request = -1.0
-parameters/ResetTimeSeek/seek_request = -1.0
 
 [node name="CollisionShape2D" parent="Interactables/Alchemist/Clickable" index="0"]
 position = Vector2(-8, 5.5)
@@ -87,11 +86,9 @@ position = Vector2(-156, 106)
 [node name="Flask" parent="Interactables" instance=ExtResource("5_fieot")]
 position = Vector2(429, 275)
 UIIcon = ExtResource("8_8jldv")
+UILabel = "LABEL_FLASK"
+SpellName = "LEVITATION"
 Autocast = true
-FCastIntercationLines = PackedStringArray("FCAST_FLASK")
-BCastInteractionLines = PackedStringArray("BCAST_FLASK")
-ErrFCastInteractionLines = PackedStringArray("FCAST_ERR_FLASK")
-ErrBCastInteractionLines = PackedStringArray("BCAST_ERR_FLASK")
 
 [node name="Object" parent="Interactables/Flask" index="0"]
 texture = ExtResource("9_8jwgp")
@@ -100,16 +97,15 @@ texture = ExtResource("9_8jwgp")
 position = Vector2(-1.99999, 2)
 scale = Vector2(0.6, 0.68)
 
-[node name="AnimationTree" parent="Interactables/Flask/MagicEffect" index="1"]
-parameters/AppearTimeScale/scale = 1.0
-parameters/AppearTimeSeek/seek_request = -1.0
-parameters/ResetTimeSeek/seek_request = -1.0
+[node name="CollisionShape2D" parent="Interactables/Flask/Clickable" index="0"]
+shape = SubResource("CapsuleShape2D_s4vvu")
 
 [node name="LookAtPoint" parent="Interactables/Flask" index="3"]
+visible = false
 position = Vector2(0, 10)
 
 [node name="WayPoint" parent="Interactables/Flask" index="4"]
-position = Vector2(-83, 158)
+position = Vector2(-80, 158)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(379, 274)

@@ -88,11 +88,6 @@ UIIcon = ExtResource("6_5jpup")
 UILabel = "LABEL_BAKER"
 InteractionLines = PackedStringArray("INT_BAKER")
 
-[node name="AnimationTree" parent="Baker/MagicEffect" index="1"]
-parameters/AppearTimeScale/scale = 1.0
-parameters/AppearTimeSeek/seek_request = -1.0
-parameters/ResetTimeSeek/seek_request = -1.0
-
 [node name="CollisionShape2D" parent="Baker/Clickable" index="0"]
 position = Vector2(-18, -26)
 shape = SubResource("RectangleShape2D_cowkc")

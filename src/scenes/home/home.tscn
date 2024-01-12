@@ -63,6 +63,7 @@ position = Vector2(147, 228)
 UIIcon = ExtResource("7_3kghw")
 UILabel = "LABEL_BOOKS"
 InteractionLines = PackedStringArray("INT_BOOKS")
+SpellName = "TEST"
 
 [node name="Object" parent="Books" index="0"]
 texture = ExtResource("7_7bebi")

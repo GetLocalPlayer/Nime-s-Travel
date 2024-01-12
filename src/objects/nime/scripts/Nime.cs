@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class Nime : Node2D
 {
@@ -10,7 +11,7 @@ public partial class Nime : Node2D
 	[Signal] public delegate void InteractableTargetedEventHandler();
 	[Signal] public delegate void WalkTargetSetEventHandler();
 	[Signal] public delegate void SceneEnteredEventHandler();
-	[Signal] public delegate void MagicCastEventHandler(string magicName);
+	[Signal] public delegate void HornUsedEventHandler(char code);
 
 	[Export] public float MoveSpeed = 80;	
 
@@ -19,12 +20,11 @@ public partial class Nime : Node2D
 
 	public Interactable TargetedInteractable;
 
-	/* Код спелла а-ля rgg ggb и его название а-ля
-	LEVITATION, IGNITION. Заполняется по мере открытия
-	в мире. Все строки приводятся к нижнему регистру. */
-	public readonly Dictionary<string, string> SpellBook = new Dictionary<string, string>{
-		{"bbg", "levitation"}
-	};
+	/* Названия изученный заклинаний ака
+	LEVITATION, IGNITION. Существующие
+	заклинания можно посмотреть в
+	Autoload/Spells. */
+	[Export] public string[] LearntSpells;
 
 	/*
 	Функции ниже вызываются через GetTree().CallGroup("Player", ...).
@@ -42,8 +42,7 @@ public partial class Nime : Node2D
 		EmitSignal("WalkTargetSet");
 		if (TargetedInteractable != null)
 		{ 
-			GetTree().CallGroup("Interactables", "InteractableLeft", TargetedInteractable);
-			GetTree().CallGroup("UI", "InteractableLeft", TargetedInteractable);
+			GetTree().CallGroup("Interactables", "InteractableLeft", TargetedInteractable);			
 			TargetedInteractable = null;
 		}
 	}
@@ -57,7 +56,6 @@ public partial class Nime : Node2D
 			if (TargetedInteractable != null)
 			{
 				GetTree().CallGroup("Interactables", "InteractableLeft", TargetedInteractable);
-				GetTree().CallGroup("UI", "InteractableLeft", TargetedInteractable);
 			}
 			TargetedInteractable = i;
 			GetNode<NavigationAgent2D>("NavigationAgent2D").TargetPosition = TargetedInteractable.WayPoint;
@@ -74,8 +72,14 @@ public partial class Nime : Node2D
 	}
 
 	/* CallGroup("Player", ...) из класса UI. */
-	public void HornButtonClicked(string buttonName)
+	public void HornButtonClicked(char code)
 	{
-		EmitSignal("MagicCast", buttonName[0].ToString().ToLower());
+		EmitSignal("HornUsed", code);
+	}
+
+	public void InteractableSpellRevealed(string spellName)
+	{
+		if (!LearntSpells.Contains(spellName))
+			LearntSpells.Append(spellName);
 	}
 }

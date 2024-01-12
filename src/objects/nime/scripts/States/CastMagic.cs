@@ -1,68 +1,71 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class CastMagic : State
 {
-    public delegate void SpellCastHandler(State state, Node context, string spell);
-    public event SpellCastHandler SpellCast;
-
-    readonly static Dictionary<char, string> code2AnimName = new Dictionary<char, string>{
+    readonly static Dictionary<char, string> code2AnimName = new(){
         {'r', "CastRed"},
         {'g', "CastGreen"},
         {'b', "CastBlue"},
     };
 
     event AnimationMixer.AnimationFinishedEventHandler onAnimationFinished;
-    string spellBeingCast;
+    readonly List<char> codes = new();
     double exitTime;
 
     public override void Enter(Node context)
     {
-        spellBeingCast = "";
+        codes.Clear();
         var nime = (Nime)context;
+        exitTime = nime.SpellResetTime;
         nime.GetNode<Sprite2D>("MagicSpark").Show();
 		var animPlayer = nime.GetNode<AnimationPlayer>("AnimationPlayer");
-        var spellLength = 1;
+        var spells = nime.GetTree().Root.GetNode<Spells>("Spells");
+    
         onAnimationFinished = (animName) =>
         {
-            if (spellLength < spellBeingCast.Length)
+            var spellName = spells.GetSpellName(new string(codes.ToArray()));
+            if (nime.LearntSpells.Contains(spellName))
             {
-                animPlayer.Play(code2AnimName[spellBeingCast[spellLength]]);
-                spellLength++;
-            }
-            else if (nime.SpellBook.ContainsKey(spellBeingCast))
-            {
-                SpellCast?.Invoke(this, context, spellBeingCast);
+                Success(context, spellName);
                 EmitStateFinished(context);
             }
             else
                 exitTime = nime.SpellResetTime;
         };
         animPlayer.AnimationFinished += onAnimationFinished;
+        nime.GetTree().CallGroup("Interactables", "StartCastOnInteractable", nime.TargetedInteractable);
+    }
+
+    protected virtual void Success(Node context, string spellName)
+    {
+        var nime = context as Nime;
+        nime.GetTree().CallGroup("Interactables", "CastOnInteractable", nime.TargetedInteractable, spellName);
     }
 
     public override void Update(Node context, double delta)
     {
-        var nime = (Nime)context;
-		var animPlayer = nime.GetNode<AnimationPlayer>("AnimationPlayer");
+		var animPlayer = context.GetNode<AnimationPlayer>("AnimationPlayer");
         if (!animPlayer.IsPlaying())
         {
             exitTime -= delta;
             if (exitTime <= 0)
-            {
-                spellBeingCast = "";
                 EmitStateFinished(context);
-            }
         }
     }
 
-    public void AddSpell(Node context, string code)
+    public void AddCode(Node context, char code)
     {
-        var animPlayer = (context as Nime).GetNode<AnimationPlayer>("AnimationPlayer");
-        if (spellBeingCast == "" || !animPlayer.IsPlaying())
-            (context as Nime).GetNode<AnimationPlayer>("AnimationPlayer").Play(code2AnimName[code[0]]);
-        spellBeingCast += code;
+        var nime = context as Nime;
+        exitTime = nime.SpellResetTime;
+        var animPlayer = nime.GetNode<AnimationPlayer>("AnimationPlayer");
+        if (!codes.Any())
+            animPlayer.Play(code2AnimName[code]);
+        else
+            animPlayer.Queue(code2AnimName[code]);
+        codes.Add(code);
     }
 
     public override void Exit(Node context)
@@ -74,6 +77,7 @@ public partial class CastMagic : State
         nime.GetNode<Sprite2D>("MagicSpark").Hide();
         animPlayer.AnimationFinished -= onAnimationFinished;
         onAnimationFinished = null;
-        spellBeingCast = "";
+        codes.Clear();
+        nime.GetTree().CallGroup("Interactables", "StopCastOnInteractable", nime.TargetedInteractable);
     }
 }

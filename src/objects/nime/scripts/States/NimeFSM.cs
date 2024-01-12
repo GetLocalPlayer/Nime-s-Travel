@@ -44,27 +44,18 @@ public partial class NimeFSM : FiniteStateMachine
 		states["walkToInteractable"].StateFinished += (state, context) =>
 		{
 			SetState(states["idle"]);
-			tree.CallGroup("Interactables", "InteractableReached", nime.TargetedInteractable);
-			tree.CallGroup("UI", "InteractableReached", nime.TargetedInteractable);
 		};
 
-		nime.MagicCast += (spellCode) =>
+		nime.HornUsed += (code) =>
 		{
 			if (currentState != states["castMagic"])
 				SetState(states["castMagic"]);
-			(currentState as CastMagic).AddSpell(nime, spellCode);
-			tree.CallGroup("Interactables", "StartCastOnInteractable", nime.TargetedInteractable);
-		};
-
-		(states["castMagic"] as CastMagic).SpellCast += (state, context, spellBeingCast) =>
-		{
-			tree.CallGroup("Interactables", "CastOnInteractable", nime.TargetedInteractable, spellBeingCast);
+			(currentState as CastMagic).AddCode(nime, code);
 		};
 
 		states["castMagic"].StateFinished += (state, context) =>
 		{
 			SetState(states["idle"]);
-			tree.CallGroup("Interactables", "StopCastOnInteractable", nime.TargetedInteractable);
-		};
+		};	
 	}
 }
