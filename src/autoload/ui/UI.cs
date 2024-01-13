@@ -133,6 +133,16 @@ public partial class UI : Control
 		hornContainer.Hide();
 	}
 
+	public void BlockMouse()
+	{
+		cutsceneModal.Show();
+	}
+
+	public void UnblockMouse()
+	{
+		cutsceneModal.Hide();
+	}
+
 	async public void RevealSpell(string spellName)
 	{
 		var spells = GetTree().Root.GetNode<Spells>("Spells");

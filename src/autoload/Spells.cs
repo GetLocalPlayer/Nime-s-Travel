@@ -14,7 +14,7 @@ public partial class Spells: Node
 	это "-LEVITATION". Именя/коды обратных
 	заклинаний генерируются внутри _Ready(). */
 	readonly Dictionary<string, string> spellCodes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase){
-		{"TEST", "bbb"},
+		{"TEST", "bbbgggrrr"},
 		{"LEVITATION", "bbg"},
 		{"IGNITION", "gbrbg"},
 	};
@@ -31,7 +31,7 @@ public partial class Spells: Node
 		var revSpells = new Dictionary<string, string>();
 		foreach (var entry in spellCodes)
 		{
-			var reverse = entry.Value.Reverse().ToString();
+			var reverse = new string(entry.Value.Reverse().ToArray());
 			/* Нет смысла добавлять заклинания с 
 			симитричнвм кодом. */
 			if (reverse != entry.Value)

@@ -20,21 +20,31 @@ public partial class Nime : Node2D
 
 	public Interactable TargetedInteractable;
 
-	/* Названия изученный заклинаний ака
-	LEVITATION, IGNITION. Существующие
-	заклинания можно посмотреть в
-	Autoload/Spells. */
-	[Export] public string[] LearntSpells;
+	/* Названия изученных заклинаний ака LEVITATION, IGNITION.
+	Существующие заклинания можно посмотреть в Autoload/Spells.cs.
+	initialSpells используется только для указания известных
+	заклинаний на момент запуска сцены, через инспектор, в коде
+	используется список LearntSpells принимающий в себя
+	initialSpells в момент вызова _Ready. */
+	[Export] string[] initialSpells;
+	public List<string> LearntSpells = new();
 
-	/*
+    public override void _Ready()
+    {
+		if (initialSpells != null)
+        	LearntSpells.AddRange(initialSpells);
+    }
+
+    /*
 	Функции ниже вызываются через GetTree().CallGroup("Player", ...).
 	Поскольку в группе Player может быть только один нод Nime, я
 	не заморачиваюсь проверкой если текущий нод находится под
 	управлением игрока.
 	*/
 
-	/* CallGroup("Player", ...) вызывается из класса
+    /* CallGroup("Player", ...) вызывается из класса
 	Background. */
+
     public void BackgroundClicked(Vector2 newTarget)
 	{
 		var agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
@@ -80,6 +90,6 @@ public partial class Nime : Node2D
 	public void InteractableSpellRevealed(string spellName)
 	{
 		if (!LearntSpells.Contains(spellName))
-			LearntSpells.Append(spellName);
+			LearntSpells.Add(spellName);
 	}
 }

@@ -343,7 +343,7 @@ size_flags_horizontal = 3
 [node name="HSeparator" type="HSeparator" parent="MainContainer/InteractionContainer"]
 light_mask = 0
 visibility_layer = 0
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
 [node name="RichLabel" type="RichTextLabel" parent="MainContainer/InteractionContainer"]
@@ -353,15 +353,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("2_ukrsc")
-theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "Interaction text"
+text = "Interaction text line 1
+Line 2
+Line 3
+Line 4
+"
 scroll_active = false
 
 [node name="HSeparator2" type="HSeparator" parent="MainContainer/InteractionContainer"]
 light_mask = 0
 visibility_layer = 0
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
 [node name="VSeparator2" type="VSeparator" parent="MainContainer"]
@@ -379,6 +383,7 @@ visibility_layer = 0
 layout_mode = 2
 
 [node name="Button" type="Button" parent="MainContainer/InteractableContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0

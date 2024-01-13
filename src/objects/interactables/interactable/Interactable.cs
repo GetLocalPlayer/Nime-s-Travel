@@ -74,7 +74,7 @@ public partial class Interactable : Node2D
 	
 	/* Ссылка на нод интерфейса чтобы не
 	повторять GetTree().Root.GetNode... */
-	UI ui;
+	protected UI ui;
 	/* Флаг для запуска взаимодействия первой встречи. */
 	bool met = false;
 	/* Флаг сигнализирующий что Ниме дошла до точке
@@ -115,7 +115,7 @@ public partial class Interactable : Node2D
 	async public virtual void Clickable_OnClick()
 	{
 		var tree = GetTree();
-		GD.Print(isReached);
+		GD.Print($"isReached = {isReached}");
 		if (!isReached)
 			tree.CallGroup("Player", "InteractableClicked", this);
 		else
@@ -149,34 +149,31 @@ public partial class Interactable : Node2D
 		}
 	}
 
-	public virtual void OnFirstInteractionFinished()
+	protected virtual void OnFirstInteractionFinished()
 	{
 		GD.Print("First interaction finished");
 	}
 
-	public virtual void OnInspectionFinished()
+	protected virtual void OnInspectionFinished()
 	{
 		GD.Print("Inspection finished");
 	}
 
-	public virtual void OnInteractionFinished()
+	protected virtual void OnInteractionFinished()
 	{
 		GD.Print("Interaction finished");
 	}
 
-	public virtual void OnSpellRevealed()
+	protected virtual void OnSpellRevealed()
 	{
 		GD.Print("Spell revealed");
+		OnSpellCast(SpellName);
 	}
 
-	protected virtual void OnWrongSpellCast()
+	protected virtual void OnSpellCast(string spellName)
 	{
-		ui.RunInteraction(WrongSpellInteractionLines);
-	}
-
-	protected virtual void OnSpellCast()
-	{
-		ui.RunInteraction(SpellInteractionLines);
+		GD.Print("Spell is cast");
+		ui.RunInteraction(spellName == SpellName ? SpellInteractionLines : WrongSpellInteractionLines);
 	}
 
 	/* Функции ниже вызываются через GetTree().CallGroup("Interactables", ...) */
@@ -215,9 +212,6 @@ public partial class Interactable : Node2D
 	{
 		if (this != i) return;
 
-		if (SpellName == spellName)
-			OnSpellCast();
-		else
-			OnWrongSpellCast();
+		OnSpellCast(spellName);
 	}
 }
