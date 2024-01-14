@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cjvfm7im765jm"]
 
 [ext_resource type="Script" path="res://objects/SceneGate/SceneGate.cs" id="1_qx145"]
-[ext_resource type="Script" path="res://objects/interactables/interactable/PointDrawer.cs" id="2_m44lv"]
+[ext_resource type="Script" path="res://objects/interactable/PointDrawer.cs" id="2_m44lv"]
 [ext_resource type="Texture2D" uid="uid://bvsylpob8wqoj" path="res://objects/SceneGate/SpawnPoint.png" id="3_r4q22"]
 [ext_resource type="Texture2D" uid="uid://dd3b8ete0eqsi" path="res://objects/SceneGate/SpawnWayPoint.png" id="4_7kajk"]
 [ext_resource type="Texture2D" uid="uid://dg3gr5oodtdgt" path="res://objects/SceneGate/ExitWayPoint.png" id="5_nltm3"]

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b18inoo254ek0" path="res://scenes/bakerhouse/back.png" id="2_n7gu8"]
 [ext_resource type="Texture2D" uid="uid://cwl5jeumh4hg1" path="res://scenes/bakerhouse/back_z0.png" id="3_u7o2y"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="4_jxp4p"]
-[ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactables/interactable/interactable.tscn" id="5_ggtyw"]
+[ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactable/interactable.tscn" id="5_ggtyw"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="5_uupps"]
 [ext_resource type="Texture2D" uid="uid://c4ymlc2loys1x" path="res://scenes/bakerhouse/pony_ico.png" id="6_5jpup"]
 [ext_resource type="Shader" uid="uid://dkwxj81uqbq0k" path="res://scenes/bakerhouse/flameshader.tres" id="9_baq7i"]

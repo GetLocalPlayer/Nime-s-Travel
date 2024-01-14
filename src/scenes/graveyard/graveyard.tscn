@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_7732i"]
 [ext_resource type="Texture2D" uid="uid://drv4wl1d4y7vv" path="res://scenes/graveyard/back.png" id="2_kjyhk"]
-[ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactables/interactable/interactable.tscn" id="3_7fqlc"]
+[ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactable/interactable.tscn" id="3_7fqlc"]
 [ext_resource type="Texture2D" uid="uid://di2d3veko00no" path="res://scenes/graveyard/grave_ico.png" id="4_6cabc"]
 [ext_resource type="Texture2D" uid="uid://iaa21bgoia06" path="res://scenes/graveyard/grave1.png" id="5_003ir"]
 [ext_resource type="Texture2D" uid="uid://6lhr7omh6osp" path="res://scenes/graveyard/grave3.png" id="6_25ayc"]

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkog84x7t6k1"
-path="res://.godot/imported/WayPoint.png-f4884af2fe9cc4199616e2989f9609bf.ctex"
+path="res://.godot/imported/WayPoint.png-49cd9b96bf72b55320f8d32913874171.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/interactables/interactable/WayPoint.png"
-dest_files=["res://.godot/imported/WayPoint.png-f4884af2fe9cc4199616e2989f9609bf.ctex"]
+source_file="res://objects/interactable/WayPoint.png"
+dest_files=["res://.godot/imported/WayPoint.png-49cd9b96bf72b55320f8d32913874171.ctex"]
 
 [params]
 

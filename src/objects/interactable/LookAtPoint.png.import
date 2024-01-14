@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6asdnoqvos7x"
-path="res://.godot/imported/LookAtPoint.png-81478b5a826fb25884094cb39f5de828.ctex"
+path="res://.godot/imported/LookAtPoint.png-c2ba2f8c82074b4aff11e345d2a3604f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/interactables/interactable/LookAtPoint.png"
-dest_files=["res://.godot/imported/LookAtPoint.png-81478b5a826fb25884094cb39f5de828.ctex"]
+source_file="res://objects/interactable/LookAtPoint.png"
+dest_files=["res://.godot/imported/LookAtPoint.png-c2ba2f8c82074b4aff11e345d2a3604f.ctex"]
 
 [params]
 

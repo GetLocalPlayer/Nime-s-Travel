@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b06fnnrptobf1" path="res://scenes/alchemisthouse/back.png" id="2_ox0rm"]
 [ext_resource type="Texture2D" uid="uid://c4psxmk5nsxs1" path="res://scenes/alchemisthouse/back_z0.png" id="3_olxm5"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="4_ptc2y"]
-[ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactables/interactable/interactable.tscn" id="5_fieot"]
+[ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactable/interactable.tscn" id="5_fieot"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="5_xggcl"]
 [ext_resource type="Texture2D" uid="uid://bwujamettbkun" path="res://scenes/alchemisthouse/pony_ico.png" id="6_vktut"]
 [ext_resource type="Texture2D" uid="uid://c5btqb38q77nb" path="res://scenes/alchemisthouse/pony.png" id="7_o7twc"]

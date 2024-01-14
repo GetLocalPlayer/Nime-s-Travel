@@ -1,12 +1,12 @@
 [gd_scene load_steps=21 format=3 uid="uid://djk0tfvrgbpsp"]
 
 [ext_resource type="Texture2D" uid="uid://b652rv7d4j3m2" path="res://icon.svg" id="1_fj3kd"]
-[ext_resource type="Script" path="res://objects/interactables/interactable/Interactable.cs" id="1_wvcga"]
-[ext_resource type="Texture2D" uid="uid://dusg2hfpjqqt0" path="res://objects/interactables/interactable/magic.png" id="3_2202n"]
-[ext_resource type="Script" path="res://objects/interactables/interactable/PointDrawer.cs" id="3_uj84h"]
-[ext_resource type="Script" path="res://objects/interactables/interactable/MagicEffect.cs" id="4_fhcdu"]
-[ext_resource type="Texture2D" uid="uid://b6asdnoqvos7x" path="res://objects/interactables/interactable/LookAtPoint.png" id="4_p0b67"]
-[ext_resource type="Texture2D" uid="uid://bkog84x7t6k1" path="res://objects/interactables/interactable/WayPoint.png" id="5_1ggc6"]
+[ext_resource type="Script" path="res://objects/interactable/Interactable.cs" id="1_wvcga"]
+[ext_resource type="Texture2D" uid="uid://dusg2hfpjqqt0" path="res://objects/interactable/magic.png" id="3_2202n"]
+[ext_resource type="Script" path="res://objects/interactable/PointDrawer.cs" id="3_uj84h"]
+[ext_resource type="Script" path="res://objects/interactable/MagicEffect.cs" id="4_fhcdu"]
+[ext_resource type="Texture2D" uid="uid://b6asdnoqvos7x" path="res://objects/interactable/LookAtPoint.png" id="4_p0b67"]
+[ext_resource type="Texture2D" uid="uid://bkog84x7t6k1" path="res://objects/interactable/WayPoint.png" id="5_1ggc6"]
 
 [sub_resource type="Animation" id="Animation_ndpt8"]
 resource_name = "Appear"
