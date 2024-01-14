@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwl5jeumh4hg1"
-path="res://.godot/imported/back_z0.png-ba3e22dfc1a96da7e9af307242550f48.ctex"
+uid="uid://cak17g7nsa5gf"
+path="res://.godot/imported/stovezcover.png-8440c79df564f03b2e4cbd877829b40b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/bakerhouse/back_z0.png"
-dest_files=["res://.godot/imported/back_z0.png-ba3e22dfc1a96da7e9af307242550f48.ctex"]
+source_file="res://scenes/bakerhouse/stovezcover.png"
+dest_files=["res://.godot/imported/stovezcover.png-8440c79df564f03b2e4cbd877829b40b.ctex"]
 
 [params]
 

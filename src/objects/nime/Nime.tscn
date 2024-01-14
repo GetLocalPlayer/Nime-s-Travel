@@ -421,5 +421,6 @@ stream = ExtResource("18_uc1nq")
 position = Vector2(0, -148.92)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
+visible = false
 position = Vector2(0, 55.855)
 shape = SubResource("RectangleShape2D_4hbnr")

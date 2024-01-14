@@ -1,19 +1,43 @@
-[gd_scene load_steps=19 format=3 uid="uid://b15mn1d0al221"]
+[gd_scene load_steps=20 format=3 uid="uid://b15mn1d0al221"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_0qp4l"]
 [ext_resource type="Texture2D" uid="uid://b18inoo254ek0" path="res://scenes/bakerhouse/back.png" id="2_n7gu8"]
-[ext_resource type="Texture2D" uid="uid://cwl5jeumh4hg1" path="res://scenes/bakerhouse/back_z0.png" id="3_u7o2y"]
+[ext_resource type="Texture2D" uid="uid://cwl5jeumh4hg1" path="res://scenes/bakerhouse/doorzcover.png" id="3_u7o2y"]
+[ext_resource type="Texture2D" uid="uid://cak17g7nsa5gf" path="res://scenes/bakerhouse/stovezcover.png" id="4_1bcw8"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="4_jxp4p"]
 [ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactable/interactable.tscn" id="5_ggtyw"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="5_uupps"]
 [ext_resource type="Texture2D" uid="uid://c4ymlc2loys1x" path="res://scenes/bakerhouse/pony_ico.png" id="6_5jpup"]
+[ext_resource type="Texture2D" uid="uid://cg7oyotj61up3" path="res://scenes/bakerhouse/pony.png" id="7_sa6lb"]
 [ext_resource type="Shader" uid="uid://dkwxj81uqbq0k" path="res://scenes/bakerhouse/flameshader.tres" id="9_baq7i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brmn3"]
 size = Vector2(953, 510)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cowkc"]
-size = Vector2(94, 152)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvj3t"]
+size = Vector2(87, 152)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p0aub"]
+noise_type = 0
+frequency = 0.0034
+offset = Vector3(338.03, 0.95, 138.89)
+fractal_type = 2
+fractal_octaves = 2
+fractal_lacunarity = 2.12
+fractal_gain = 0.595
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m7yhw"]
+height = 400
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_p0aub")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t6ofg"]
+shader = ExtResource("9_baq7i")
+shader_parameter/Texture2DParameter = SubResource("NoiseTexture2D_m7yhw")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lpofn"]
+size = Vector2(68, 78)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_v5l6m"]
 vertices = PackedVector2Array(-570, 240, -446, 262, -447, 262, -869, 232, -569, 239, -575, 250, -870, 242, -446, 276, -445, 276, -181, 298, -180, 298, 90, 303, 90, 310, -181, 310, -353, 300, -348, 288)
@@ -22,43 +46,10 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-878, 222, -568, 230, -
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7oyxo"]
-size = Vector2(87.25, 125)
+size = Vector2(53.625, 71.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bvxqt"]
-size = Vector2(196, 518)
-
-[sub_resource type="Gradient" id="Gradient_iyqvn"]
-offsets = PackedFloat32Array(0, 0.56051, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.579618, 0.579618, 0.579618, 1, 1, 1, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_nq383"]
-noise_type = 3
-seed = 6
-frequency = 0.006
-fractal_type = 2
-fractal_octaves = 3
-fractal_lacunarity = 1.4
-fractal_gain = 0.91
-domain_warp_type = 2
-domain_warp_amplitude = 18.285
-domain_warp_frequency = -3.155
-domain_warp_fractal_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vdjem"]
-width = 256
-height = 256
-seamless = true
-seamless_blend_skirt = 1.0
-color_ramp = SubResource("Gradient_iyqvn")
-noise = SubResource("FastNoiseLite_nq383")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvbah"]
-shader = ExtResource("9_baq7i")
-shader_parameter/Texture2DParameter = SubResource("NoiseTexture2D_vdjem")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ygbhv"]
-size = Vector2(64, 64)
-orientation = 2
+size = Vector2(108, 302.75)
 
 [node name="AlchemistHouse" type="Node2D"]
 y_sort_enabled = true
@@ -66,37 +57,81 @@ metadata/_edit_lock_ = true
 
 [node name="Background" parent="." instance=ExtResource("1_0qp4l")]
 texture = ExtResource("2_n7gu8")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" parent="Background/Clickable" index="0"]
+visible = false
 position = Vector2(386, 246)
 shape = SubResource("RectangleShape2D_brmn3")
 
-[node name="BackZ0" type="Sprite2D" parent="."]
+[node name="DoorZCover" type="Sprite2D" parent="."]
 position = Vector2(0, 454)
 texture = ExtResource("3_u7o2y")
 centered = false
 offset = Vector2(0, -339)
+metadata/_edit_lock_ = true
+
+[node name="Stovezcover" type="Sprite2D" parent="."]
+position = Vector2(629, 418)
+texture = ExtResource("4_1bcw8")
+centered = false
+offset = Vector2(0, -209)
+metadata/_edit_lock_ = true
+
+[node name="Interactables" type="Node2D" parent="."]
+
+[node name="Baker" parent="Interactables" instance=ExtResource("5_ggtyw")]
+position = Vector2(535, 342)
+UIIcon = ExtResource("6_5jpup")
+UILabel = "LABEL_BAKER"
+InteractionLines = PackedStringArray("INT_BAKER")
+metadata/_edit_lock_ = true
+
+[node name="Object" parent="Interactables/Baker" index="0"]
+texture = ExtResource("7_sa6lb")
+
+[node name="MagicEffect" parent="Interactables/Baker" index="1"]
+position = Vector2(-0.999992, 15)
+scale = Vector2(1.32, 1.88)
+
+[node name="CollisionShape2D" parent="Interactables/Baker/Clickable" index="0"]
+visible = false
+position = Vector2(-2.5, 12)
+shape = SubResource("RectangleShape2D_nvj3t")
+
+[node name="LookAtPoint" parent="Interactables/Baker" index="3"]
+position = Vector2(-13, 15)
+
+[node name="WayPoint" parent="Interactables/Baker" index="4"]
+position = Vector2(-116, 104)
+
+[node name="Fire" parent="Interactables" instance=ExtResource("5_ggtyw")]
+position = Vector2(682, 305)
+metadata/_edit_lock_ = true
+
+[node name="Object" parent="Interactables/Fire" index="0"]
+material = SubResource("ShaderMaterial_t6ofg")
+position = Vector2(0.625034, -7.00001)
+scale = Vector2(0.650391, 0.875)
+
+[node name="MagicEffect" parent="Interactables/Fire" index="1"]
+position = Vector2(2, 9)
+
+[node name="CollisionShape2D" parent="Interactables/Fire/Clickable" index="0"]
+visible = false
+position = Vector2(-6, 8)
+shape = SubResource("RectangleShape2D_lpofn")
+
+[node name="LookAtPoint" parent="Interactables/Fire" index="3"]
+visible = false
+
+[node name="WayPoint" parent="Interactables/Fire" index="4"]
+visible = false
 
 [node name="Nime" parent="." instance=ExtResource("4_jxp4p")]
 position = Vector2(379, 296)
 scale = Vector2(0.5, 0.5)
 MoveSpeed = 150.0
-
-[node name="Baker" parent="." instance=ExtResource("5_ggtyw")]
-position = Vector2(570, 365)
-UIIcon = ExtResource("6_5jpup")
-UILabel = "LABEL_BAKER"
-InteractionLines = PackedStringArray("INT_BAKER")
-
-[node name="CollisionShape2D" parent="Baker/Clickable" index="0"]
-position = Vector2(-18, -26)
-shape = SubResource("RectangleShape2D_cowkc")
-
-[node name="LookAtPoint" parent="Baker" index="3"]
-position = Vector2(-13, 15)
-
-[node name="WayPoint" parent="Baker" index="4"]
-position = Vector2(-149, 83)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(380, 295)
@@ -105,33 +140,26 @@ navigation_polygon = SubResource("NavigationPolygon_v5l6m")
 
 [node name="NeighborhoodBakerHouseGate" parent="." instance=ExtResource("5_uupps")]
 position = Vector2(-51, 358)
-scale = Vector2(0.5, 0.5)
 ToScenePath = "res://scenes/neighborhood/neighborhood.tscn"
 
 [node name="SpawnPoint" parent="NeighborhoodBakerHouseGate" index="0"]
-position = Vector2(174, 114)
+position = Vector2(57, 53)
 
 [node name="SpawnWayPoint" parent="NeighborhoodBakerHouseGate" index="1"]
-position = Vector2(418, 144)
+position = Vector2(170, 60)
 
 [node name="ExitWayPoint" parent="NeighborhoodBakerHouseGate" index="2"]
-position = Vector2(-44, 116)
+position = Vector2(3, 55)
 
 [node name="CollisionShape2D" parent="NeighborhoodBakerHouseGate/Collider" index="0"]
-position = Vector2(-8, 32)
+position = Vector2(-51, 23)
 shape = SubResource("RectangleShape2D_7oyxo")
 
 [node name="CollisionShape2D" parent="NeighborhoodBakerHouseGate/Clickable" index="0"]
-position = Vector2(192, -93)
+position = Vector2(98, -65.375)
 shape = SubResource("RectangleShape2D_bvxqt")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-material = SubResource("ShaderMaterial_hvbah")
-position = Vector2(680, 298)
-rotation = 3.14159
-scale = Vector2(0.960545, 1.41023)
-mesh = SubResource("PlaneMesh_ygbhv")
-
 [editable path="Background"]
-[editable path="Baker"]
+[editable path="Interactables/Baker"]
+[editable path="Interactables/Fire"]
 [editable path="NeighborhoodBakerHouseGate"]

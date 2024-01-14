@@ -17,7 +17,6 @@ script = ExtResource("1_qx145")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(-122, 114)
-scale = Vector2(0.75, 0.75)
 gizmo_extents = 24.4
 script = ExtResource("2_m44lv")
 Texture = ExtResource("3_r4q22")
@@ -26,7 +25,6 @@ Size = Vector2(72, 62)
 
 [node name="SpawnWayPoint" type="Marker2D" parent="."]
 position = Vector2(19, 62)
-scale = Vector2(0.75, 0.75)
 script = ExtResource("2_m44lv")
 Texture = ExtResource("4_7kajk")
 Offset = Vector2(-24, -62)
@@ -34,7 +32,6 @@ Size = Vector2(48, 62)
 
 [node name="ExitWayPoint" type="Marker2D" parent="."]
 position = Vector2(-19, -73)
-scale = Vector2(0.75, 0.75)
 gizmo_extents = 55.5
 script = ExtResource("2_m44lv")
 Texture = ExtResource("5_nltm3")
