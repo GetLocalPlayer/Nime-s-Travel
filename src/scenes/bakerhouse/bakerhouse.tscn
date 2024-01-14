@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b15mn1d0al221"]
+[gd_scene load_steps=21 format=3 uid="uid://b15mn1d0al221"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_0qp4l"]
 [ext_resource type="Texture2D" uid="uid://b18inoo254ek0" path="res://scenes/bakerhouse/back.png" id="2_n7gu8"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="5_uupps"]
 [ext_resource type="Texture2D" uid="uid://c4ymlc2loys1x" path="res://scenes/bakerhouse/pony_ico.png" id="6_5jpup"]
 [ext_resource type="Texture2D" uid="uid://cg7oyotj61up3" path="res://scenes/bakerhouse/pony.png" id="7_sa6lb"]
+[ext_resource type="Texture2D" uid="uid://cebehqmffxefg" path="res://scenes/bakerhouse/stove_ico.png" id="8_nagnu"]
 [ext_resource type="Shader" uid="uid://dkwxj81uqbq0k" path="res://scenes/bakerhouse/flameshader.tres" id="9_baq7i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brmn3"]
@@ -85,6 +86,8 @@ position = Vector2(535, 342)
 UIIcon = ExtResource("6_5jpup")
 UILabel = "LABEL_BAKER"
 InteractionLines = PackedStringArray("INT_BAKER")
+SpellInteractionLines = PackedStringArray("SPELL_INT_PONY_DEFAULT")
+WrongSpellInteractionLines = PackedStringArray("WRONG_SPELL_INT_PONY_DEFAULT")
 metadata/_edit_lock_ = true
 
 [node name="Object" parent="Interactables/Baker" index="0"]
@@ -107,12 +110,17 @@ position = Vector2(-116, 104)
 
 [node name="Fire" parent="Interactables" instance=ExtResource("5_ggtyw")]
 position = Vector2(682, 305)
+UIIcon = ExtResource("8_nagnu")
+UILabel = "LABEL_STOVE"
+SpellName = "IGNITION"
+Autocast = true
+SpellInteractionLines = PackedStringArray("SPELL_INT_STOVE_1", "SPELL_INT_STOVE_2")
 metadata/_edit_lock_ = true
 
 [node name="Object" parent="Interactables/Fire" index="0"]
 material = SubResource("ShaderMaterial_t6ofg")
-position = Vector2(0.625034, -7.00001)
-scale = Vector2(0.650391, 0.875)
+position = Vector2(1.12501, -2.00002)
+scale = Vector2(0.642579, 0.796875)
 
 [node name="MagicEffect" parent="Interactables/Fire" index="1"]
 position = Vector2(2, 9)

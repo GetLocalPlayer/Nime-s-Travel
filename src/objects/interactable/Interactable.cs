@@ -167,6 +167,7 @@ public partial class Interactable : Node2D
 	protected virtual void OnSpellRevealed()
 	{
 		GD.Print("Spell revealed");
+		GetTree().CallGroup("Player", "InteractableSpellRevealed", SpellName);
 		OnSpellCast(SpellName);
 	}
 

@@ -114,9 +114,8 @@ operator = 2
 operator = 2
 
 [sub_resource type="Gradient" id="Gradient_h1630"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.243028, 0.450199, 0.677291, 0.74502, 1)
-colors = PackedColorArray(0.18968, 0.0387853, 8.45417e-05, 1, 0, 0, 0, 1, 0.133101, 0.143994, 0.146787, 1, 0.38681, 0.388451, 0.388871, 1, 0.463, 0.463, 0.463, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.177966, 0.34322, 0.427966, 0.508475, 0.580508, 0.745763, 0.822034, 1)
+colors = PackedColorArray(0.18968, 0.0387853, 8.45417e-05, 1, 0.018968, 0.00387853, 8.45418e-06, 1, 0, 0, 0, 1, 0.0102135, 0.00208844, 4.55225e-06, 1, 0.30829, 0.320859, 0.324082, 1, 0.133101, 0.143994, 0.146787, 1, 0.38681, 0.388451, 0.388871, 1, 0.463, 0.463, 0.463, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2byrg"]
 gradient = SubResource("Gradient_h1630")
@@ -241,7 +240,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(36.0943, -647.77)
+graph_offset = Vector2(212.574, -570.637)
 mode = 1
 modes/blend = 1
 flags/light_only = false
