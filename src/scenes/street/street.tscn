@@ -12,17 +12,17 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(
 outlines = Array[PackedVector2Array]([PackedVector2Array(-63, 409, 52, 427, 229, 437, 278, 431, 273, 404, 279, 386, 290, 373, 304, 363, 334, 342, 378, 329, 430, 329, 431, 351, 385, 350, 345, 362, 324, 379, 322, 390, 329, 410, 343, 425, 436, 432, 532, 429, 626, 429, 753, 433, 877, 444, 879, 467, 737, 454, 620, 453, 528, 451, 438, 455, 331, 456, 296, 455, 229, 458, 45, 449, -76, 431)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_urnuw"]
-size = Vector2(44, 60)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5w56"]
-size = Vector2(108.25, 98.5)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbv5w"]
 size = Vector2(58.5, 62)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1n0bq"]
 size = Vector2(62.5, 93)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urnuw"]
+size = Vector2(44, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5w56"]
+size = Vector2(108.25, 98.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2144"]
 size = Vector2(50, 50)
@@ -39,6 +39,7 @@ metadata/_edit_lock_ = true
 texture = ExtResource("2_bu2jx")
 
 [node name="CollisionShape2D" parent="Background/Clickable" index="0"]
+visible = false
 position = Vector2(394.25, 241.5)
 
 [node name="HouseZ" type="Sprite2D" parent="."]
@@ -54,70 +55,75 @@ scale = Vector2(0.26, 0.26)
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_l0g0j")
 
-[node name="HomeStreetGate" parent="." instance=ExtResource("4_lhdlr")]
-position = Vector2(449, 213)
-ToScenePath = "res://scenes/home/home.tscn"
+[node name="Gates" type="Node2D" parent="."]
 
-[node name="SpawnPoint" parent="HomeStreetGate" index="0"]
-position = Vector2(-67, 127)
-
-[node name="SpawnWayPoint" parent="HomeStreetGate" index="1"]
-position = Vector2(-124, 150)
-
-[node name="ExitWayPoint" parent="HomeStreetGate" index="2"]
-position = Vector2(-21, 126)
-
-[node name="CollisionShape2D" parent="HomeStreetGate/Collider" index="0"]
-position = Vector2(-12, 80)
-shape = SubResource("RectangleShape2D_urnuw")
-
-[node name="CollisionShape2D" parent="HomeStreetGate/Clickable" index="0"]
-position = Vector2(-46.125, 95.75)
-shape = SubResource("RectangleShape2D_i5w56")
-
-[node name="StreetNeighborhoodGate" parent="." instance=ExtResource("4_lhdlr")]
+[node name="ToStreetToNeighborhood" parent="Gates" instance=ExtResource("4_lhdlr")]
+unique_name_in_owner = true
 position = Vector2(946, 417)
 ToScenePath = "res://scenes/neighborhood/neighborhood.tscn"
 
-[node name="SpawnPoint" parent="StreetNeighborhoodGate" index="0"]
+[node name="SpawnPoint" parent="Gates/ToStreetToNeighborhood" index="0"]
 position = Vector2(-137, 33)
 
-[node name="SpawnWayPoint" parent="StreetNeighborhoodGate" index="1"]
+[node name="SpawnWayPoint" parent="Gates/ToStreetToNeighborhood" index="1"]
 position = Vector2(-200, 26)
 
-[node name="ExitWayPoint" parent="StreetNeighborhoodGate" index="2"]
+[node name="ExitWayPoint" parent="Gates/ToStreetToNeighborhood" index="2"]
 position = Vector2(-80, 37)
 
-[node name="CollisionShape2D" parent="StreetNeighborhoodGate/Collider" index="0"]
+[node name="CollisionShape2D" parent="Gates/ToStreetToNeighborhood/Collider" index="0"]
 position = Vector2(-74, -9)
 shape = SubResource("RectangleShape2D_cbv5w")
 
-[node name="CollisionShape2D" parent="StreetNeighborhoodGate/Clickable" index="0"]
+[node name="CollisionShape2D" parent="Gates/ToStreetToNeighborhood/Clickable" index="0"]
 position = Vector2(-178.75, 17)
 shape = SubResource("RectangleShape2D_1n0bq")
 
-[node name="StreetGraveyardGate" parent="." instance=ExtResource("4_lhdlr")]
+[node name="ToStreetToHome" parent="Gates" instance=ExtResource("4_lhdlr")]
+unique_name_in_owner = true
+position = Vector2(449, 213)
+ToScenePath = "res://scenes/home/home.tscn"
+
+[node name="SpawnPoint" parent="Gates/ToStreetToHome" index="0"]
+position = Vector2(-67, 127)
+
+[node name="SpawnWayPoint" parent="Gates/ToStreetToHome" index="1"]
+position = Vector2(-124, 150)
+
+[node name="ExitWayPoint" parent="Gates/ToStreetToHome" index="2"]
+position = Vector2(-21, 126)
+
+[node name="CollisionShape2D" parent="Gates/ToStreetToHome/Collider" index="0"]
+position = Vector2(-12, 80)
+shape = SubResource("RectangleShape2D_urnuw")
+
+[node name="CollisionShape2D" parent="Gates/ToStreetToHome/Clickable" index="0"]
+position = Vector2(-46.125, 95.75)
+shape = SubResource("RectangleShape2D_i5w56")
+
+[node name="ToStreetToGraveyard" parent="Gates" instance=ExtResource("4_lhdlr")]
+unique_name_in_owner = true
 position = Vector2(-146, 401)
 ToScenePath = "res://scenes/graveyard/graveyard.tscn"
 
-[node name="SpawnPoint" parent="StreetGraveyardGate" index="0"]
+[node name="SpawnPoint" parent="Gates/ToStreetToGraveyard" index="0"]
 position = Vector2(132, 28)
 
-[node name="SpawnWayPoint" parent="StreetGraveyardGate" index="1"]
+[node name="SpawnWayPoint" parent="Gates/ToStreetToGraveyard" index="1"]
 position = Vector2(196, 37)
 
-[node name="ExitWayPoint" parent="StreetGraveyardGate" index="2"]
+[node name="ExitWayPoint" parent="Gates/ToStreetToGraveyard" index="2"]
 position = Vector2(89, 21)
 
-[node name="CollisionShape2D" parent="StreetGraveyardGate/Collider" index="0"]
+[node name="CollisionShape2D" parent="Gates/ToStreetToGraveyard/Collider" index="0"]
 position = Vector2(73, -5)
 shape = SubResource("RectangleShape2D_q2144")
 
-[node name="CollisionShape2D" parent="StreetGraveyardGate/Clickable" index="0"]
+[node name="CollisionShape2D" parent="Gates/ToStreetToGraveyard/Clickable" index="0"]
 position = Vector2(171, 18)
 shape = SubResource("RectangleShape2D_levci")
 
 [editable path="Background"]
-[editable path="HomeStreetGate"]
-[editable path="StreetNeighborhoodGate"]
-[editable path="StreetGraveyardGate"]
+[editable path="Gates/ToStreetToNeighborhood"]
+[editable path="Gates/ToStreetToHome"]
+[editable path="Gates/ToStreetToGraveyard"]

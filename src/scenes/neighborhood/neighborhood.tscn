@@ -12,11 +12,8 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(
 outlines = Array[PackedVector2Array]([PackedVector2Array(-102, 421, 39, 431, 178, 434, 318, 431, 371, 422, 382, 399, 397, 353, 399, 305, 423, 303, 428, 354, 424, 395, 435, 421, 492, 429, 535, 433, 567, 433, 592, 418, 614, 398, 641, 394, 737, 396, 736, 419, 648, 417, 625, 419, 606, 435, 573, 455, 544, 454, 492, 450, 438, 444, 382, 442, 313, 455, 164, 455, 29, 452, -111, 443)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcbak"]
-size = Vector2(58.5, 62)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8smgn"]
-size = Vector2(80, 108)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1e5du"]
+size = Vector2(47, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2qxsc"]
 size = Vector2(58.5, 62)
@@ -24,8 +21,11 @@ size = Vector2(58.5, 62)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btpda"]
 size = Vector2(66, 98)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1e5du"]
-size = Vector2(47, 64)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcbak"]
+size = Vector2(58.5, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8smgn"]
+size = Vector2(80, 108)
 
 [node name="Neighborhood" type="Node2D"]
 z_as_relative = false
@@ -52,71 +52,77 @@ scale = Vector2(0.295, 0.295)
 z_index = 1
 navigation_polygon = SubResource("NavigationPolygon_tvj8o")
 
-[node name="StreetNeighborhoodGate" parent="." instance=ExtResource("5_humm4")]
-position = Vector2(-99, 413)
-ToScenePath = "res://scenes/street/street.tscn"
+[node name="Gates" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
-[node name="SpawnPoint" parent="StreetNeighborhoodGate" index="0"]
-position = Vector2(87, 25)
-
-[node name="SpawnWayPoint" parent="StreetNeighborhoodGate" index="1"]
-position = Vector2(167, 29)
-
-[node name="ExitWayPoint" parent="StreetNeighborhoodGate" index="2"]
-position = Vector2(26, 22)
-
-[node name="CollisionShape2D" parent="StreetNeighborhoodGate/Collider" index="0"]
-position = Vector2(7, -20)
-shape = SubResource("RectangleShape2D_kcbak")
-
-[node name="CollisionShape2D" parent="StreetNeighborhoodGate/Clickable" index="0"]
-position = Vector2(137, 2)
-shape = SubResource("RectangleShape2D_8smgn")
-
-[node name="NeighborhoodAlchemistHouseGate" parent="." instance=ExtResource("5_humm4")]
-position = Vector2(410, 219)
-ToScenePath = "res://scenes/alchemisthouse/alchemisthouse.tscn"
-
-[node name="SpawnPoint" parent="NeighborhoodAlchemistHouseGate" index="0"]
-position = Vector2(3, 130)
-
-[node name="SpawnWayPoint" parent="NeighborhoodAlchemistHouseGate" index="1"]
-position = Vector2(0, 162)
-
-[node name="ExitWayPoint" parent="NeighborhoodAlchemistHouseGate" index="2"]
-position = Vector2(2, 96)
-
-[node name="CollisionShape2D" parent="NeighborhoodAlchemistHouseGate/Collider" index="0"]
-position = Vector2(2, 40)
-shape = SubResource("RectangleShape2D_2qxsc")
-
-[node name="CollisionShape2D" parent="NeighborhoodAlchemistHouseGate/Clickable" index="0"]
-position = Vector2(-3, 80)
-shape = SubResource("RectangleShape2D_btpda")
-
-[node name="NeighborhoodBakerHouseGate" parent="." instance=ExtResource("5_humm4")]
+[node name="ToBakerToNeighborhood" parent="Gates" instance=ExtResource("5_humm4")]
+unique_name_in_owner = true
 position = Vector2(735, 352)
 ToScenePath = "res://scenes/bakerhouse/bakerhouse.tscn"
 
-[node name="SpawnPoint" parent="NeighborhoodBakerHouseGate" index="0"]
+[node name="SpawnPoint" parent="Gates/ToBakerToNeighborhood" index="0"]
 position = Vector2(-52, 54)
 
-[node name="SpawnWayPoint" parent="NeighborhoodBakerHouseGate" index="1"]
+[node name="SpawnWayPoint" parent="Gates/ToBakerToNeighborhood" index="1"]
 position = Vector2(-114, 57)
 
-[node name="ExitWayPoint" parent="NeighborhoodBakerHouseGate" index="2"]
+[node name="ExitWayPoint" parent="Gates/ToBakerToNeighborhood" index="2"]
 position = Vector2(-11, 54)
 
-[node name="CollisionShape2D" parent="NeighborhoodBakerHouseGate/Collider" index="0"]
+[node name="CollisionShape2D" parent="Gates/ToBakerToNeighborhood/Collider" index="0"]
 z_index = 1
 position = Vector2(17.5, 16)
 shape = SubResource("RectangleShape2D_1e5du")
 
-[node name="CollisionShape2D" parent="NeighborhoodBakerHouseGate/Clickable" index="0"]
+[node name="CollisionShape2D" parent="Gates/ToBakerToNeighborhood/Clickable" index="0"]
 z_index = 1
 position = Vector2(-30, -2)
 
+[node name="ToAlchemistToNeighborhood" parent="Gates" instance=ExtResource("5_humm4")]
+unique_name_in_owner = true
+position = Vector2(410, 219)
+ToScenePath = "res://scenes/alchemisthouse/alchemisthouse.tscn"
+
+[node name="SpawnPoint" parent="Gates/ToAlchemistToNeighborhood" index="0"]
+position = Vector2(-3, 147)
+
+[node name="SpawnWayPoint" parent="Gates/ToAlchemistToNeighborhood" index="1"]
+position = Vector2(-6, 178)
+
+[node name="ExitWayPoint" parent="Gates/ToAlchemistToNeighborhood" index="2"]
+position = Vector2(2, 96)
+
+[node name="CollisionShape2D" parent="Gates/ToAlchemistToNeighborhood/Collider" index="0"]
+position = Vector2(0, 25)
+shape = SubResource("RectangleShape2D_2qxsc")
+
+[node name="CollisionShape2D" parent="Gates/ToAlchemistToNeighborhood/Clickable" index="0"]
+position = Vector2(-3, 80)
+shape = SubResource("RectangleShape2D_btpda")
+
+[node name="ToStreetToNeighborhood" parent="Gates" instance=ExtResource("5_humm4")]
+unique_name_in_owner = true
+position = Vector2(-99, 413)
+ToScenePath = "res://scenes/street/street.tscn"
+
+[node name="SpawnPoint" parent="Gates/ToStreetToNeighborhood" index="0"]
+position = Vector2(87, 25)
+
+[node name="SpawnWayPoint" parent="Gates/ToStreetToNeighborhood" index="1"]
+position = Vector2(167, 29)
+
+[node name="ExitWayPoint" parent="Gates/ToStreetToNeighborhood" index="2"]
+position = Vector2(26, 22)
+
+[node name="CollisionShape2D" parent="Gates/ToStreetToNeighborhood/Collider" index="0"]
+position = Vector2(7, -20)
+shape = SubResource("RectangleShape2D_kcbak")
+
+[node name="CollisionShape2D" parent="Gates/ToStreetToNeighborhood/Clickable" index="0"]
+position = Vector2(137, 2)
+shape = SubResource("RectangleShape2D_8smgn")
+
 [editable path="Background"]
-[editable path="StreetNeighborhoodGate"]
-[editable path="NeighborhoodAlchemistHouseGate"]
-[editable path="NeighborhoodBakerHouseGate"]
+[editable path="Gates/ToBakerToNeighborhood"]
+[editable path="Gates/ToAlchemistToNeighborhood"]
+[editable path="Gates/ToStreetToNeighborhood"]

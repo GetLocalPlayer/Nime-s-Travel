@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://bdnwor80y7kvj"]
+[gd_scene load_steps=24 format=3 uid="uid://bdnwor80y7kvj"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_7732i"]
 [ext_resource type="Texture2D" uid="uid://drv4wl1d4y7vv" path="res://scenes/graveyard/back.png" id="2_kjyhk"]
 [ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactable/interactable.tscn" id="3_7fqlc"]
 [ext_resource type="Texture2D" uid="uid://di2d3veko00no" path="res://scenes/graveyard/grave_ico.png" id="4_6cabc"]
 [ext_resource type="Texture2D" uid="uid://iaa21bgoia06" path="res://scenes/graveyard/grave1.png" id="5_003ir"]
+[ext_resource type="PackedScene" uid="uid://b233gcxrlq2nd" path="res://objects/Scaler/Scaler.tscn" id="5_ythtj"]
 [ext_resource type="Texture2D" uid="uid://6lhr7omh6osp" path="res://scenes/graveyard/grave3.png" id="6_25ayc"]
 [ext_resource type="Texture2D" uid="uid://cwecqo7mfree2" path="res://scenes/graveyard/clover_engraving.png" id="6_n0aij"]
 [ext_resource type="Script" path="res://scenes/graveyard/CloverGrave.cs" id="7_eko1s"]
@@ -25,10 +26,16 @@ size = Vector2(52, 52)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acrgy"]
 size = Vector2(54, 57)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2mtb"]
+size = Vector2(60.5, 53)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ttna3"]
+size = Vector2(71, 148)
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_luotr"]
-vertices = PackedVector2Array(147, -148, 146, -148, 194, -152, 190, -149, 43, -113, 54, -115, 55, -115, -4, -92, -5, -93, 283, -138, 372, -105, 372, -102, 279, -133, 278, -134, 237, -146, 233, -143, 232, -143, 147, -146, 81, -132, 87, -130, -331, -116, -332, -120, -275, -135, -279, -128, -221, -134, -278, -128, -215, -135, -177, -122, -166, -120, -133, -97, -127, -100, -77, -88, -77, -91, -12, -96)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13), PackedInt32Array(14, 9, 13, 15, 2), PackedInt32Array(2, 15, 16, 3), PackedInt32Array(0, 3, 17), PackedInt32Array(18, 0, 17, 19), PackedInt32Array(18, 19, 5, 4), PackedInt32Array(20, 21, 22, 23), PackedInt32Array(24, 25, 23, 22, 26), PackedInt32Array(27, 24, 26, 28), PackedInt32Array(29, 27, 28, 30), PackedInt32Array(31, 29, 30, 32), PackedInt32Array(8, 31, 32, 33), PackedInt32Array(8, 33, 4)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(39, -122, 78, -142, 145, -158, 195, -163, 239, -156, 285, -148, 382, -112, 382, -89, 276, -124, 231, -133, 190, -139, 149, -136, 90, -121, 58, -106, -4, -83, -79, -78, -137, -88, -181, -113, -222, -124, -277, -118, -339, -104, -346, -128, -277, -145, -212, -145, -163, -130, -124, -110, -76, -101, -14, -106)])
+vertices = PackedVector2Array(151, -166, 202, -165, 201, -165, 372, -105, 372, -102, 281, -135, 283, -135, 288, -134, 241, -159, 238, -158, 195, -163, 148, -163, 87, -153, 86, -152, 45, -130, 49, -129, -8, -81, -7, -83, -73, -72, -73, -68, -279, -142, -332, -117, -333, -122, -276, -145, -221, -148, -216, -150, -173, -123, -169, -125, -130, -76, -129, -80)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5, 6, 7), PackedInt32Array(8, 7, 6, 9), PackedInt32Array(2, 8, 9, 10), PackedInt32Array(0, 2, 10, 11), PackedInt32Array(12, 0, 11, 13), PackedInt32Array(14, 12, 13, 15), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 17, 16, 19), PackedInt32Array(20, 21, 22, 23), PackedInt32Array(24, 20, 23, 25), PackedInt32Array(26, 24, 25, 27), PackedInt32Array(28, 26, 27, 29), PackedInt32Array(18, 19, 28, 29)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(40, -139, 84, -163, 150, -177, 202, -175, 245, -169, 292, -143, 382, -112, 382, -89, 278, -126, 235, -148, 194, -153, 149, -153, 90, -142, 55, -121, -4, -72, -73, -58, -135, -67, -179, -115, -223, -138, -276, -132, -339, -104, -346, -128, -277, -155, -214, -161, -162, -133, -124, -89, -73, -82, -12, -92)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ahsum"]
@@ -37,21 +44,18 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(
 outlines = Array[PackedVector2Array]([PackedVector2Array(-479, -71, -445, -77, -416, -85, -381, -109, -348, -125, -327, -132, -315, -110, -340, -102, -370, -85, -402, -65, -442, -54, -493, -48, -570, -50, -570, -72)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2mtb"]
-size = Vector2(60.5, 53)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ttna3"]
-size = Vector2(71, 148)
-
 [node name="Graveyard" type="Node2D"]
 z_as_relative = false
 y_sort_enabled = true
 metadata/_edit_vertical_guides_ = [59.0]
+metadata/_edit_lock_ = true
 
 [node name="Background" parent="." instance=ExtResource("1_7732i")]
 texture = ExtResource("2_kjyhk")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" parent="Background/Clickable" index="0"]
+visible = false
 position = Vector2(399, 254)
 
 [node name="Tree" type="Sprite2D" parent="."]
@@ -59,10 +63,22 @@ position = Vector2(498, 503)
 texture = ExtResource("7_g7nm7")
 centered = false
 offset = Vector2(-100, -255)
+metadata/_edit_lock_ = true
 
 [node name="Nime" parent="." instance=ExtResource("9_m46h3")]
-position = Vector2(707, 349)
-scale = Vector2(0.265, 0.265)
+position = Vector2(396, 430)
+scale = Vector2(0.34, 0.34)
+
+[node name="Scaler" parent="." instance=ExtResource("5_ythtj")]
+metadata/_edit_lock_ = true
+
+[node name="MaxScale" parent="Scaler" index="0"]
+position = Vector2(363, 431)
+scale = Vector2(0.32, 0.32)
+
+[node name="MinScale" parent="Scaler" index="1"]
+position = Vector2(629, 335)
+scale = Vector2(0.28, 0.28)
 
 [node name="Interactables" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -137,6 +153,28 @@ position = Vector2(0, -9)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("12_qpj7e")
 
+[node name="ToStreetToGraveyard" parent="." instance=ExtResource("8_xde2y")]
+unique_name_in_owner = true
+position = Vector2(930, 385)
+ToScenePath = "res://scenes/street/street.tscn"
+
+[node name="SpawnPoint" parent="ToStreetToGraveyard" index="0"]
+position = Vector2(-119, -6)
+
+[node name="SpawnWayPoint" parent="ToStreetToGraveyard" index="1"]
+position = Vector2(-224, -32)
+
+[node name="ExitWayPoint" parent="ToStreetToGraveyard" index="2"]
+position = Vector2(-65, 14)
+
+[node name="CollisionShape2D" parent="ToStreetToGraveyard/Collider" index="0"]
+position = Vector2(-50, -16)
+shape = SubResource("RectangleShape2D_c2mtb")
+
+[node name="CollisionShape2D" parent="ToStreetToGraveyard/Clickable" index="0"]
+position = Vector2(-164.5, -59)
+shape = SubResource("RectangleShape2D_ttna3")
+
 [node name="NavigationRegions" type="Node" parent="."]
 
 [node name="Main" type="NavigationRegion2D" parent="NavigationRegions"]
@@ -148,29 +186,9 @@ position = Vector2(498, 503)
 navigation_polygon = SubResource("NavigationPolygon_ahsum")
 enabled = false
 
-[node name="StreetGraveyardGate" parent="." instance=ExtResource("8_xde2y")]
-position = Vector2(930, 385)
-ToScenePath = "res://scenes/street/street.tscn"
-
-[node name="SpawnPoint" parent="StreetGraveyardGate" index="0"]
-position = Vector2(-119, -6)
-
-[node name="SpawnWayPoint" parent="StreetGraveyardGate" index="1"]
-position = Vector2(-224, -32)
-
-[node name="ExitWayPoint" parent="StreetGraveyardGate" index="2"]
-position = Vector2(-65, 14)
-
-[node name="CollisionShape2D" parent="StreetGraveyardGate/Collider" index="0"]
-position = Vector2(-50, -16)
-shape = SubResource("RectangleShape2D_c2mtb")
-
-[node name="CollisionShape2D" parent="StreetGraveyardGate/Clickable" index="0"]
-position = Vector2(-164.5, -59)
-shape = SubResource("RectangleShape2D_ttna3")
-
 [editable path="Background"]
+[editable path="Scaler"]
 [editable path="Interactables/Grave1"]
 [editable path="Interactables/Grave2"]
 [editable path="Interactables/CloverGrave"]
-[editable path="StreetGraveyardGate"]
+[editable path="ToStreetToGraveyard"]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b233gcxrlq2nd"]
+
+[ext_resource type="Script" path="res://objects/Scaler/Scaler.cs" id="1_jylew"]
+
+[node name="Scaler" type="Node2D"]
+script = ExtResource("1_jylew")
+
+[node name="MaxScale" type="Marker2D" parent="."]
+
+[node name="MinScale" type="Marker2D" parent="."]

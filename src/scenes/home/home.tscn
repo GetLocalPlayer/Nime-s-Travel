@@ -29,27 +29,28 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 y_sort_enabled = true
 metadata/_edit_lock_ = true
 
-[node name="HomeStreetGate" parent="." instance=ExtResource("3_iqu22")]
+[node name="ToStreetToHome" parent="." instance=ExtResource("3_iqu22")]
+unique_name_in_owner = true
 position = Vector2(-167, 247)
 ToScenePath = "res://scenes/street/street.tscn"
 
-[node name="SpawnPoint" parent="HomeStreetGate" index="0"]
+[node name="SpawnPoint" parent="ToStreetToHome" index="0"]
 position = Vector2(138, 163)
 
-[node name="SpawnWayPoint" parent="HomeStreetGate" index="1"]
+[node name="SpawnWayPoint" parent="ToStreetToHome" index="1"]
 position = Vector2(361, 166)
 
-[node name="ExitWayPoint" parent="HomeStreetGate" index="2"]
+[node name="ExitWayPoint" parent="ToStreetToHome" index="2"]
 position = Vector2(82, 165)
 
-[node name="CollisionShape2D" parent="HomeStreetGate/Collider" index="0"]
+[node name="CollisionShape2D" parent="ToStreetToHome/Collider" index="0"]
 position = Vector2(39, 142)
 shape = SubResource("RectangleShape2D_4fygc")
 
-[node name="Clickable" parent="HomeStreetGate" index="4"]
+[node name="Clickable" parent="ToStreetToHome" index="4"]
 priority = 1
 
-[node name="CollisionShape2D" parent="HomeStreetGate/Clickable" index="0"]
+[node name="CollisionShape2D" parent="ToStreetToHome/Clickable" index="0"]
 position = Vector2(199.5, 41.5)
 shape = SubResource("RectangleShape2D_4gn8y")
 
@@ -100,6 +101,6 @@ z_as_relative = false
 y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_sf02g")
 
-[editable path="HomeStreetGate"]
+[editable path="ToStreetToHome"]
 [editable path="Books"]
 [editable path="Background"]

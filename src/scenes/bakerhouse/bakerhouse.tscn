@@ -146,28 +146,29 @@ position = Vector2(380, 295)
 scale = Vector2(0.5, 0.5)
 navigation_polygon = SubResource("NavigationPolygon_v5l6m")
 
-[node name="NeighborhoodBakerHouseGate" parent="." instance=ExtResource("5_uupps")]
+[node name="ToBakerToNeighborhood" parent="." instance=ExtResource("5_uupps")]
+unique_name_in_owner = true
 position = Vector2(-51, 358)
 ToScenePath = "res://scenes/neighborhood/neighborhood.tscn"
 
-[node name="SpawnPoint" parent="NeighborhoodBakerHouseGate" index="0"]
+[node name="SpawnPoint" parent="ToBakerToNeighborhood" index="0"]
 position = Vector2(57, 53)
 
-[node name="SpawnWayPoint" parent="NeighborhoodBakerHouseGate" index="1"]
+[node name="SpawnWayPoint" parent="ToBakerToNeighborhood" index="1"]
 position = Vector2(170, 60)
 
-[node name="ExitWayPoint" parent="NeighborhoodBakerHouseGate" index="2"]
+[node name="ExitWayPoint" parent="ToBakerToNeighborhood" index="2"]
 position = Vector2(3, 55)
 
-[node name="CollisionShape2D" parent="NeighborhoodBakerHouseGate/Collider" index="0"]
+[node name="CollisionShape2D" parent="ToBakerToNeighborhood/Collider" index="0"]
 position = Vector2(-51, 23)
 shape = SubResource("RectangleShape2D_7oyxo")
 
-[node name="CollisionShape2D" parent="NeighborhoodBakerHouseGate/Clickable" index="0"]
+[node name="CollisionShape2D" parent="ToBakerToNeighborhood/Clickable" index="0"]
 position = Vector2(98, -65.375)
 shape = SubResource("RectangleShape2D_bvxqt")
 
 [editable path="Background"]
 [editable path="Interactables/Baker"]
 [editable path="Interactables/Fire"]
-[editable path="NeighborhoodBakerHouseGate"]
+[editable path="ToBakerToNeighborhood"]

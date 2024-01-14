@@ -19,10 +19,12 @@ using System;
 */
 public partial class SceneGate : Node2D
 {
+	/* Путь к сцене на которую обеспечиавют
+	переход данные ворота. */
 	[Export] public string ToScenePath;
 	Node storedScene;
-	private PackedScene ToScene;
-	private bool _isActive = true;
+
+	bool _isActive = true;
 	[Export] public bool IsActive {
 		get => _isActive;
 		set {
@@ -49,16 +51,6 @@ public partial class SceneGate : Node2D
 
     public override void _Ready()
     {
-		/* CallDeferred вызывает функцию с указанным
-		в строке именем в конце текущего кадра. Это
-		хорошее место чтобы отложить вызов функций
-		для которых требуется чтобы все ноды сцены были
-		инициализированны, готовы к работе и все
-		внутренние процессы движка звершены. */
-		CallDeferred("ReadyDeferred");
-
-		ToScene = ResourceLoader.Load<PackedScene>(ToScenePath);
-
 		GetNode<Area2D>("Clickable").Monitoring = IsActive;
 		GetNode<Area2D>("Clickable").InputPickable = IsActive;
 		GetNode<Area2D>("Collider").Monitoring = IsActive;	
@@ -78,30 +70,77 @@ public partial class SceneGate : Node2D
 		collider.AreaEntered += (area) =>
 		{
 			if (area.IsInGroup("PlayerCollider"))
-				/* Выгружать текущую сцену в момент
+				/* Смена текущей сцены в момент
 				выполнения кода сигнала - не лучшая идея,
 				поскольку движок продолжет выполнение
 				внутренних процессов связанных с нодой
 				текущего сигнала, что приведет к
 				исключению нулевого указателя.
-				Выгружать сцену следует в конце текущего 
+				Менять сцену следует в конце текущего 
 				кадра, когда все внутренние процессы завершены. */
 				CallDeferred("ChangeScene");
 		};
     }
 
-	private void ReadyDeferred()
-	{
-		var globals = GetTree().Root.GetNode<GlobalVariables>("GlobalVariables");
-
-		if (Name == globals.SceneGateName)
-			GetTree().CallGroup("Player", "EnterScene", this);
-	}
-
 	private void ChangeScene()
 	{
-		var globals = GetTree().Root.GetNode<GlobalVariables>("GlobalVariables");
-		globals.SceneGateName = Name;
-		GetTree().ChangeSceneToPacked(ToScene);
+		/* Я не удаляю текущую сцену из памяти при
+		переходе в новую локацию, я отсоединяю ее 
+		от древа, перенося Ниме из одной сцены в 
+		другую.
+		Я удаляю лишнюю копию Ниме из загруженной
+		сцены (в каждой сцене есть своя копия Ниме
+		для тестов).
+		Экземпляр SceneGate хранят в поле storedScene
+		ссылку на сцену, на которую обеспечивают
+		переход. */
+		
+		/* Древо следует иметь в переменной, поскольку
+		после удаления текущей сцены, вызов метода
+		GetTree будет возвращать null. */
+		var tree = GetTree();
+
+		/* Прячем текущую сцену (RemoveChild не
+		удаляет нод из памяти, а просто отсоединяет
+		его, скрывает, останавливает процессы). */
+		var removedScene = GetTree().CurrentScene;
+		tree.Root.RemoveChild(removedScene);
+		// Достаем Ниме
+		var nime = removedScene.GetNode<Nime>("Nime");
+		removedScene.RemoveChild(nime);
+		/* Загружаем новую сцену по указанному пути
+		в поле ToScenPath если ранее не была загружена. */
+		if (storedScene == null)
+		{
+			var packedScene = ResourceLoader.Load<PackedScene>(ToScenePath);
+			storedScene = packedScene.Instantiate();
+		}
+		/* Удаляем копию Ниме в загруженной сцене
+		(для тестов в каждую сцену была добавлена
+		своя Ниме). */
+		if (storedScene.HasNode("Nime"))
+		{
+			var n = storedScene.GetNode<Nime>("Nime");
+			storedScene.RemoveChild(n);
+			nime.MoveSpeed = n.MoveSpeed;
+			n.QueueFree();
+		}
+		/* Устанавливаем текущую сцену. */
+		tree.Root.AddChild(storedScene);
+		tree.CurrentScene = storedScene;
+		/* Передаем воротам в новой сцене ссылку
+		на текущую, чтобы не загружать ее дважды
+		при возврате. Ворота между двумя сценами
+		дожны иметь одинаковое имя в обеих сценах. */
+		var newGate = storedScene.GetNode<SceneGate>(new NodePath("%" + Name));
+		newGate.storedScene = removedScene;
+		/* Переносим Ниме в новую сцену но на всякий
+		пожарный через deferred вызов, когда все функции
+		движка в текущий кадр выполнены  (P.S. API
+		движка написано в snake_case, поэтому передается
+		имя оригинальной функции в snake_case, а не
+		в C# обретке CamelCase). */
+		storedScene.CallDeferred("add_child", nime);
+		tree.CallDeferred("call_group", "Player", "EnterScene", newGate);
 	}
 }
