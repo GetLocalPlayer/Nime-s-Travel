@@ -20,6 +20,7 @@ using System;
 public partial class SceneGate : Node2D
 {
 	[Export] public string ToScenePath;
+	Node storedScene;
 	private PackedScene ToScene;
 	private bool _isActive = true;
 	[Export] public bool IsActive {
@@ -68,7 +69,7 @@ public partial class SceneGate : Node2D
 			if (@event is InputEventMouseButton btn)
 				if (btn.IsPressed() && btn.ButtonIndex == MouseButton.Left)
 				{
-					GetTree().CallGroup("Player", "SetNewWalkTarget", GetNode<Marker2D>("ExitWayPoint").GlobalPosition);
+					GetTree().CallGroup("Player", "SceneGateClicked", this);
 					((Viewport)viewport).SetInputAsHandled();
 				}
 		};

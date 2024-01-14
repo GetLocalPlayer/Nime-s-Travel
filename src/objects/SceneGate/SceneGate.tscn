@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjvfm7im765jm"]
+[gd_scene load_steps=8 format=3 uid="uid://cjvfm7im765jm"]
 
 [ext_resource type="Script" path="res://objects/SceneGate/SceneGate.cs" id="1_qx145"]
+[ext_resource type="Script" path="res://objects/interactables/interactable/PointDrawer.cs" id="2_m44lv"]
+[ext_resource type="Texture2D" uid="uid://bvsylpob8wqoj" path="res://objects/SceneGate/SpawnPoint.png" id="3_r4q22"]
+[ext_resource type="Texture2D" uid="uid://dd3b8ete0eqsi" path="res://objects/SceneGate/SpawnWayPoint.png" id="4_7kajk"]
+[ext_resource type="Texture2D" uid="uid://dg3gr5oodtdgt" path="res://objects/SceneGate/ExitWayPoint.png" id="5_nltm3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i2r0h"]
 size = Vector2(200, 200)
@@ -13,14 +17,29 @@ script = ExtResource("1_qx145")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(-122, 114)
+scale = Vector2(0.75, 0.75)
 gizmo_extents = 24.4
+script = ExtResource("2_m44lv")
+Texture = ExtResource("3_r4q22")
+Offset = Vector2(-36, -62)
+Size = Vector2(72, 62)
 
 [node name="SpawnWayPoint" type="Marker2D" parent="."]
 position = Vector2(19, 62)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_m44lv")
+Texture = ExtResource("4_7kajk")
+Offset = Vector2(-24, -62)
+Size = Vector2(48, 62)
 
 [node name="ExitWayPoint" type="Marker2D" parent="."]
 position = Vector2(-19, -73)
+scale = Vector2(0.75, 0.75)
 gizmo_extents = 55.5
+script = ExtResource("2_m44lv")
+Texture = ExtResource("5_nltm3")
+Offset = Vector2(-24, -62)
+Size = Vector2(48, 62)
 
 [node name="Collider" type="Area2D" parent="."]
 monitorable = false

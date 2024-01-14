@@ -57,6 +57,14 @@ public partial class Nime : Node2D
 		}
 	}
 
+	/* CallGroup("Player", ...) вызывается из класса
+	SceneGate. */
+	public void SceneGateClicked(SceneGate g)
+	{
+		BackgroundClicked(g.ExitWayPoint);
+	}
+
+
 	/* CallGroup("Player", ...) из класса Interactable 
 	и класса UI (клик на иконку в углу). */
 	public void InteractableClicked(Interactable i)
