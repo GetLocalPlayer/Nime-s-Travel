@@ -1,19 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://expad3u7bjp3"]
+[gd_scene load_steps=14 format=3 uid="uid://expad3u7bjp3"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_lisb4"]
 [ext_resource type="Texture2D" uid="uid://c44srvewhefkb" path="res://scenes/home/background.png" id="1_v0acl"]
+[ext_resource type="PackedScene" uid="uid://b233gcxrlq2nd" path="res://objects/Scaler/Scaler.tscn" id="1_vd3jc"]
 [ext_resource type="Texture2D" uid="uid://geh8o1qm8n6w" path="res://scenes/home/door_cover.png" id="3_8mep1"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="3_dlque"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="3_iqu22"]
 [ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactable/interactable.tscn" id="6_4jxc5"]
 [ext_resource type="Texture2D" uid="uid://ep5tridp670e" path="res://scenes/home/book_ico.png" id="7_3kghw"]
 [ext_resource type="Texture2D" uid="uid://blrfplqio7ehx" path="res://scenes/home/books.png" id="7_7bebi"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fygc"]
-size = Vector2(58, 71)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gn8y"]
-size = Vector2(117, 233)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ygfj"]
 size = Vector2(43, 44)
@@ -25,34 +20,25 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-91, 401, 78, 400, 198,
 parsed_geometry_type = 0
 source_geometry_group_name = &"navigation_polygon_source_group"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fygc"]
+size = Vector2(58, 71)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gn8y"]
+size = Vector2(117, 233)
+
 [node name="Home" type="Node2D"]
 y_sort_enabled = true
 metadata/_edit_lock_ = true
 
-[node name="ToStreetToHome" parent="." instance=ExtResource("3_iqu22")]
-unique_name_in_owner = true
-position = Vector2(-167, 247)
-ToScenePath = "res://scenes/street/street.tscn"
+[node name="Scaler" parent="." instance=ExtResource("1_vd3jc")]
 
-[node name="SpawnPoint" parent="ToStreetToHome" index="0"]
-position = Vector2(138, 163)
+[node name="MaxScale" parent="Scaler" index="0"]
+position = Vector2(398, 446)
+scale = Vector2(0.5, 0.5)
 
-[node name="SpawnWayPoint" parent="ToStreetToHome" index="1"]
-position = Vector2(361, 166)
-
-[node name="ExitWayPoint" parent="ToStreetToHome" index="2"]
-position = Vector2(82, 165)
-
-[node name="CollisionShape2D" parent="ToStreetToHome/Collider" index="0"]
-position = Vector2(39, 142)
-shape = SubResource("RectangleShape2D_4fygc")
-
-[node name="Clickable" parent="ToStreetToHome" index="4"]
-priority = 1
-
-[node name="CollisionShape2D" parent="ToStreetToHome/Clickable" index="0"]
-position = Vector2(199.5, 41.5)
-shape = SubResource("RectangleShape2D_4gn8y")
+[node name="MinScale" parent="Scaler" index="1"]
+position = Vector2(152, 412)
+scale = Vector2(0.47, 0.47)
 
 [node name="Nime" parent="." instance=ExtResource("3_dlque")]
 position = Vector2(610, 439)
@@ -101,6 +87,35 @@ z_as_relative = false
 y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_sf02g")
 
-[editable path="ToStreetToHome"]
+[node name="Gates" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="ToStreetToHome" parent="Gates" instance=ExtResource("3_iqu22")]
+unique_name_in_owner = true
+position = Vector2(-167, 247)
+ToScenePath = "res://scenes/street/street.tscn"
+
+[node name="SpawnPoint" parent="Gates/ToStreetToHome" index="0"]
+position = Vector2(138, 163)
+
+[node name="SpawnWayPoint" parent="Gates/ToStreetToHome" index="1"]
+position = Vector2(361, 166)
+
+[node name="ExitWayPoint" parent="Gates/ToStreetToHome" index="2"]
+position = Vector2(82, 165)
+
+[node name="CollisionShape2D" parent="Gates/ToStreetToHome/Collider" index="0"]
+position = Vector2(39, 142)
+shape = SubResource("RectangleShape2D_4fygc")
+
+[node name="Clickable" parent="Gates/ToStreetToHome" index="4"]
+priority = 1
+
+[node name="CollisionShape2D" parent="Gates/ToStreetToHome/Clickable" index="0"]
+position = Vector2(199.5, 41.5)
+shape = SubResource("RectangleShape2D_4gn8y")
+
+[editable path="Scaler"]
 [editable path="Books"]
 [editable path="Background"]
+[editable path="Gates/ToStreetToHome"]

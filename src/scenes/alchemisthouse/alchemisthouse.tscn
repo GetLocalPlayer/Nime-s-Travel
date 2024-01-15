@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://ds7xjedviyivx"]
+[gd_scene load_steps=25 format=3 uid="uid://ds7xjedviyivx"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_yk12b"]
 [ext_resource type="Texture2D" uid="uid://b06fnnrptobf1" path="res://scenes/alchemisthouse/back.png" id="2_ox0rm"]
 [ext_resource type="Texture2D" uid="uid://c4psxmk5nsxs1" path="res://scenes/alchemisthouse/back_z0.png" id="3_olxm5"]
+[ext_resource type="PackedScene" uid="uid://b233gcxrlq2nd" path="res://objects/Scaler/Scaler.tscn" id="4_mkd5g"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="4_ptc2y"]
 [ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactable/interactable.tscn" id="5_fieot"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="5_xggcl"]
@@ -262,6 +263,16 @@ texture = ExtResource("3_olxm5")
 centered = false
 offset = Vector2(0, -339)
 
+[node name="Scaler" parent="." instance=ExtResource("4_mkd5g")]
+
+[node name="MaxScale" parent="Scaler" index="0"]
+position = Vector2(398, 446)
+scale = Vector2(0.5, 0.5)
+
+[node name="MinScale" parent="Scaler" index="1"]
+position = Vector2(87, 395)
+scale = Vector2(0.45, 0.45)
+
 [node name="Nime" parent="." instance=ExtResource("4_ptc2y")]
 position = Vector2(236, 336)
 scale = Vector2(0.5, 0.5)
@@ -342,29 +353,33 @@ position = Vector2(379, 274)
 scale = Vector2(0.5, 0.5)
 navigation_polygon = SubResource("NavigationPolygon_v5l6m")
 
-[node name="NeighborhoodAlchemistHouseGate" parent="." instance=ExtResource("5_xggcl")]
+[node name="Gates" type="Node2D" parent="."]
 position = Vector2(-51, 358)
 scale = Vector2(0.5, 0.5)
+
+[node name="ToAlchemistToNeighborhood" parent="Gates" instance=ExtResource("5_xggcl")]
+unique_name_in_owner = true
 ToScenePath = "res://scenes/neighborhood/neighborhood.tscn"
 
-[node name="SpawnPoint" parent="NeighborhoodAlchemistHouseGate" index="0"]
+[node name="SpawnPoint" parent="Gates/ToAlchemistToNeighborhood" index="0"]
 position = Vector2(176, 70)
 
-[node name="SpawnWayPoint" parent="NeighborhoodAlchemistHouseGate" index="1"]
+[node name="SpawnWayPoint" parent="Gates/ToAlchemistToNeighborhood" index="1"]
 position = Vector2(386, 102)
 
-[node name="ExitWayPoint" parent="NeighborhoodAlchemistHouseGate" index="2"]
+[node name="ExitWayPoint" parent="Gates/ToAlchemistToNeighborhood" index="2"]
 position = Vector2(-8, 64)
 
-[node name="CollisionShape2D" parent="NeighborhoodAlchemistHouseGate/Collider" index="0"]
+[node name="CollisionShape2D" parent="Gates/ToAlchemistToNeighborhood/Collider" index="0"]
 position = Vector2(14.375, 31.5)
 shape = SubResource("RectangleShape2D_7oyxo")
 
-[node name="CollisionShape2D" parent="NeighborhoodAlchemistHouseGate/Clickable" index="0"]
+[node name="CollisionShape2D" parent="Gates/ToAlchemistToNeighborhood/Clickable" index="0"]
 position = Vector2(192, -93)
 shape = SubResource("RectangleShape2D_bvxqt")
 
 [editable path="Background"]
+[editable path="Scaler"]
 [editable path="Interactables/Alchemist"]
 [editable path="Interactables/Flask"]
-[editable path="NeighborhoodAlchemistHouseGate"]
+[editable path="Gates/ToAlchemistToNeighborhood"]

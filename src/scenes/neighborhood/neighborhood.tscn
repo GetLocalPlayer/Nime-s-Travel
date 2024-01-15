@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bxm1byncrqdyo"]
+[gd_scene load_steps=13 format=3 uid="uid://bxm1byncrqdyo"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_2pmrb"]
 [ext_resource type="Texture2D" uid="uid://cjvffpuybgtya" path="res://scenes/neighborhood/back.png" id="2_1k7nj"]
 [ext_resource type="Texture2D" uid="uid://cvmrn5bau5llf" path="res://scenes/neighborhood/house_z.png" id="3_m0vqg"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="4_3nipx"]
+[ext_resource type="PackedScene" uid="uid://b233gcxrlq2nd" path="res://objects/Scaler/Scaler.tscn" id="5_hn6im"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="5_humm4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tvj8o"]
@@ -16,7 +17,7 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 size = Vector2(47, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2qxsc"]
-size = Vector2(58.5, 62)
+size = Vector2(58.5, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btpda"]
 size = Vector2(66, 98)
@@ -51,6 +52,16 @@ scale = Vector2(0.295, 0.295)
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 z_index = 1
 navigation_polygon = SubResource("NavigationPolygon_tvj8o")
+
+[node name="Scaler" parent="." instance=ExtResource("5_hn6im")]
+
+[node name="MaxScale" parent="Scaler" index="0"]
+position = Vector2(276, 443)
+scale = Vector2(0.34, 0.34)
+
+[node name="MinScale" parent="Scaler" index="1"]
+position = Vector2(412, 325)
+scale = Vector2(0.25, 0.25)
 
 [node name="Gates" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -93,7 +104,7 @@ position = Vector2(-6, 178)
 position = Vector2(2, 96)
 
 [node name="CollisionShape2D" parent="Gates/ToAlchemistToNeighborhood/Collider" index="0"]
-position = Vector2(0, 25)
+position = Vector2(0, 34)
 shape = SubResource("RectangleShape2D_2qxsc")
 
 [node name="CollisionShape2D" parent="Gates/ToAlchemistToNeighborhood/Clickable" index="0"]
@@ -123,6 +134,7 @@ position = Vector2(137, 2)
 shape = SubResource("RectangleShape2D_8smgn")
 
 [editable path="Background"]
+[editable path="Scaler"]
 [editable path="Gates/ToBakerToNeighborhood"]
 [editable path="Gates/ToAlchemistToNeighborhood"]
 [editable path="Gates/ToStreetToNeighborhood"]

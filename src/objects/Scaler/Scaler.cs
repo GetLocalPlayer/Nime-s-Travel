@@ -29,17 +29,18 @@ public partial class Scaler : Node2D
         min = GetNode<Marker2D>("MinScale");
         GetParent().ChildEnteredTree += (node) =>
         {
-            if (node.Name == "Nime")
+            if (node.IsInGroup("Player"))
                 _Process(0);
         };
     }
 
     public override void _Process(double delta)
     {
-        var nime = GetParent().GetNode<Nime>("Nime");
-        var factor = (nime.Position.Y - min.Position.Y) / (max.Position.Y - min.Position.Y);
-        var signX = nime.Scale.Sign();
-        nime.Scale = min.Scale + (max.Scale - min.Scale) * factor;
-        nime.Scale *= signX;
+        foreach (var node in GetTree().GetNodesInGroup("Player"))
+        {
+            var nime = node as Nime;
+            var factor = (nime.Position.Y - min.Position.Y) / (max.Position.Y - min.Position.Y);
+            nime.Scale = (min.Scale + (max.Scale - min.Scale) * factor) * nime.Scale.Sign();
+        }
     }
 }

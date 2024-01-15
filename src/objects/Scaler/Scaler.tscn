@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" path="res://objects/Scaler/Scaler.cs" id="1_jylew"]
 
-[node name="Scaler" type="Node2D"]
+[node name="Scaler" type="Node2D" groups=["Scalers"]]
 script = ExtResource("1_jylew")
+metadata/_edit_lock_ = true
 
 [node name="MaxScale" type="Marker2D" parent="."]
 

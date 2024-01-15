@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://deuv0qk8qfnu4"]
+[gd_scene load_steps=14 format=3 uid="uid://deuv0qk8qfnu4"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_ymmvc"]
 [ext_resource type="Texture2D" uid="uid://c2v0qm2p08dq8" path="res://scenes/street/back.png" id="2_bu2jx"]
 [ext_resource type="Texture2D" uid="uid://cotd0dtqqacw3" path="res://scenes/street/house_z.png" id="3_1pcbg"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="4_lhdlr"]
+[ext_resource type="PackedScene" uid="uid://b233gcxrlq2nd" path="res://objects/Scaler/Scaler.tscn" id="4_yi155"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="6_gsxwc"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_l0g0j"]
@@ -48,9 +49,19 @@ texture = ExtResource("3_1pcbg")
 centered = false
 offset = Vector2(0, -187)
 
+[node name="Scaler" parent="." instance=ExtResource("4_yi155")]
+
+[node name="MaxScale" parent="Scaler" index="0"]
+position = Vector2(276, 443)
+scale = Vector2(0.34, 0.34)
+
+[node name="MinScale" parent="Scaler" index="1"]
+position = Vector2(412, 325)
+scale = Vector2(0.25, 0.25)
+
 [node name="Nime" parent="." instance=ExtResource("6_gsxwc")]
-position = Vector2(726, 442)
-scale = Vector2(0.26, 0.26)
+position = Vector2(270, 444)
+scale = Vector2(0.3, 0.3)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_l0g0j")
@@ -124,6 +135,7 @@ position = Vector2(171, 18)
 shape = SubResource("RectangleShape2D_levci")
 
 [editable path="Background"]
+[editable path="Scaler"]
 [editable path="Gates/ToStreetToNeighborhood"]
 [editable path="Gates/ToStreetToHome"]
 [editable path="Gates/ToStreetToGraveyard"]

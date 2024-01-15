@@ -35,6 +35,23 @@ public partial class Nime : Node2D
         	LearntSpells.AddRange(initialSpells);
     }
 
+	/* Включает/выключает процессинг и коллайдер. */
+	public void Enable()
+	{
+		ProcessMode = ProcessModeEnum.Inherit;
+		var col = GetNode<Area2D>("Collider");
+		col.Monitorable = true;
+		col.Monitoring = true;
+	}
+
+	public void Disable()
+	{
+		ProcessMode = ProcessModeEnum.Disabled;
+		var col = GetNode<Area2D>("Collider");
+		col.Monitorable = false;
+		col.Monitoring = false;
+	}
+
     /*
 	Функции ниже вызываются через GetTree().CallGroup("Player", ...).
 	Поскольку в группе Player может быть только один нод Nime, я
