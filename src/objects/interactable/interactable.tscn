@@ -181,9 +181,17 @@ script = ExtResource("3_uj84h")
 Texture = ExtResource("4_p0b67")
 Offset = Vector2(-16, -16)
 Size = Vector2(32, 32)
+DrawLines = true
+LineWidth = 10
+LineDash = 22
+LineColor = Color(0, 1, 1, 0.501961)
 
 [node name="WayPoint" type="Marker2D" parent="."]
 script = ExtResource("3_uj84h")
 Texture = ExtResource("5_1ggc6")
 Offset = Vector2(-18, -50)
 Size = Vector2(36, 50)
+DrawLines = true
+LineWidth = 10
+LineColor = Color(1, 0.854902, 0.45098, 0.509804)
+LineToOffset = Vector2(0, -35)
