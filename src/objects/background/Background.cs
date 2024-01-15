@@ -8,14 +8,25 @@ public partial class Background : Sprite2D
 	к которой строится маршрут по навигационной
 	сетке. */
 	public override void _Ready()
-	{
-		var clickable = GetNode<Area2D>("Clickable");
-		
-		clickable.InputEvent += (Nodeviewport, @event, shapeIdx) =>
+	{	
+		var onInputEvent = Callable.From((Viewport v, InputEvent e, int idx) =>
 		{
-			if (@event is InputEventMouseButton btn)
-				if (btn.IsPressed() && btn.ButtonIndex == MouseButton.Left)
-					GetTree().CallGroup("Player", "BackgroundClicked", GetGlobalMousePosition());
-		};
+			if (v.IsInputHandled()) return;
+			if (e is InputEventMouseButton btn && btn.IsPressed() && btn.ButtonIndex == MouseButton.Left)
+				GetTree().CallGroup("Player", "BackgroundClicked", GetGlobalMousePosition());
+		});
+
+		/* Пришлось перенести реакцию на сигнал в отложенный (deferred)
+		вызов поскольку в движке нет встроенной функции упорядочивания
+		событий ввода или их приоритетов, что приводило к тому что
+		Clickable ноды у задников и экземпляров Interactable конкурировали
+		за один и тот же клик. В классе Interactable я, конечно, останавливал
+		поток выполнения по событию ввода путем вызова функции SetInputAsHandled,
+		что работало прекрасно, если движок фиксировал сначала клик по Interactable
+		и уже потом по Background, но если порядок был обртаный, начиналась
+		жопа, поскольку Ниме переходила в состояние "Walk" и затем в состояние
+		"WalkToInteractable" в тот же самый кадр. */
+		var clickable = GetNode<Area2D>("Clickable");
+		clickable.Connect(Area2D.SignalName.InputEvent, onInputEvent, (uint)ConnectFlags.Deferred);
 	}
 }

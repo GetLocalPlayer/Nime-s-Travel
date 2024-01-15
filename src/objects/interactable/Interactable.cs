@@ -115,7 +115,6 @@ public partial class Interactable : Node2D
 	async public virtual void Clickable_OnClick()
 	{
 		var tree = GetTree();
-		GD.Print($"isReached = {isReached}");
 		if (!isReached)
 			tree.CallGroup("Player", "InteractableClicked", this);
 		else
@@ -139,7 +138,7 @@ public partial class Interactable : Node2D
 				await ToSignal(ui, "InteractionFinished");
 				OnInteractionFinished();
 			}
-			if (SpellName != "" && SpellName != null)
+			if (Autocast && SpellName != "" && SpellName != null)
 			{
 				ui.RevealSpell(SpellName);
 				await ToSignal(ui, "SpellRevealed");
