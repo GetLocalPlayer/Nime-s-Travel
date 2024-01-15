@@ -88,16 +88,14 @@ public partial class SceneGate : Node2D
 		переходе в новую локацию, я отсоединяю ее 
 		от древа, перенося Ниме из одной сцены в 
 		другую.
-		Я удаляю лишнюю копию Ниме из загруженной
-		сцены (в каждой сцене есть своя копия Ниме
-		для тестов).
-		Экземпляр SceneGate хранят в поле storedScene
+		Экземпляры SceneGate хранят в поле storedScene
 		ссылку на сцену, на которую обеспечивают
 		переход. */
 		
-		/* Древо следует иметь в переменной, поскольку
-		после удаления текущей сцены, вызов метода
-		GetTree будет возвращать null. */
+		/* Древо следует поместить в переменную,
+		поскольку, после удаления текущей сцены
+		из которой работает текущий SceneGate,
+		вызов метода GetTree будет возвращать null. */
 		var tree = GetTree();
 
 		/* Прячем текущую сцену (RemoveChild не
@@ -105,44 +103,70 @@ public partial class SceneGate : Node2D
 		его, скрывает, останавливает процессы). */
 		var removedScene = GetTree().CurrentScene;
 		tree.Root.RemoveChild(removedScene);
-		// Достаем Ниме
+		// Достаем Ниме из текущей сцены
 		var nime = removedScene.GetNode<Nime>("Nime");
+
+		/* В процессе тестов, в каждую сцену была добавлена
+		своя копия Ниме. Вместо удаления данных копий я решил
+		их оставить, чтобы брать от них параметры оптимально
+		подобранные в процессе тестов (пока что это только
+		MoveSpeed). Копию я просто переименовываю в NimeParams. */
+
+		/* Если в удаляемой сцене нет нода NimeParams, значит
+		эта сцена была загружена при запуске игры и нужно
+		создать копию Ниме. */
+		if (!removedScene.HasNode("NimeParams"))
+		{
+			var copy = nime.Duplicate((int)DuplicateFlags.Scripts) as Nime;
+			copy.Disable();
+			copy.Hide();
+			copy.Name = "NimeParams";
+			foreach (var child in copy.GetChildren())
+			{
+				copy.RemoveChild(child);
+				child.QueueFree();
+			}
+			removedScene.AddChild(copy);
+		}
 		removedScene.RemoveChild(nime);
 		/* Загружаем новую сцену по указанному пути
 		в поле ToScenPath если ранее не была загружена. */
-		if (storedScene == null)
+		var loadedScene = storedScene ?? ResourceLoader.Load<PackedScene>(ToScenePath).Instantiate();
+		storedScene = loadedScene;
+		/* Чищу копию Ниме перед сменой сцены. */
+		if (!loadedScene.HasNode("NimeParams"))
 		{
-			var packedScene = ResourceLoader.Load<PackedScene>(ToScenePath);
-			storedScene = packedScene.Instantiate();
+			var n = loadedScene.GetNode<Nime>("Nime");
+			n.Disable();
+			n.Hide();
+			n.Name = "NimeParams";
+			foreach (var child in n.GetChildren())
+			{
+				n.RemoveChild(child);
+				child.QueueFree();
+			}
+			foreach (var group in n.GetGroups())
+				n.RemoveFromGroup(group);
 		}
-		/* Удаляем копию Ниме в загруженной сцене
-		(для тестов в каждую сцену была добавлена
-		своя Ниме). */
-		if (storedScene.HasNode("Nime"))
-		{
-			var n = storedScene.GetNode<Nime>("Nime");
-			storedScene.RemoveChild(n);
-			nime.MoveSpeed = n.MoveSpeed;
-			n.QueueFree();
-		}
+		nime.MoveSpeed = loadedScene.GetNode<Nime>("NimeParams").MoveSpeed;
 		/* Устанавливаем текущую сцену. */
-		tree.Root.AddChild(storedScene);
-		tree.CurrentScene = storedScene;
+		tree.Root.AddChild(loadedScene);
+		tree.CurrentScene = loadedScene;
 		/* Передаем воротам в новой сцене ссылку
 		на текущую, чтобы не загружать ее дважды
 		при возврате. Ворота между двумя сценами
 		дожны иметь одинаковое имя в обеих сценах. */
-		var newGate = storedScene.GetNode<SceneGate>(new NodePath("%" + Name));
-		newGate.storedScene = removedScene;
+		var loadedGate = loadedScene.GetNode<SceneGate>(new NodePath("%" + Name));
+		loadedGate.storedScene = removedScene;
 		/* Переносим Ниме в новую сцену но на всякий
 		пожарный через deferred вызов, когда все функции
 		движка в текущий кадр выполнены  (P.S. API
 		движка написано в snake_case, поэтому передается
 		имя оригинальной функции в snake_case, а не
-		в C# обретке CamelCase). */
+		в C# обертке CamelCase). */
 		nime.Disable();
-		storedScene.CallDeferred("add_child", nime);
-		tree.CallDeferred("call_group", "Player", "EnterScene", newGate);
+		loadedScene.CallDeferred("add_child", nime);
+		tree.CallDeferred("call_group", "Player", "EnterScene", loadedGate);
 		nime.CallDeferred("Enable");
 	}
 }

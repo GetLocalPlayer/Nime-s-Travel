@@ -13,7 +13,7 @@ public partial class Nime : Node2D
 	[Signal] public delegate void SceneEnteredEventHandler();
 	[Signal] public delegate void HornUsedEventHandler(char code);
 
-	[Export] public float MoveSpeed = 80;	
+	[Export] public float MoveSpeed = 80;
 
 	/* Время перед сбросом заклинания. */
 	[Export] public float SpellResetTime = 2;
