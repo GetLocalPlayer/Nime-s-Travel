@@ -17,19 +17,19 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 size = Vector2(58.5, 62)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1n0bq"]
-size = Vector2(62.5, 93)
+size = Vector2(78.5, 171.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_urnuw"]
 size = Vector2(44, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5w56"]
-size = Vector2(108.25, 98.5)
+size = Vector2(128.25, 131)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2144"]
 size = Vector2(50, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_levci"]
-size = Vector2(70, 100)
+size = Vector2(84, 165)
 
 [node name="Street" type="Node2D"]
 z_as_relative = false
@@ -87,7 +87,7 @@ position = Vector2(-74, -9)
 shape = SubResource("RectangleShape2D_cbv5w")
 
 [node name="CollisionShape2D" parent="Gates/ToStreetToNeighborhood/Clickable" index="0"]
-position = Vector2(-178.75, 17)
+position = Vector2(-186.75, -22.25)
 shape = SubResource("RectangleShape2D_1n0bq")
 
 [node name="ToStreetToHome" parent="Gates" instance=ExtResource("4_lhdlr")]
@@ -109,7 +109,7 @@ position = Vector2(-12, 80)
 shape = SubResource("RectangleShape2D_urnuw")
 
 [node name="CollisionShape2D" parent="Gates/ToStreetToHome/Clickable" index="0"]
-position = Vector2(-46.125, 95.75)
+position = Vector2(-36.125, 79.5)
 shape = SubResource("RectangleShape2D_i5w56")
 
 [node name="ToStreetToGraveyard" parent="Gates" instance=ExtResource("4_lhdlr")]
@@ -131,7 +131,7 @@ position = Vector2(73, -5)
 shape = SubResource("RectangleShape2D_q2144")
 
 [node name="CollisionShape2D" parent="Gates/ToStreetToGraveyard/Clickable" index="0"]
-position = Vector2(171, 18)
+position = Vector2(178, -14.5)
 shape = SubResource("RectangleShape2D_levci")
 
 [editable path="Background"]

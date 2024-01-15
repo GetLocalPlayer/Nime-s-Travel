@@ -40,9 +40,8 @@ texture = SubResource("NoiseTexture2D_3kc06")
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_v8nx4"]
 
 [sub_resource type="Gradient" id="Gradient_cxdql"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.239044, 0.438247, 0.697211)
-colors = PackedColorArray(0, 0, 0, 1, 0.184762, 0.184762, 0.184762, 1, 0.562127, 0.562127, 0.562127, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.239044, 0.402632, 0.438247, 0.697211)
+colors = PackedColorArray(0, 0, 0, 1, 0.184762, 0.184762, 0.184762, 1, 0.225458, 0.225458, 0.225458, 1, 0.562127, 0.562127, 0.562127, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_lyscu"]
 gradient = SubResource("Gradient_cxdql")

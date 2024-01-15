@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://expad3u7bjp3"]
+[gd_scene load_steps=26 format=3 uid="uid://expad3u7bjp3"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_lisb4"]
 [ext_resource type="Texture2D" uid="uid://c44srvewhefkb" path="res://scenes/home/background.png" id="1_v0acl"]
@@ -7,18 +7,302 @@
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="3_dlque"]
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="3_iqu22"]
 [ext_resource type="PackedScene" uid="uid://djk0tfvrgbpsp" path="res://objects/interactable/interactable.tscn" id="6_4jxc5"]
+[ext_resource type="Texture2D" uid="uid://53q5qmjwaaxi" path="res://scenes/home/guards_ico.png" id="7_2hhfe"]
 [ext_resource type="Texture2D" uid="uid://ep5tridp670e" path="res://scenes/home/book_ico.png" id="7_3kghw"]
+[ext_resource type="Script" path="res://scenes/home/Guards.cs" id="7_4qbm3"]
 [ext_resource type="Texture2D" uid="uid://blrfplqio7ehx" path="res://scenes/home/books.png" id="7_7bebi"]
+[ext_resource type="Texture2D" uid="uid://cxhg11xuvibdw" path="res://scenes/home/guards.png" id="8_g0qi1"]
+[ext_resource type="Texture2D" uid="uid://436csbgmxb4u" path="res://scenes/home/guard_shadow.png" id="9_iv7o5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7tfj"]
+size = Vector2(125, 172.03)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mp5wo"]
+size = Vector2(131, 172.03)
+
+[sub_resource type="Animation" id="Animation_iu6ih"]
+resource_name = "FlyUp"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -175)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MagicEffect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -175)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Clickable:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -175)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RightShadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.66, 0.66)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LeftShadow:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.66, 0.66)]
+}
+
+[sub_resource type="Animation" id="Animation_wvb0a"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.5),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MagicEffect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.5),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Clickable:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.5),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LeftShadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RightShadow:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tkuhf"]
+resource_name = "Levitation"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector2(0, -175), Vector2(0, -190), Vector2(0, -175)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MagicEffect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector2(0, -175), Vector2(0, -190), Vector2(0, -175)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Clickable:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector2(0, -175), Vector2(0, -190), Vector2(0, -175)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LeftShadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector2(0.66, 0.66), Vector2(0.6, 0.6), Vector2(0.66, 0.66)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RightShadow:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector2(0.66, 0.66), Vector2(0.6, 0.6), Vector2(0.66, 0.66)]
+}
+
+[sub_resource type="Animation" id="Animation_y8ceo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -36.75)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MagicEffect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, -36.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Clickable:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -36.75)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LeftShadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RightShadow:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8lpq7"]
+_data = {
+"FlyUp": SubResource("Animation_iu6ih"),
+"Idle": SubResource("Animation_wvb0a"),
+"Levitation": SubResource("Animation_tkuhf"),
+"RESET": SubResource("Animation_y8ceo")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ygfj"]
 size = Vector2(43, 44)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sf02g"]
-vertices = PackedVector2Array(498, 437, 497, 437, 578, 436, 330, 441, 263, 432, 264, 432, 49, 411, -87, 413, -85, 410, 196, 410, 196, 411, 197, 415, 267, 428, 268, 428, 324, 436, 375, 442, 374, 447, 451, 447, 376, 442, 441, 443, 442, 443, 522, 439, 582, 441, 644, 437, 644, 439)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8), PackedInt32Array(6, 8, 9, 10), PackedInt32Array(11, 6, 10), PackedInt32Array(11, 10, 12, 5), PackedInt32Array(3, 5, 12, 13, 14), PackedInt32Array(3, 14, 15, 16), PackedInt32Array(17, 16, 15, 18, 19), PackedInt32Array(17, 19, 20), PackedInt32Array(17, 20, 0, 21), PackedInt32Array(22, 21, 0, 2, 23, 24)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-91, 401, 78, 400, 198, 401, 269, 418, 325, 426, 376, 432, 441, 433, 497, 427, 578, 426, 653, 428, 656, 449, 582, 451, 522, 449, 452, 457, 373, 458, 328, 451, 262, 442, 196, 425, 49, 421, -108, 424)])
+vertices = PackedVector2Array(265, 426, 308, 433, 303, 437, 262, 430, 197, 408, 195, 414, 67, 407, 61, 414, -94, 409, -95, 415)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(6, 4, 5, 7, 8), PackedInt32Array(8, 7, 9)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-94, 409, 67, 407, 197, 408, 265, 426, 308, 433, 303, 437, 262, 430, 195, 414, 61, 414, -95, 415)])
 parsed_geometry_type = 0
 source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_647rp"]
+vertices = PackedVector2Array(362, 446, 302, 437, 307, 433, 362, 439, 443, 442, 450, 447, 505, 442, 497, 436, 575, 434, 576, 440, 644, 436, 644, 440)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(6, 5, 4, 7, 8), PackedInt32Array(9, 6, 8, 10), PackedInt32Array(9, 10, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(307, 433, 362, 439, 443, 442, 497, 436, 575, 434, 644, 436, 644, 440, 576, 440, 505, 442, 450, 447, 362, 446, 302, 437)])
+parsed_geometry_type = 0
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4fygc"]
 size = Vector2(58, 71)
@@ -28,6 +312,24 @@ size = Vector2(117, 233)
 
 [node name="Home" type="Node2D"]
 y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Background" parent="." instance=ExtResource("1_lisb4")]
+texture = ExtResource("1_v0acl")
+metadata/_edit_lock_ = true
+
+[node name="Clickable" parent="Background" index="0"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="Background/Clickable" index="0"]
+visible = false
+position = Vector2(432, 246)
+
+[node name="DoorCover" type="Sprite2D" parent="Background"]
+position = Vector2(0, 496.105)
+texture = ExtResource("3_8mep1")
+centered = false
+offset = Vector2(0, -400)
 metadata/_edit_lock_ = true
 
 [node name="Scaler" parent="." instance=ExtResource("1_vd3jc")]
@@ -44,48 +346,103 @@ scale = Vector2(0.47, 0.47)
 position = Vector2(610, 439)
 scale = Vector2(-0.5, 0.5)
 MoveSpeed = 150.0
+initialSpells = PackedStringArray("LEVITATION", "-LEVITATION")
 
-[node name="Books" parent="." instance=ExtResource("6_4jxc5")]
+[node name="Interactables" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Guards" parent="Interactables" node_paths=PackedStringArray("blockedRegion") instance=ExtResource("6_4jxc5")]
+visible = false
+position = Vector2(603, 342)
+script = ExtResource("7_4qbm3")
+revSpellLines = PackedStringArray("BSPELL_INT_GUARDS")
+afterSpellLines = PackedStringArray("AFTER_SPELL_INT_GUARDS")
+blockedRegion = NodePath("../../Navigation/Right")
+UIIcon = ExtResource("7_2hhfe")
+UILabel = "LABEL_GUARDS"
+FirstInteracitonLines = PackedStringArray("F_INT_GUARDS_1", "F_INT_GUARDS_2", "F_INT_GUARDS_3", "F_INT_GUARDS_4", "F_INT_GUARDS_5")
+InteractionLines = PackedStringArray("INT_GUARDS_1", "INT_GUARDS_2")
+SpellName = "LEVITATION"
+SpellInteractionLines = PackedStringArray("FSPELL_INT_GUARDS_1", "FSPELL_INT_GUARDS_2", "FSPELL_INT_GUARDS_3")
+WrongSpellInteractionLines = PackedStringArray("WRONG_SPELL_INT_PONY_DEFAULT")
+
+[node name="Object" parent="Interactables/Guards" index="0"]
+z_index = 1
+position = Vector2(0, -36.75)
+texture = ExtResource("8_g0qi1")
+
+[node name="MagicEffect" parent="Interactables/Guards" index="1"]
+z_index = 1
+position = Vector2(-2, -36.75)
+scale = Vector2(3.95, 2.52)
+
+[node name="Clickable" parent="Interactables/Guards" index="2"]
+position = Vector2(0, -36.75)
+
+[node name="CollisionShape2D" parent="Interactables/Guards/Clickable" index="0"]
+visible = false
+position = Vector2(81.5, 8.9852)
+shape = SubResource("RectangleShape2D_k7tfj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Interactables/Guards/Clickable" index="1"]
+visible = false
+position = Vector2(-95.5, 10.9852)
+shape = SubResource("RectangleShape2D_mp5wo")
+debug_color = Color(1, 1, 1, 0.419608)
+metadata/_edit_lock_ = true
+
+[node name="WayPoint" parent="Interactables/Guards" index="4"]
+position = Vector2(-306, 89)
+
+[node name="LeftShadow" type="Sprite2D" parent="Interactables/Guards"]
+position = Vector2(-84, 90)
+texture = ExtResource("9_iv7o5")
+
+[node name="RightShadow" type="Sprite2D" parent="Interactables/Guards"]
+position = Vector2(92, 89)
+texture = ExtResource("9_iv7o5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interactables/Guards"]
+libraries = {
+"": SubResource("AnimationLibrary_8lpq7")
+}
+autoplay = "Idle"
+
+[node name="Books" parent="Interactables" instance=ExtResource("6_4jxc5")]
 position = Vector2(147, 228)
 UIIcon = ExtResource("7_3kghw")
 UILabel = "LABEL_BOOKS"
 InteractionLines = PackedStringArray("INT_BOOKS")
 SpellName = "TEST"
 
-[node name="Object" parent="Books" index="0"]
+[node name="Object" parent="Interactables/Books" index="0"]
 texture = ExtResource("7_7bebi")
 
-[node name="MagicEffect" parent="Books" index="1"]
+[node name="MagicEffect" parent="Interactables/Books" index="1"]
 position = Vector2(-4.50001, -1.49999)
 scale = Vector2(0.71, 0.71)
 
-[node name="CollisionShape2D" parent="Books/Clickable" index="0"]
+[node name="CollisionShape2D" parent="Interactables/Books/Clickable" index="0"]
 position = Vector2(-3.5, 0)
 shape = SubResource("RectangleShape2D_8ygfj")
 
-[node name="LookAtPoint" parent="Books" index="3"]
+[node name="LookAtPoint" parent="Interactables/Books" index="3"]
 position = Vector2(-5, -2)
 
-[node name="WayPoint" parent="Books" index="4"]
+[node name="WayPoint" parent="Interactables/Books" index="4"]
 position = Vector2(65, 188)
 
-[node name="Background" parent="." instance=ExtResource("1_lisb4")]
-texture = ExtResource("1_v0acl")
+[node name="Navigation" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" parent="Background/Clickable" index="0"]
-position = Vector2(432, 246)
-
-[node name="DoorCover" type="Sprite2D" parent="Background"]
-position = Vector2(0, 496.105)
-texture = ExtResource("3_8mep1")
-centered = false
-offset = Vector2(0, -400)
-metadata/_edit_lock_ = true
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+[node name="Left" type="NavigationRegion2D" parent="Navigation"]
 z_as_relative = false
 y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_sf02g")
+
+[node name="Right" type="NavigationRegion2D" parent="Navigation"]
+z_as_relative = false
+y_sort_enabled = true
+navigation_polygon = SubResource("NavigationPolygon_647rp")
 
 [node name="Gates" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -115,7 +472,8 @@ priority = 1
 position = Vector2(199.5, 41.5)
 shape = SubResource("RectangleShape2D_4gn8y")
 
-[editable path="Scaler"]
-[editable path="Books"]
 [editable path="Background"]
+[editable path="Scaler"]
+[editable path="Interactables/Guards"]
+[editable path="Interactables/Books"]
 [editable path="Gates/ToStreetToHome"]

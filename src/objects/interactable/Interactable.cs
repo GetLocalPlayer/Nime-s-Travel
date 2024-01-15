@@ -76,7 +76,7 @@ public partial class Interactable : Node2D
 	повторять GetTree().Root.GetNode... */
 	protected UI ui;
 	/* Флаг для запуска взаимодействия первой встречи. */
-	bool met = false;
+	protected bool met = false;
 	/* Флаг сигнализирующий что Ниме дошла до точке
 	взаимодействия с текущим Interactable по клику
 	на Clickable и может с ним взаимодействовать. */
