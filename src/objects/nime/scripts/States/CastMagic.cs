@@ -27,7 +27,7 @@ public partial class CastMagic : State
         onAnimationFinished = (animName) =>
         {
             var spellName = spells.GetSpellName(new string(codes.ToArray()));
-            if (nime.LearntSpells.Contains(spellName))
+            if (nime.LearntSpells.Contains(spellName, StringComparer.OrdinalIgnoreCase))
             {
                 Success(context, spellName);
                 EmitStateFinished(context);

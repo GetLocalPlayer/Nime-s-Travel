@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class Guards : Interactable
 {
@@ -14,6 +15,15 @@ public partial class Guards : Interactable
         base._Ready();
         blockedRegion.Enabled = !Visible;
         VisibilityChanged += () => blockedRegion.Enabled = !Visible;
+
+        GetTree().CurrentScene.ChildEnteredTree += (node) =>
+        {
+            if (node.Name != "Nime") return;
+            var learntSpells = (node as Nime).LearntSpells;
+            var comparer = StringComparer.OrdinalIgnoreCase;
+            if (learntSpells.Contains("LEVITATION", comparer) && learntSpells.Contains("IGNITION", comparer))
+                Show();
+        };
     }
 
     async protected override void OnSpellCast(string spellName)

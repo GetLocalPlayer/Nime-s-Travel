@@ -164,9 +164,7 @@ public partial class SceneGate : Node2D
 		движка написано в snake_case, поэтому передается
 		имя оригинальной функции в snake_case, а не
 		в C# обертке CamelCase). */
-		nime.Disable();
 		loadedScene.CallDeferred("add_child", nime);
 		tree.CallDeferred("call_group", "Player", "EnterScene", loadedGate);
-		nime.CallDeferred("Enable");
 	}
 }

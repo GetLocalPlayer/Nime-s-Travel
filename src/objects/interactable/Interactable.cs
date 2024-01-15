@@ -62,7 +62,7 @@ public partial class Interactable : Node2D
 	[ExportGroup("Applied Spell")]
 	/* Имя заклинания которое можно использовать
 	на данный Interactable.  */ 
-	[Export] public string SpellName;
+	[Export] public string SpellName = "";
 	/* Заклинание применяется автоматически,
 	как	при изучении нового заклинания (прим.
 	колба левитации). */
@@ -173,7 +173,8 @@ public partial class Interactable : Node2D
 	protected virtual void OnSpellCast(string spellName)
 	{
 		GD.Print("Spell is cast");
-		ui.RunInteraction(spellName == SpellName ? SpellInteractionLines : WrongSpellInteractionLines);
+		var equal = spellName.Equals(this.SpellName, StringComparison.OrdinalIgnoreCase);
+		ui.RunInteraction(equal ? SpellInteractionLines : WrongSpellInteractionLines);
 	}
 
 	/* Функции ниже вызываются через GetTree().CallGroup("Interactables", ...) */
