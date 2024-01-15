@@ -15,7 +15,10 @@ public partial class Guards : Interactable
         base._Ready();
         blockedRegion.Enabled = !Visible;
         VisibilityChanged += () => blockedRegion.Enabled = !Visible;
+    }
 
+    void ReadyDeferred()
+    {
         GetTree().CurrentScene.ChildEnteredTree += (node) =>
         {
             if (node.Name != "Nime") return;

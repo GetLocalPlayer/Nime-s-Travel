@@ -117,7 +117,7 @@ animation = &"Idle"
 [sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_1syu2"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wc0p5"]
-graph_offset = Vector2(-312.98, -157.644)
+graph_offset = Vector2(155.298, -275.382)
 nodes/AddAppear/node = SubResource("AnimationNodeAdd2_itmdk")
 nodes/AddAppear/position = Vector2(440, -160)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_s5he4")
@@ -165,7 +165,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/AddAppear/add_amount = 1.0
 parameters/AppearTimeScale/scale = 1.0
 parameters/AppearTimeSeek/seek_request = -1.0
-parameters/BlendResetPlay/blend_amount = 1.0
+parameters/BlendResetPlay/blend_amount = 0.0
 parameters/ResetTimeSeek/seek_request = -1.0
 
 [node name="Clickable" type="Area2D" parent="." groups=["InteractableClickables"]]
