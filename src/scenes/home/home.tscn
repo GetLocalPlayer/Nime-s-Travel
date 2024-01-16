@@ -427,7 +427,7 @@ position = Vector2(-3.5, 0)
 shape = SubResource("RectangleShape2D_8ygfj")
 
 [node name="LookAtPoint" parent="Interactables/Books" index="3"]
-position = Vector2(-5, -2)
+position = Vector2(-1, -2)
 
 [node name="WayPoint" parent="Interactables/Books" index="4"]
 position = Vector2(65, 188)

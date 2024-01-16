@@ -9,17 +9,29 @@ public partial class Guards : Interactable
     [Export] NavigationRegion2D blockedRegion;
 
     public bool IsLevitating = false;
+    SceneGate gatesToBlock;
 
     public override void _Ready()
     {
         base._Ready();
         blockedRegion.Enabled = !Visible;
-        VisibilityChanged += () => blockedRegion.Enabled = !Visible;
+
+        VisibilityChanged += () =>
+        {
+            if (Visible)
+            {
+                blockedRegion.Enabled = false;
+                gatesToBlock.IsBlocked = true;
+            }
+        };
+        CallDeferred("ReadyDeferred");
     }
 
     void ReadyDeferred()
     {
-        GetTree().CurrentScene.ChildEnteredTree += (node) =>
+        var currentScene = GetTree().CurrentScene;
+        gatesToBlock = currentScene.GetNode<SceneGate>("%ToStreetToHome");
+        currentScene.ChildEnteredTree += (node) =>
         {
             if (node.Name != "Nime") return;
             var learntSpells = (node as Nime).LearntSpells;
@@ -53,7 +65,9 @@ public partial class Guards : Interactable
                 met = true;
                 base.SpellName = "-" + spellName;
                 spellName = base.SpellName;
-                GetTree().Root.GetNode<GlobalVariables>("GlobalVariables").GuardsDealtWith = true;
+                var tree = GetTree();
+                tree.Root.GetNode<GlobalVariables>("GlobalVariables").GuardsDealtWith = true;
+                gatesToBlock.IsBlocked = false;
             }
         }
         base.OnSpellCast(spellName);

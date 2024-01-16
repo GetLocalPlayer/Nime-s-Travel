@@ -59,7 +59,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-74, -20)]
+"values": [Vector2(-72, -13)]
 }
 
 [sub_resource type="Animation" id="Animation_fxeu2"]
@@ -204,7 +204,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-56, 37)]
+"values": [Vector2(-56, 29)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lg54o"]
@@ -289,6 +289,7 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_n58fa")
 hframes = 4
 vframes = 4
+frame = 15
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MainContainer/HornContainer/Horn/Buttons/MagicSpark"]
 libraries = {
@@ -338,6 +339,7 @@ flat = true
 [node name="Filler" type="Control" parent="MainContainer/HornContainer"]
 custom_minimum_size = Vector2(224, 100)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="VSeparator" type="VSeparator" parent="MainContainer"]
 light_mask = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://deuv0qk8qfnu4"]
+[gd_scene load_steps=15 format=3 uid="uid://deuv0qk8qfnu4"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_ymmvc"]
 [ext_resource type="Texture2D" uid="uid://c2v0qm2p08dq8" path="res://scenes/street/back.png" id="2_bu2jx"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="4_lhdlr"]
 [ext_resource type="PackedScene" uid="uid://b233gcxrlq2nd" path="res://objects/Scaler/Scaler.tscn" id="4_yi155"]
 [ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="6_gsxwc"]
+[ext_resource type="Script" path="res://scenes/street/StreetSceneGate.cs" id="7_jxm4i"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_l0g0j"]
 vertices = PackedVector2Array(626, 439, 753, 443, 752, 443, 229, 448, 45, 439, 46, 439, -59, 423, -57, 420, 50, 437, 51, 437, 229, 447, 867, 453, 867, 455, 738, 444, 532, 439, 737, 444, 620, 443, 528, 441, 436, 442, 438, 445, 331, 446, 435, 442, 338, 435, 296, 445, 290, 440, 420, 339, 420, 340, 384, 340, 381, 339, 340, 353, 337, 352, 315, 374, 310, 371, 320, 415, 283, 403, 312, 391, 287, 392, 296, 381)
@@ -71,7 +72,9 @@ navigation_polygon = SubResource("NavigationPolygon_l0g0j")
 [node name="ToStreetToNeighborhood" parent="Gates" instance=ExtResource("4_lhdlr")]
 unique_name_in_owner = true
 position = Vector2(946, 417)
+script = ExtResource("7_jxm4i")
 ToScenePath = "res://scenes/neighborhood/neighborhood.tscn"
+BlockedInteractionLines = PackedStringArray("SG_INT_BLOCKED_MUST_LEAVE_VILLAGE")
 
 [node name="SpawnPoint" parent="Gates/ToStreetToNeighborhood" index="0"]
 position = Vector2(-137, 33)
@@ -93,7 +96,9 @@ shape = SubResource("RectangleShape2D_1n0bq")
 [node name="ToStreetToHome" parent="Gates" instance=ExtResource("4_lhdlr")]
 unique_name_in_owner = true
 position = Vector2(449, 213)
+script = ExtResource("7_jxm4i")
 ToScenePath = "res://scenes/home/home.tscn"
+BlockedInteractionLines = PackedStringArray("SG_INT_BLOCKED_GUARDS_ARE_THERE")
 
 [node name="SpawnPoint" parent="Gates/ToStreetToHome" index="0"]
 position = Vector2(-67, 127)

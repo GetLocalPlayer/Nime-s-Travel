@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bdnwor80y7kvj"]
+[gd_scene load_steps=25 format=3 uid="uid://bdnwor80y7kvj"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_7732i"]
 [ext_resource type="Texture2D" uid="uid://drv4wl1d4y7vv" path="res://scenes/graveyard/back.png" id="2_kjyhk"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bav48rel7l3jf" path="res://scenes/graveyard/graveview.png" id="9_w80xd"]
 [ext_resource type="Texture2D" uid="uid://c73xqnvjnssja" path="res://scenes/graveyard/grave_clover.png" id="10_fk2kn"]
 [ext_resource type="Texture2D" uid="uid://ib6etdyp1ltd" path="res://scenes/graveyard/clover.png" id="12_qpj7e"]
+[ext_resource type="Script" path="res://scenes/graveyard/GraveyardSceneGate.cs" id="17_0t8gb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvokv"]
 size = Vector2(53, 58)
@@ -172,7 +173,8 @@ metadata/_edit_lock_ = true
 [node name="ToStreetToGraveyard" parent="Gates" instance=ExtResource("8_xde2y")]
 unique_name_in_owner = true
 position = Vector2(930, 385)
-ToScenePath = "res://scenes/street/street.tscn"
+script = ExtResource("17_0t8gb")
+BlockedInteractionLines = PackedStringArray("SG_INT_BLOCKED_MUST_LEAVE_VILLAGE")
 
 [node name="SpawnPoint" parent="Gates/ToStreetToGraveyard" index="0"]
 position = Vector2(-119, -6)
