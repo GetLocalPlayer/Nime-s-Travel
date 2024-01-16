@@ -1,4 +1,9 @@
 "keys","ru","en"
+"SPELL_INT_DEFAULT","[color=#ffdef7]Заклинание работает, но ничего не происходит.","[color=#ffdef7]The spell's working, but nothing's happening."
+"SPELL_AFFECTED_INT_DEFAULT","[color=#ffdef7]Уже под действием заклинания.","[color=#ffdef7]It's already under the spell's effect."
+"WRONG_SPELL_INT_DEFAULT","[color=#ffdef7]Это так не работает. ","[color=#ffdef7]It doesn't work that way."
+"WRONG_SPELL_INT_PONY_DEFAULT","[color=#ffdef7]Очевидно, плохая идея. ","[color=#ffdef7]Obviously a bad idea."
+"SG_INT_BLOCKED_DEFAULT","[color=#ffdef7]Проход заблокирован, мне не пройти.","[color=#ffdef7]The way is blocked, I can't pass."
 "LABEL_BOOKS","Книги","Books"
 "INT_BOOKS","[color=#ffdef7]Здесь мои книги и дневники.
 Немного. Я мало что успела изучить.","[color=#ffdef7]Here are my books and diaries.
@@ -32,11 +37,6 @@ There are tombstone all around here."
 It's high time to look for a new mentor."
 "LABEL_CLOVER_GRAVE","Памятник Кловер ","Clover's tombstone"
 "LABEL_FLASK","Колба","Flask"
-"SPELL_INT_DEFAULT","[color=#ffdef7]Заклинание работает, но ничего
-не происходит.","[color=#ffdef7]The spell's working, but nothing's happening."
-"SPELL_AFFECTED_INT_DEFAULT","[color=#ffdef7]Уже под действием заклинания.","[color=#ffdef7]It's already under the spell's effect."
-"WRONG_SPELL_INT_DEFAULT","[color=#ffdef7]Это так не работает. ","[color=#ffdef7]It doesn't work that way."
-"WRONG_SPELL_INT_PONY_DEFAULT","[color=#ffdef7]Очевидно, плохая идея. ","[color=#ffdef7]Obviously a bad idea."
 "FSPELL_FLASK","[color=#ffdef7]Это левитация.
 Стоит запомнить, как работает.
 Я могу выполнить заклинание в обе стороны.
@@ -67,9 +67,9 @@ I can try it myself."
 "FSPELL_INT_GUARDS_3","[color=#ffdef7]Извините, парни, но я не хочу быть задержаной ни за что. ","[color=#ffdef7]Sorry, guys, but I don't want to be detained without reason."
 "AFTER_SPELL_INT_GUARDS","[color=#ffdef7]Не о чем с ними сейчас разговаривать. ","[color=#ffdef7]There's nothing to talk to them about right now."
 "BSPELL_INT_GUARDS","[color=#ffdef7]Пусть лучше повисят в воздухе. ","[color=#ffdef7]Let them hang in the air better."
-"BLOCK_EXIT_IN_GUARDS","[color=#ececec]Стоять на месте! ","[color=#ececec]Stop right there!"
-"","",""
-"","",""
+"SG_INT_BLOCKED_GUARDS","[color=#ececec]Стоять на месте! ","[color=#ececec]Stop right there!"
+"SG_INT_BLOCKED_GUARDS_ARE_THERE","[color=#ffdef7]Не стоит возвращаться туда, где уже есть стража. ","[color=#ffdef7]It's not good going back to where there are already guards."
+"SG_INT_BLOCKED_MUST_LEAVE_VILLAGE","[color=#ffdef7]Мне лучше уйти подальше от деревни. ","[color=#ffdef7]I'd better get away from the village."
 "","",""
 "","",""
 "","",""

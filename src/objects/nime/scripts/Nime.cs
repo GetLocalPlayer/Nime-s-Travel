@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public partial class Nime : Node2D
 {
@@ -12,6 +11,7 @@ public partial class Nime : Node2D
 	[Signal] public delegate void WalkTargetSetEventHandler();
 	[Signal] public delegate void SceneEnteredEventHandler();
 	[Signal] public delegate void HornUsedEventHandler(char code);
+	[Signal] public delegate void OnLookAtEventHandler(Vector2 target);
 
 	[Export] public float MoveSpeed = 80;
 
@@ -51,6 +51,12 @@ public partial class Nime : Node2D
 		col.Monitorable = false;
 		col.Monitoring = false;
 	}
+
+	public new void LookAt(Vector2 target)
+	{
+		EmitSignal("OnLookAt", target);
+	}
+
 
     /*
 	Функции ниже вызываются через GetTree().CallGroup("Player", ...).

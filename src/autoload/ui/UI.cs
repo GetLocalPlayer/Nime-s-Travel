@@ -10,7 +10,7 @@ public partial class UI : Control
 	[Signal] public delegate void SpellRevealedEventHandler();
 	[Signal] public delegate void InteractableButtonClickedEventHandler();
 
-	CenterContainer hornContainer;
+	TextureRect horn;
 	Button interactableHint;
 	Button interactableButton;
 	AnimationPlayer msAnimPlayer;
@@ -45,10 +45,10 @@ public partial class UI : Control
 			TranslationServer.SetLocale(toggledOn ? "ru" : "en");
 		var mainContainer = GetNode<BoxContainer>("MainContainer");
 
-		hornContainer = mainContainer.GetNode<CenterContainer>("HornContainer");
-		hornContainer.Hide();
+		horn = mainContainer.GetNode<TextureRect>("HornContainer/Horn");
+		horn.Hide();
 
-		var buttonsRoot = hornContainer.GetNode<Control>("Buttons");
+		var buttonsRoot = horn.GetNode<Control>("Buttons");
 		msAnimPlayer = buttonsRoot.GetNode<AnimationPlayer>("MagicSpark/AnimationPlayer");
 
 
@@ -125,12 +125,12 @@ public partial class UI : Control
 
 	public void ShowHorn()
 	{
-		hornContainer.Show();
+		horn.Show();
 	}
 
 	public void HideHorn()
 	{
-		hornContainer.Hide();
+		horn.Hide();
 	}
 
 	public void BlockMouse()

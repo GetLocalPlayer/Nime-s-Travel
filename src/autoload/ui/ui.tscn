@@ -274,10 +274,15 @@ layout_mode = 2
 texture = ExtResource("1_btmpg")
 stretch_mode = 2
 
-[node name="Buttons" type="Control" parent="MainContainer/HornContainer"]
+[node name="Buttons" type="Control" parent="MainContainer/HornContainer/Horn"]
 layout_mode = 2
+anchors_preset = 0
+offset_left = 112.0
+offset_top = 50.0
+offset_right = 112.0
+offset_bottom = 50.0
 
-[node name="MagicSpark" type="Sprite2D" parent="MainContainer/HornContainer/Buttons"]
+[node name="MagicSpark" type="Sprite2D" parent="MainContainer/HornContainer/Horn/Buttons"]
 visible = false
 position = Vector2(-26, -1)
 scale = Vector2(1.5, 1.5)
@@ -285,18 +290,18 @@ texture = ExtResource("4_n58fa")
 hframes = 4
 vframes = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MainContainer/HornContainer/Buttons/MagicSpark"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainContainer/HornContainer/Horn/Buttons/MagicSpark"]
 libraries = {
 "": SubResource("AnimationLibrary_lg54o")
 }
 autoplay = "RESET"
 
-[node name="Red" type="Button" parent="MainContainer/HornContainer/Buttons"]
+[node name="Red" type="Button" parent="MainContainer/HornContainer/Horn/Buttons"]
 layout_mode = 2
-offset_left = -75.0
-offset_top = 18.0
-offset_right = -52.0
-offset_bottom = 41.0
+offset_left = -74.0
+offset_top = 10.0
+offset_right = -51.0
+offset_bottom = 33.0
 scale = Vector2(1.5, 1.5)
 focus_mode = 0
 theme_override_constants/outline_size = 0
@@ -304,12 +309,12 @@ action_mode = 0
 icon = ExtResource("3_2arbf")
 flat = true
 
-[node name="Green" type="Button" parent="MainContainer/HornContainer/Buttons"]
+[node name="Green" type="Button" parent="MainContainer/HornContainer/Horn/Buttons"]
 layout_mode = 2
 offset_left = -107.0
-offset_top = -3.0
+offset_top = -5.0
 offset_right = -84.0
-offset_bottom = 20.0
+offset_bottom = 18.0
 scale = Vector2(1.5, 1.5)
 focus_mode = 0
 theme_override_constants/outline_size = 0
@@ -317,18 +322,22 @@ action_mode = 0
 icon = ExtResource("3_2arbf")
 flat = true
 
-[node name="Blue" type="Button" parent="MainContainer/HornContainer/Buttons"]
+[node name="Blue" type="Button" parent="MainContainer/HornContainer/Horn/Buttons"]
 layout_mode = 2
-offset_left = -93.0
-offset_top = -39.0
-offset_right = -70.0
-offset_bottom = -16.0
+offset_left = -90.0
+offset_top = -33.0
+offset_right = -67.0
+offset_bottom = -10.0
 scale = Vector2(1.5, 1.5)
 focus_mode = 0
 theme_override_constants/outline_size = 0
 action_mode = 0
 icon = ExtResource("3_2arbf")
 flat = true
+
+[node name="Filler" type="Control" parent="MainContainer/HornContainer"]
+custom_minimum_size = Vector2(224, 100)
+layout_mode = 2
 
 [node name="VSeparator" type="VSeparator" parent="MainContainer"]
 light_mask = 0

@@ -14,6 +14,7 @@ size = Vector2(100, 100)
 
 [node name="SceneGate" type="Node2D" groups=["SceneGates"]]
 script = ExtResource("1_qx145")
+BlockedInteractionLines = PackedStringArray("SG_INT_BLOCKED_DEFAULT")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(210, 222)

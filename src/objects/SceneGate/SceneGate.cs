@@ -19,11 +19,6 @@ using System;
 */
 public partial class SceneGate : Node2D
 {
-	/* Путь к сцене на которую обеспечиавют
-	переход данные ворота. */
-	[Export] public string ToScenePath;
-	Node storedScene;
-
 	bool _isActive = true;
 	[Export] public bool IsActive {
 		get => _isActive;
@@ -40,6 +35,16 @@ public partial class SceneGate : Node2D
 			}
 		}
 	}
+
+	/* Путь к сцене на которую обеспечиавют
+	переход данные ворота. */
+	[Export] public string ToScenePath;
+	Node storedScene;
+
+	[ExportGroup("Way Blocking")]
+	[Export] public bool IsBlocked = false;
+	[Export] public string[] BlockedInteractionLines;
+
 	public Vector2 SpawnPoint { get => GetNode<Marker2D>("SpawnPoint").GlobalPosition; }
 	public Vector2 SpawnWayPoint { get => GetNode<Marker2D>("SpawnWayPoint").GlobalPosition; }
 	public Vector2 ExitWayPoint { get => GetNode<Marker2D>("ExitWayPoint").GlobalPosition; }
@@ -48,6 +53,7 @@ public partial class SceneGate : Node2D
 	// GetTree().CallGroup("SceneGates", "Disable"/"Enable")
 	public void Disable() => IsActive = false;
 	public void Enable() => IsActive = true;
+
 
     public override void _Ready()
     {
@@ -70,15 +76,23 @@ public partial class SceneGate : Node2D
 		collider.AreaEntered += (area) =>
 		{
 			if (area.IsInGroup("PlayerCollider"))
-				/* Смена текущей сцены в момент
-				выполнения кода сигнала - не лучшая идея,
-				поскольку движок продолжет выполнение
-				внутренних процессов связанных с нодой
-				текущего сигнала, что приведет к
-				исключению нулевого указателя.
-				Менять сцену следует в конце текущего 
-				кадра, когда все внутренние процессы завершены. */
-				CallDeferred("ChangeScene");
+				if (IsBlocked)
+				{
+					GetTree().Root.GetNode<UI>("UI").RunInteraction(BlockedInteractionLines);
+					GetTree().CallGroup("Player", "LookAt", SpawnWayPoint);
+				}
+				else
+				{
+					/* Смена текущей сцены в момент
+					выполнения кода сигнала - не лучшая идея,
+					поскольку движок продолжет выполнение
+					внутренних процессов связанных с нодой
+					текущего сигнала, что приведет к
+					исключению нулевого указателя.
+					Менять сцену следует в конце текущего 
+					кадра, когда все внутренние процессы завершены. */
+					CallDeferred("ChangeScene");
+				}
 		};
     }
 

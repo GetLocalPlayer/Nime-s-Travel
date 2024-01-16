@@ -56,6 +56,13 @@ public partial class NimeFSM : FiniteStateMachine
 		states["castMagic"].StateFinished += (state, context) =>
 		{
 			SetState(states["idle"]);
-		};	
+		};
+
+		nime.OnLookAt += (Vector2 target) =>
+		{
+			nime.GetNode<NavigationAgent2D>("NavigationAgent2D").TargetPosition = target;
+			SetState(states["walk"]);
+			SetState(states["idle"]);
+		};
 	}
 }
