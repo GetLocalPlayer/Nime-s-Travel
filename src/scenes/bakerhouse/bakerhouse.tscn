@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c4ymlc2loys1x" path="res://scenes/bakerhouse/pony_ico.png" id="6_5jpup"]
 [ext_resource type="Texture2D" uid="uid://cg7oyotj61up3" path="res://scenes/bakerhouse/pony.png" id="7_sa6lb"]
 [ext_resource type="Texture2D" uid="uid://cebehqmffxefg" path="res://scenes/bakerhouse/stove_ico.png" id="8_nagnu"]
-[ext_resource type="Shader" uid="uid://dkwxj81uqbq0k" path="res://scenes/bakerhouse/flameshader.tres" id="9_baq7i"]
+[ext_resource type="Shader" uid="uid://dkwxj81uqbq0k" path="res://scenes/bakerhouse/stoveflameshader.tres" id="9_baq7i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brmn3"]
 size = Vector2(953, 510)
