@@ -617,13 +617,13 @@ position = Vector2(-53, 96)
 [node name="CloverGrave" parent="Interactables" instance=ExtResource("3_7fqlc")]
 position = Vector2(275, 295)
 script = ExtResource("7_eko1s")
+cloverDialogLines = PackedStringArray("INT_CLOVER_1", "INT_CLOVER_2", "INT_CLOVER_3", "INT_CLOVER_4", "INT_CLOVER_5", "INT_CLOVER_6", "INT_CLOVER_7", "INT_CLOVER_8", "INT_CLOVER_9")
 postDialogInteractinLines = PackedStringArray("INT_CLOVER_GRAVE_POST")
 UIIcon = ExtResource("8_b55mr")
 UILabel = "LABEL_CLOVER_GRAVE"
 InspectionTexture = ExtResource("9_w80xd")
 InspectionLines = PackedStringArray("INSP_CLOVER_GRAVE")
 Met = true
-FirstInteracitonLines = PackedStringArray("INT_CLOVER_1", "INT_CLOVER_2", "INT_CLOVER_3", "INT_CLOVER_4", "INT_CLOVER_5", "INT_CLOVER_6", "INT_CLOVER_7", "INT_CLOVER_8", "INT_CLOVER_9")
 InteractionLines = PackedStringArray("INT_CLOVER_GRAVE")
 
 [node name="Object" parent="Interactables/CloverGrave" index="0"]

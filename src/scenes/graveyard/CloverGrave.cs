@@ -4,6 +4,7 @@ using System.Linq;
 
 public partial class CloverGrave : Interactable
 {
+    [Export] string[] cloverDialogLines;
     [Export] string[] postDialogInteractinLines;
 
     AnimationPlayer headAnimPlayer;
@@ -14,33 +15,40 @@ public partial class CloverGrave : Interactable
         headAnimPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
     }
 
+    async void RunDialog()
+    {
+           var backgroundMusic = GetTree().Root.GetNode("BackgroundMusic");
+           backgroundMusic.GetNode<AudioStreamPlayer>("Default").Play();
+           backgroundMusic.GetNode<AudioStreamPlayer>("Guards").Stop();
+           
+           ui.BlockMouse();
+           headAnimPlayer.Play("CloverAppears");
+           await ToSignal(headAnimPlayer, AnimationPlayer.SignalName.AnimationFinished);
+           ui.UnblockMouse();
+
+           ui.RunInteraction(cloverDialogLines.Take(cloverDialogLines.Length - 1).ToArray());
+           await ToSignal(ui, "InteractionFinished");
+           
+           ui.BlockMouse();
+           headAnimPlayer.PlayBackwards("CloverAppears");
+           await ToSignal(headAnimPlayer, AnimationPlayer.SignalName.AnimationFinished);
+           ui.UnblockMouse();
+           ui.RunInteraction(cloverDialogLines.Skip(cloverDialogLines.Length - 1).ToArray());
+           ui.ShowHornButtons("r");
+    }
+
     async protected override void OnInspection()
     {
         var globals = GetTree().Root.GetNode<GlobalVariables>("GlobalVariables");
         if (globals.GuardsDealtWith && !globals.CloverTalkedTo)
         {
-            var backgroundMusic = GetTree().Root.GetNode("BackgroundMusic");
-            backgroundMusic.GetNode<AudioStreamPlayer>("Default").Play();
-            backgroundMusic.GetNode<AudioStreamPlayer>("Guards").Stop();
-
-            globals.CloverTalkedTo = true;
             InteractionLines = postDialogInteractinLines;
-            ui.BlockMouse();
-            headAnimPlayer.Play("CloverAppears");
-            await ToSignal(headAnimPlayer, AnimationPlayer.SignalName.AnimationFinished);
-            ui.UnblockMouse();
-
-            ui.RunInteraction(FirstInteracitonLines.Take(FirstInteracitonLines.Length - 1).ToArray());
+            globals.CloverTalkedTo = true;
+            ui.RunInteraction(cloverDialogLines.Take(1).ToArray());
             await ToSignal(ui, "InteractionFinished");
+            cloverDialogLines = cloverDialogLines.Skip(1).ToArray();
+            RunDialog();
             
-            ui.BlockMouse();
-            headAnimPlayer.PlayBackwards("CloverAppears");
-            await ToSignal(headAnimPlayer, AnimationPlayer.SignalName.AnimationFinished);
-            ui.UnblockMouse();
-
-            ui.RunInteraction(FirstInteracitonLines.Skip(FirstInteracitonLines.Length - 1).ToArray());
-
-            ui.ShowHornButtons("r");
         }
         else
             base.OnInspection();
@@ -48,7 +56,9 @@ public partial class CloverGrave : Interactable
 
     public void RunDialogFromBush()
     {
-        FirstInteracitonLines = FirstInteracitonLines.Skip(1).ToArray();
-        OnInspection();
+        cloverDialogLines = cloverDialogLines.Skip(1).ToArray();
+        InteractionLines = postDialogInteractinLines;
+        GetTree().Root.GetNode<GlobalVariables>("GlobalVariables").CloverTalkedTo = true;
+        RunDialog();
     }
 }
