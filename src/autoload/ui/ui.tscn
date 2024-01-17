@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkcn5ylv2er2p"]
+[gd_scene load_steps=17 format=3 uid="uid://bkcn5ylv2er2p"]
 
 [ext_resource type="Texture2D" uid="uid://x1qjlmton88t" path="res://autoload/ui/horn.png" id="1_btmpg"]
 [ext_resource type="Script" path="res://autoload/ui/UI.cs" id="1_uvga7"]
@@ -8,10 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://bvi5g26ivi4ty" path="res://autoload/ui/hornbutton.png" id="3_2arbf"]
 [ext_resource type="Texture2D" uid="uid://cuam7yq5bmu8v" path="res://autoload/ui/lang.ru.png" id="3_vu2xy"]
 [ext_resource type="Texture2D" uid="uid://cqsrgvngeegvg" path="res://autoload/ui/hornbuttonanim.png" id="4_n58fa"]
+[ext_resource type="AudioStream" uid="uid://bspkmiwd1me1g" path="res://autoload/ui/magicblue.ogg" id="6_m1rep"]
+[ext_resource type="AudioStream" uid="uid://cs6bys5xcwest" path="res://autoload/ui/magicred.ogg" id="7_kdg32"]
+[ext_resource type="AudioStream" uid="uid://b0awdv02ysqct" path="res://autoload/ui/magicgreen.ogg" id="7_t6f82"]
 
 [sub_resource type="Animation" id="Animation_8ykup"]
 resource_name = "Blue"
-length = 0.8
+length = 0.9
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -61,10 +64,25 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(-72, -13)]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_m1rep")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_fxeu2"]
 resource_name = "Green"
-length = 0.8
+length = 0.9
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -114,6 +132,21 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(-88, 16)]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_t6f82")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_a4jgu"]
 length = 0.001
@@ -206,6 +239,21 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(-56, 29)]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_kdg32")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lg54o"]
 _data = {
@@ -289,7 +337,6 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_n58fa")
 hframes = 4
 vframes = 4
-frame = 15
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MainContainer/HornContainer/Horn/Buttons/MagicSpark"]
 libraries = {
@@ -297,8 +344,11 @@ libraries = {
 }
 autoplay = "RESET"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MainContainer/HornContainer/Horn/Buttons/MagicSpark"]
+volume_db = -5.0
+bus = &"SoundEffect"
+
 [node name="Red" type="Button" parent="MainContainer/HornContainer/Horn/Buttons"]
-visible = false
 layout_mode = 2
 offset_left = -74.0
 offset_top = 10.0

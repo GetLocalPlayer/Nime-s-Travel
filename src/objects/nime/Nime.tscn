@@ -416,6 +416,7 @@ autoplay = "Idle"
 
 [node name="GalopSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_uc1nq")
+bus = &"SoundEffect"
 
 [node name="Collider" type="Area2D" parent="." groups=["PlayerCollider"]]
 position = Vector2(0, -148.92)

@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 
 GlobalVariables="*res://autoload/GlobalVariables.cs"
 Spells="*res://autoload/Spells.cs"
+BackgroundMusic="*res://autoload/BackgroundMusic.tscn"
 UI="*res://autoload/ui/ui.tscn"
 
 [display]
