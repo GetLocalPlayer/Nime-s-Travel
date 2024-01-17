@@ -44,8 +44,6 @@ public partial class UI : Control
 
 	public override void _Ready()
 	{
-		GetNode<CheckBox>("LanguageSwitcher").Toggled += (toggledOn) =>
-			TranslationServer.SetLocale(toggledOn ? "ru" : "en");
 		var mainContainer = GetNode<BoxContainer>("MainContainer");
 
 		horn = mainContainer.GetNode<TextureRect>("HornContainer/Horn");

@@ -4,10 +4,12 @@
 "WRONG_SPELL_INT_DEFAULT","[color=#ffdef7]Это так не работает. ","[color=#ffdef7]It doesn't work that way."
 "WRONG_SPELL_INT_PONY_DEFAULT","[color=#ffdef7]Очевидно, плохая идея. ","[color=#ffdef7]Obviously a bad idea."
 "SG_INT_BLOCKED_DEFAULT","[color=#ffdef7]Проход заблокирован, мне не пройти.","[color=#ffdef7]The way is blocked, I can't pass."
+"The books","",""
 "LABEL_BOOKS","Книги","Books"
 "INT_BOOKS","[color=#ffdef7]Здесь мои книги и дневники.
 Немного. Я мало что успела изучить.","[color=#ffdef7]Here are my books and diaries.
 A little. I didn't have much time to study."
+"The alchemist","",""
 "LABEL_ALCHEMIST","Алхимик","Alchemist"
 "F_INT_ALCHEMIST_1","[color=#ffdef7]Привет, как твои исследования? ","[color=#ffdef7]Hi, how's your research going?"
 "F_INT_ALCHEMIST_2","[color=#71c837]Наконец-то смог добиться устойчивой
@@ -22,6 +24,7 @@ Experience is not enough
 even for simple spells."
 "INT_ALCHEMIST_1","[color=#ffdef7]Ещё что интересного? ","[color=#ffdef7]What else is interesting?"
 "INT_ALCHEMIST_2","[color=#71c837]Пока только левитационный раствор. ","[color=#71c837]So far, only levitation solution."
+"The baker himself","",""
 "LABEL_BAKER","Пекарь","Baker"
 "INT_BAKER","[color=#ffdef7]Пекарь очень занят.
 Лучше его не отвлекать. ","[color=#ffdef7]The baker is very busy.
@@ -31,7 +34,7 @@ It's better not to distract him."
 Здесь кругом памятники.","[color=#ffdef7]This is a cemetery.
 There are tombstone all around here."
 "INT_GRAVE_2","[color=#ffdef7]Еще один памятник. ","[color=#ffdef7]Another tombstone."
-"","",""
+"Clover grave","",""
 "LABEL_CLOVER_GRAVE","Памятник Кловер ","Clover's tombstone"
 "INSP_CLOVER_GRAVE","Кловер Премудрая, юникорн","Clover the Clever, Unicorn"
 "INT_CLOVER_GRAVE","[color=#ffdef7]Два года прошло.
@@ -56,6 +59,7 @@ Focus on the magic inside you, and in a minute you will be able to use new spell
 "INT_CLOVER_9","[color=#ffdef7]Хотя бы так.
 По крайней мере, мне действительно теперь доступен следующий уровень.","[color=#ffdef7]At least so.
 The next level is really available to me now."
+"Levitation flask","",""
 "LABEL_FLASK","Колба","Flask"
 "FSPELL_FLASK","[color=#ffdef7]Это левитация.
 Стоит запомнить, как работает.
@@ -71,9 +75,11 @@ The same magic but in reverse order.
 I can try it myself."
 "FSPELL_AFFECTED_FLASK","[color=#ffdef7]Колба уже левитирует.","[color=#ffdef7]The flask is already levitating."
 "BSPELL_AFFECTED_FLASK","[color=#ffdef7]Эффект левитации уже снят.","[color=#ffdef7]The levitation effect has already been removed."
+"Stove in the baker's house","",""
 "LABEL_STOVE","Огонь","Fire"
 "SPELL_INT_STOVE_1","[color=#ffdef7]Это магия огня! ","[color=#ffdef7]It's fire magic!"
 "SPELL_INT_STOVE_2","[color=#ffdef7]Я могу её запомнить, но слишком слаба, чтобы воспроизвести. ","[color=#ffdef7]I can memorize it, yet I'm too weak to use it."
+"Guards at home","",""
 "LABEL_GUARDS","Стражники","Guards"
 "F_INT_GUARDS_1","[color=#ececec]Именем Принцессы Селестии, вы задержаны и должны проследовать с нами. ","[color=#ececec]In the name of Princess Celestia, you are detained and must come with us."
 "F_INT_GUARDS_2","[color=#ffdef7]Очень смешно. Я два года не покидала эту деревню. И вообще не подданная принцессы.","[color=#ffdef7]Very funny. I haven't left this village for two years. And not a subject of the princess at all."
@@ -88,27 +94,39 @@ I can try it myself."
 "AFTER_SPELL_INT_GUARDS","[color=#ffdef7]Не о чем с ними сейчас разговаривать. ","[color=#ffdef7]There's nothing to talk to them about right now."
 "BSPELL_INT_GUARDS","[color=#ffdef7]Пусть лучше повисят в воздухе. ","[color=#ffdef7]Let them hang in the air better."
 "SG_INT_BLOCKED_GUARDS","[color=#ececec]Стоять на месте! ","[color=#ececec]Stop right there!"
+"Scene gates blocked","",""
 "SG_INT_BLOCKED_GUARDS_ARE_THERE","[color=#ffdef7]Не стоит возвращаться туда, где уже есть стража. ","[color=#ffdef7]It's not good going back to where are guards already."
 "SG_INT_BLOCKED_MUST_LEAVE_VILLAGE","[color=#ffdef7]Мне лучше уйти подальше от деревни. ","[color=#ffdef7]I'd better get away from the village."
+"Bush interacitons","",""
 "LABEL_BUSH","Колючий куст","Prickly bush"
 "F_INT_BUSH","[color=#ffdef7]Если бы я только могла пройти через лес, как-то избавиться от куста...","[color=#ffdef7]If only I could pass through the forest, somehow get rid of the bush..."
 "INT_BUSH","[color=#ffdef7]Дорога заросла колючим кустарником.","[color=#ffdef7]The road is overgrown with prickly bush."
 "SPELL_INT_BUSH","[color=#ffdef7]Путь свободен, теперь пора убираться отсюда, пока не нагрянула новая стража.","[color=#ffdef7]The way is clear, now it's time to get out of here, before more guards arrive."
+"gg wp","",""
 "GAME_OVER","[color=#ffdef7]Пролог игры ""Путешествие Нимэ"" успешно пройден! Спасибо за тестирование!","[color=#ffdef7]The prologue of the game ""Nime's Travel"" has been successfully completed! Thanks for testing!"
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
+"Esc menu buttons, labels, text","",""
+"BTN_NEW_GAME","Новая игра","New game"
+"BTN_LANGUAGE","Язык: RU","Language: EN"
+"BTN_MUSIC_ON","Музыка: вкл","Music: on"
+"BTN_MUSIC_OFF","Музыка: выкл","Music: off"
+"BTN_SOUND_ON","Звуки: вкл","Sound: on"
+"BTN_SOUND_OFF","Звуки: выкл","Sound: off"
+"BTN_HELP","Помощь","Help"
+"BTN_EXIT","Выход","Exit"
+"LABEL_HELP","Справка","Help"
+"TEXT_HELP","   Задача игрока - изучать магию, собирая заклинания и применяя их на объектах игрового мира для продвижения сюжета.
+   Перемещение героя - левая кнопка мыши на нужный участок.
+   При наведении курсора на объект, он отображается миниатюрой в правом нижнем углу экрана. Для активации объекта, нужно нажать на него левой кнопкой мыши, герой переместится к объекту, и его название отобразится рядом с миниатюрой объекта.
+   Нажатие левой кнопки мыши на активный объект (после перемещения к нему) - даёт информацию или взаимодействие. Также на активный объект можно применять заклинания.
+   В случае, если объект показывает игроку заклинание - его нужно запомнить или записать в виде последовательности цветов или участков на роге героя. При новом запуске игры заклинание может иметь другую последовательность!
+   Для применения заклинания на объекте, нужно последовательно нажать на участки рога в правильном порядке, или набрать с помощью цифр, где цифры соответствуют участкам рога в порядке слева направо, начиная с единицы.","   The player's task is to study magic by collecting spells and applying them to the objects of the game world to advance the plot.
+   Move the hero - left mouse button to the desired area.
+   When you hover the cursor over an object, it is displayed as a thumbnail in the lower right corner of the screen. To activate the object, you need to click on with the left mouse button, the hero will move to the object, and his name will be displayed next to the thumbnail of the object.
+   Clicking the left mouse button on the active object (after moving to it) - gives information or interaction.
+   You can also cast spells on the active object.
+   If the object shows the player a spell, it needs to be remembered or written down as a sequence of colors or bunches on the hero's horn. When you start the game again, the spell may have a different sequence!
+   To cast a spell on an object, you need to sequentially press the horn sections in the correct order, or press the keyboard digits, where the numbers correspond to the horn sections in the left-right order, starting from one."
+"BTN_CONTINUE","Продолжить","Continue"
 "","",""
 "","",""
 "","",""

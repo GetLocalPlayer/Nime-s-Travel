@@ -1,0 +1,292 @@
+[gd_scene load_steps=8 format=3 uid="uid://d7ctlsdyuaar"]
+
+[ext_resource type="Script" path="res://autoload/EscMenu/EscMenu.cs" id="1_pylgq"]
+[ext_resource type="Texture2D" uid="uid://clttnxp45jdpy" path="res://autoload/EscMenu/menu_back.png" id="1_ulu8x"]
+[ext_resource type="FontFile" uid="uid://cbxbbyqhktfve" path="res://fonts/arial.ttf" id="2_n4aw7"]
+[ext_resource type="Texture2D" uid="uid://cuam7yq5bmu8v" path="res://autoload/EscMenu/lang.ru.png" id="3_84hui"]
+[ext_resource type="Texture2D" uid="uid://dg4xe3y2j0cef" path="res://autoload/EscMenu/lang.en.png" id="4_fj3ir"]
+[ext_resource type="Script" path="res://autoload/EscMenu/CustomCheckButton.cs" id="6_tr5bj"]
+[ext_resource type="Texture2D" uid="uid://dxh656u1pgwi0" path="res://autoload/EscMenu/help_back.png" id="7_y1cj8"]
+
+[node name="EscMenu" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pylgq")
+
+[node name="ButtonsBackdrop" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_ulu8x")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+alignment = 1
+
+[node name="NewGame" type="Control" parent="ButtonContainer"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ButtonContainer/NewGame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.0
+offset_top = -19.0
+offset_right = 122.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_focus_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_disabled_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_outline_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_n4aw7")
+theme_override_font_sizes/font_size = 28
+text = "BTN_NEW_GAME"
+flat = true
+
+[node name="Continue" type="Control" parent="ButtonContainer"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ButtonContainer/Continue"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.0
+offset_top = -19.0
+offset_right = 122.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_focus_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_disabled_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_outline_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_n4aw7")
+theme_override_font_sizes/font_size = 28
+text = "BTN_CONTINUE"
+flat = true
+
+[node name="Language" type="Control" parent="ButtonContainer"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="Button" type="CheckButton" parent="ButtonContainer/Language"]
+light_mask = 0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -17.0
+offset_right = 62.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_focus_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_disabled_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_outline_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_n4aw7")
+theme_override_font_sizes/font_size = 28
+theme_override_icons/checked = ExtResource("4_fj3ir")
+theme_override_icons/unchecked = ExtResource("3_84hui")
+button_pressed = true
+text = "BTN_LANGUAGE"
+flat = true
+
+[node name="Music" type="Control" parent="ButtonContainer"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ButtonContainer/Music"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -17.0
+offset_right = 62.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_focus_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_disabled_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_outline_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_n4aw7")
+theme_override_font_sizes/font_size = 28
+toggle_mode = true
+button_pressed = true
+text = "BTN_MUSIC_ON_OFF"
+flat = true
+script = ExtResource("6_tr5bj")
+TextChacked = "BTN_MUSIC_ON"
+TextUnchecked = "BTN_MUSIC_OFF"
+
+[node name="Sound" type="Control" parent="ButtonContainer"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ButtonContainer/Sound"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -17.0
+offset_right = 62.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_focus_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_disabled_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_outline_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_n4aw7")
+theme_override_font_sizes/font_size = 28
+toggle_mode = true
+button_pressed = true
+text = "BTN_SOUND_ON_OFF"
+flat = true
+script = ExtResource("6_tr5bj")
+TextChacked = "BTN_SOUND_ON"
+TextUnchecked = "BTN_SOUND_OFF"
+
+[node name="Help" type="Control" parent="ButtonContainer"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ButtonContainer/Help"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -17.0
+offset_right = 62.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_focus_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_disabled_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_outline_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_n4aw7")
+theme_override_font_sizes/font_size = 28
+text = "BTN_HELP"
+flat = true
+
+[node name="Exit" type="Control" parent="ButtonContainer"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ButtonContainer/Exit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -17.0
+offset_right = 62.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_focus_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_disabled_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_colors/font_outline_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_n4aw7")
+theme_override_font_sizes/font_size = 28
+text = "BTN_EXIT"
+flat = true
+
+[node name="HelpBackdrop" type="Button" parent="."]
+visible = false
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("7_y1cj8")
+flat = true
+
+[node name="Label" type="Label" parent="HelpBackdrop"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 60.0
+offset_right = -0.400024
+offset_bottom = -0.104002
+theme_override_colors/font_color = Color(0.6, 0.403922, 0.196078, 1)
+theme_override_font_sizes/font_size = 26
+text = "LABEL_HELP"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HelpBackdrop"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 100.0
+offset_right = -64.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.486275, 0.321569, 0.14902, 1)
+theme_override_fonts/normal_font = ExtResource("2_n4aw7")
+theme_override_font_sizes/normal_font_size = 20
+text = "TEXT_HELP"

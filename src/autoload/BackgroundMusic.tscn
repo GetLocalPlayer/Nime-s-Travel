@@ -8,13 +8,16 @@
 
 [node name="Default" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_6vg1g")
+volume_db = -10.0
 autoplay = true
 bus = &"BackgroundMusic"
 
 [node name="Guards" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_fhas4")
+volume_db = -10.0
 bus = &"BackgroundMusic"
 
 [node name="Fire" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_7w14k")
+volume_db = -10.0
 bus = &"BackgroundMusic"
