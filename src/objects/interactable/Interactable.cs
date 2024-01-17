@@ -111,67 +111,92 @@ public partial class Interactable : Node2D
 		};
     }
 
-	async public virtual void Clickable_OnClick()
+	public virtual void Clickable_OnClick()
 	{
 		var tree = GetTree();
 		if (!isReached)
 			tree.CallGroup("Player", "InteractableClicked", this);
 		else
 		{
-			if (InspectionTexture != null)
-			{
-				ui.RunPicturedInteraction(InspectionTexture, InspectionLines);
-				await ToSignal(ui, "InteractionFinished");
-				OnInspectionFinished();
-			}
-			if (!Met && !FirstInteracitonLines.IsEmpty())
-			{
-				Met = true;
-				ui.RunInteraction(FirstInteracitonLines);
-				await ToSignal(ui, "InteractionFinished");
-				OnFirstInteractionFinished();
-			}
-			else if (!InteractionLines.IsEmpty())
-			{
-				ui.RunInteraction(InteractionLines);
-				await ToSignal(ui, "InteractionFinished");
-				OnInteractionFinished();
-			}
-			if (Autocast && SpellName != "" && SpellName != null)
-			{
-				ui.RevealSpell(SpellName);
-				await ToSignal(ui, "SpellRevealed");
-				tree.CallGroup("Player", "InteractableSpellRevealed", SpellName);
-				OnSpellRevealed();
-			}
+			OnInspection();
 		}
 	}
 
-	protected virtual void OnFirstInteractionFinished()
+	async protected virtual void OnInspection()
 	{
-		GD.Print("First interaction finished");
+		GD.Print($"{Name} - inspection");
+		if (InspectionTexture != null)
+		{
+			ui.RunPicturedInteraction(InspectionTexture, InspectionLines);
+			await ToSignal(ui, "InteractionFinished");
+		}
+		OnInspectionFinished();
 	}
 
 	protected virtual void OnInspectionFinished()
 	{
-		GD.Print("Inspection finished");
+		GD.Print($"{Name} - inspection finished");
+		if (!Met)
+			OnFirstInteraction();
+		else
+			OnInteraction();
+	}
+
+	async protected virtual void OnFirstInteraction()
+	{
+		GD.Print($"{Name} - first interaction");
+		if (!FirstInteracitonLines.IsEmpty())
+		{
+			ui.RunInteraction(FirstInteracitonLines);
+			await ToSignal(ui, "InteractionFinished");
+		}
+		Met = true;
+		OnFirstInteractionFinished();
+	}
+
+	protected virtual void OnFirstInteractionFinished()
+	{
+		GD.Print($"{Name} - first interaction finished");
+		OnSpellReveal();
+	}
+
+	protected virtual void OnInteraction()
+	{
+		GD.Print($"{Name} - interaction");
+		if (!InteractionLines.IsEmpty())
+			ui.RunInteraction(InteractionLines);
+		OnInteractionFinished();
 	}
 
 	protected virtual void OnInteractionFinished()
 	{
-		GD.Print("Interaction finished");
+		GD.Print($"{Name} - interaction finished");
+		if (Autocast)
+			OnSpellReveal();
+	}
+
+	async protected virtual void OnSpellReveal()
+	{
+		GD.Print($"{Name} - spell reveal");
+		if (SpellName != null && SpellName != "")
+		{
+			ui.RevealSpell(SpellName);
+			await ToSignal(ui, "SpellRevealed");
+			GetTree().CallGroup("Player", "InteractableSpellRevealed", SpellName);
+		}
+		OnSpellRevealed();
 	}
 
 	protected virtual void OnSpellRevealed()
 	{
-		GD.Print("Spell revealed");
+		GD.Print($"{Name} - spell revealed");
 		GetTree().CallGroup("Player", "InteractableSpellRevealed", SpellName);
 		OnSpellCast(SpellName);
 	}
 
 	protected virtual void OnSpellCast(string spellName)
 	{
-		GD.Print("Spell is cast");
+		GD.Print($"'{spellName}' is cast on '{Name}'");
 		var equal = spellName.Equals(this.SpellName, StringComparison.OrdinalIgnoreCase);
 		ui.RunInteraction(equal ? SpellInteractionLines : WrongSpellInteractionLines);
 	}
