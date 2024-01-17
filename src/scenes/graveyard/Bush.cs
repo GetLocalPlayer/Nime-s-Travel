@@ -20,7 +20,7 @@ public partial class Bush : Interactable
         var tree = GetTree();
         var cloverGrave = tree.CurrentScene.GetNode<CloverGrave>("Interactables/CloverGrave");
         tree.CallGroup("Player", "LookAt", cloverGrave.LookAtPoint);
-        cloverGrave.RunDialog();
+        cloverGrave.RunDialogFromBush();
     }
 
     async protected override void OnSpellCast(string spellName)
@@ -28,13 +28,23 @@ public partial class Bush : Interactable
         if (spellName.Equals(this.SpellName, StringComparison.OrdinalIgnoreCase))
         {
             GetNode<Area2D>("Clickable").InputPickable = false;
-            var player = GetNode<AnimationPlayer>("AnimationPlayer");
+
+            var backgroundMusic = GetTree().Root.GetNode("BackgroundMusic");
+            var defaultPlayer = backgroundMusic.GetNode<AudioStreamPlayer>("Default");
+            defaultPlayer.Stop();
+            var firePlayer = backgroundMusic.GetNode<AudioStreamPlayer>("Fire");
+            firePlayer.Play();
+
+            var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
             /* Там 3 последовательных анимаций, но переходы между
-            ними заданы в редакторе анимаий посему тут не приходится. */
-            player.Play("FireGrow");
-            ui.BlockMouse();
-            await ToSignal(player, AnimationPlayer.SignalName.AnimationFinished);
+            ними заданы в редакторе AnimationPlayer посему тут не
+            приходится впердоливать очередь анимаций кодом. */
+            animPlayer.Play("FireGrow");
+            ui.BlockMouse();    
+            await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
             ui.UnblockMouse();
+            firePlayer.Stop();
+            defaultPlayer.Play();
             GetTree().CurrentScene.GetNode<NavigationRegion2D>("NavigationRegions/Escape").Enabled = true;
         }
         base.OnSpellCast(spellName);

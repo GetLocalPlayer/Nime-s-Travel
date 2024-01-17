@@ -7,8 +7,35 @@ public partial class Background : Sprite2D
 	группе игроков глобальную позицию курсора
 	к которой строится маршрут по навигационной
 	сетке. */
+
 	public override void _Ready()
 	{	
+		var zoneMusicPlayer = GetNode<AudioStreamPlayer>("ZoneMusicPlayer");
+
+		var backgroundBusIdx = AudioServer.GetBusIndex("BackgroundMusic");
+		var zoneBusIdx = AudioServer.GetBusIndex("ZoneMusic");
+
+        void onTreeEntered()
+        {
+            if (zoneMusicPlayer.Autoplay && zoneMusicPlayer.Stream != null)
+            {
+                AudioServer.SetBusMute(backgroundBusIdx, true);
+                AudioServer.SetBusMute(zoneBusIdx, false);
+            }
+        }
+
+        TreeEntered += onTreeEntered;
+		onTreeEntered();
+
+		TreeExiting += () =>
+		{
+			if (zoneMusicPlayer.Autoplay && zoneMusicPlayer.Stream != null)
+			{
+				AudioServer.SetBusMute(backgroundBusIdx, false);
+				AudioServer.SetBusMute(zoneBusIdx, true);
+			}
+		};
+
 		var onInputEvent = Callable.From((Viewport v, InputEvent e, int idx) =>
 		{
 			if (v.IsInputHandled()) return;
@@ -28,5 +55,5 @@ public partial class Background : Sprite2D
 		"WalkToInteractable" в тот же самый кадр. */
 		var clickable = GetNode<Area2D>("Clickable");
 		clickable.Connect(Area2D.SignalName.InputEvent, onInputEvent, (uint)ConnectFlags.Deferred);
-	}
+	}	
 }

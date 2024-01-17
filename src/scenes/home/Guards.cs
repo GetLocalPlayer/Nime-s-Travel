@@ -22,6 +22,9 @@ public partial class Guards : Interactable
             {
                 blockedRegion.Enabled = false;
                 gatesToBlock.IsBlocked = true;
+                var backgroundMusic = GetTree().Root.GetNode("BackgroundMusic");
+                backgroundMusic.GetNode<AudioStreamPlayer>("Default").Stop();
+                backgroundMusic.GetNode<AudioStreamPlayer>("Guards").Play();
             }
         };
         CallDeferred("ReadyDeferred");

@@ -318,7 +318,7 @@ metadata/_edit_lock_ = true
 texture = ExtResource("1_v0acl")
 metadata/_edit_lock_ = true
 
-[node name="Clickable" parent="Background" index="0"]
+[node name="Clickable" parent="Background" index="1"]
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" parent="Background/Clickable" index="0"]

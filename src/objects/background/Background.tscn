@@ -5,10 +5,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dboli"]
 size = Vector2(953, 510)
 
-[node name="Background" type="Sprite2D"]
+[node name="Background" type="Sprite2D" node_paths=PackedStringArray("music")]
 y_sort_enabled = true
 centered = false
 script = ExtResource("1_8kjky")
+music = NodePath("")
+
+[node name="ZoneMusicPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+bus = &"ZoneMusic"
 
 [node name="Clickable" type="Area2D" parent="."]
 monitorable = false

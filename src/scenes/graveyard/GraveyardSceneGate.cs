@@ -4,15 +4,11 @@ using System.Collections.Generic;
 
 public partial class GraveyardSceneGate : SceneGate
 {
-    public override void _Ready()
+    public override void _EnterTree()
     {
-        base._Ready();
-        TreeEntered += () =>
+        if (GetTree().Root.GetNode<GlobalVariables>("GlobalVariables").GuardsDealtWith)
         {
-            if (GetTree().Root.GetNode<GlobalVariables>("GlobalVariables").GuardsDealtWith)
-            {
-                IsBlocked = true;
-            };
+            IsBlocked = true;
         };
     }
 }

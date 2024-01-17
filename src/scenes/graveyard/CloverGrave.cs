@@ -19,6 +19,10 @@ public partial class CloverGrave : Interactable
         var globals = GetTree().Root.GetNode<GlobalVariables>("GlobalVariables");
         if (globals.GuardsDealtWith && !globals.CloverTalkedTo)
         {
+            var backgroundMusic = GetTree().Root.GetNode("BackgroundMusic");
+            backgroundMusic.GetNode<AudioStreamPlayer>("Default").Play();
+            backgroundMusic.GetNode<AudioStreamPlayer>("Guards").Stop();
+
             globals.CloverTalkedTo = true;
             InteractionLines = postDialogInteractinLines;
             ui.BlockMouse();
@@ -42,8 +46,9 @@ public partial class CloverGrave : Interactable
             base.OnInspection();
     }
 
-    public void RunDialog()
+    public void RunDialogFromBush()
     {
+        FirstInteracitonLines = FirstInteracitonLines.Skip(1).ToArray();
         OnInspection();
     }
 }
