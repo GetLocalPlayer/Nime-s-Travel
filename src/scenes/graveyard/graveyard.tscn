@@ -578,6 +578,7 @@ metadata/_edit_lock_ = true
 position = Vector2(178, 285)
 UIIcon = ExtResource("4_6cabc")
 UILabel = "LABEL_GRAVE"
+Met = true
 InteractionLines = PackedStringArray("INT_GRAVE_1")
 
 [node name="Object" parent="Interactables/Grave1" index="0"]
@@ -597,6 +598,7 @@ position = Vector2(55, 83)
 position = Vector2(352, 278)
 UIIcon = ExtResource("4_6cabc")
 UILabel = "LABEL_GRAVE"
+Met = true
 InteractionLines = PackedStringArray("INT_GRAVE_2")
 
 [node name="Object" parent="Interactables/Grave2" index="0"]

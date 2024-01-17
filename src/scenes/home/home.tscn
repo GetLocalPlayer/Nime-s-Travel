@@ -412,6 +412,7 @@ autoplay = "Idle"
 position = Vector2(147, 228)
 UIIcon = ExtResource("7_3kghw")
 UILabel = "LABEL_BOOKS"
+Met = true
 InteractionLines = PackedStringArray("INT_BOOKS")
 SpellName = "TEST"
 

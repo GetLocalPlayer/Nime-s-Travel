@@ -318,6 +318,7 @@ onRevCastLines = PackedStringArray("BSPELL_FLASK")
 revAlreadyUsedLines = PackedStringArray("BSPELL_AFFECTED_FLASK")
 UIIcon = ExtResource("10_m3ffi")
 UILabel = "LABEL_FLASK"
+Met = true
 Autocast = true
 
 [node name="Object" parent="Interactables/Flask" index="0"]
