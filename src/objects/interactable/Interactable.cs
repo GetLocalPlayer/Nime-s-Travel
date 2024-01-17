@@ -25,7 +25,7 @@ using System.Linq;
 3. 	InteractionLines 				- текст второго и каждого последующего
 									взаимодействия с объектом.
 4.	Autocast 						- автоматическое применение заклинания
-									(если задано) при каждом взаимодействии
+									(если задано) при каждом взаимодействии.
 5.	SpellInteractionLines			- текст отображаемый сразу после применения
 									заклинания.
 6.	WrongSpellInteracitonLines		- текст отображаемый в случае если использованное
@@ -40,43 +40,42 @@ public partial class Interactable : Node2D
 	игре (правый-нижний угол). */
 	[Export] public CompressedTexture2D UIIcon;
 	/* Название объекта под иконкой. */
-	[Export] public string UILabel;
-	/* inspection* используятся для более близкого
-	взаимодействия с объектом (пр. могила Кловер).
-	Всегда происходит перед initialInteraction и
-	interaction. */
+	[Export] public string UILabel;	
+	/* inspection* это взаимодействие при котором
+	на экране выводится текстура на (почти) весь
+	экран, а-ля осмотр могилы Кловер. */
 	[ExportGroup("Inspection")]
 	[Export] public CompressedTexture2D InspectionTexture;
 	[Export] public string[] InspectionLines;
 
 	[ExportGroup("First Interaction")]
-	/* InitInteraction содержит текст при первом
-	взаимодействии, после чего поле чистится
-	и всегда возвращается Interaciton (см.
-	GetInteraction). */
+	/* Текст при первом взаимодействии с объектом. */	
+	[Export] public bool Met = false;
 	[Export] public string[] FirstInteracitonLines;
 
+	/* Текст при каждом последующем взаимодействии с объектом. */
 	[ExportGroup("Interaction")]
 	[Export] public string[] InteractionLines;
 
 	[ExportGroup("Applied Spell")]
-	/* Имя заклинания которое можно использовать
-	на данный Interactable.  */ 
+	/* Имя заклинания, которое можно использовать
+	на Interactable. При совпадении использованного
+	Ниме заклинания и заклинания в этом поле происходит
+	взаимодействия с текстом из SpellInteractionLines, 
+	в ином случае WrongSpellInteractionLines. Данное
+	поведение можно переопределить в потомках
+	переопределив void OnSpellCast(string spellName). */
 	[Export] public string SpellName = "";
-	/* Заклинание применяется автоматически,
-	как	при изучении нового заклинания (прим.
-	колба левитации). */
+	/* Заклинание применяется автоматически. По умолчанию
+	Ниме изучает заклинание с Autocast в true. */
 	[Export] public bool Autocast = false;
 	/* Текст после применения заклинания. */
 	[Export] public string[] SpellInteractionLines;
 	/* Текст неверного заклинания. */
 	[Export] public string[] WrongSpellInteractionLines;
-	
 	/* Ссылка на нод интерфейса чтобы не
 	повторять GetTree().Root.GetNode... */
 	protected UI ui;
-	/* Флаг для запуска взаимодействия первой встречи. */
-	protected bool met = false;
 	/* Флаг сигнализирующий что Ниме дошла до точке
 	взаимодействия с текущим Interactable по клику
 	на Clickable и может с ним взаимодействовать. */
@@ -125,9 +124,9 @@ public partial class Interactable : Node2D
 				await ToSignal(ui, "InteractionFinished");
 				OnInspectionFinished();
 			}
-			if (!met && !FirstInteracitonLines.IsEmpty())
+			if (!Met && !FirstInteracitonLines.IsEmpty())
 			{
-				met = true;
+				Met = true;
 				ui.RunInteraction(FirstInteracitonLines);
 				await ToSignal(ui, "InteractionFinished");
 				OnFirstInteractionFinished();
