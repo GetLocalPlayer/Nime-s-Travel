@@ -575,7 +575,7 @@ y_sort_enabled = true
 metadata/_edit_lock_ = true
 
 [node name="Grave1" parent="Interactables" instance=ExtResource("3_7fqlc")]
-position = Vector2(178, 285)
+position = Vector2(205, 277)
 UIIcon = ExtResource("4_6cabc")
 UILabel = "LABEL_GRAVE"
 Met = true
@@ -592,10 +592,10 @@ shape = SubResource("RectangleShape2D_pvokv")
 position = Vector2(3, 3)
 
 [node name="WayPoint" parent="Interactables/Grave1" index="4"]
-position = Vector2(55, 83)
+position = Vector2(76, 85)
 
 [node name="Grave2" parent="Interactables" instance=ExtResource("3_7fqlc")]
-position = Vector2(352, 278)
+position = Vector2(381, 273)
 UIIcon = ExtResource("4_6cabc")
 UILabel = "LABEL_GRAVE"
 Met = true
@@ -612,10 +612,10 @@ shape = SubResource("RectangleShape2D_x0mpq")
 position = Vector2(2, 8)
 
 [node name="WayPoint" parent="Interactables/Grave2" index="4"]
-position = Vector2(-53, 96)
+position = Vector2(-67, 106)
 
 [node name="CloverGrave" parent="Interactables" instance=ExtResource("3_7fqlc")]
-position = Vector2(275, 295)
+position = Vector2(298, 295)
 script = ExtResource("7_eko1s")
 cloverDialogLines = PackedStringArray("INT_CLOVER_1", "INT_CLOVER_2", "INT_CLOVER_3", "INT_CLOVER_4", "INT_CLOVER_5", "INT_CLOVER_6", "INT_CLOVER_7", "INT_CLOVER_8", "INT_CLOVER_9")
 postDialogInteractinLines = PackedStringArray("INT_CLOVER_GRAVE_POST")
@@ -637,7 +637,7 @@ shape = SubResource("RectangleShape2D_acrgy")
 position = Vector2(2, -6)
 
 [node name="WayPoint" parent="Interactables/CloverGrave" index="4"]
-position = Vector2(-51, 76)
+position = Vector2(-85, 68)
 
 [node name="CloverEngraving" type="Sprite2D" parent="Interactables/CloverGrave"]
 position = Vector2(0, -8)
@@ -692,7 +692,7 @@ position = Vector2(3, -49)
 
 [node name="WayPoint" parent="Interactables/Bush" index="4"]
 z_index = 1
-position = Vector2(93, -94)
+position = Vector2(81, -95)
 
 [node name="Polygon2D" type="MeshInstance2D" parent="Interactables/Bush"]
 visible = false
