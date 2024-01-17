@@ -157,7 +157,8 @@ public partial class Interactable : Node2D
 	protected virtual void OnFirstInteractionFinished()
 	{
 		GD.Print($"{Name} - first interaction finished");
-		OnSpellReveal();
+		if (Autocast)
+			OnSpellReveal();
 	}
 
 	protected virtual void OnInteraction()
@@ -182,9 +183,8 @@ public partial class Interactable : Node2D
 		{
 			ui.RevealSpell(SpellName);
 			await ToSignal(ui, "SpellRevealed");
-			GetTree().CallGroup("Player", "InteractableSpellRevealed", SpellName);
+			OnSpellRevealed();
 		}
-		OnSpellRevealed();
 	}
 
 	protected virtual void OnSpellRevealed()

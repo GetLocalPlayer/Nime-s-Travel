@@ -298,6 +298,7 @@ libraries = {
 autoplay = "RESET"
 
 [node name="Red" type="Button" parent="MainContainer/HornContainer/Horn/Buttons"]
+visible = false
 layout_mode = 2
 offset_left = -74.0
 offset_top = 10.0

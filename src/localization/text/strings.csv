@@ -31,11 +31,30 @@ It's better not to distract him."
 Здесь кругом памятники.","[color=#ffdef7]This is a cemetery.
 There are tombstone all around here."
 "INT_GRAVE_2","[color=#ffdef7]Еще один памятник. ","[color=#ffdef7]Another tombstone."
+"LABEL_CLOVER_GRAVE","Памятник Кловер ","Clover's tombstone"
 "INSP_CLOVER_GRAVE","Кловер Премудрая, юникорн","Clover the Clever, Unicorn"
 "INT_CLOVER_GRAVE","[color=#ffdef7]Два года прошло.
 Уже давно пора бы искать нового наставника.","[color=#ffdef7]Two years have passed.
 It's high time to look for a new mentor."
-"LABEL_CLOVER_GRAVE","Памятник Кловер ","Clover's tombstone"
+"INT_CLOVER_GRAVE_POST","[color=#ffdef7]Надеюсь, я ещё её увижу.","[color=#ffdef7]I hope I'll see her again."
+"INT_CLOVER_1","[color=#ffdef7]Мне не хватает вас, учитель.
+Даже не магии - просто совета.","[color=#ffdef7]I miss you, Teacher.
+Not even your magic - just advice."
+"INT_CLOVER_2","[color=#71c837]Я предвидела подобный поворот.
+Ты справишься.","[color=#71c837]I foresaw this twist.
+You can conquer it."
+"INT_CLOVER_3","[color=#ffdef7]Учитель? Как это возможно?","[color=#ffdef7]Teacher? How is this possible?"
+"INT_CLOVER_4","[color=#71c837]Единороги высшего уровня не исчезают сразу и бесследно. Я стану частью той силы, которую использовала, когда...","[color=#71c837]Unicorns of the highest level do not disappear immediately and without a trace. I will become a part of the force that I used when..."
+"INT_CLOVER_5","[color=#ffdef7]Жаль, я не такой единорог. Меня пытаются задержать стражники, а я за два года даже булку у пекаря ни разу не украла.","[color=#ffdef7]I wish I was that kind of unicorn.
+The guards are trying to detain me, and in two years I have never even stolen a loaf from a baker."
+"INT_CLOVER_6","[color=#71c837]Принцесса Селестия сильна, но её склонность к быстрым решениям может пугать. Я попробую выяснить, в чём дело.","[color=#71c837]Princess Celestia is powerfull, but her penchant for quick decisions can be intimidating. I'll try to figure out what's the matter."
+"INT_CLOVER_7","[color=#ffdef7]Как мне быть, Кловер?","[color=#ffdef7]What should I do, Clover?"
+"INT_CLOVER_8","[color=#71c837]Для начала - продолжить обучение.
+Сосредоточься на магии внутри тебя, и уже через минуту сможешь использовать новые заклинания.","[color=#71c837]To begin with - continue training.
+Focus on the magic inside you, and in a minute you will be able to use new spells."
+"INT_CLOVER_9","[color=#ffdef7]Хотя бы так.
+По крайней мере, мне действительно теперь доступен следующий уровень.","[color=#ffdef7]At least so.
+The next level is really available to me now."
 "LABEL_FLASK","Колба","Flask"
 "FSPELL_FLASK","[color=#ffdef7]Это левитация.
 Стоит запомнить, как работает.
@@ -68,29 +87,13 @@ I can try it myself."
 "AFTER_SPELL_INT_GUARDS","[color=#ffdef7]Не о чем с ними сейчас разговаривать. ","[color=#ffdef7]There's nothing to talk to them about right now."
 "BSPELL_INT_GUARDS","[color=#ffdef7]Пусть лучше повисят в воздухе. ","[color=#ffdef7]Let them hang in the air better."
 "SG_INT_BLOCKED_GUARDS","[color=#ececec]Стоять на месте! ","[color=#ececec]Stop right there!"
-"SG_INT_BLOCKED_GUARDS_ARE_THERE","[color=#ffdef7]Не стоит возвращаться туда, где уже есть стража. ","[color=#ffdef7]It's not good going back to where there are already guards."
+"SG_INT_BLOCKED_GUARDS_ARE_THERE","[color=#ffdef7]Не стоит возвращаться туда, где уже есть стража. ","[color=#ffdef7]It's not good going back to where are guards already."
 "SG_INT_BLOCKED_MUST_LEAVE_VILLAGE","[color=#ffdef7]Мне лучше уйти подальше от деревни. ","[color=#ffdef7]I'd better get away from the village."
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
-"","",""
+"LABEL_BUSH","[color=#ffdef7]Колючий куст","[color=#ffdef7]Prickly bush"
+"F_INT_BUSH","[color=#ffdef7]Если бы я только могла пройти через лес, как-то избавиться от куста...","[color=#ffdef7]If only I could pass through the forest, somehow get rid of the bush..."
+"INT_BUSH","[color=#ffdef7]Дорога заросла колючим кустарником.","[color=#ffdef7]The road is overgrown with prickly bush."
+"SPELL_INT_BUSH","[color=#ffdef7]Путь свободен, теперь пора убираться отсюда, пока не нагрянула новая стража.","[color=#ffdef7]The way is clear, now it's time to get out of here, before more guards arrive."
+"GAME_OVER","[color=#ffdef7]Пролог игры ""Путешествие Нимэ"" успешно пройден! Спасибо за тестирование!","[color=#ffdef7]The prologue of the game ""Nime's Travel"" has been successfully completed! Thanks for testing!"
 "","",""
 "","",""
 "","",""

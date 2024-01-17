@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bdnwor80y7kvj"]
+[gd_scene load_steps=54 format=3 uid="uid://bdnwor80y7kvj"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_7732i"]
 [ext_resource type="Texture2D" uid="uid://drv4wl1d4y7vv" path="res://scenes/graveyard/back.png" id="2_kjyhk"]
@@ -16,10 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://bav48rel7l3jf" path="res://scenes/graveyard/graveview.png" id="9_w80xd"]
 [ext_resource type="Texture2D" uid="uid://c73xqnvjnssja" path="res://scenes/graveyard/grave_clover.png" id="10_fk2kn"]
 [ext_resource type="Texture2D" uid="uid://ib6etdyp1ltd" path="res://scenes/graveyard/clover.png" id="12_qpj7e"]
-[ext_resource type="Texture2D" uid="uid://chaawwb8e5vgx" path="res://scenes/graveyard/bush_ico.png" id="16_bv4ah"]
+[ext_resource type="Script" path="res://scenes/graveyard/Bush.cs" id="16_77jr8"]
 [ext_resource type="Texture2D" uid="uid://cpwy1oismlpkv" path="res://scenes/graveyard/bush.png" id="16_f58eu"]
 [ext_resource type="Script" path="res://scenes/graveyard/GraveyardSceneGate.cs" id="17_0t8gb"]
 [ext_resource type="Shader" uid="uid://c75bjfk8d2bd" path="res://scenes/graveyard/bushshader.tres" id="17_hxa8u"]
+[ext_resource type="Texture2D" uid="uid://chaawwb8e5vgx" path="res://scenes/graveyard/bush_ico.png" id="17_lvlmb"]
 [ext_resource type="Shader" uid="uid://baoa2b3pf4gft" path="res://scenes/graveyard/flameshader.tres" id="18_bb5j8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvokv"]
@@ -30,6 +31,43 @@ size = Vector2(52, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acrgy"]
 size = Vector2(54, 57)
+
+[sub_resource type="Animation" id="Animation_pk2rp"]
+resource_name = "CloverAppears"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloverTalkingHead:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tl1py"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloverTalkingHead:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_411n3"]
+_data = {
+"CloverAppears": SubResource("Animation_pk2rp"),
+"RESET": SubResource("Animation_tl1py")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gegit"]
 
@@ -45,7 +83,7 @@ size = Vector2(133, 99)
 offsets = PackedFloat32Array(0, 0.382488, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.764977, 0.764977, 0.764977, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1l2pm"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v4edo"]
 gradient = SubResource("Gradient_oi43w")
 fill = 1
 fill_from = Vector2(0.504274, 0.850427)
@@ -74,8 +112,7 @@ seamless_blend_skirt = 1.0
 noise = SubResource("FastNoiseLite_h515x")
 
 [sub_resource type="Gradient" id="Gradient_0l8y5"]
-offsets = PackedFloat32Array(0, 0.308756, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.797235, 0.797235, 0.797235, 1, 0, 0, 0, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xd5sw"]
 gradient = SubResource("Gradient_0l8y5")
@@ -95,7 +132,7 @@ shader = ExtResource("18_bb5j8")
 shader_parameter/VerticalFade = SubResource("GradientTexture2D_3yww6")
 shader_parameter/RightGrow = SubResource("GradientTexture2D_xd5sw")
 shader_parameter/LeftGrow = SubResource("GradientTexture2D_t8bsa")
-shader_parameter/BottowGrow = SubResource("GradientTexture2D_1l2pm")
+shader_parameter/BottowGrow = SubResource("GradientTexture2D_v4edo")
 shader_parameter/Noise = SubResource("NoiseTexture2D_72vs3")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f5pue"]
@@ -105,9 +142,114 @@ lightmap_size_hint = Vector2i(7, 7)
 material = SubResource("ShaderMaterial_f5pue")
 size = Vector2(1, -1)
 
+[sub_resource type="Animation" id="Animation_khvku"]
+resource_name = "BushDecay"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object:material:shader_parameter/Grayscale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Object:material:shader_parameter/Black")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Object:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.6, 0.096)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Polygon2D:material:shader_parameter/VerticalFade:fill_to")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 0),
+"update": 0,
+"values": [Vector2(0, 0.025641), Vector2(0, 1), Vector2(0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Polygon2D:material:shader_parameter/VerticalFade:fill_from")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0.786325)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Polygon2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_2b14n"]
+resource_name = "BushGrayOut"
+length = 3.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Object:material:shader_parameter/Grayscale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Object:material:shader_parameter/Black")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.6]
+}
+
 [sub_resource type="Animation" id="Animation_scuro"]
 resource_name = "FireGrow"
-length = 8.0
+length = 9.0
 step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -140,7 +282,7 @@ tracks/2/path = NodePath("Polygon2D:material:shader_parameter/RightGrow:fill_to"
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 3, 8),
+"times": PackedFloat32Array(0, 3, 9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0.598291, 0.666667), Vector2(0.598291, 0.666667), Vector2(0, 0)]
@@ -152,10 +294,10 @@ tracks/3/path = NodePath("Polygon2D:material:shader_parameter/RightGrow:fill_fro
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 3, 8),
+"times": PackedFloat32Array(0, 3, 9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0.611111, 0.679487), Vector2(0.611111, 0.679487), Vector2(1, 1)]
+"values": [Vector2(0.611111, 0.679487), Vector2(0.611111, 0.679487), Vector2(0.747863, 0.752137)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -164,7 +306,7 @@ tracks/4/path = NodePath("Polygon2D:material:shader_parameter/LeftGrow:fill_from
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 1.5, 3, 6, 8),
+"times": PackedFloat32Array(0, 1.5, 3, 6, 9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0.34188, 0.722222), Vector2(0.34188, 0.722222), Vector2(0.34188, 0.722222), Vector2(0.34188, 0.722222), Vector2(0, 1)]
@@ -176,7 +318,7 @@ tracks/5/path = NodePath("Polygon2D:material:shader_parameter/LeftGrow:fill_to")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 1.5, 3, 6, 8),
+"times": PackedFloat32Array(0, 1.5, 3, 6, 9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0.333333, 0.713675), Vector2(0.333333, 0.713675), Vector2(0.277778, 0.636752), Vector2(0.213675, 0.380342), Vector2(1, 0)]
@@ -188,7 +330,7 @@ tracks/6/path = NodePath("Polygon2D:material:shader_parameter/BottowGrow:fill_fr
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 3, 8),
+"times": PackedFloat32Array(0, 3, 9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0.495726, 0.850427), Vector2(0.474359, 0.84188), Vector2(0.512821, 0.854701)]
@@ -200,7 +342,7 @@ tracks/7/path = NodePath("Polygon2D:material:shader_parameter/BottowGrow:fill_to
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 3, 6, 8),
+"times": PackedFloat32Array(0, 3, 6, 9),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0.482906, 0.837607), Vector2(0.5, 0.696581), Vector2(0.551282, 0.482906), Vector2(1, 0)]
@@ -365,111 +507,6 @@ tracks/11/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_2b14n"]
-resource_name = "BushGrayOut"
-length = 3.0
-step = 1.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Object:material:shader_parameter/Grayscale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Object:material:shader_parameter/Black")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.6]
-}
-
-[sub_resource type="Animation" id="Animation_khvku"]
-resource_name = "BushDecay"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Object:material:shader_parameter/Grayscale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Object:material:shader_parameter/Black")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.6]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Object:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 0.16)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Polygon2D:material:shader_parameter/VerticalFade:fill_to")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 2.5, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0.025641), Vector2(0, 1), Vector2(0, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Polygon2D:material:shader_parameter/VerticalFade:fill_from")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 2.5, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0.786325)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Polygon2D:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(5),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d3fhd"]
 _data = {
 "BushDecay": SubResource("Animation_khvku"),
@@ -578,10 +615,13 @@ position = Vector2(-53, 96)
 [node name="CloverGrave" parent="Interactables" instance=ExtResource("3_7fqlc")]
 position = Vector2(275, 295)
 script = ExtResource("7_eko1s")
+postDialogInteractinLines = PackedStringArray("INT_CLOVER_GRAVE_POST")
 UIIcon = ExtResource("8_b55mr")
 UILabel = "LABEL_CLOVER_GRAVE"
 InspectionTexture = ExtResource("9_w80xd")
 InspectionLines = PackedStringArray("INSP_CLOVER_GRAVE")
+Met = true
+FirstInteracitonLines = PackedStringArray("INT_CLOVER_1", "INT_CLOVER_2", "INT_CLOVER_3", "INT_CLOVER_4", "INT_CLOVER_5", "INT_CLOVER_6", "INT_CLOVER_7", "INT_CLOVER_8", "INT_CLOVER_9")
 InteractionLines = PackedStringArray("INT_CLOVER_GRAVE")
 
 [node name="Object" parent="Interactables/CloverGrave" index="0"]
@@ -601,17 +641,29 @@ position = Vector2(-51, 76)
 position = Vector2(0, -8)
 texture = ExtResource("6_n0aij")
 
-[node name="Clover" type="Sprite2D" parent="Interactables/CloverGrave"]
-visible = false
+[node name="CloverTalkingHead" type="Sprite2D" parent="Interactables/CloverGrave"]
+self_modulate = Color(1, 1, 1, 0)
 position = Vector2(0, -9)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("12_qpj7e")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interactables/CloverGrave"]
+libraries = {
+"": SubResource("AnimationLibrary_411n3")
+}
+autoplay = "RESET"
+
 [node name="Bush" parent="Interactables" instance=ExtResource("3_7fqlc")]
 material = SubResource("ShaderMaterial_gegit")
 position = Vector2(132, 459)
-UIIcon = ExtResource("16_bv4ah")
+script = ExtResource("16_77jr8")
+UIIcon = ExtResource("17_lvlmb")
 UILabel = "LABEL_BUSH"
+Met = true
+FirstInteracitonLines = PackedStringArray("F_INT_BUSH")
+InteractionLines = PackedStringArray("INT_BUSH")
+SpellName = "IGNITION"
+SpellInteractionLines = PackedStringArray("SPELL_INT_BUSH")
 
 [node name="Object" parent="Interactables/Bush" index="0"]
 material = SubResource("ShaderMaterial_etwaj")
@@ -634,13 +686,11 @@ visible = false
 polygon = PackedVector2Array(14, 10, 41, 5, 84, 0, 93, -2, 97, -12, 87, -22, 81, -44, 69, -48, 65, -77, 47, -94, 22, -97, 9, -95, -2, -100, -9, -96, -27, -99, -43, -92, -49, -80, -53, -66, -68, -54, -70, -45, -73, -35, -83, -22, -84, -9, -73, 1, -57, 1, -46, -3, -39, 0, -19, 5, -5, 0)
 
 [node name="LookAtPoint" parent="Interactables/Bush" index="3"]
-visible = false
 position = Vector2(3, -49)
 
 [node name="WayPoint" parent="Interactables/Bush" index="4"]
-visible = false
 z_index = 1
-position = Vector2(80, -91)
+position = Vector2(93, -94)
 
 [node name="Polygon2D" type="MeshInstance2D" parent="Interactables/Bush"]
 visible = false
@@ -654,6 +704,8 @@ libraries = {
 "": SubResource("AnimationLibrary_d3fhd")
 }
 autoplay = "RESET"
+next/BushGrayOut = &"BushDecay"
+next/FireGrow = &"BushGrayOut"
 
 [node name="NavigationRegions" type="Node" parent="."]
 

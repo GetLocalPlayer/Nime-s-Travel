@@ -33,6 +33,7 @@ public partial class LevitationFlask : Interactable
             isLevitating = true;
             animPlayer.Play("FlyUp");
             animPlayer.Queue("Levitation");
+            base.SpellName = revSpellName;
         }
         else if (spellName == this.revSpellName)
         {
@@ -44,22 +45,24 @@ public partial class LevitationFlask : Interactable
             isLevitating = false;
             animPlayer.Play("Land");
             animPlayer.Queue("Idle");
+            base.SpellName = spellName;
         }
         else
             base.OnSpellCast(spellName);
     }
 
-    async protected override void OnSpellRevealed()
+    protected override void OnSpellReveal()
     {
-        OnSpellCast(isLevitating ? revSpellName : spellName);
-        ui.BlockMouse();
-        await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationChanged);
-        ui.UnblockMouse();
+        base.OnSpellReveal();
+        OnSpellCast(SpellName);
         ui.RunInteraction(isLevitating ? onCastLines : onRevCastLines);
         GetTree().CallGroup("Player", "InteractableSpellRevealed", spellName);
         GetTree().CallGroup("Player", "InteractableSpellRevealed", revSpellName);
-        /* Базовый класс должен иметь значение в поле SpellName
-        для демонстрации заклинания. */
-        base.SpellName = isLevitating ? revSpellName : spellName;
+        ui.BlockMouse();
+    }
+
+    protected override void OnSpellRevealed()
+    {
+        ui.UnblockMouse();
     }
 }

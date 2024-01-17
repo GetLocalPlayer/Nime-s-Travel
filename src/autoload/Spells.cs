@@ -13,7 +13,7 @@ public partial class Spells: Node
 	Так обратное заклинание для "LEVITATION" 
 	это "-LEVITATION". Именя/коды обратных
 	заклинаний генерируются внутри _Ready(). */
-	readonly Dictionary<string, string> spellCodes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase){
+	readonly Dictionary<string, string> spellCodes = new(StringComparer.OrdinalIgnoreCase){
 		{"TEST", "bbbgggrrr"},
 		{"LEVITATION", "bbg"},
 		{"IGNITION", "gbrbg"},

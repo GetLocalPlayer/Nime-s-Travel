@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
@@ -39,6 +40,8 @@ public partial class UI : Control
 	OnInteractionModalClick(). */
 	List<string> interactionLines = new List<string>();
 
+	Dictionary<string, Button> hornButtons = new(StringComparer.OrdinalIgnoreCase);
+
 	public override void _Ready()
 	{
 		GetNode<CheckBox>("LanguageSwitcher").Toggled += (toggledOn) =>
@@ -55,6 +58,10 @@ public partial class UI : Control
 		var btnRed = buttonsRoot.GetNode<Button>("Red");
 		var btnGreen = buttonsRoot.GetNode<Button>("Green");
 		var btnBlue = buttonsRoot.GetNode<Button>("Blue");
+
+		hornButtons.Add("r", btnRed);
+		hornButtons.Add("g", btnGreen);
+		hornButtons.Add("b", btnBlue);
 
 		var btn2Code = new Dictionary<Button, char>{
 			{btnRed, 'r'},
@@ -121,6 +128,26 @@ public partial class UI : Control
 		interactableButton.Icon = null;
 		interactableButton.Text = "";
 		interactableButton.Hide();
+	}
+
+	public void ShowHornButtons(string buttons)
+	{
+		foreach (var c in buttons)
+		{
+			var s = c.ToString();
+			if (hornButtons.ContainsKey(s))
+				hornButtons[s].Show();
+		}
+	}
+
+	public void HideHornButtons(string buttons)
+	{
+		foreach (var c in buttons)
+		{
+			var s = c.ToString();
+			if (hornButtons.ContainsKey(s))
+				hornButtons[s].Hide();
+		}
 	}
 
 	public void ShowHorn()

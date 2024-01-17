@@ -62,7 +62,7 @@ public partial class Guards : Interactable
                 player.Play("Levitation");
                 InteractionLines = afterSpellLines;
                 IsLevitating = true;
-                met = true;
+                Met = true;
                 base.SpellName = "-" + spellName;
                 spellName = base.SpellName;
                 var tree = GetTree();
