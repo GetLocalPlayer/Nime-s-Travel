@@ -243,7 +243,7 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 size = Vector2(87.25, 125)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bvxqt"]
-size = Vector2(196, 518)
+size = Vector2(230, 548)
 
 [node name="AlchemistHouse" type="Node2D"]
 y_sort_enabled = true
@@ -376,7 +376,7 @@ position = Vector2(14.375, 31.5)
 shape = SubResource("RectangleShape2D_7oyxo")
 
 [node name="CollisionShape2D" parent="Gates/ToAlchemistToNeighborhood/Clickable" index="0"]
-position = Vector2(192, -93)
+position = Vector2(209, -108)
 shape = SubResource("RectangleShape2D_bvxqt")
 
 [editable path="Background"]

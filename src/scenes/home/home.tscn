@@ -308,7 +308,7 @@ agent_radius = 0.0
 size = Vector2(114, 122.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gn8y"]
-size = Vector2(117, 233)
+size = Vector2(128, 355)
 
 [node name="Home" type="Node2D"]
 y_sort_enabled = true
@@ -471,7 +471,7 @@ shape = SubResource("RectangleShape2D_4fygc")
 priority = 1
 
 [node name="CollisionShape2D" parent="Gates/ToStreetToHome/Clickable" index="0"]
-position = Vector2(199.5, 41.5)
+position = Vector2(205, 37.5)
 shape = SubResource("RectangleShape2D_4gn8y")
 
 [editable path="Background"]

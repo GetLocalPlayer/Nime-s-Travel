@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxm1byncrqdyo"]
+[gd_scene load_steps=14 format=3 uid="uid://bxm1byncrqdyo"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_2pmrb"]
 [ext_resource type="Texture2D" uid="uid://cjvffpuybgtya" path="res://scenes/neighborhood/back.png" id="2_1k7nj"]
@@ -16,17 +16,20 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1e5du"]
 size = Vector2(47, 64)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e8ppe"]
+size = Vector2(149, 143)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2qxsc"]
 size = Vector2(58.5, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btpda"]
-size = Vector2(66, 98)
+size = Vector2(224, 166)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcbak"]
 size = Vector2(58.5, 62)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8smgn"]
-size = Vector2(80, 108)
+size = Vector2(80, 213)
 
 [node name="Neighborhood" type="Node2D"]
 z_as_relative = false
@@ -37,6 +40,7 @@ metadata/_edit_lock_ = true
 texture = ExtResource("2_1k7nj")
 
 [node name="CollisionShape2D" parent="Background/Clickable" index="0"]
+visible = false
 position = Vector2(420, 242)
 
 [node name="HouseZ" type="Sprite2D" parent="."]
@@ -87,7 +91,8 @@ shape = SubResource("RectangleShape2D_1e5du")
 
 [node name="CollisionShape2D" parent="Gates/ToBakerToNeighborhood/Clickable" index="0"]
 z_index = 1
-position = Vector2(-30, -2)
+position = Vector2(-29.5, -22.5)
+shape = SubResource("RectangleShape2D_e8ppe")
 
 [node name="ToAlchemistToNeighborhood" parent="Gates" instance=ExtResource("5_humm4")]
 unique_name_in_owner = true
@@ -108,7 +113,7 @@ position = Vector2(0, 34)
 shape = SubResource("RectangleShape2D_2qxsc")
 
 [node name="CollisionShape2D" parent="Gates/ToAlchemistToNeighborhood/Clickable" index="0"]
-position = Vector2(-3, 80)
+position = Vector2(5, 52)
 shape = SubResource("RectangleShape2D_btpda")
 
 [node name="ToStreetToNeighborhood" parent="Gates" instance=ExtResource("5_humm4")]
@@ -130,7 +135,7 @@ position = Vector2(7, -20)
 shape = SubResource("RectangleShape2D_kcbak")
 
 [node name="CollisionShape2D" parent="Gates/ToStreetToNeighborhood/Clickable" index="0"]
-position = Vector2(137, 2)
+position = Vector2(138, -29.5)
 shape = SubResource("RectangleShape2D_8smgn")
 
 [editable path="Background"]
