@@ -25,8 +25,6 @@ public partial class scene : Button
 		escMenu.Hide();
 		escMenu.Buttons["Continue"].GetParent<Control>().Show();
 		escMenu.Buttons["NewGame"].GetParent<Control>().Hide();
-		escMenu.Buttons["Continue"].Pressed += () =>
-            escMenu.Hide();
         escMenu.EscapePressed += () =>
             escMenu.Visible = !escMenu.Visible;
         escMenu.VisibilityChanged += () =>

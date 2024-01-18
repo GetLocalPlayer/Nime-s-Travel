@@ -35,6 +35,9 @@ public partial class EscMenu : Control
             Buttons.Add(child.Name, btn);
         }
 
+        buttonContainer.GetNode<Button>("Continue/Button").Pressed += () =>
+            Hide();
+
         buttonContainer.GetNode<Button>("Language/Button").Toggled += (bool toggledOn) =>
             TranslationServer.SetLocale(toggledOn ? "en" : "ru");
 

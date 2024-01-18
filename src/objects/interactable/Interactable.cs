@@ -94,11 +94,19 @@ public partial class Interactable : Node2D
 
 		var clickable = GetNode<Area2D>("Clickable");
 
+		var cursorSetup = GetTree().Root.GetNode<CursorSetup>("CursorSetup");
+
 		clickable.MouseEntered += () =>
+		{
 			ui.SetHint(UIIcon, UILabel);
+			cursorSetup.SetCursorIcon(CursorSetup.Shape.Wtf);
+		};
 
 		clickable.MouseExited += () =>
+		{
 			ui.ClearHint();
+			cursorSetup.SetCursorIcon(CursorSetup.Shape.Default);
+		};
 
 		clickable.InputEvent += (viewport, @event, shapeIdx) =>
 		{

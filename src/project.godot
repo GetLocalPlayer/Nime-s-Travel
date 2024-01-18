@@ -16,6 +16,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+CursorSetup="*res://autoload/CursorSetup/CursorSetup.cs"
 GlobalVariables="*res://autoload/GlobalVariables.cs"
 Spells="*res://autoload/Spells.cs"
 BackgroundMusic="*res://autoload/BackgroundMusic.tscn"

@@ -77,6 +77,10 @@ public partial class UI : Control
 		btnGreen.Pressed += () => pressedHandler(btnGreen);
 		btnBlue.Pressed += () => pressedHandler(btnBlue);
 
+		btnRed.MouseDefaultCursorShape = (Control.CursorShape)CursorSetup.Shape.Red;
+		btnGreen.MouseDefaultCursorShape = (Control.CursorShape)CursorSetup.Shape.Green;
+		btnBlue.MouseDefaultCursorShape = (Control.CursorShape)CursorSetup.Shape.Blue;
+
 		var interactableContainer = mainContainer.GetNode<BoxContainer>("InteractableContainer");
 		interactableHint = interactableContainer.GetNode<Button>("Hint");
 		interactableHint.Hide();

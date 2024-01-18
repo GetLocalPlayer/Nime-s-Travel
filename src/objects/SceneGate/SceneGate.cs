@@ -72,6 +72,14 @@ public partial class SceneGate : Node2D
 				}
 		};
 
+		var cursorSetup = GetTree().Root.GetNode<CursorSetup>("CursorSetup");
+
+		clickable.MouseEntered += () =>
+			cursorSetup.SetCursorIcon(CursorSetup.Shape.Exit);
+
+		clickable.MouseExited += () =>
+			cursorSetup.SetCursorIcon(CursorSetup.Shape.Default);
+
 		var collider = GetNode<Area2D>("Collider");
 		collider.AreaEntered += (area) =>
 		{

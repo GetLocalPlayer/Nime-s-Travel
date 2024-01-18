@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://jv85vwesbofg"]
+
+[ext_resource type="Script" path="res://autoload/CursorSetup/CursorSetup.cs" id="1_7p3ch"]
+
+[node name="CursorSetup" type="Node"]
+script = ExtResource("1_7p3ch")
