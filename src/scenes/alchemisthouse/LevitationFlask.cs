@@ -51,18 +51,11 @@ public partial class LevitationFlask : Interactable
             base.OnSpellCast(spellName);
     }
 
-    protected override void OnSpellReveal()
+    protected override void OnSpellRevealed()
     {
-        base.OnSpellReveal();
         OnSpellCast(SpellName);
         ui.RunInteraction(isLevitating ? onCastLines : onRevCastLines);
         GetTree().CallGroup("Player", "InteractableSpellRevealed", spellName);
         GetTree().CallGroup("Player", "InteractableSpellRevealed", revSpellName);
-        ui.BlockMouse();
-    }
-
-    protected override void OnSpellRevealed()
-    {
-        ui.UnblockMouse();
     }
 }
