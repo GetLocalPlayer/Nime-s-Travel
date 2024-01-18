@@ -28,21 +28,11 @@ public partial class main : TextureRect
         escMenu.Buttons["NewGame"].Pressed += () =>
         {
             escMenu.Buttons["NewGame"].GetParent<Control>().Hide();
-            escMenu.ShowPauseBackdrop();
+            escMenu.Buttons["Continue"].GetParent<Control>().Show();
+            buttonContainer.Position = buttonContainer.Position with {Y = buttonContainer.Position.Y - 50};
+            buttonsBackdrop.Position = buttonsBackdrop.Position with {Y = buttonsBackdrop.Position.Y - 50};
             escMenu.Hide();
             tree.ChangeSceneToFile(IntroScenePath);
-            buttonContainer.Position = buttonContainer.Position with {Y = buttonContainer.Position.Y - 80};
-            buttonsBackdrop.Position = buttonsBackdrop.Position with {Y = buttonsBackdrop.Position.Y - 80};
-            escMenu.Buttons["Continue"].Pressed += () =>
-                escMenu.Hide();
-            escMenu.EscapePressed += () =>
-                escMenu.Visible = !escMenu.Visible;
-            escMenu.VisibilityChanged += () =>
-            {
-                var processMode = escMenu.Visible ? ProcessModeEnum.Disabled : ProcessModeEnum.Always;
-                tree.CurrentScene.ProcessMode = processMode;
-                ui.ProcessMode = processMode;
-            };
         };        
     }
 }

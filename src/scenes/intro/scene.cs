@@ -5,31 +5,62 @@ using System.Linq;
 
 public partial class scene : Button
 {
-	private List<RichTextLabel> labels;
+	[Export] string[] introLines;
+	[Export] string NextScenePath;
+	
+	List<string> lines;
+	RichTextLabel label;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		labels = GetNode<Control>("TextBorders").GetChildren()
-			.Cast<RichTextLabel>()
-			.ToList();
-		labels[0].Show();
 		var tree = GetTree();
-		tree.Root.GetNode<UI>("UI").HideHornButtons("r");
-		tree.Root.GetNode<UI>("UI").ShowHornButtons("gb");
+
+		var ui = tree.Root.GetNode<UI>("UI");
+		ui.HideHornButtons("r");
+		ui.ShowHornButtons("gb");
+		ui.Hide();
+
+		var escMenu = tree.Root.GetNode<EscMenu>("EscMenu");
+		escMenu.Hide();
+		escMenu.Buttons["Continue"].GetParent<Control>().Show();
+		escMenu.Buttons["NewGame"].GetParent<Control>().Hide();
+		escMenu.Buttons["Continue"].Pressed += () =>
+            escMenu.Hide();
+        escMenu.EscapePressed += () =>
+            escMenu.Visible = !escMenu.Visible;
+        escMenu.VisibilityChanged += () =>
+        {
+            var processMode = escMenu.Visible ? ProcessModeEnum.Disabled : ProcessModeEnum.Always;
+            tree.CurrentScene.ProcessMode = processMode;
+            ui.ProcessMode = processMode;
+        };
+		
+		label = GetNode<RichTextLabel>("RichTextLabel");
+		label.Text = introLines[0];
+		lines = new List<string>(introLines.Skip(1));
 	}
 
-	public void _on_pressed()
-	{
-		labels[0].Hide();
-		labels.RemoveAt(0);
-		if (!labels.Any())
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton btn && btn.IsPressed() && !btn.IsEcho() && btn.ButtonIndex == MouseButton.Left)
 		{
-			var tree = GetTree();
-			tree.ChangeSceneToFile("res://scenes/home/home.tscn");
-			tree.Root.GetNode<Control>("UI").Show();
+			if (lines.Any())
+			{
+				label.Text = lines[0];
+				lines.RemoveAt(0);
+			}
+			else
+			{
+				var tree = GetTree();
+				tree.Root.GetNode<Control>("UI").Show();
+				var escMenu = tree.Root.GetNode<Control>("EscMenu");
+				var buttonContainer = escMenu.GetNode<Control>("ButtonContainer");
+        		buttonContainer.Position = buttonContainer.Position with {Y = buttonContainer.Position.Y - 25};
+        		var buttonsBackdrop = escMenu.GetNode<Control>("ButtonsBackdrop");
+        		buttonsBackdrop.Position = buttonsBackdrop.Position with {Y = buttonsBackdrop.Position.Y - 25};
+				tree.ChangeSceneToFile(NextScenePath);
+			}	
 		}
-		else
-			labels[0].Show();
-	}
+    }
 }
