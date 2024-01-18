@@ -19,11 +19,11 @@ using System;
 */
 public partial class SceneGate : Node2D
 {
-	bool _isActive = true;
-	[Export] public bool IsActive {
-		get => _isActive;
+	bool _active = true;
+	[Export] public bool Active {
+		get => _active;
 		set {
-			_isActive = value;
+			_active = value;
 			// На момент первого вызова этого сеттера,
 			// нод и его потомки еще не готовы и попытка
 			// обращения вызовает исключение null указателя.
@@ -51,15 +51,15 @@ public partial class SceneGate : Node2D
 
 	// Для активации/деактивации посредстом вызова группы
 	// GetTree().CallGroup("SceneGates", "Disable"/"Enable")
-	public void Disable() => IsActive = false;
-	public void Enable() => IsActive = true;
+	public void Disable() => Active = false;
+	public void Enable() => Active = true;
 
 
     public override void _Ready()
     {
-		GetNode<Area2D>("Clickable").Monitoring = IsActive;
-		GetNode<Area2D>("Clickable").InputPickable = IsActive;
-		GetNode<Area2D>("Collider").Monitoring = IsActive;	
+		GetNode<Area2D>("Clickable").Monitoring = Active;
+		GetNode<Area2D>("Clickable").InputPickable = Active;
+		GetNode<Area2D>("Collider").Monitoring = Active;	
 
         var clickable = GetNode<Area2D>("Clickable");
 		clickable.InputEvent += (viewport, @event, shapeIdx) =>
@@ -178,8 +178,9 @@ public partial class SceneGate : Node2D
 		на текущую, чтобы не загружать ее дважды
 		при возврате. Ворота между двумя сценами
 		дожны иметь одинаковое имя в обеих сценах. */
-		var loadedGate = loadedScene.GetNode<SceneGate>(new NodePath("%" + Name));
-		loadedGate.storedScene = removedScene;
+		var loadedGate = loadedScene.GetNodeOrNull<SceneGate>(new NodePath("%" + Name));
+		if (loadedGate != null)
+			loadedGate.storedScene = removedScene;
 		/* Переносим Ниме в новую сцену но на всякий
 		пожарный через deferred вызов, когда все функции
 		движка в текущий кадр выполнены  (P.S. API
@@ -187,6 +188,7 @@ public partial class SceneGate : Node2D
 		имя оригинальной функции в snake_case, а не
 		в C# обертке CamelCase). */
 		loadedScene.CallDeferred("add_child", nime);
-		tree.CallDeferred("call_group", "Player", "EnterScene", loadedGate);
+		if (loadedGate != null)
+			tree.CallDeferred("call_group", "Player", "EnterScene", loadedGate);
 	}
 }

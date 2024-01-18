@@ -112,6 +112,12 @@ public partial class UI : Control
 		cutsceneModal.Hide();
 	}
 
+	public void SetInteracitonText(string text)
+	{
+		interactionLabel.Text = text;
+		interactionLabel.Show();
+	}
+
 	public void SetHint(CompressedTexture2D icon, string label)
 	{
 		interactableHint.Icon = icon;

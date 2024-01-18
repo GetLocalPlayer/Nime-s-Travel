@@ -28,8 +28,8 @@ public partial class Bush : Interactable
         if (spellName.Equals(this.SpellName, StringComparison.OrdinalIgnoreCase))
         {
             GetNode<Area2D>("Clickable").InputPickable = false;
-
-            var backgroundMusic = GetTree().Root.GetNode("BackgroundMusic");
+            var tree = GetTree();
+            var backgroundMusic = tree.Root.GetNode("BackgroundMusic");
             var defaultPlayer = backgroundMusic.GetNode<AudioStreamPlayer>("Default");
             defaultPlayer.Stop();
             var firePlayer = backgroundMusic.GetNode<AudioStreamPlayer>("Fire");
@@ -45,7 +45,8 @@ public partial class Bush : Interactable
             ui.UnblockMouse();
             firePlayer.Stop();
             defaultPlayer.Play();
-            GetTree().CurrentScene.GetNode<NavigationRegion2D>("NavigationRegions/Escape").Enabled = true;
+            tree.CurrentScene.GetNode<NavigationRegion2D>("NavigationRegions/Escape").Enabled = true;
+            tree.CurrentScene.GetNode<SceneGate>("%ToGameOver").Active = true;
         }
         base.OnSpellCast(spellName);
     }

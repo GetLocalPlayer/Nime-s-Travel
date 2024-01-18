@@ -536,7 +536,7 @@ size = Vector2(60.5, 53)
 size = Vector2(61, 304)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gtuud"]
-size = Vector2(75, 122)
+size = Vector2(100.5, 122)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qfjck"]
 size = Vector2(98, 277)
@@ -565,6 +565,7 @@ metadata/_edit_lock_ = true
 y_sort_enabled = true
 position = Vector2(293, 434)
 scale = Vector2(0.34, 0.34)
+initialSpells = PackedStringArray("ignition")
 
 [node name="Scaler" parent="." instance=ExtResource("5_ythtj")]
 
@@ -755,8 +756,9 @@ position = Vector2(-159.5, -92)
 shape = SubResource("RectangleShape2D_ttna3")
 
 [node name="ToGameOver" parent="Gates" instance=ExtResource("8_xde2y")]
+unique_name_in_owner = true
 position = Vector2(-147, 375)
-IsActive = false
+ToScenePath = "res://scenes/gameover/gameover.tscn"
 
 [node name="SpawnPoint" parent="Gates/ToGameOver" index="0"]
 visible = false
@@ -770,7 +772,7 @@ position = Vector2(213, 56)
 position = Vector2(105, 71)
 
 [node name="CollisionShape2D" parent="Gates/ToGameOver/Collider" index="0"]
-position = Vector2(45, 39)
+position = Vector2(57.75, 39)
 shape = SubResource("RectangleShape2D_gtuud")
 
 [node name="CollisionShape2D" parent="Gates/ToGameOver/Clickable" index="0"]

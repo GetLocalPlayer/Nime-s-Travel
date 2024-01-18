@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://bi6y65jmfli0x"]
+
+[ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_cs04q"]
+[ext_resource type="Script" path="res://scenes/gameover/GameOver.cs" id="1_mwxse"]
+[ext_resource type="PackedScene" uid="uid://b233gcxrlq2nd" path="res://objects/Scaler/Scaler.tscn" id="1_ptxye"]
+[ext_resource type="Texture2D" uid="uid://uxcsoic101k0" path="res://scenes/gameover/back.png" id="2_hvwiy"]
+[ext_resource type="PackedScene" uid="uid://naqvhvou0w4y" path="res://objects/nime/Nime.tscn" id="4_ibewf"]
+[ext_resource type="PackedScene" uid="uid://cjvfm7im765jm" path="res://objects/SceneGate/SceneGate.tscn" id="6_hi57q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwpyh"]
+size = Vector2(1149, 689)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_2pk8e"]
+vertices = PackedVector2Array(756, 397, 762, 490, 38, 490, 42, 395)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(38, 490, 762, 490, 756, 397, 42, 395)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lj7e"]
+size = Vector2(100.5, 122)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txxcv"]
+size = Vector2(98, 277)
+
+[node name="Gameover" type="Node2D"]
+script = ExtResource("1_mwxse")
+text = "GAME_OVER"
+metadata/_edit_lock_ = true
+
+[node name="Scaler" parent="." instance=ExtResource("1_ptxye")]
+position = Vector2(455, 338)
+scale = Vector2(0.31, 0.31)
+
+[node name="MaxScale" parent="Scaler" index="0"]
+position = Vector2(-264.516, 419.355)
+scale = Vector2(0.4, 0.4)
+
+[node name="MinScale" parent="Scaler" index="1"]
+position = Vector2(-264.516, 200)
+scale = Vector2(0.3, 0.3)
+
+[node name="Background" parent="." instance=ExtResource("1_cs04q")]
+texture = ExtResource("2_hvwiy")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="Background/Clickable" index="0"]
+visible = false
+position = Vector2(387.5, 155.5)
+shape = SubResource("RectangleShape2D_uwpyh")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_2pk8e")
+
+[node name="Nime" parent="." instance=ExtResource("4_ibewf")]
+position = Vector2(335, 398)
+scale = Vector2(0.3, 0.3)
+
+[node name="ToGameOver" parent="." instance=ExtResource("6_hi57q")]
+unique_name_in_owner = true
+position = Vector2(702, 399)
+Active = false
+ToScenePath = "res://scenes/gameover/gameover.tscn"
+
+[node name="SpawnPoint" parent="ToGameOver" index="0"]
+position = Vector2(50, 42)
+
+[node name="SpawnWayPoint" parent="ToGameOver" index="1"]
+position = Vector2(-64, 61)
+
+[node name="ExitWayPoint" parent="ToGameOver" index="2"]
+visible = false
+position = Vector2(105, 71)
+
+[node name="Collider" parent="ToGameOver" index="3"]
+visible = false
+
+[node name="CollisionShape2D" parent="ToGameOver/Collider" index="0"]
+position = Vector2(57.75, 39)
+shape = SubResource("RectangleShape2D_1lj7e")
+
+[node name="Clickable" parent="ToGameOver" index="4"]
+visible = false
+
+[node name="CollisionShape2D" parent="ToGameOver/Clickable" index="0"]
+position = Vector2(169, 4.5)
+shape = SubResource("RectangleShape2D_txxcv")
+
+[editable path="Scaler"]
+[editable path="Background"]
+[editable path="ToGameOver"]
