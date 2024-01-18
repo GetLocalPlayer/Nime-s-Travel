@@ -190,5 +190,7 @@ public partial class SceneGate : Node2D
 		loadedScene.CallDeferred("add_child", nime);
 		if (loadedGate != null)
 			tree.CallDeferred("call_group", "Player", "EnterScene", loadedGate);
+
+		tree.Root.GetNode<CursorSetup>("CursorSetup").SetCursorIcon(CursorSetup.Shape.Default);
 	}
 }
