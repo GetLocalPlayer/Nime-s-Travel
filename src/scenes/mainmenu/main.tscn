@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bit7vtqj8lj5p"]
 
-[ext_resource type="Texture2D" uid="uid://bo14v2a16yrb4" path="res://intro.png" id="1_d4tfp"]
-[ext_resource type="Script" path="res://main.cs" id="2_0w60m"]
-[ext_resource type="Texture2D" uid="uid://o5n0gbacp6pv" path="res://logo.en.png" id="2_fv87y"]
+[ext_resource type="Texture2D" uid="uid://bo14v2a16yrb4" path="res://scenes/mainmenu/intro.png" id="1_d4tfp"]
+[ext_resource type="Script" path="res://scenes/mainmenu/main.cs" id="2_0w60m"]
+[ext_resource type="Texture2D" uid="uid://o5n0gbacp6pv" path="res://scenes/mainmenu/logo.en.png" id="2_fv87y"]
 
 [node name="main" type="TextureRect"]
 anchors_preset = 15
