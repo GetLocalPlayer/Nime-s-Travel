@@ -8,7 +8,9 @@
 [ext_resource type="Script" path="res://autoload/EscMenu/CustomCheckButton.cs" id="6_tr5bj"]
 [ext_resource type="Texture2D" uid="uid://dxh656u1pgwi0" path="res://autoload/EscMenu/help_back.png" id="7_y1cj8"]
 
-[node name="EscMenu" type="CenterContainer"]
+[node name="EscMenu" type="Control"]
+z_index = 2
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,13 +18,43 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pylgq")
 
+[node name="PauseBackdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.313726)
+
 [node name="ButtonsBackdrop" type="TextureRect" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = -175.0
+offset_right = 185.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_ulu8x")
 
 [node name="ButtonContainer" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(300, 300)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
 [node name="NewGame" type="Control" parent="ButtonContainer"]
@@ -258,7 +290,18 @@ flat = true
 
 [node name="HelpBackdrop" type="Button" parent="."]
 visible = false
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -404.0
+offset_top = -304.0
+offset_right = 404.0
+offset_bottom = 304.0
+grow_horizontal = 2
+grow_vertical = 2
 focus_mode = 0
 icon = ExtResource("7_y1cj8")
 flat = true

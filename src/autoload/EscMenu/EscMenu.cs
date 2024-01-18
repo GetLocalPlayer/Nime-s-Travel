@@ -1,16 +1,18 @@
 using Godot;
-using System;
+using System.Collections.Generic;
 
-public partial class EscMenu : CenterContainer
+public partial class EscMenu : Control
 {
+    [Signal] public delegate void EscapePressedEventHandler();
+
     [Export] int MouseHoverOutline = 2;
     [Export] int MouseHoverSizeIncrease = 3;
+    
+    public Dictionary<string, Button> Buttons = new();
 
 
     public override void _Ready()
     {
-        GetTree().Root.GetNode<Control>("UI").Hide();
-
         var buttonContainer = GetNode("ButtonContainer");            
 
         foreach (var child in buttonContainer.GetChildren())
@@ -30,6 +32,7 @@ public partial class EscMenu : CenterContainer
                 btn.Set("theme_override_constants/outline_size", minOutline);
                 btn.Set("theme_override_font_sizes/font_size", minSize);
             };
+            Buttons.Add(child.Name, btn);
         }
 
         buttonContainer.GetNode<Button>("Language/Button").Toggled += (bool toggledOn) =>
@@ -50,7 +53,21 @@ public partial class EscMenu : CenterContainer
             helpBackdrop.Show();
         helpBackdrop.Pressed += () =>
             helpBackdrop.Hide();
+    }
 
-        
+    public void ShowPauseBackdrop()
+    {
+        GetNode<Control>("PauseBackdrop").Show();
+    }
+
+    public void HidePauseBackdrop()
+    {
+        GetNode<Control>("PauseBackdrop").Hide();
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventKey key && key.Keycode == Key.Escape && key.Pressed && !key.Echo)
+            EmitSignal("EscapePressed");
     }
 }

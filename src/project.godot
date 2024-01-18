@@ -20,6 +20,7 @@ GlobalVariables="*res://autoload/GlobalVariables.cs"
 Spells="*res://autoload/Spells.cs"
 BackgroundMusic="*res://autoload/BackgroundMusic.tscn"
 UI="*res://autoload/ui/ui.tscn"
+EscMenu="*res://autoload/EscMenu/EscMenu.tscn"
 
 [display]
 
@@ -34,8 +35,11 @@ project/assembly_name="Nime-s Travel"
 
 [internationalization]
 
-locale/translation_remaps={}
+locale/translation_remaps={
+"res://logo.en.png": PackedStringArray("res://logo.ru.png:ru", "res://logo.en.png:en")
+}
 locale/translations=PackedStringArray("res://localization/text/strings.en.translation", "res://localization/text/strings.ru.translation")
+locale/locale_filter_mode=0
 
 [rendering]
 

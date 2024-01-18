@@ -14,8 +14,9 @@ public partial class scene : Button
 			.Cast<RichTextLabel>()
 			.ToList();
 		labels[0].Show();
-		GetTree().Root.GetNode<UI>("UI").HideHornButtons("r");
-		GetTree().Root.GetNode<UI>("UI").ShowHornButtons("gb");
+		var tree = GetTree();
+		tree.Root.GetNode<UI>("UI").HideHornButtons("r");
+		tree.Root.GetNode<UI>("UI").ShowHornButtons("gb");
 	}
 
 	public void _on_pressed()
@@ -23,7 +24,11 @@ public partial class scene : Button
 		labels[0].Hide();
 		labels.RemoveAt(0);
 		if (!labels.Any())
-			GetTree().ChangeSceneToFile("res://scenes/home/home.tscn");
+		{
+			var tree = GetTree();
+			tree.ChangeSceneToFile("res://scenes/home/home.tscn");
+			tree.Root.GetNode<Control>("UI").Show();
+		}
 		else
 			labels[0].Show();
 	}

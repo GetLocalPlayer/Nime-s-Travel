@@ -1,3 +1,24 @@
-[gd_scene format=3 uid="uid://bit7vtqj8lj5p"]
+[gd_scene load_steps=4 format=3 uid="uid://bit7vtqj8lj5p"]
 
-[node name="main" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://bo14v2a16yrb4" path="res://intro.png" id="1_d4tfp"]
+[ext_resource type="Script" path="res://main.cs" id="2_0w60m"]
+[ext_resource type="Texture2D" uid="uid://o5n0gbacp6pv" path="res://logo.en.png" id="2_fv87y"]
+
+[node name="main" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_d4tfp")
+script = ExtResource("2_0w60m")
+IntroScenePath = "res://scenes/intro/scene.tscn"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 140.0
+grow_horizontal = 2
+texture = ExtResource("2_fv87y")
