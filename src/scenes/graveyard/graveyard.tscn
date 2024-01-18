@@ -758,6 +758,7 @@ shape = SubResource("RectangleShape2D_ttna3")
 [node name="ToGameOver" parent="Gates" instance=ExtResource("8_xde2y")]
 unique_name_in_owner = true
 position = Vector2(-147, 375)
+Active = false
 ToScenePath = "res://scenes/gameover/gameover.tscn"
 
 [node name="SpawnPoint" parent="Gates/ToGameOver" index="0"]
