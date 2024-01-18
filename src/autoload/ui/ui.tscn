@@ -369,7 +369,7 @@ action_mode = 0
 icon = ExtResource("3_2arbf")
 flat = true
 
-[node name="Filler" type="Control" parent="MainContainer/HornContainer"]
+[node name="Placeholder" type="Control" parent="MainContainer/HornContainer"]
 custom_minimum_size = Vector2(224, 100)
 layout_mode = 2
 mouse_filter = 2
@@ -416,6 +416,13 @@ layout_mode = 2
 light_mask = 0
 visibility_layer = 0
 custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="InteractablePlaceholder" type="VSeparator" parent="MainContainer"]
+visible = false
+light_mask = 0
+visibility_layer = 0
+custom_minimum_size = Vector2(85, 0)
 layout_mode = 2
 
 [node name="InteractableContainer" type="VBoxContainer" parent="MainContainer"]

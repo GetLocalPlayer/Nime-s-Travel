@@ -90,6 +90,15 @@ public partial class UI : Control
 		interactableButton.Pressed += () =>
 			EmitSignal("InteractableButtonClicked");
 
+		/* Заполнитель на место иконки в нижнем-правом углу, чтобы
+		текс не уезжал до края в случае отсутствия отображаемой иконки.
+		Ту же фигну проделываю с рогом. */
+		var interactablePlaceholder = mainContainer.GetNode<VSeparator>("InteractablePlaceholder");
+        void onVisibilityChanged() =>
+            interactablePlaceholder.Visible = !interactableHint.Visible && !interactableButton.Visible;
+        interactableButton.VisibilityChanged += onVisibilityChanged;
+		interactableHint.VisibilityChanged += onVisibilityChanged;
+
 		interactionLabel = mainContainer.GetNode<RichTextLabel>("InteractionContainer/RichLabel");
 		interactionLabel.Text = null;
 
