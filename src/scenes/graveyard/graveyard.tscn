@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://bdnwor80y7kvj"]
+[gd_scene load_steps=56 format=3 uid="uid://bdnwor80y7kvj"]
 
 [ext_resource type="PackedScene" uid="uid://dsin28x3d0431" path="res://objects/background/Background.tscn" id="1_7732i"]
 [ext_resource type="Texture2D" uid="uid://drv4wl1d4y7vv" path="res://scenes/graveyard/back.png" id="2_kjyhk"]
@@ -533,11 +533,17 @@ agent_radius = 0.0
 size = Vector2(60.5, 53)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ttna3"]
-size = Vector2(71, 148)
+size = Vector2(61, 304)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtuud"]
+size = Vector2(75, 122)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qfjck"]
+size = Vector2(98, 277)
 
 [node name="Graveyard" type="Node2D"]
 y_sort_enabled = true
-metadata/_edit_vertical_guides_ = [-2.0]
+metadata/_edit_vertical_guides_ = [-2.0, -238.0]
 metadata/_edit_lock_ = true
 
 [node name="Background" parent="." instance=ExtResource("1_7732i")]
@@ -745,8 +751,31 @@ position = Vector2(-50, -16)
 shape = SubResource("RectangleShape2D_c2mtb")
 
 [node name="CollisionShape2D" parent="Gates/ToStreetToGraveyard/Clickable" index="0"]
-position = Vector2(-164.5, -59)
+position = Vector2(-159.5, -92)
 shape = SubResource("RectangleShape2D_ttna3")
+
+[node name="ToGameOver" parent="Gates" instance=ExtResource("8_xde2y")]
+position = Vector2(-147, 375)
+IsActive = false
+
+[node name="SpawnPoint" parent="Gates/ToGameOver" index="0"]
+visible = false
+position = Vector2(216, 53)
+
+[node name="SpawnWayPoint" parent="Gates/ToGameOver" index="1"]
+visible = false
+position = Vector2(213, 56)
+
+[node name="ExitWayPoint" parent="Gates/ToGameOver" index="2"]
+position = Vector2(105, 71)
+
+[node name="CollisionShape2D" parent="Gates/ToGameOver/Collider" index="0"]
+position = Vector2(45, 39)
+shape = SubResource("RectangleShape2D_gtuud")
+
+[node name="CollisionShape2D" parent="Gates/ToGameOver/Clickable" index="0"]
+position = Vector2(169, 4.5)
+shape = SubResource("RectangleShape2D_qfjck")
 
 [editable path="Background"]
 [editable path="Scaler"]
@@ -755,3 +784,4 @@ shape = SubResource("RectangleShape2D_ttna3")
 [editable path="Interactables/CloverGrave"]
 [editable path="Interactables/Bush"]
 [editable path="Gates/ToStreetToGraveyard"]
+[editable path="Gates/ToGameOver"]

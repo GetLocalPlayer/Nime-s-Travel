@@ -39,7 +39,7 @@ public partial class Scaler : Node2D
         foreach (var node in GetTree().GetNodesInGroup("Player"))
         {
             var nime = node as Nime;
-            var factor = (nime.Position.Y - min.Position.Y) / (max.Position.Y - min.Position.Y);
+            var factor = (nime.GlobalPosition.Y - min.GlobalPosition.Y) / (max.GlobalPosition.Y - min.GlobalPosition.Y);
             nime.Scale = (min.Scale + (max.Scale - min.Scale) * factor) * nime.Scale.Sign();
         }
     }
