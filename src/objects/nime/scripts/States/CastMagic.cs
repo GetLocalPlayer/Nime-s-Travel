@@ -14,6 +14,7 @@ public partial class CastMagic : State
     event AnimationMixer.AnimationFinishedEventHandler onAnimationFinished;
     readonly List<char> codes = new();
     double exitTime;
+    Interactable targetedInteractable;
 
     public override void Enter(Node context)
     {
@@ -36,13 +37,14 @@ public partial class CastMagic : State
                 exitTime = nime.SpellResetTime;
         };
         animPlayer.AnimationFinished += onAnimationFinished;
-        nime.GetTree().CallGroup("Interactables", "StartCastOnInteractable", nime.TargetedInteractable);
+        targetedInteractable = nime.TargetedInteractable;
+        nime.GetTree().CallGroup("Interactables", "StartCastOnInteractable", targetedInteractable);
     }
 
     protected virtual void Success(Node context, string spellName)
     {
         var nime = context as Nime;
-        nime.GetTree().CallGroup("Interactables", "CastOnInteractable", nime.TargetedInteractable, spellName);
+        nime.GetTree().CallGroup("Interactables", "CastOnInteractable", targetedInteractable, spellName);
     }
 
     public override void Update(Node context, double delta)
@@ -78,6 +80,8 @@ public partial class CastMagic : State
         animPlayer.AnimationFinished -= onAnimationFinished;
         onAnimationFinished = null;
         codes.Clear();
-        nime.GetTree().CallGroup("Interactables", "StopCastOnInteractable", nime.TargetedInteractable);
+        nime.GetTree().CallGroup("Interactables", "StopCastOnInteractable", targetedInteractable);
+        nime.GetTree().Root.GetNode<UI>("UI").StopCast();
+        targetedInteractable = null;
     }
 }

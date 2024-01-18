@@ -94,7 +94,7 @@ public partial class Nime : Node2D
 	{
 		if (TargetedInteractable != i)
 		{
-			if (TargetedInteractable != null)
+			if (TargetedInteractable != i)
 			{
 				GetTree().CallGroup("Interactables", "InteractableLeft", TargetedInteractable);
 			}

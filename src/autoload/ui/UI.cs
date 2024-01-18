@@ -174,6 +174,7 @@ public partial class UI : Control
 
 	public void HideHorn()
 	{
+		StopCast();
 		horn.Hide();
 	}
 
@@ -185,6 +186,13 @@ public partial class UI : Control
 	public void UnblockMouse()
 	{
 		cutsceneModal.Hide();
+	}
+
+	public void StopCast()
+	{
+		var animPlayer = horn.GetNode<AnimationPlayer>("Buttons/MagicSpark/AnimationPlayer");
+		animPlayer.ClearQueue();
+		animPlayer.Play("RESET");
 	}
 
 	async public void RevealSpell(string spellName)

@@ -319,6 +319,7 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_n58fa")
 hframes = 4
 vframes = 4
+frame = 15
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MainContainer/HornContainer/Horn/Buttons/MagicSpark"]
 libraries = {
