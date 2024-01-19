@@ -3,13 +3,12 @@ using System.Collections.Generic;
 
 public partial class EscMenu : Control
 {
-    [Signal] public delegate void EscapePressedEventHandler();
-
     [Export] int MouseHoverOutline = 2;
     [Export] int MouseHoverSizeIncrease = 3;
+
+    [Export] string NewGameScenePath;
     
     public Dictionary<string, Button> Buttons = new();
-
 
     public override void _Ready()
     {
@@ -35,6 +34,12 @@ public partial class EscMenu : Control
             Buttons.Add(child.Name, btn);
         }
 
+        buttonContainer.GetNode<Button>("NewGame/Button").Pressed += () =>
+        {
+            GetTree().ChangeSceneToFile(NewGameScenePath);
+            GetTree().Root.GetNode<GlobalVariables>("GlobalVariables").SetToDefault();
+        };
+
         buttonContainer.GetNode<Button>("Continue/Button").Pressed += () =>
             Hide();
 
@@ -56,6 +61,23 @@ public partial class EscMenu : Control
             helpBackdrop.Show();
         helpBackdrop.Pressed += () =>
             helpBackdrop.Hide();
+
+        var unpausedMouseMode = Input.MouseModeEnum.Visible;
+        VisibilityChanged += () =>
+        {
+            GetTree().Paused = Visible;
+            if (Visible)
+            {
+                unpausedMouseMode = Input.MouseMode;
+                Input.MouseMode = Input.MouseModeEnum.Visible;
+            }
+            else
+            {
+                Input.MouseMode = unpausedMouseMode;
+            }
+        };
+
+        Hide();
     }
 
     public void ShowPauseBackdrop()
@@ -71,6 +93,9 @@ public partial class EscMenu : Control
     public override void _Input(InputEvent @event)
     {
         if (@event is InputEventKey key && key.Keycode == Key.Escape && key.Pressed && !key.Echo)
-            EmitSignal("EscapePressed");
+            if (Visible)
+                Hide();
+            else 
+                Show();
     }
 }

@@ -2,10 +2,8 @@ using Godot;
 using System;
 using System.Runtime.InteropServices;
 
-public partial class main : TextureRect
+public partial class MainMenu : TextureRect
 {
-    [Export] string IntroScenePath;
-
     public override void _Ready()
     {
         var tree = GetTree();
@@ -16,6 +14,11 @@ public partial class main : TextureRect
         var escMenu = tree.Root.GetNode<EscMenu>("EscMenu");
         escMenu.Show();
         escMenu.HidePauseBackdrop();
+
+        /* Предотвращаем сокрытие по нажатию Esc в главном меню. */
+        void onEscMenuVisibilityChanged() =>
+            escMenu.CallDeferred("show");
+        escMenu.VisibilityChanged += onEscMenuVisibilityChanged;
  
         var buttonContainer = escMenu.GetNode<Control>("ButtonContainer");
         buttonContainer.Position = buttonContainer.Position with {Y = buttonContainer.Position.Y + 50};
@@ -31,8 +34,9 @@ public partial class main : TextureRect
             escMenu.Buttons["Continue"].GetParent<Control>().Show();
             buttonContainer.Position = buttonContainer.Position with {Y = buttonContainer.Position.Y - 50};
             buttonsBackdrop.Position = buttonsBackdrop.Position with {Y = buttonsBackdrop.Position.Y - 50};
+            escMenu.VisibilityChanged -= onEscMenuVisibilityChanged;
             escMenu.Hide();
-            tree.ChangeSceneToFile(IntroScenePath);
+            escMenu.ShowPauseBackdrop();
         };        
     }
 }

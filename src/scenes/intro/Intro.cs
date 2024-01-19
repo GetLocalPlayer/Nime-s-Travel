@@ -3,7 +3,7 @@ using Godot.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class scene : Button
+public partial class Intro : Button
 {
 	[Export] string[] introLines;
 	[Export] string NextScenePath;
@@ -25,14 +25,6 @@ public partial class scene : Button
 		escMenu.Hide();
 		escMenu.Buttons["Continue"].GetParent<Control>().Show();
 		escMenu.Buttons["NewGame"].GetParent<Control>().Hide();
-        escMenu.EscapePressed += () =>
-            escMenu.Visible = !escMenu.Visible;
-        escMenu.VisibilityChanged += () =>
-        {
-            var processMode = escMenu.Visible ? ProcessModeEnum.Disabled : ProcessModeEnum.Always;
-            tree.CurrentScene.ProcessMode = processMode;
-            ui.ProcessMode = processMode;
-        };
 		
 		label = GetNode<RichTextLabel>("RichTextLabel");
 		label.Text = introLines[0];

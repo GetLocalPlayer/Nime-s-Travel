@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dxh656u1pgwi0" path="res://autoload/EscMenu/help_back.png" id="7_y1cj8"]
 
 [node name="EscMenu" type="Control"]
+process_mode = 3
 z_index = 2
 layout_mode = 3
 anchors_preset = 15
@@ -17,6 +18,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pylgq")
+NewGameScenePath = "res://scenes/intro/intro.tscn"
 
 [node name="PauseBackdrop" type="ColorRect" parent="."]
 layout_mode = 1

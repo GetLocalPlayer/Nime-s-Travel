@@ -110,6 +110,11 @@ public partial class UI : Control
 
 		cutsceneModal = GetNode<Control>("CutsceneModal");
 		cutsceneModal.Hide();
+
+		void onModalVisibilityChange() =>
+			Input.MouseMode = cutsceneModal.Visible || interactionModal.Visible ? Input.MouseModeEnum.Hidden : Input.MouseModeEnum.Visible;
+		interactionModal.VisibilityChanged += onModalVisibilityChange;
+		cutsceneModal.VisibilityChanged += onModalVisibilityChange;
 	}
 
 	public void SetInteracitonText(string text)
