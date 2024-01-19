@@ -19,25 +19,14 @@ public partial class UI : Control
 	RichTextLabel interactionLabel;
 	TextureRect inspectionImage;
 
-	/* Кнтрол на весь экран перехватывающий
-	события мыши для перелистования текста. */
+	/* Control that blocks mouse click input during interacitons. */
 	Control interactionModal;
-	/* То же самое что и кнтрол выше но
-	для катсцен (демонастрации заклинаний,
-	взлета колбы и прочего). */
+	/* Control that blocks mouse click input during cutscenes usually
+	written in code. */
 	Control cutsceneModal;
-	/* Хранит в себе Interactable к которому
-	подошла Ниме, нужен для отображения 
-	кнопки в нижнем-правом углу. */
-	Interactable reachedInteractable;
-	/* Пеоеменна для передачи между функциями
-	Interactable с которым происходит
-	взаимодействие. */
-	Interactable currentInteractable;
-	/* Строки текста взаимодействия, сменяющие
-	друг друга при по клику мышия. Нужен только
-	для передачи между вызовами
-	OnInteractionModalClick(). */
+	/* Keeps the interactable Nime has reached and can interract with,
+	used to show icon in bottom-right corner. */
+
 	List<string> interactionLines = new List<string>();
 
 	Dictionary<string, Button> hornButtons = new(StringComparer.OrdinalIgnoreCase);
@@ -90,9 +79,8 @@ public partial class UI : Control
 		interactableButton.Pressed += () =>
 			EmitSignal("InteractableButtonClicked");
 
-		/* Заполнитель на место иконки в нижнем-правом углу, чтобы
-		текс не уезжал до края в случае отсутствия отображаемой иконки.
-		Ту же фигну проделываю с рогом. */
+		/* A placeholder for bottom-right corner so the interaction
+		text doesn't reach the screen's edge if no icon is shown. */
 		var interactablePlaceholder = mainContainer.GetNode<VSeparator>("InteractablePlaceholder");
         void onVisibilityChanged() =>
             interactablePlaceholder.Visible = !interactableHint.Visible && !interactableButton.Visible;

@@ -4,81 +4,70 @@ using System.Linq;
 
 
 /*
-Данная сцена описывает базовый объект с которым может
-взаимодействовать Ниме.
--Корень
---Sprite2D		// Визуал.
---Clickable		// Нода типа Area2D для отлова клика мышкой.
---Collider		// Нода типа Area2D для отлова столкновения с Нимэ,
-				// фактически - область, в которой должна находиться
-				// Нимэ чтобы взаимодействие произошло.
+Interactable is a base game object Nime can interract
+with. The main structure of the scene is following:
 
-На основе этой сцены создаются прочие объекты взаимодейтсвия.
+Root
+|--Object					// Visual sprite of the object
+|--MagicEffect				// Visual sprite for magic "cloud" effect during spell cast
+|	|-- AnimationPlayer 	// Animations of the MagicEffect
+|	|-- AnimationTree		// Transitions and blendings for animations above
+|--	Clickable				// Area2D to catch mouse clicks to interract with the object
+|	|-- CollisionShape2D	// Collision shape required by Area2D
+|-- LookAtPoint				// The point Nime will be looking at
+|-- WayPoint				// The position Nime must reach to interract with the object
 
-Последовательность взаимодействия:
-1. 	Inspection(Lines/Texture) 		- текстура закрывает экран с подписью
-									снизу (прим. могила Кловер). Повторяется
-									при каждом взаимодействии.
-2. 	FirstIInteractinLines 			- текст самого первого взаимодействия с
-									объектом, не повторяется, следует после
-									Inspection.
-3. 	InteractionLines 				- текст второго и каждого последующего
-									взаимодействия с объектом.
-4.	Autocast 						- автоматическое применение заклинания
+
+Interaction order is next (each action runs one after
+another unless it was changed in an inheriting class).
+
+1. 	Inspection(Lines/Texture) 		- a texture covers the screen with specific
+									text (check Clover's Grave interaction).
+2. 	FirstInteractinLines 			- the text shown on very first interaction.
+									Exported field 'Met' must be set to 'false',
+									after the very first interaction 'Met' field
+									is set to 'true'.
+3. 	InteractionLines 				- the text shown on each next interaction after
+									the very first one (if 'Met' field is set to
+									'true' in other words).
+4.	Autocast 						- makes the spell set in 'SpellName' field
+									be cast automatically right after interaction.
+									This makes Nime learn the spell.
 									(если задано) при каждом взаимодействии.
-5.	SpellInteractionLines			- текст отображаемый сразу после применения
-									заклинания.
-6.	WrongSpellInteracitonLines		- текст отображаемый в случае если использованное
-									заклинание не принимается.
+5.	SpellInteractionLines			- the text shown if Nime has cast the same spell
+									as the one set in 'SpellName' field.
+6.	WrongSpellInteracitonLines		- the text shown if Nime has cast a spell that
+									differs from the one set in 'SpellName' field.
 */
 
 
 public partial class Interactable : Node2D
 {
 	[ExportGroup("UI")]
-	/* Иконка отображаемая при взаимодействии в 
-	игре (правый-нижний угол). */
+	/* Icon/Label shown in UI's left-right corner. */
 	[Export] public CompressedTexture2D UIIcon;
-	/* Название объекта под иконкой. */
 	[Export] public string UILabel;	
-	/* inspection* это взаимодействие при котором
-	на экране выводится текстура на (почти) весь
-	экран, а-ля осмотр могилы Кловер. */
+
 	[ExportGroup("Inspection")]
 	[Export] public CompressedTexture2D InspectionTexture;
 	[Export] public string[] InspectionLines;
 
 	[ExportGroup("First Interaction")]
-	/* Текст при первом взаимодействии с объектом. */	
 	[Export] public bool Met = false;
 	[Export] public string[] FirstInteracitonLines;
 
-	/* Текст при каждом последующем взаимодействии с объектом. */
 	[ExportGroup("Interaction")]
 	[Export] public string[] InteractionLines;
 
 	[ExportGroup("Applied Spell")]
-	/* Имя заклинания, которое можно использовать
-	на Interactable. При совпадении использованного
-	Ниме заклинания и заклинания в этом поле происходит
-	взаимодействия с текстом из SpellInteractionLines, 
-	в ином случае WrongSpellInteractionLines. Данное
-	поведение можно переопределить в потомках
-	переопределив void OnSpellCast(string spellName). */
 	[Export] public string SpellName = "";
-	/* Заклинание применяется автоматически. По умолчанию
-	Ниме изучает заклинание с Autocast в true. */
 	[Export] public bool Autocast = false;
-	/* Текст после применения заклинания. */
 	[Export] public string[] SpellInteractionLines;
-	/* Текст неверного заклинания. */
 	[Export] public string[] WrongSpellInteractionLines;
-	/* Ссылка на нод интерфейса чтобы не
-	повторять GetTree().Root.GetNode... */
+
 	protected UI ui;
-	/* Флаг сигнализирующий что Ниме дошла до точке
-	взаимодействия с текущим Interactable по клику
-	на Clickable и может с ним взаимодействовать. */
+	/* A flag that tells that Nime reached the current
+	interactable and can interract/cast spells. */
 	bool isReached = false;
 	
 	public Vector2 WayPoint {
@@ -129,6 +118,9 @@ public partial class Interactable : Node2D
 			OnInspection();
 		}
 	}
+
+	/* Functions of basic interaction logic. Overridden in 
+	inheritors. */
 
 	async protected virtual void OnInspection()
 	{
@@ -209,7 +201,13 @@ public partial class Interactable : Node2D
 		ui.RunInteraction(equal ? SpellInteractionLines : WrongSpellInteractionLines);
 	}
 
-	/* Функции ниже вызываются через GetTree().CallGroup("Interactables", ...) */
+	/* Functions to be called from outside via groups aka GetTree().CallGroup("Interactables", ...)
+	since other interactables can be interested in performing actions depending on what is happening
+	to an interactable in the current scene.
+	
+	Since 'CallGroup' calls funciton by the given name of EACH node in the given group
+	I must check if the current Interactable is the given Interactable otherwise ALL
+	interactables in the group will perform the same action. */
 
 	protected virtual void InteractableReached(Interactable i)
 	{

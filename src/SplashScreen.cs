@@ -14,8 +14,7 @@ public partial class SplashScreen : Control
         root.GetNode<Control>("UI").Hide();
         root.GetNode<Control>("EscMenu").Hide();
 
-        /* Выключаем все процессы всем сценам на 
-        время сплешскрина. */
+        /* Disabling all processes forcefully during splashscreen. */
         var processModes = new Dictionary<Node, ProcessModeEnum>();
         foreach (var child in root.GetChildren())
         {

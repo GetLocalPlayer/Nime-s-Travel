@@ -36,9 +36,11 @@ public partial class Bush : Interactable
             firePlayer.Play();
 
             var animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-            /* Там 3 последовательных анимаций, но переходы между
-            ними заданы в редакторе AnimationPlayer посему тут не
-            приходится впердоливать очередь анимаций кодом. */
+            /* FireGrow, GrayOut, and Decay are 3 different
+            animations. Usually I call .Queue method but here
+            it was possible to set transitions from FireGrow
+            to the rest in the sequence via AnimationPlayer
+            itself. */
             animPlayer.Play("FireGrow");
             ui.BlockMouse();    
             await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);

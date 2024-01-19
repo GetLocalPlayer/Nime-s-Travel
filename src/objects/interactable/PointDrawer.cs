@@ -1,6 +1,15 @@
 using Godot;
 using System;
 
+
+/* I wrote this class only for the engines Editor, it
+draws the given texture on Marker2D position with
+a line to it from its parrent. It's used for SceneGate
+and Interactable markers to simplify visual understanding
+of their scenes. If there's several interactables/gates one
+next to another it was difficult to visually understand
+which Marked2D belongs to which interactable/gate. */
+
 [Tool] public partial class PointDrawer : Marker2D
 {
 	[ExportGroup("Icon")]

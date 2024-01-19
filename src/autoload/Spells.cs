@@ -6,13 +6,16 @@ using System.Linq;
 
 public partial class Spells: Node
 {
-    /* Я рассматриваю всякое обратное
-	заклинание как просто заклинание со своим
-	уникальным именем, однако помечаю его как
-	имя оригинального заклинания с префиксом "-".
-	Так обратное заклинание для "LEVITATION" 
-	это "-LEVITATION". Именя/коды обратных
-	заклинаний генерируются внутри _Ready(). */
+	/* Each reversed spell is just a spell but with reversed code of
+	its original verions.
+	Reversed spells with their codes are generated in '_Ready' method.
+	Simply.
+	Each reversed spell has a name equeal to its original version but
+	with "-" in the beginning. So reversed spell of "LEVITATIN" is 
+	"-LEVITATION". Reversed spell is possible only for non-symmetric
+	spells, .g. "IGNITION" spell cannot have a reversed version since
+	its code written backwards is the same as the original. */
+
 	readonly Dictionary<string, string> spellCodes = new(StringComparer.OrdinalIgnoreCase){
 		{"TEST", "bbbgggrrr"},
 		{"LEVITATION", "bbg"},
@@ -27,13 +30,10 @@ public partial class Spells: Node
 
     public override void _Ready()
     {
-        /* Генерация обратных заклинаний. */
 		var revSpells = new Dictionary<string, string>();
 		foreach (var entry in spellCodes)
 		{
 			var reverse = new string(entry.Value.Reverse().ToArray());
-			/* Нет смысла добавлять заклинания с 
-			симитричнвм кодом. */
 			if (reverse != entry.Value)
 				revSpells.Add("-" + entry.Key, reverse);
 		}

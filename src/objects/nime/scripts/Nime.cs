@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public partial class Nime : Node2D
 {
-	/* Все сигналы сделаны исключитльено для использования
-	внутри конечного автомата NimeFSM. Не уверем, может
-	обычный выхов функции был бы лучше. */
+	/* All signals are defined specifically to use them inside
+	Nime's finite state machine (NimeFSM). Not sure, maybe
+	regular funciton calling would be better. */
 	[Signal] public delegate void InteractableTargetedEventHandler();
 	[Signal] public delegate void WalkTargetSetEventHandler();
 	[Signal] public delegate void SceneEnteredEventHandler();
@@ -15,18 +15,17 @@ public partial class Nime : Node2D
 
 	[Export] public float MoveSpeed = 80;
 
-	/* Время перед сбросом заклинания. */
+	/* Time before spell cast sequence is reset. */
 	[Export] public float SpellResetTime = 2;
 
 	public Interactable TargetedInteractable;
 
-	/* Названия изученных заклинаний ака LEVITATION, IGNITION.
-	Существующие заклинания можно посмотреть в Autoload/Spells.cs.
-	initialSpells используется только для указания известных
-	заклинаний на момент запуска сцены, через инспектор, в коде
-	используется список LearntSpells принимающий в себя
-	initialSpells в момент вызова _Ready. */
+	/* An array of spells known by Nime on game start. You can
+	check all possible spell name in "autoload/Spells.cs".
+	Used mainly for testing. */
 	[Export] string[] initialSpells;
+
+	/* The spells Nime learnt. */
 	public List<string> LearntSpells = new();
 
     public override void _Ready()
@@ -35,7 +34,7 @@ public partial class Nime : Node2D
         	LearntSpells.AddRange(initialSpells);
     }
 
-	/* Включает/выключает процессинг и коллайдер. */
+	/* Enable/disable collider and process mode. */
 	public void Enable()
 	{
 		ProcessMode = ProcessModeEnum.Inherit;
@@ -58,15 +57,13 @@ public partial class Nime : Node2D
 	}
 
 
-    /*
-	Функции ниже вызываются через GetTree().CallGroup("Player", ...).
-	Поскольку в группе Player может быть только один нод Nime, я
-	не заморачиваюсь проверкой если текущий нод находится под
-	управлением игрока.
-	*/
+    /* Functions to be called via group call GetTree().CallGroup("Player").
+	Technically, a group call means EACH node in the group will invoke
+	a method by the given name and I must check inside this method if
+	it belongs to the correct instance. But I don't do this check since
+	I have only one Nime active at a time in the current scene. 	*/
 
-    /* CallGroup("Player", ...) вызывается из класса
-	Background. */
+    /* Called from Background. */
 
     public void BackgroundClicked(Vector2 newTarget)
 	{
@@ -80,16 +77,8 @@ public partial class Nime : Node2D
 		}
 	}
 
-	/* CallGroup("Player", ...) вызывается из класса
-	SceneGate. */
-	public void SceneGateClicked(SceneGate g)
-	{
-		BackgroundClicked(g.ExitWayPoint);
-	}
+	/* Called from Interactable. */
 
-
-	/* CallGroup("Player", ...) из класса Interactable 
-	и класса UI (клик на иконку в углу). */
 	public void InteractableClicked(Interactable i)
 	{
 		if (TargetedInteractable != i)
@@ -103,6 +92,11 @@ public partial class Nime : Node2D
 			EmitSignal("InteractableTargeted");
 		}
 	}
+	public void InteractableSpellRevealed(string spellName)
+	{
+		if (!LearntSpells.Contains(spellName))
+			LearntSpells.Add(spellName);
+	}
 
 	/* CallGroup("Player", ...) из класса SceneGate. */
 	public void EnterScene(SceneGate gate)
@@ -112,15 +106,16 @@ public partial class Nime : Node2D
 		EmitSignal("SceneEntered");
 	}
 
-	/* CallGroup("Player", ...) из класса UI. */
+	public void SceneGateClicked(SceneGate g)
+	{
+		BackgroundClicked(g.ExitWayPoint);
+	}
+
+
+	/* Called from UI. */
+
 	public void HornButtonClicked(char code)
 	{
 		EmitSignal("HornUsed", code);
-	}
-
-	public void InteractableSpellRevealed(string spellName)
-	{
-		if (!LearntSpells.Contains(spellName))
-			LearntSpells.Add(spellName);
 	}
 }

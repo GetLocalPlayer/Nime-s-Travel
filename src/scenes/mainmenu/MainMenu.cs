@@ -15,7 +15,10 @@ public partial class MainMenu : TextureRect
         escMenu.Show();
         escMenu.HidePauseBackdrop();
 
-        /* Предотвращаем сокрытие по нажатию Esc в главном меню. */
+        /* Preventing hiding escape menu during the main menu.
+        I can't change visibility inside visibility signal
+        handler so I do it in the "idle" frame via deferred
+        call. */
         void onEscMenuVisibilityChanged() =>
             escMenu.CallDeferred("show");
         escMenu.VisibilityChanged += onEscMenuVisibilityChanged;

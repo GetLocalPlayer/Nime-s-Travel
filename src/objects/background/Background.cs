@@ -3,10 +3,10 @@ using System;
 
 public partial class Background : Sprite2D
 {
-	/* Задник отлавливает клик мышкой и передает
-	группе игроков глобальную позицию курсора
-	к которой строится маршрут по навигационной
-	сетке. */
+	/* Background node that catches mousce clicks
+	and calls "Player" group with the cursor's 
+	global position to pave the way via
+	NavigationRegion2D. */
 
 	public override void _Ready()
 	{	
@@ -43,16 +43,14 @@ public partial class Background : Sprite2D
 				GetTree().CallGroup("Player", "BackgroundClicked", GetGlobalMousePosition());
 		});
 
-		/* Пришлось перенести реакцию на сигнал в отложенный (deferred)
-		вызов поскольку в движке нет встроенной функции упорядочивания
-		событий ввода или их приоритетов, что приводило к тому что
-		Clickable ноды у задников и экземпляров Interactable конкурировали
-		за один и тот же клик. В классе Interactable я, конечно, останавливал
-		поток выполнения по событию ввода путем вызова функции SetInputAsHandled,
-		что работало прекрасно, если движок фиксировал сначала клик по Interactable
-		и уже потом по Background, но если порядок был обртаный, начиналась
-		жопа, поскольку Ниме переходила в состояние "Walk" и затем в состояние
-		"WalkToInteractable" в тот же самый кадр. */
+		/* I had to make signal handler deferred since the engine's physic
+		system does not allow to arrange the order in which physical nodes
+		react on click events. That was just not possible to predict which
+		Area2D catches the mouse click first (that is applied only to Node2D
+		inheriting classes, Control nodes' order works fine and predictable).
+		So I delay Background node reaction on click event to "idle" frame
+		to make sure that Interactable and SceneGate node catch and handle
+		mouse events first marking them as "Handled". */
 		var clickable = GetNode<Area2D>("Clickable");
 		clickable.Connect(Area2D.SignalName.InputEvent, onInputEvent, (uint)ConnectFlags.Deferred);
 	}	

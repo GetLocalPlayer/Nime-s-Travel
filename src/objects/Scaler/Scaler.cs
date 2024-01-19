@@ -2,22 +2,15 @@ using Godot;
 using System;
 
 
-/* Нод, масштабирующий Ниме (для масштабирования
-в момент передвижения по дороге)
+/* A node to scale Nime depending on her Y position on the screen.
 
--- Scaler        // Главная нода
----- MaxScale    // Максимальный масштаб
----- MinScale    // Минимальный масштаб
+Root
+|-- MaxScale    // contains max scale in its transfrom
+|-- MinScale    // contains min scale in its transfrom
 
-
-Нод каждый кадр интерполирует масштаб Ниме до
-масштаба между маркерами MinScale и MaxScale
-в зависимости от ее положения по оси Y.
-
-В идеале следовало описать граф через GDNatives
-для поиска путей и масштабирования вдоль граней
-графа, но пока что только вот такой костыль и
-NavigationRegion для поиска путей. */
+In each frame, the node interpolates the scale between transform
+properties of MaxScale and MinScale markers depending on Y global
+position of Nime betwee these two markers. */
 public partial class Scaler : Node2D
 {
     Marker2D max;
