@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://bp066rgmnmre6" path="res://music/music_fire.ogg" id="3_7w14k"]
 
 [node name="BackgroundMusic" type="Node"]
-process_mode = 3
+process_mode = 4
 
 [node name="Default" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_6vg1g")

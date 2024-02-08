@@ -8,6 +8,8 @@ public partial class MainMenu : TextureRect
     {
         var tree = GetTree();
 
+        tree.Root.GetNode("BackgroundMusic").ProcessMode = ProcessModeEnum.Always;
+
         var ui = tree.Root.GetNode<Control>("UI");
         ui.Hide();
 
